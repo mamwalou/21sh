@@ -34,11 +34,10 @@ void		termcaps_exit(const char *exit_msg, struct termios *term)
 void		init_term(struct termios *term, t_llist *e, t_win *data, int len)
 {
 	char				*name_term;
-	char				buffer[246];
 
 	if ((name_term = search_env(e, "TERM=")) == NULL)
 		name_term = ft_strdup("xterm-256color");
-	if (tgetent(buffer, name_term) == ERR)
+	if (tgetent(NULL, name_term) == ERR)
 		return ;
 	if (tcgetattr(0, term) == -1)
 		return ;
@@ -64,7 +63,6 @@ int			termcaps(t_llist *env, t_memory *memo, int len, t_win *win)
 	init_term(&term, env, win, len);
 	while (win->buffer[0] != RETURN)
 	{
-		ft_bzero(win->buffer, 4);
 		read(0, win->buffer, 4);
 		if (win->buffer[0] == CTRL_D)
 			termcaps_exit("close", &term);

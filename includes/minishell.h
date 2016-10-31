@@ -36,6 +36,7 @@ typedef struct		s_data
 {
 	int				index;
 	int				*raw_line;
+	int				*tableau;
 	char			*cmd;
 	char			**option;
 	char			*operation;
@@ -76,9 +77,8 @@ int					ft_setenv(t_data *data, t_llist *env, t_memory *memory);
 int					ft_toexport(t_data *data, t_llist *env, t_memory *memory);
 t_llist				*my_setenv();
 char				**my_env(t_llist *env);
-int					export_var(t_llist **env, char *var);
-int					export_var0(t_llist **env, char *var, char **option,
-								int index);
+int					export_var(t_llist **env, char *var, t_data *data);
+int					export_var0(t_llist **env, char *var, t_data *data);
 int					unenv(char *unset, t_llist *env);
 
 int					exec_cmd(t_memory *memo, t_llist **env);
@@ -97,9 +97,9 @@ t_data				*build_data();
 int					ctrl_var(char *line);
 int					my_ctrl(int test);
 char				*is_bulltin(char *cmd);
-char				*bin_checkout(char *line, t_llist *env);
+char				*bin_checkout(char *line, t_llist *env, t_data *data);
 int					operator_filters(char *line);
 
-int					define_variable(t_memory *memory, char *line);
-int					*generate(int c, int c1, int size);
+int					define_variable(t_memory *memory, char *line, t_data *data);
+int					*generate(int c, int c1, int size, t_data *data);
 #endif

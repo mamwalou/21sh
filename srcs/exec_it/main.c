@@ -49,7 +49,6 @@ int					main(int argc, char **argv, char **environ)
 	ctrl = 0;
 	win.set = 0;
 	memory.var = NULL;
-	env = (t_llist*)ft_memalloc(sizeof(t_llist));
 	env = build_env(environ);
 	while (ctrl >= 0)
 	{

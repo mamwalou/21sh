@@ -20,7 +20,7 @@ int				unenv(char *unset, t_llist *env)
 
 	ptr = env;
 	if (unset[ft_strlen(unset)] != '=')
-		ft_strjoin(unset, "=");
+		unset = ft_strjoin(unset, "=");
 	while (ptr)
 	{
 		if (!ft_strncmp((const char*)ptr->content, unset, ft_strlen(unset)))
