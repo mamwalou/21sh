@@ -68,11 +68,11 @@ int						exec_cmd(t_memory *memo, t_llist **env)
 	t_data				*data;
 	char				**pline;
 	int					error;
-	static int			count = 0;
+	int					*tableau;
 
 	error = 0;
 	data = build_data();
-	if ((memo->ll = ft_strsplit(&pline, memo->line, generate(9, 32, 3))) == -1)
+	if ((memo->ll = ft_strsplit(&pline, memo->line, generate(9, 32, 3, data))) == -1)
 		return (0);
 	if (memo->ll > 0)
 	{

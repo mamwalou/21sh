@@ -12,7 +12,7 @@
 
 #include "../../includes/minishell.h"
 
-static int	aff_var(t_llist *env, char *ptr)
+static int	aff_var(t_llist *env, char *ptr, t_data *data)
 {
 	char	**dword;
 	int		lenght;
@@ -20,7 +20,7 @@ static int	aff_var(t_llist *env, char *ptr)
 	char	*tmp;
 
 	i = 0;
-	lenght = ft_strsplit(&dword, ptr, generate(' ', 0, 2));
+	lenght = ft_strsplit(&dword, ptr, generate(' ', 0, 2, data));
 	while (i < lenght)
 	{
 		if (dword[i][0] == '$')
@@ -39,7 +39,7 @@ static int	aff_var(t_llist *env, char *ptr)
 	return (SUCCESS);
 }
 
-static int	duo_quote(char *line, t_llist *env)
+static int	duo_quote(char *line, t_llist *env, t_data *data)
 {
 	char	*cpy;
 	int		i;
@@ -59,7 +59,7 @@ static int	duo_quote(char *line, t_llist *env)
 	}
 	cpy = ft_strndup(line, 0, len);
 	if (lock)
-		return (aff_var(env, cpy));
+		return (aff_var(env, cpy, data));
 	else
 		ft_putendl(cpy);
 	return (SUCCESS);
@@ -73,9 +73,9 @@ int			parser_echo(t_data *data, t_memory *memory, t_llist *env)
 	i = 1;
 	ptr = memory->line + 5;
 	if (*ptr == 34)
-		return (duo_quote(ptr + 1, env));
+		return (duo_quote(ptr + 1, env, data));
 	if (ft_strrchr(ptr, '$'))
-		return (aff_var(env, ptr));
+		return (aff_var(env, ptr, data));
 	else if (*ptr == 39)
 	{
 		while (ptr[i])

@@ -39,7 +39,7 @@ int			overlaps_env(t_llist **env, char *var_memo)
 	return (ER_PREMMR);
 }
 
-int			export_var(t_llist **env, char *var)
+int			export_var(t_llist **env, char *var, t_data *data)
 {
 	char		**var_memo;
 	t_llist		*ptr;
@@ -47,7 +47,7 @@ int			export_var(t_llist **env, char *var)
 	int			len;
 
 	i = 0;
-	len = ft_strsplit(&var_memo, var, generate(59, 0, 2));
+	len = ft_strsplit(&var_memo, var, generate(59, 0, 2, data));
 	while (var_memo[i])
 	{
 		ptr = *env;
@@ -68,7 +68,7 @@ int			export_var(t_llist **env, char *var)
 	return (0);
 }
 
-int			export_var0(t_llist **env, char *var, char **option, int index)
+int			export_var0(t_llist **env, char *var, t_data *data)
 {
 	char	**var_memo;
 	t_llist	*ptr;
@@ -76,17 +76,17 @@ int			export_var0(t_llist **env, char *var, char **option, int index)
 	int		y;
 
 	i = 0;
-	ft_strsplit(&var_memo, var, generate(59, 0, 2));
-	while (i < index)
+	ft_strsplit(&var_memo, var, generate(59, 0, 2, data));
+	while (i < data->index)
 	{
 		y = 0;
 		while (var_memo[y])
 		{
-			if (!ft_strncmp(option[i], var_memo[y],
+			if (!ft_strncmp(data->option[i], var_memo[y],
 					ft_strchr(var_memo[y], '=') - 1))
 			{
 				if ((overlaps_env(env, var_memo[y])) == ER_PREMMR)
-					export_var(env, var_memo[y]);
+					export_var(env, var_memo[y], data);
 			}
 			y++;
 		}

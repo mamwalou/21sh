@@ -25,8 +25,8 @@ static int			ft_cdoneopt(t_data *data, t_llist *env, char *cpy)
 	free(buf);
 	buf = ft_memalloc(UCHAR_MAX);
 	getcwd(buf, UCHAR_MAX);
-	export_var(&env, ft_strjoin("PWD=", buf));
-	export_var(&env, ft_strjoin("OLDPWD=", cpy));
+	export_var(&env, ft_strjoin("PWD=", buf), data);
+	export_var(&env, ft_strjoin("OLDPWD=", cpy), data);
 	free(buf);
 	return (0);
 }
@@ -48,8 +48,8 @@ static int			ft_cdone2opt(t_data *data, t_llist *env, char *cpy)
 		free(buf);
 		buf = ft_memalloc(UCHAR_MAX);
 		getcwd(buf, UCHAR_MAX);
-		export_var(&env, ft_strjoin("PWD=", buf));
-		export_var(&env, ft_strjoin("OLDPWD=", cpy));
+		export_var(&env, ft_strjoin("PWD=", buf), data);
+		export_var(&env, ft_strjoin("OLDPWD=", cpy), data);
 		free(buf);
 		return (0);
 	}
@@ -57,18 +57,25 @@ static int			ft_cdone2opt(t_data *data, t_llist *env, char *cpy)
 	return (43);
 }
 
-static int			revers_cd(t_llist *env, char *newold)
+static int			revers_cd(t_llist *env, char *newold, t_data *data)
 {
 	char			*cpy;
+	char			*tmp_pwd;
+	char			*old_pwd;
 
 	cpy = ft_strdup(search_env(env, "OLDPWD="));
 	chdir(cpy);
 	unenv("PWD=", env);
 	unenv("OLDPWD=", env);
-	export_var(&env, ft_strjoin("PWD=", cpy));
+	tmp_pwd = ft_strjoin("PWD=", cpy);
+	export_var(&env, tmp_pwd, data);
 	ft_putendl(ft_strjoin("~", ft_chrstr(search_env(env, "PWD="),
 				search_env(env, "HOME="))));
-	export_var(&env, ft_strjoin("OLDPWD=", newold));
+	old_pwd = ft_strjoin("OLDPWD=", newold);
+	export_var(&env, old_pwd, data);
+	free(cpy);
+	free(tmp_pwd);
+	free(old_pwd);
 	return (0);
 }
 
@@ -85,13 +92,13 @@ int					ft_cd(t_data *data, t_llist *env, t_memory *memory)
 			chdir(search_env(env, "HOME="));
 			unenv("PWD=", env);
 			unenv("OLDPWD=", env);
-			export_var(&env, ft_strjoin("PWD=", search_env(env, "HOME=")));
-			export_var(&env, ft_strjoin("OLDPWD=", cpy));
+			export_var(&env, ft_strjoin("PWD=", search_env(env, "HOME=")), data);
+			export_var(&env, ft_strjoin("OLDPWD=", cpy), data);
 		}
 		return (1);
 	}
 	if (data->option[1][0] == '-')
-		return (revers_cd(env, cpy));
+		return (revers_cd(env, cpy, data));
 	if (data->index > 3)
 		return (48);
 	if ((data->index == 2) && (is_dir(data->option[1]) == REP))

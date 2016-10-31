@@ -45,9 +45,9 @@ int					ft_setenv(t_data *data, t_llist *env, t_memory *memory)
 
 	ptr = env;
 	if (memory->var && data->index == 1)
-		return (export_var(&env, memory->var));
+		return (export_var(&env, memory->var, data));
 	else if (memory->var && data->index >= 1)
-		return (export_var0(&env, memory->var, data->option, data->index));
+		return (export_var0(&env, memory->var, data));
 	else
 		return (32);
 	return (0);

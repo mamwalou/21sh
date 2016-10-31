@@ -83,28 +83,32 @@ char		*is_bulltin(char *cmd)
 	return (NULL);
 }
 
-char		*bin_checkout(char *line, t_llist *env)
+char		*bin_checkout(char *line, t_llist *env, t_data *data)
 {
 	char	**b;
 	char	*cpy;
+	char	*bin_test;
 	int		lenght_bin;
 	int		i;
 
 	i = 0;
 	cpy = NULL;
-	lenght_bin = ft_strsplit(&b, search_env(env, "PATH"), generate(58, 0, 2));
+	lenght_bin = ft_strsplit(&b, search_env(env, "PATH"), generate(58, 0, 2,
+		data));
 	while (i < lenght_bin)
 	{
-		if (((access(ft_strtrijoin(b[i], "/", line), X_OK)) == 0) ||
-			((access(line, X_OK)) == 0))
+		bin_test = ft_strtrijoin(b[i], "/", line);
+		if (((access(bin_test, X_OK)) == 0) || ((access(line, X_OK)) == 0))
 		{
 			if (ft_strrchr(line, '/'))
 				cpy = ft_strdup(line);
 			else
 				cpy = (ft_strtrijoin(b[i], "/", line));
 			free_d(b, lenght_bin);
+			free(bin_test);
 			return (cpy);
 		}
+		free(bin_test);
 		i++;
 	}
 	free_d(b, lenght_bin);

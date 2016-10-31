@@ -57,14 +57,14 @@ int			overlaps(t_memory *memory, char **array, char *line, int len)
 	return (0);
 }
 
-int			can_var(t_memory *memory, char *line)
+int			can_var(t_memory *memory, char *line, t_data *data)
 {
 	char	**array;
 	int		i;
 	int		len;
 
 	i = 0;
-	len = ft_strsplit(&array, memory->var, generate(';', 0, 2));
+	len = ft_strsplit(&array, memory->var, generate(';', 0, 2, data));
 	while (array[i])
 	{
 		if (!ft_strcmp(line, array[i]))
@@ -76,12 +76,12 @@ int			can_var(t_memory *memory, char *line)
 	return (7);
 }
 
-int			define_variable(t_memory *memory, char *line)
+int			define_variable(t_memory *memory, char *line, t_data *data)
 {
 	char			**cpy;
 
 	if (memory->var)
-		return (can_var(memory, line));
+		return (can_var(memory, line, data));
 	else
 		memory->var = ft_strdup(line);
 	return (6);

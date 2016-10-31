@@ -12,25 +12,25 @@
 
 #include "../../includes/minishell.h"
 
-int			*generate(int c, int c1, int size)
+int			*generate(int c, int c1, int size, t_data *data)
 {
-	int		*tableau;
-
-	tableau = (int*)ft_memalloc(sizeof(int) * size);
+	if (data->tableau)
+		free(data->tableau);
+	data->tableau = (int*)ft_memalloc(sizeof(int) * size);
 	if (size == 2)
 	{
-		tableau[0] = c;
-		tableau[1] = 0;
-		tableau[2] = 0;
+		data->tableau[0] = c;
+		data->tableau[1] = 0;
+		data->tableau[2] = 0;
 	}
 	if (size == 3)
 	{
-		tableau[0] = c;
-		tableau[1] = c1;
-		tableau[2] = 0;
-		tableau[2] = 0;
+		data->tableau[0] = c;
+		data->tableau[1] = c1;
+		data->tableau[2] = 0;
+		data->tableau[2] = 0;
 	}
-	return (tableau);
+	return (data->tableau);
 }
 
 void		free_d(char **dtab, int lenght)
@@ -65,7 +65,7 @@ int			parser_data(t_llist *env, char **line, t_data **data, t_memory **me)
 				return (-1);
 		}
 		if (!ctrl_var(*line))
-			return (define_variable(*me, *line));
+			return (define_variable(*me, *line, *data));
 		line++;
 	}
 	return (0);
