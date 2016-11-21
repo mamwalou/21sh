@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   clear_gest.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbeline <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,30 +10,37 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Includes/libft.h"
+#include "../../includes/minishell.h"
 
-char		*ft_strjoin(char const *s1, char const *s2)
+void		free_d(char **dtab, int lenght)
 {
-	char	*s3;
-	size_t	i;
+	int		i;
 
-	if (!s1 || !s2)
-		return (NULL);
-	s3 = (char*)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (s3)
+	i = 0;
+	while (i != lenght)
 	{
-		i = 0;
-		while (*s1)
-		{
-			s3[i++] = *s1;
-			s1++;
-		}
-		while (*s2)
-		{
-			s3[i++] = *s2;
-			s2++;
-		}
-		s3[i] = '\0';
+		free(dtab[i]);
+		i++;
 	}
-	return (s3);
+	free(dtab);
+}
+
+void 		clear_zone(t_data *data)
+{
+	int i;
+
+	i = 0;
+	if (data->tableau)
+		free(data->tableau);
+	if (data->cmd)
+		free(data->cmd);
+	if (data->option)
+	{
+		while(data->option[i])
+			i++;
+		free_d(data->option, i);
+	}
+	if (data->operation)
+		free(data->operation);
+	free(data);
 }

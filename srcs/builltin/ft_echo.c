@@ -20,7 +20,8 @@ static int	aff_var(t_llist *env, char *ptr, t_data *data)
 	char	*tmp;
 
 	i = 0;
-	lenght = ft_strsplit(&dword, ptr, generate(' ', 0, 2, data));
+	generate(' ', 0, 2, data);
+	lenght = ft_strsplit(&dword, ptr, data->tableau);
 	while (i < lenght)
 	{
 		if (dword[i][0] == '$')

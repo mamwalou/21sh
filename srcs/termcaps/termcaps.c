@@ -55,28 +55,28 @@ void		init_term(struct termios *term, t_llist *e, t_win *data, int len)
 		return ;
 }
 
-int			termcaps(t_llist *env, t_memory *memo, int len, t_win *win)
+int			termcaps(t_llist *env, t_memory *memo, int len)
 {
 	struct termios		term;
 	int					code;
+	t_win				win;
 
-	init_term(&term, env, win, len);
-	while (win->buffer[0] != RETURN)
+	init_term(&term, env, &win, len);
+	while (win.buffer[0] != RETURN)
 	{
-		read(0, win->buffer, 4);
-		if (win->buffer[0] == CTRL_D)
+		ft_bzero(win.buffer, 4);
+		read(0, win.buffer, 4);
+		if (win.buffer[0] == CTRL_D)
 			termcaps_exit("close", &term);
-		if ((ft_isalnum(win->buffer[0])) == 1 || (my_ctrl(win->buffer[0])) == 1)
+		if ((ft_isalnum(win.buffer[0])) == 1 || (my_ctrl(win.buffer[0])) == 1)
 		{
-			memo->line = push_line(win->buffer[0], memo->line, win);
-			ft_putchar(win->buffer[0]);
+			memo->line = push_line(win.buffer[0], memo->line, &win);
+			ft_putchar(win.buffer[0]);
 		}
-		else if ((code = termc_ctrl(memo->line, win, env, memo)) > 0)
-			memo->line = parsing_term(code, memo->line, win);
+		else if ((code = termc_ctrl(memo->line, &win, env, memo)) > 0)
+			memo->line = parsing_term(code, memo->line, &win);
 	}
-	if (memo->c_t_r + RETURN == TAB + RETURN)
-		tabulation(memo->line, win);
 	bring_back_shell(&term);
-	win->pos[1]++;
+	win.pos[1]++;
 	return (0);
 }

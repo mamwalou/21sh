@@ -6,7 +6,7 @@
 #    By: sbeline  <sbeline @student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/17 17:09:35 by sbeline           #+#    #+#              #
-#    Updated: 2016/10/28 14:27:18 by sbeline          ###   ########.fr        #
+#    Updated: 2016/11/21 17:31:21 by sbeline          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,8 @@ SRC_NAME = main.c \
 			option_parser.c \
 			move_cursr.c \
 			export_var.c \
+			clear_gest.c \
+			quote_mode.c \
 			parser.c
 
 INC_PATH = ./includes/

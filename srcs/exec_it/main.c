@@ -43,11 +43,10 @@ int					main(int argc, char **argv, char **environ)
 {
 	t_memory		memory;
 	t_llist			*env;
-	t_win			win;
+
 	int				ctrl;
 
 	ctrl = 0;
-	win.set = 0;
 	memory.var = NULL;
 	env = build_env(environ);
 	while (ctrl >= 0)
@@ -55,13 +54,11 @@ int					main(int argc, char **argv, char **environ)
 		if (env == NULL)
 			env = my_setenv();
 		memory.line = NULL;
-		if ((termcaps(env, &memory, prompt(env), &win)) == -1)
+		if ((termcaps(env, &memory, prompt(env))) == -1)
 			return (-1);
 		ft_putchar('\n');
 		if (memory.line)
 			ctrl = exec_cmd(&memory, &env);
-		if (ctrl == 1)
-			env = NULL;
 		free(memory.line);
 	}
 	return (0);

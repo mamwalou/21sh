@@ -21,5 +21,6 @@ char		*ft_strtrijoin(const char *s1, const char *s2, const char *s3)
 		return (NULL);
 	tmp = ft_strjoin(s1, s2);
 	ret = ft_strjoin(tmp, s3);
+	free(tmp);
 	return (ret);
 }

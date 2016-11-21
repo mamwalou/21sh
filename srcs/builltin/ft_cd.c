@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-#include "../../includes/minishell.h"
 
 static int			ft_cdoneopt(t_data *data, t_llist *env, char *cpy)
 {
@@ -79,6 +78,27 @@ static int			revers_cd(t_llist *env, char *newold, t_data *data)
 	return (0);
 }
 
+static int			cd_only(t_data *data, t_llist *env, char *cpy)
+{
+	char			*pwd;
+	char			*old_pwd;
+
+	if (search_env(env, "HOME"))
+	{
+		pwd = ft_strjoin("PWD=", search_env(env, "HOME="));
+		old_pwd = ft_strjoin("OLDPWD=", cpy);
+		chdir(search_env(env, "HOME="));
+		unenv("PWD=", env);
+		unenv("OLDPWD=", env);
+		export_var(&env, pwd, data);
+		export_var(&env, old_pwd, data);
+		free(pwd);
+		free(old_pwd);
+	}
+	free(cpy);
+	return (0);
+}
+
 int					ft_cd(t_data *data, t_llist *env, t_memory *memory)
 {
 	char			*cpy;
@@ -86,17 +106,7 @@ int					ft_cd(t_data *data, t_llist *env, t_memory *memory)
 
 	cpy = ft_strdup(search_env(env, "PWD="));
 	if (data->index == 1)
-	{
-		if (search_env(env, "HOME"))
-		{
-			chdir(search_env(env, "HOME="));
-			unenv("PWD=", env);
-			unenv("OLDPWD=", env);
-			export_var(&env, ft_strjoin("PWD=", search_env(env, "HOME=")), data);
-			export_var(&env, ft_strjoin("OLDPWD=", cpy), data);
-		}
-		return (1);
-	}
+		return (cd_only(data, env, cpy));
 	if (data->option[1][0] == '-')
 		return (revers_cd(env, cpy, data));
 	if (data->index > 3)

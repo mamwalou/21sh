@@ -81,7 +81,8 @@ typedef struct	s_terminal
 	int			(*f)(t_win *, t_llist *, char *, t_memory *mem);
 }				t_terminal;
 
-int				termcaps(t_llist *env, t_memory *memory, int len, t_win *win);
+int				termcaps(t_llist *env, t_memory *memo, int len);
+
 
 int				init_varfcurs();
 

@@ -49,6 +49,7 @@ char				*real_push(char *str, char c)
 	}
 	tmp[i] = c;
 	tmp[i + 1] = 0;
+	free(str);
 	return (tmp);
 }
 
@@ -78,6 +79,7 @@ char				*depushline(char *line, t_win *win)
 	if ((ret = (char*)ft_memalloc(win->lineshell)) == NULL)
 		return (NULL);
 	i = 0;
+
 	while (i < win->lineshell)
 	{
 		ret[i] = line[i];

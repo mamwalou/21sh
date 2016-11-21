@@ -64,7 +64,8 @@ int			can_var(t_memory *memory, char *line, t_data *data)
 	int		len;
 
 	i = 0;
-	len = ft_strsplit(&array, memory->var, generate(';', 0, 2, data));
+	generate(';', 0, 2, data);
+	len = ft_strsplit(&array, memory->var, data->tableau);
 	while (array[i])
 	{
 		if (!ft_strcmp(line, array[i]))

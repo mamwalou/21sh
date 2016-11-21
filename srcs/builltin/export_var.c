@@ -12,11 +12,11 @@
 
 #include "../../includes/minishell.h"
 
-static int	f_realloc(t_llist *ptr, char *new)
+static void	f_realloc(t_llist *ptr, char *new)
 {
 	free(ptr->content);
 	ptr->content = ft_strdup(new);
-	return (SUCCESS);
+	free(new);
 }
 
 int			overlaps_env(t_llist **env, char *var_memo)
@@ -47,7 +47,8 @@ int			export_var(t_llist **env, char *var, t_data *data)
 	int			len;
 
 	i = 0;
-	len = ft_strsplit(&var_memo, var, generate(59, 0, 2, data));
+	generate(59, 0, 2, data);
+	len = ft_strsplit(&var_memo, var, data->tableau);
 	while (var_memo[i])
 	{
 		ptr = *env;
@@ -57,14 +58,13 @@ int			export_var(t_llist **env, char *var, t_data *data)
 				return (ER_PREMMR);
 			else if (!ft_strncmp(ptr->content, var_memo[i],
 						ft_strchr(var_memo[i], '=')))
-				return (f_realloc(ptr, var_memo[i]));
+				f_realloc(ptr, var_memo[i]);
 			ptr = ptr->next;
 		}
 		ft_lstadd(env, ft_lstnew(var_memo[i], ft_strlen(var_memo[i])));
 		i++;
 	}
-	if (len)
-		free_d(var_memo, len);
+	free_d(var_memo, len);
 	return (0);
 }
 
@@ -76,7 +76,8 @@ int			export_var0(t_llist **env, char *var, t_data *data)
 	int		y;
 
 	i = 0;
-	ft_strsplit(&var_memo, var, generate(59, 0, 2, data));
+	generate(59, 0, 2, data);
+	ft_strsplit(&var_memo, var, data->tableau);
 	while (i < data->index)
 	{
 		y = 0;

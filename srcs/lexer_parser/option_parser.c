@@ -12,41 +12,7 @@
 
 #include "../../includes/minishell.h"
 
-int			dup_option(t_data *data, char **line, int pos, int nb_car)
-{
-	char	*new_opt;
-	int		i;
-	int		y;
-	int		h;
-
-	i = 0;
-	h = 0;
-	new_opt = (char*)ft_memalloc(nb_car + pos);
-	while (i <= pos)
-	{
-		y = 0;
-		while (line[i][y])
-		{
-			if (line[i][y] != 39 && line[i][y] != 34)
-				new_opt[h++] = line[i][y];
-			y++;
-		}
-		if (i != pos)
-			new_opt[h++] = ' ';
-		i++;
-	}
-	new_opt[h + 1] = 0;
-	data->option = init_option(new_opt, data->option);
-	data->index++;
-	return (QUOTE_OPT);
-}
-
-int			open_quote_mode(void)
-{
-	return (SUCCESS);
-}
-
-static char			**push_option(char *opt, char **save)
+static char			**push_option(char *opt, char **save, int index)
 {
 	int				pos;
 	char			**nw_opt;
@@ -65,10 +31,12 @@ static char			**push_option(char *opt, char **save)
 	}
 	nw_opt[count] = ft_strdup(opt);
 	nw_opt[count + 1] = 0;
+	printf("(%pdata->option)\n", *save);
+	free_d(save, index);
 	return (nw_opt);
 }
 
-char				**init_option(char *opt, char **save)
+char				**init_option(char *opt, char **save, int index)
 {
 	char			**nw_opt;
 	int				pos;
@@ -82,36 +50,16 @@ char				**init_option(char *opt, char **save)
 		return (nw_opt);
 	}
 	else
-		return (push_option(opt, save));
+		return (push_option(opt, save, index));
 	return (nw_opt);
 }
 
 int			option_ctrl(t_data *data, t_memory *memory, char **line)
 {
-	int		count;
-	int		c_c;
 
-	c_c = 0;
 	memory->pos = 0;
 	if (line[memory->pos][0] == 39 || line[memory->pos][0] == 34)
-	{
-		while (line[memory->pos])
-		{
-			count = 1;
-			while (line[memory->pos][count])
-			{
-				if (line[memory->pos][count] == 39
-					|| line[memory->pos][count] == 34)
-					return (dup_option(data, line, memory->pos, c_c));
-				c_c++;
-				count++;
-			}
-			c_c++;
-			memory->pos++;
-		}
-		return (open_quote_mode());
-	}
-	exit(1);
-	data->option = init_option(*line, data->option);
+		quote_mode(data, memory, line);
+	data->option = init_option(*line, data->option, data->index);
 	return (SUCCESS);
 }

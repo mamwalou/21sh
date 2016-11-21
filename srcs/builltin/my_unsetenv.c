@@ -34,6 +34,7 @@ int				unenv(char *unset, t_llist *env)
 		save = ptr;
 		ptr = ptr->next;
 	}
+	free(unset);
 	return (2);
 }
 

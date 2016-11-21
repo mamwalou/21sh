@@ -18,14 +18,14 @@ void				init_data(t_llist *env, char *line, t_data **data)
 
 	if (((*data)->cmd = is_bulltin(line)) != NULL)
 	{
+		(*data)->option = init_option((*data)->cmd, (*data)->option, (*data)->index);
 		(*data)->index += 1;
-		(*data)->option = init_option((*data)->cmd, (*data)->option);
 		return ;
 	}
 	if (((*data)->cmd = bin_checkout(line, env, (*data))) != NULL)
 	{
+		(*data)->option = init_option((*data)->cmd, (*data)->option, (*data)->index);
 		(*data)->index += 1;
-		(*data)->option = init_option((*data)->cmd, (*data)->option);
 		(*data)->index = 0;
 		return ;
 	}

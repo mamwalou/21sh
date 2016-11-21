@@ -79,7 +79,7 @@ char		*is_bulltin(char *cmd)
 		|| ft_strcmp(cmd, "toexport") == 0
 		|| ft_strcmp(cmd, "echo") == 0
 		|| ft_strcmp(cmd, "var") == 0)
-		return (cmd);
+			return (ft_strdup(cmd));
 	return (NULL);
 }
 
@@ -93,8 +93,8 @@ char		*bin_checkout(char *line, t_llist *env, t_data *data)
 
 	i = 0;
 	cpy = NULL;
-	lenght_bin = ft_strsplit(&b, search_env(env, "PATH"), generate(58, 0, 2,
-		data));
+	generate(58, 0, 2, data);
+	lenght_bin = ft_strsplit(&b, search_env(env, "PATH"), data->tableau);
 	while (i < lenght_bin)
 	{
 		bin_test = ft_strtrijoin(b[i], "/", line);

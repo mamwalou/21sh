@@ -72,7 +72,8 @@ int						exec_cmd(t_memory *memo, t_llist **env)
 
 	error = 0;
 	data = build_data();
-	if ((memo->ll = ft_strsplit(&pline, memo->line, generate(9, 32, 3, data))) == -1)
+	generate(9, 32, 3, data);
+	if ((memo->ll = ft_strsplit(&pline, memo->line, data->tableau)) == -1)
 		return (0);
 	if (memo->ll > 0)
 	{
@@ -88,6 +89,7 @@ int						exec_cmd(t_memory *memo, t_llist **env)
 				return (manage_error(error, data, env, memo));
 		}
 	}
+	clear_zone(data);
 	free_d(pline, memo->ll);
 	return (0);
 }

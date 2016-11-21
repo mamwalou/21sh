@@ -35,7 +35,6 @@
 typedef struct		s_data
 {
 	int				index;
-	int				*raw_line;
 	int				*tableau;
 	char			*cmd;
 	char			**option;
@@ -63,11 +62,29 @@ typedef struct		s_built
 	int				(*f)(t_data *, t_llist *, t_memory *);
 }					t_built;
 
-int					prompt(t_llist *env);
-t_llist				*build_env(char **environ);
+/*error gestion*/
 void				ft_print_error(char *error, const char *str);
 int					manage_error(int cod, t_data *data, t_llist **env,
 								t_memory *me);
+
+/*exec_cmd*/
+int					exec_cmd(t_memory *memo, t_llist **env);
+int					prompt(t_llist *env);
+
+
+/*parser and lexer*/
+t_llist				*build_env(char **environ);
+t_data				*build_data();
+int					count_env(t_llist *env);
+int					parser_data(t_llist *env, char **line, t_data **data,
+						t_memory **memory);
+char				*search_env(t_llist *env, const char *value);
+char				**init_option(char *opt, char **save, int index);
+int					option_ctrl(t_data *data, t_memory *memory, char **line);
+void				init_data(t_llist *env, char *line, t_data **data);
+int					operator_filters(char *line);
+
+/*builltin*/
 int					ft_echo(t_data *data, t_llist *env, t_memory *memory);
 int					ft_variable(t_data *data, t_llist *env, t_memory *memory);
 int					ft_cd(t_data *data, t_llist *env, t_memory *memory);
@@ -81,25 +98,17 @@ int					export_var(t_llist **env, char *var, t_data *data);
 int					export_var0(t_llist **env, char *var, t_data *data);
 int					unenv(char *unset, t_llist *env);
 
-int					exec_cmd(t_memory *memo, t_llist **env);
-int					count_env(t_llist *env);
-
-int					parser_data(t_llist *env, char **line, t_data **data,
-						t_memory **memory);
-char				*search_env(t_llist *env, const char *value);
-void				free_d(char **dtab, int lenght);
-char				**init_option(char *opt, char **save);
-int					option_ctrl(t_data *data, t_memory *memory, char **line);
-void				init_data(t_llist *env, char *line, t_data **data);
-
-t_data				*build_data();
-
+/*memory gestion*/
 int					ctrl_var(char *line);
 int					my_ctrl(int test);
 char				*is_bulltin(char *cmd);
 char				*bin_checkout(char *line, t_llist *env, t_data *data);
-int					operator_filters(char *line);
-
 int					define_variable(t_memory *memory, char *line, t_data *data);
-int					*generate(int c, int c1, int size, t_data *data);
+void				generate(int c, int c1, int size, t_data *data);
+
+/*free gestion*/
+void 				clear_zone(t_data *data);
+void				free_d(char **dtab, int lenght);
+
+int			quote_mode(t_data *data, t_memory *memory, char **line);
 #endif

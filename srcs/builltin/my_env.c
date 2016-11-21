@@ -68,11 +68,6 @@ int				ft_env(t_data *data, t_llist *env, t_memory *memory)
 	t_llist		*ptr;
 
 	ptr = env;
-	if (data->option[1] && !ft_strcmp(data->option[1], "-i"))
-	{
-		ft_lstdel(&env, ft_bzero);
-		return (-7);
-	}
 	while (ptr)
 	{
 		ft_putendl(ptr->content);
