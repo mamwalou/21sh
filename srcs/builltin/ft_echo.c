@@ -12,34 +12,26 @@
 
 #include "../../includes/minishell.h"
 
-static int	aff_var(t_llist *env, char *ptr, int mode)
+static void aff_echo(char *ptr)
 {
-	while (ptr)
+	while (*ptr)
+	{
+		ft_putchar(*ptr);
+		ptr++;
+	}
+	ft_putchar('\n');
 }
-
-static int	duo_quote(char *line, t_llist *env)
+static int	duo_quote(char *line, t_llist *env, int len)
 {
 	char	*cpy;
 	int		i;
-	int		len;
 	int		lock;
 
 	i = 0;
-	len = 0;
 	lock = 0;
-	while (line[i])
-	{
-		if (line[i] != 34)
-			len++;
-		if (line[i] == '$')
-			lock = 1;
-		i++;
-	}
 	cpy = ft_strndup(line, 0, len);
-	if (lock)
-		aff_var(env, cpy, data);
-	else
-		ft_putendl(cpy);
+	aff_echo(cpy);
+	free(cpy);
 	return (SUCCESS);
 }
 
@@ -49,11 +41,12 @@ int			parser_echo(t_memory *memory, t_llist *env)
 	int		i;
 
 	i = 1;
-	ptr = memory->line + 5;
+	ptr = (memory->line) + 5;
+	while (*ptr == ' ')
+		ptr++;
 	if (*ptr == 34)
-		return (duo_quote(ptr + 1, env, data, ft_strchr(ptr, 34)));
-	else
-		return (aff_var(env, ptr);
+		return (duo_quote(ptr, env, ft_strchr(ptr, 34)));
+	aff_echo(ptr);
 	return (SUCCESS);
 }
 
