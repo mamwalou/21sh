@@ -24,6 +24,7 @@
 # define ER_CMDNF -1
 # define ER_MMR 32
 # define ER_PREMMR 33
+# define ER_NOENVSET 99
 # define ER_PATHNF 2
 # define ER_CDPWDNF 43
 # define ER_USEVR 45

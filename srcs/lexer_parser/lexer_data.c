@@ -97,8 +97,9 @@ char		*bin_checkout(char *line, t_llist *env, t_data *data)
 	i = 0;
 	cpy = NULL;
 	generate(58, 0, 2, data);
+	if ((search_env(env, "PATH")) == NULL)
+		return (NULL);
 	lenght_bin = ft_strsplit(&b, search_env(env, "PATH"), data->tableau);
-
 	while (i < lenght_bin)
 	{
 		bin_test = ft_strtrijoin(b[i], "/", line);

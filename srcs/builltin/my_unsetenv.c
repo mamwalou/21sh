@@ -29,6 +29,7 @@ int				unenv(char *unset, t_llist *env)
 			free(ptr->content);
 			free(ptr);
 			save->next = to_next;
+			free(unset);
 			return (0);
 		}
 		save = ptr;

@@ -25,20 +25,6 @@ t_llist				*build_env(char **environ)
 	return (ret);
 }
 
-t_llist				*my_setenv(void)
-{
-	t_llist			*new_env;
-	char			*buf;
-
-	buf = ft_memalloc(UCHAR_MAX);
-	getcwd(buf, UCHAR_MAX);
-	ft_lstadd(&new_env, ft_lstnew("NO_ENV=null", 11));
-	ft_lstadd(&new_env, ft_lstnew(ft_strjoin("PWD=", buf), ft_strlen(buf) + 4));
-	ft_lstadd(&new_env, ft_lstnew(ft_strjoin("OLDPWD=", buf)
-				, ft_strlen(buf) + 7));
-	return (new_env);
-}
-
 int					ft_setenv(t_data *data, t_llist *env, t_memory *memory)
 {
 	t_llist			*ptr;

@@ -43,7 +43,6 @@ int					main(int argc, char **argv, char **environ)
 {
 	t_memory		memory;
 	t_llist			*env;
-
 	int				ctrl;
 
 	ctrl = 0;
@@ -51,8 +50,6 @@ int					main(int argc, char **argv, char **environ)
 	env = build_env(environ);
 	while (ctrl >= 0)
 	{
-		if (env == NULL)
-			env = my_setenv();
 		memory.line = NULL;
 		if ((termcaps(env, &memory, prompt(env))) == -1)
 			return (-1);

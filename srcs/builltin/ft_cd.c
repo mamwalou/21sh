@@ -107,16 +107,20 @@ int					ft_cd(t_data *data, t_llist *env, t_memory *memory)
 	char			*cpy;
 	int				i;
 
-	cpy = ft_strdup(search_env(env, "PWD="));
-	if (data->index == 1)
-		return (cd_only(data, env, cpy));
-	if (data->option[1][0] == '-')
-		return (revers_cd(env, cpy, data));
-	if (data->index > 3)
-		return (48);
-	if ((data->index == 2) && (is_dir(data->option[1]) == REP))
-		return (ft_cdoneopt(data, env, cpy));
-	else if (data->index == 3)
-		return (ft_cdone2opt(data, env, cpy));
-	return (66);
+	if (env != NULL)
+	{
+		cpy = ft_strdup(search_env(env, "PWD="));
+		if (data->index == 1)
+			return (cd_only(data, env, cpy));
+		if (data->option[1][0] == '-')
+			return (revers_cd(env, cpy, data));
+		if (data->index > 3)
+			return (48);
+		if ((data->index == 2) && (is_dir(data->option[1]) == REP))
+			return (ft_cdoneopt(data, env, cpy));
+		else if (data->index == 3)
+			return (ft_cdone2opt(data, env, cpy));
+		return (66);
+	}
+	return (ER_NOENVSET);
 }
