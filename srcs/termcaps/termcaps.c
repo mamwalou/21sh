@@ -42,7 +42,7 @@ void		init_term(struct termios *term, t_llist *e, t_win *data, int len)
 	if (tcgetattr(0, term) == -1)
 		return ;
 	ft_bzero(data->buffer, 4);
-	term->c_lflag &= ~(ICANON | ECHO | ISIG);
+	term->c_lflag &= ~(ICANON | ECHO);
 	term->c_cc[VMIN] = 1;
 	term->c_cc[VTIME] = 0;
 	data->lenght = tgetnum("li");
@@ -73,10 +73,7 @@ int			termcaps(t_llist *env, t_memory *memo, int len)
 			memo->line = push_line(win.buffer[0], memo->line, &win);
 			ft_putchar(win.buffer[0]);
 		}
-		else if ((code = termc_ctrl(memo->line, &win, env, memo)) > 0)
-			memo->line = parsing_term(code, memo->line, &win);
 	}
 	bring_back_shell(&term);
-	win.pos[1]++;
 	return (0);
 }

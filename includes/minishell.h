@@ -16,6 +16,7 @@
 # include "../libft/Includes/libft.h"
 # include <unistd.h>
 # include <signal.h>
+# include <stdio.h>
 
 # define NB_BUILT 8
 
@@ -97,11 +98,11 @@ char				**my_env(t_llist *env);
 int					export_var(t_llist **env, char *var, t_data *data);
 int					export_var0(t_llist **env, char *var, t_data *data);
 int					unenv(char *unset, t_llist *env);
-
+int					env_collapse(t_llist *env, const char *value);
 /*memory gestion*/
 int					ctrl_var(char *line);
 int					my_ctrl(int test);
-char				*is_bulltin(char *cmd);
+int					is_bulltin(char *cmd);
 char				*bin_checkout(char *line, t_llist *env, t_data *data);
 int					define_variable(t_memory *memory, char *line, t_data *data);
 void				generate(int c, int c1, int size, t_data *data);

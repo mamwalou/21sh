@@ -41,6 +41,24 @@ char			*search_env(t_llist *env, const char *value)
 	return (NULL);
 }
 
+int				env_collapse(t_llist *env, const char *value)
+{
+	t_llist		*ptr;
+	int			pos;
+
+	ptr = env;
+	pos = 0;
+	while (ptr != NULL)
+	{
+		pos++;
+		if (!ft_strncmp(ptr->content,
+			(char*)value, ft_strchr((char*)value, '=')))
+			return (pos);
+		ptr = ptr->next;
+	}
+	return (0);
+}
+
 char			**my_env(t_llist *env)
 {
 	t_llist		*ptr;

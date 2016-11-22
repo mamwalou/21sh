@@ -13,12 +13,12 @@
 #include "../../includes/termcaps/termcaps.h"
 #include "../../includes/minishell.h"
 
-static const t_terminal	g_tableau[CNT_TERM - 1] =
+static const t_terminal	g_tableau[CNT_TERM - 2] =
 {
 	//{DELETE, ft_del},
 	{SPACE, ft_space},
 	{CTRL_L, ft_clear},
-	{CTRL_C, ft_signal},
+	//{CTRL_C, ft_signal},
 	{TAB, ft_search},
 };
 

@@ -16,8 +16,9 @@ void				init_data(t_llist *env, char *line, t_data **data)
 {
 	char			*blank;
 
-	if (((*data)->cmd = is_bulltin(line)) != NULL)
+	if ((is_bulltin(line)))
 	{
+		(*data)->cmd = ft_strdup(line);
 		(*data)->option = init_option((*data)->cmd, (*data)->option, (*data)->index);
 		(*data)->index += 1;
 		return ;
@@ -25,7 +26,6 @@ void				init_data(t_llist *env, char *line, t_data **data)
 	if (((*data)->cmd = bin_checkout(line, env, (*data))) != NULL)
 	{
 		(*data)->option = init_option((*data)->cmd, (*data)->option, (*data)->index);
-		(*data)->index += 1;
 		(*data)->index = 0;
 		return ;
 	}

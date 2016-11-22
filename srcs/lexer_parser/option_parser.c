@@ -31,7 +31,7 @@ static char			**push_option(char *opt, char **save, int index)
 	}
 	nw_opt[count] = ft_strdup(opt);
 	nw_opt[count + 1] = 0;
-	printf("(%pdata->option)\n", *save);
+
 	free_d(save, index);
 	return (nw_opt);
 }
@@ -43,10 +43,9 @@ char				**init_option(char *opt, char **save, int index)
 
 	if (save == NULL)
 	{
-		pos = 1;
-		nw_opt = (char**)malloc(sizeof(char*));
+		nw_opt = (char**)malloc(sizeof(char*) + 1);
 		nw_opt[0] = ft_strdup(opt);
-		nw_opt[pos] = 0;
+		nw_opt[1] = 0;
 		return (nw_opt);
 	}
 	else

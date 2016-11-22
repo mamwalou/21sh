@@ -48,6 +48,7 @@ typedef	struct		s_fd
 	struct s_fd		*next;
 }					t_fd;
 
+void				ft_realloc(void *del, size_t to_del, size_t to_alloc);
 char				*ft_chrstr(char *str, char *find);
 int					is_dir(char *s);
 char				*ft_strndup(char *s, int begin, int end);

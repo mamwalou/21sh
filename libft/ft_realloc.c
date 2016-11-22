@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clear_gest.c                                       :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbeline <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,37 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "Includes/libft.h"
 
-void		free_d(char **dtab, int lenght)
+void			ft_realloc(void *del, size_t to_del, size_t to_alloc)
 {
-	int		i;
-
-	i = 0;
-	while (i < lenght)
-	{
-		free(dtab[i]);
-		i++;
-	}
-	free(dtab);
-}
-
-void 		clear_zone(t_data *data)
-{
-	int i;
-
-	i = 0;
-	if (data->tableau)
-		free(data->tableau);
-	if (data->cmd)
-		free(data->cmd);
-	if (data->option)
-	{
-		while(data->option[i])
-			i++;
-		free_d(data->option, i);
-	}
-	if (data->operation)
-		free(data->operation);
-	free(data);
+	ft_bzero(del, to_del);
+	free(del);
+	del = ft_memalloc(to_alloc);
 }

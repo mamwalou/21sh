@@ -63,13 +63,16 @@ int			my_ctrl(int test)
 		|| test == '_'
 		|| test == 92
 		|| test == 39
+		|| test == ' '
 		|| test == '!')
 		return (1);
 	return (0);
 }
 
-char		*is_bulltin(char *cmd)
+int			is_bulltin(char *cmd)
 {
+	char	*ret;
+
 	if (ft_strcmp(cmd, "env") == 0
 		|| ft_strcmp(cmd, "export") == 0
 		|| ft_strcmp(cmd, "unset") == 0
@@ -79,8 +82,8 @@ char		*is_bulltin(char *cmd)
 		|| ft_strcmp(cmd, "toexport") == 0
 		|| ft_strcmp(cmd, "echo") == 0
 		|| ft_strcmp(cmd, "var") == 0)
-			return (ft_strdup(cmd));
-	return (NULL);
+			return (1);
+	return (0);
 }
 
 char		*bin_checkout(char *line, t_llist *env, t_data *data)
@@ -95,6 +98,7 @@ char		*bin_checkout(char *line, t_llist *env, t_data *data)
 	cpy = NULL;
 	generate(58, 0, 2, data);
 	lenght_bin = ft_strsplit(&b, search_env(env, "PATH"), data->tableau);
+
 	while (i < lenght_bin)
 	{
 		bin_test = ft_strtrijoin(b[i], "/", line);

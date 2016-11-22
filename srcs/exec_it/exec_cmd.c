@@ -44,7 +44,7 @@ int						exec_parser(t_data *data, t_llist *env, t_memory *mem)
 	int		tmp;
 
 	i = 0;
-	if ((is_bulltin(data->cmd)) != NULL && ft_strcmp(data->cmd, "exit"))
+	if ((is_bulltin(data->cmd)) && ft_strcmp(data->cmd, "exit"))
 	{
 		while (i < NB_BUILT)
 		{

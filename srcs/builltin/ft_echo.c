@@ -12,35 +12,12 @@
 
 #include "../../includes/minishell.h"
 
-static int	aff_var(t_llist *env, char *ptr, t_data *data)
+static int	aff_var(t_llist *env, char *ptr, int mode)
 {
-	char	**dword;
-	int		lenght;
-	int		i;
-	char	*tmp;
-
-	i = 0;
-	generate(' ', 0, 2, data);
-	lenght = ft_strsplit(&dword, ptr, data->tableau);
-	while (i < lenght)
-	{
-		if (dword[i][0] == '$')
-		{
-			if ((tmp = search_env(env, dword[i] + 1)) != NULL)
-				ft_putstr(tmp);
-			else
-				ft_putstr(dword[i]);
-		}
-		else
-			ft_putstr(dword[i]);
-		ft_putchar(' ');
-		i++;
-	}
-	ft_putchar('\n');
-	return (SUCCESS);
+	while (ptr)
 }
 
-static int	duo_quote(char *line, t_llist *env, t_data *data)
+static int	duo_quote(char *line, t_llist *env)
 {
 	char	*cpy;
 	int		i;
@@ -60,13 +37,13 @@ static int	duo_quote(char *line, t_llist *env, t_data *data)
 	}
 	cpy = ft_strndup(line, 0, len);
 	if (lock)
-		return (aff_var(env, cpy, data));
+		aff_var(env, cpy, data);
 	else
 		ft_putendl(cpy);
 	return (SUCCESS);
 }
 
-int			parser_echo(t_data *data, t_memory *memory, t_llist *env)
+int			parser_echo(t_memory *memory, t_llist *env)
 {
 	char	*ptr;
 	int		i;
@@ -74,23 +51,9 @@ int			parser_echo(t_data *data, t_memory *memory, t_llist *env)
 	i = 1;
 	ptr = memory->line + 5;
 	if (*ptr == 34)
-		return (duo_quote(ptr + 1, env, data));
-	if (ft_strrchr(ptr, '$'))
-		return (aff_var(env, ptr, data));
-	else if (*ptr == 39)
-	{
-		while (ptr[i])
-		{
-			if (!ptr[i + 1])
-			{
-				ft_putchar('\n');
-				return (SUCCESS);
-			}
-			ft_putchar(ptr[i]);
-			i++;
-		}
-	}
-	ft_putendl(ptr);
+		return (duo_quote(ptr + 1, env, data, ft_strchr(ptr, 34)));
+	else
+		return (aff_var(env, ptr);
 	return (SUCCESS);
 }
 
@@ -104,6 +67,5 @@ int			ft_echo(t_data *data, t_llist *env, t_memory *memory)
 		ft_putchar('\n');
 		return (SUCCESS);
 	}
-	return (parser_echo(data, memory, env));
-	return (SUCCESS);
+	return (parser_echo(memory, env));
 }

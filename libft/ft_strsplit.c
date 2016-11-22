@@ -90,7 +90,7 @@ int				ft_strsplit(char ***dst, char const *s, int *t)
 		return (0);
 	if ((len = find_occur(s, t)) == 0)
 		return (-1);
-	*dst = malloc(sizeof(char*) * (len));
+	*dst = malloc(sizeof(char*) * (len + 1));
 	i = 0;
 	while (i < len)
 	{

@@ -6,7 +6,7 @@
 #    By: sbeline  <sbeline @student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/14 14:10:26 by sbeline           #+#    #+#              #
-#    Updated: 2016/10/17 17:11:40 by sbeline          ###   ########.fr        #
+#    Updated: 2016/11/22 13:18:20 by sbeline          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ SRC += ft_tolower.c ft_toupper.c ft_list_search.c
 SRC += ft_strconct.c ft_strnb.c ft_putstr_rev.c
 SRC += ft_nbsize.c ft_lenghtwchar.c ft_lenghtstrwchar.c
 SRC += ft_printunint.c ft_lenghtunint.c ft_isdir.c
-SRC += get_next_line.c ft_stradd.c ft_strmove.c
+SRC += get_next_line.c ft_stradd.c ft_strmove.c ft_realloc.c
 SRC +=  ft_strtrijoin.c ft_strndup.c ft_findstr.c ft_chrstr.c
 
 DEL = rm -f
