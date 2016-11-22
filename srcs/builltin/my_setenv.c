@@ -44,11 +44,9 @@ int					ft_setenv(t_data *data, t_llist *env, t_memory *memory)
 	t_llist			*ptr;
 
 	ptr = env;
-	if (memory->var && data->index == 1)
+	if (!ft_strcmp(data->cmd, "setenv"))
+		return (export_var(&env, data->option[1], data));
+	else if (memory->var)
 		return (export_var(&env, memory->var, data));
-	else if (memory->var && data->index >= 1)
-		return (export_var0(&env, memory->var, data));
-	else
-		return (32);
 	return (0);
 }

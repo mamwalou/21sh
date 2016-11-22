@@ -49,7 +49,7 @@ int			parser_data(t_llist *env, char **line, t_data **data, t_memory **me)
 				return (-1);
 		}
 		if (!ctrl_var(*line))
-			return (define_variable(*me, *line, *data));
+			return (define_memory(*me, *line, *data));
 		line++;
 	}
 	return (0);

@@ -21,7 +21,6 @@ static void	f_env_realloc(t_llist *ptr, char *new, int pos)
 		ptr = ptr->next;
 	free(ptr->content);
 	ptr->content = ft_strdup(new);
-	free(new);
 }
 
 int			overlaps_env(t_llist **env, char *var_memo)
@@ -64,34 +63,6 @@ int			export_var(t_llist **env, char *var, t_data *data)
 			ft_lstadd(env, ft_lstnew(var_memo[i], ft_strlen(var_memo[i])));
 		i++;
 	}
-	free_d(var_memo, len - 1);
+	free_d(var_memo, len);
 	return (0);
-}
-
-int			export_var0(t_llist **env, char *var, t_data *data)
-{
-	char	**var_memo;
-	t_llist	*ptr;
-	int		i;
-	int		y;
-
-	i = 0;
-	generate(59, 0, 2, data);
-	ft_strsplit(&var_memo, var, data->tableau);
-	while (i < data->index)
-	{
-		y = 0;
-		while (var_memo[y])
-		{
-			if (!ft_strncmp(data->option[i], var_memo[y],
-					ft_strchr(var_memo[y], '=') - 1))
-			{
-				if ((overlaps_env(env, var_memo[y])) == ER_PREMMR)
-					export_var(env, var_memo[y], data);
-			}
-			y++;
-		}
-		i++;
-	}
-	return (SUCCESS);
 }

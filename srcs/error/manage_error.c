@@ -54,6 +54,8 @@ int				manage_error(int cod, t_data *data, t_llist **env, t_memory *me)
 		ft_putendl("Good bye, have fun");
 		return (-1);
 	}
+	if (cod == ER_VARARLE)
+		ft_putstr("var already exist");
 	if (cod == -7)
 		return (1);
 	return (0);

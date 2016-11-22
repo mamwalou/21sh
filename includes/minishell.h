@@ -30,6 +30,7 @@
 # define ER_NTFORD 66
 # define ER_EXIT 42
 # define ER_NOVSET 47
+# define ER_VARARLE 7
 # define OPEN_QUOTE_MODE 2
 # define QUOTE_OPT 66
 
@@ -104,7 +105,7 @@ int					ctrl_var(char *line);
 int					my_ctrl(int test);
 int					is_bulltin(char *cmd);
 char				*bin_checkout(char *line, t_llist *env, t_data *data);
-int					define_variable(t_memory *memory, char *line, t_data *data);
+int					define_memory(t_memory *memory, char *line, t_data *data);
 void				generate(int c, int c1, int size, t_data *data);
 
 /*free gestion*/
