@@ -25,18 +25,29 @@ static int		cmp(char c, int *t)
 
 static char		*my_strrchr(const char *s, int *t)
 {
+	char		*save;
 	size_t		i;
 
 	i = 0;
 	while ((cmp(s[i], t) == -1) && s[i])
 		i++;
 	if ((cmp(s[i], t) == 0))
+	{
+		save = (char *)&s[i];
+		while ((cmp(s[i], t) == 0))
+		{
+			if (s[i + 1] == '\0')
+				return (save);
+			i++;
+		}
 		return ((char *)&s[i]);
+	}
 	return (NULL);
 }
 
 static int		ft_stspchr(char *s, int *t)
 {
+	int			save;
 	int			i;
 	int			j;
 
@@ -49,8 +60,13 @@ static int		ft_stspchr(char *s, int *t)
 			i++;
 		if ((cmp(s[i], t) == 0))
 		{
+			save = i;
 			while ((cmp(s[i], t) == 0))
+			{
+				if (!s[i + 1])
+					return (save);
 				i++;
+			}
 			return (i - 1);
 		}
 	}
@@ -92,11 +108,12 @@ int				ft_strsplit(char ***dst, char const *s, int *t)
 		return (-1);
 	*dst = malloc(sizeof(char*) * (len + 1));
 	i = 0;
+	pos = 0;
 	while (i < len)
 	{
 		while ((cmp(*s, t) == 0))
 			s++;
-		dst[0][i] = ft_strndup((char*)s, 0, ft_stspchr((char*)s, t));
+		dst[0][i] = ft_strndup((char*)s, pos, ft_stspchr((char*)s, t));
 		s = my_strrchr(s, t);
 		i++;
 	}

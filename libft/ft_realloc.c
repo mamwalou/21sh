@@ -14,7 +14,6 @@
 
 void			ft_realloc(void *del, size_t to_del, size_t to_alloc)
 {
-	ft_bzero(del, to_del);
 	free(del);
 	del = ft_memalloc(to_alloc);
 }

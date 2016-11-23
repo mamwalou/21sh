@@ -33,12 +33,15 @@ static void		error_memory(int cod, t_data *data, t_llist *env, t_memory *me)
 		ft_putendl(data->option[1]);
 	}
 	if (cod == ER_NOENVSET)
+	{
 		ft_putendl("no HOME set ");
+	}
 }
 
 int				manage_error(int cod, t_data *data, t_llist **env, t_memory *me)
 {
 	error_memory(cod, data, *env, me);
+	clear_zone(data);
 	if (cod == ER_CMDNF)
 		ft_putendl(" :CMD not found");
 	if (cod == ER_PATHNF)

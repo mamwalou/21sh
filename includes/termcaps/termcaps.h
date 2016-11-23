@@ -53,33 +53,29 @@
 # define CRIGHT		95
 # define JTAB		100
 
-char g_buf[512];
-char *g_left;
-char *g_clear;
-char *g_up;
-char *g_down;
-char *g_right;
-char *g_save;
-char *g_reset;
-char *g_resline;
-
-typedef struct	s_win
+typedef struct			s_win
 {
-	int			begin;
-	int			lenght;
-	int			column;
-	int			lineshell;
-	char		*save;
-	char		buffer[4];
-	int			pos[2];
-	int			set;
-}				t_win;
+	int					x;
+	int					y;
+	int					x_max;
+	int					y_max;
+	char				buffer[4];
+}						t_win;
 
-typedef struct	s_terminal
+typedef struct	s_input
 {
 	int			input;
 	int			(*f)(t_win *, t_llist *, char *, t_memory *mem);
-}				t_terminal;
+}				t_input;
+
+typedef	struct		s_term
+{
+	struct termios 	terminal;
+	struct termios 	new_term;
+	struct winsize	apt;
+}					t_term;
+
+t_term				g_term;
 
 int				termcaps(t_llist *env, t_memory *memo, int len);
 
@@ -92,7 +88,7 @@ void			bring_back_shell(struct termios *term);
 t_llist			*created_path(int *tabulation, t_llist *e, char *value);
 char			*parsing_term(int code, char *line, t_win *win);
 char			*depushline(char *line, t_win *win);
-char			*push_line(char c, char *line, t_win *win);
+void			push_line(char c, t_memory *memo, t_win *win);
 char			*tabulation(char *line, t_win *win);
 int				termc_ctrl(char *l, t_win *w, t_llist *e, t_memory *mem);
 

@@ -33,13 +33,14 @@ void 		clear_zone(t_data *data)
 	if (data->tableau)
 		free(data->tableau);
 	if (data->cmd)
-	{
 		free(data->cmd);
-	}
 	if (data->option)
 	{
+
 		while(data->option[i])
+		{
 			i++;
+		}
 		free_d(data->option, i);
 	}
 	if (data->operation)

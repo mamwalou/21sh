@@ -53,22 +53,18 @@ char				*real_push(char *str, char c)
 	return (tmp);
 }
 
-char				*push_line(char c, char *line, t_win *win)
+void				push_line(char c, t_memory *memo, t_win *win)
 {
-	char			*ret;
-
-	win->lineshell++;
-	win->pos[0]++;
-	if (line == NULL)
+	win->x++;
+	ft_putchar(c);
+	if (memo->line == NULL)
 	{
-		ret = (char*)ft_memalloc(1);
-		ret[0] = c;
-		ret[1] = '\0';
-		return (ret);
+		memo->line = (char*)ft_memalloc(1);
+		memo->line[0] = c;
+		memo->line[1] = '\0';
 	}
 	else
-		return (real_push(line, c));
-	return (line);
+		memo->line = real_push(memo->line, c);
 }
 
 char				*depushline(char *line, t_win *win)
@@ -76,11 +72,10 @@ char				*depushline(char *line, t_win *win)
 	int				i;
 	char			*ret;
 
-	if ((ret = (char*)ft_memalloc(win->lineshell)) == NULL)
+	if ((ret = (char*)ft_memalloc(win->x + 1)) == NULL)
 		return (NULL);
 	i = 0;
-
-	while (i < win->lineshell)
+	while (i < win->x)
 	{
 		ret[i] = line[i];
 		i++;
@@ -91,9 +86,5 @@ char				*depushline(char *line, t_win *win)
 
 char				*parsing_term(int code, char *line, t_win *win)
 {
-	if (code == SPACE)
-		return (push_line(' ', line, win));
-	else if (code == DELETE)
-		return (depushline(line, win));
 	return (line);
 }

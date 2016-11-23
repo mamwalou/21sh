@@ -73,23 +73,25 @@ int						exec_cmd(t_memory *memo, t_llist **env)
 	error = 0;
 	data = build_data();
 	generate(9, 32, 3, data);
-	if ((memo->ll = ft_strsplit(&pline, memo->line, data->tableau)) == -1)
-		return (0);
-	if (memo->ll > 0)
+	if ((memo->ll = ft_strsplit(&pline, memo->line, data->tableau)) > 0)
 	{
 		error = parser_data(*env, pline, &data, &memo);
 		if (error < 0)
 		{
-			ft_putstr(memo->line);
-			manage_error(error, data, env, memo);
+			ft_putstr(pline[0]);
+			free_d(pline, memo->ll);
+			return (manage_error(error, data, env, memo));
 		}
 		else if (error < 5)
 		{
 			if ((error = exec_parser(data, *env, memo)) != 0)
+			{
+				free_d(pline, memo->ll);
 				return (manage_error(error, data, env, memo));
+			}
 		}
+		clear_zone(data);
+		free_d(pline, memo->ll);
 	}
-	clear_zone(data);
-	free_d(pline, memo->ll);
 	return (0);
 }
