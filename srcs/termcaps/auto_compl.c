@@ -11,13 +11,3 @@
 /* ************************************************************************** */
 
 #include "../../includes/termcaps/termcaps.h"
-
-int			ft_signal(t_win *win, t_llist *e, char *line, t_memory *mem)
-{
-	return (CTRL_C);
-}
-
-char		*tabulation(char *line, t_win *win)
-{
-	return (line);
-}

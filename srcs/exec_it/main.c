@@ -45,18 +45,16 @@ int					main(int argc, char **argv, char **environ)
 	int				ctrl;
 
 	ctrl = 0;
-	memory.var = NULL;
 	env = build_env(environ);
+	memory = init_memory();
 	while (ctrl >= 0)
 	{
-		memory.line = NULL;
 		if ((termcaps(env, &memory, prompt(env))) == -1)
 			return (-1);
 		ft_putchar('\n');
 		/*if (memory.line)
 			ctrl = exec_cmd(&memory, &env);*/
-		push_history(memory);
-		free(memory.line);
+		push_history(&memory);
 	}
 	return (0);
 }

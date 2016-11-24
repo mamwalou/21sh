@@ -12,7 +12,7 @@
 
 #include "../../includes/minishell.h"
 
-int			dup_option(t_data *data, char **line, int pos, int nb_car)
+/*int			dup_option(t_data *data, char **line, int pos, int nb_car)
 {
 	char	*new_opt;
 	int		i;
@@ -67,3 +67,4 @@ int			quote_mode(t_data *data, t_memory *memory, char **line)
 	}
 	return (open_quote_mode());
 }
+*/

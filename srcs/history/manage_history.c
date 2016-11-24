@@ -11,9 +11,50 @@
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-#include "../../includes/termcaps/termcaps.h"
 
-void 	push_history(t_memory *memory)
+t_memory 			init_memory()
 {
-	if ()
+	t_memory		memory;
+	char			*var;
+
+	memory.var = NULL;
+	memory.line = NULL;
+	memory.mode_quote = 0;
+	memory.type_quote = 0;
+	memory.head = NULL;
+	memory.tail = NULL;
+	memory.father = 0;
+	memory.ll = 0;
+	return (memory);
+}
+
+static t_hst		*newhistory(char *line)
+{
+	t_hst			*maillon_hs;
+
+	maillon_hs = (t_hst*)ft_memalloc(sizeof(t_hst));
+	maillon_hs->line = ft_strdup(line);
+	maillon_hs->next = NULL;
+	maillon_hs->prev = NULL;
+	return (maillon_hs);
+}
+
+void 				push_history(t_memory *memory)
+{
+	t_hst			*new_maillon;
+
+	new_maillon = newhistory(memory->line);
+	if (memory->head == NULL)
+	{
+		memory->head = new_maillon;
+		memory->tail = memory->head;
+	}
+	else
+	{
+		memory->tail->next = new_maillon;
+		new_maillon->prev = memory->tail;
+		memory->tail = new_maillon;
+	}
+	free(memory->line);
+	memory->line = NULL;
 }

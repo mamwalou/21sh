@@ -46,11 +46,12 @@ typedef struct		s_data
 	struct s_data	*right;
 }					t_data;
 
-typedef	struct		s_hist
+typedef	struct		s_hst
 {
-	char				*line;
-	struct s_hist		hist;
-}					t_hist;
+	char			*line;
+	struct s_hst	*next;
+	struct s_hst	*prev;
+}					t_hst;
 
 typedef struct		s_memory
 {
@@ -58,8 +59,10 @@ typedef struct		s_memory
 	char			*line;
 	char			*mode_quote;
 	int				*type_quote;
-	t_llist			*line_memory;
+	int				ll;
 	pid_t			father;
+	struct s_hst	*head;
+	struct s_hst	*tail;
 }					t_memory;
 
 typedef struct		s_built
@@ -104,7 +107,10 @@ int					export_var(t_llist **env, char *var, t_data *data);
 int					export_var0(t_llist **env, char *var, t_data *data);
 int					unenv(char *unset, t_llist *env);
 int					env_collapse(t_llist *env, const char *value);
+
 /*memory gestion*/
+t_memory 			init_memory();
+void 				push_history(t_memory *memory);
 int					ctrl_var(char *line);
 int					my_ctrl(int test);
 int					is_bulltin(char *cmd);
@@ -116,5 +122,5 @@ void				generate(int c, int c1, int size, t_data *data);
 void 				clear_zone(t_data *data);
 void				free_d(char **dtab, int lenght);
 
-int			quote_mode(t_data *data, t_memory *memory, char **line);
+int					quote_mode(t_data *data, t_memory *memory, char **line);
 #endif

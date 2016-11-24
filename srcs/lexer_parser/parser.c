@@ -43,7 +43,7 @@ int			parser_data(t_llist *env, char **line, t_data **data, t_memory **me)
 			{
 				(*data)->index += 1;
 				if (option_ctrl(*data, *me, line) == QUOTE_OPT)
-					line += (*me)->pos;
+					;
 			}
 			if (!(*data)->cmd)
 				return (-1);

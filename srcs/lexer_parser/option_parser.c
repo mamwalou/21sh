@@ -56,9 +56,6 @@ char				**init_option(char *opt, char **save, int index)
 int			option_ctrl(t_data *data, t_memory *memory, char **line)
 {
 
-	memory->pos = 0;
-	/*if (line[memory->pos][0] == 39 || line[memory->pos][0] == 34)
-		quote_mode(data, memory, line);*/
 	data->option = init_option(*line, data->option, data->index);
 	return (SUCCESS);
 }
