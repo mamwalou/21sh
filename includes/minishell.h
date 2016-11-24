@@ -46,16 +46,19 @@ typedef struct		s_data
 	struct s_data	*right;
 }					t_data;
 
+typedef	struct		s_hist
+{
+	char				*line;
+	struct s_hist		hist;
+}					t_hist;
+
 typedef struct		s_memory
 {
 	char			*var;
-	char			*home;
 	char			*line;
 	char			*mode_quote;
 	int				*type_quote;
-	int				ll;
-	int				pos;
-	int				c_t_r;
+	t_llist			*line_memory;
 	pid_t			father;
 }					t_memory;
 

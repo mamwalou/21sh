@@ -13,51 +13,15 @@
 #include "../../includes/termcaps/termcaps.h"
 #include "../../includes/minishell.h"
 
-static const t_input	g_tableau[CNT_TERM - 2] =
+int				ft_puts(int c)
 {
-	{DELETE, ft_del},
-	{CTRL_L, ft_clear},
-	{TAB, ft_search},
-};
-
-int						ft_space(t_win *w, t_llist *e, char *line, t_memory *m)
-{
-	return (SPACE);
-}
-
-int						ft_puts(int c)
-{
+	write(1, &c, 1);
 	return (0);
 }
 
-int						ft_clear(t_win *w, t_llist *e, char *line, t_memory *m)
+int				input(t_line **blst, t_line **end, t_memory *memory, t_win *win)
 {
-
-	return (CTRL_L);
-}
-
-int						ft_del(t_win *win, t_llist *e, char *line, t_memory *m)
-{
-	depushline(line, win);
-	ft_putstr(line);
-	return (DELETE);
-}
-
-int						termc_ctrl(char *l, t_win *w, t_llist *e, t_memory *m)
-{
-	int		i;
-	int		ret;
-
-	i = 0;
-	while (i < CNT_TERM)
-	{
-		if (g_tableau[i].input == w->buffer[0])
-		{
-			if ((ret = g_tableau[i].f(w, e, l, m)) == TAB)
-				m->c_t_r = ret;
-			return (ret);
-		}
-		i++;
-	}
-	return (0);
+	if (*(unsigned int*)win->buffer == DELETE)
+		return (depushline(blst, end, win));
+	return(0);
 }

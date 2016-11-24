@@ -6,7 +6,7 @@
 #    By: sbeline  <sbeline @student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/17 17:09:35 by sbeline           #+#    #+#              #
-#    Updated: 2016/11/21 17:31:21 by sbeline          ###   ########.fr        #
+#    Updated: 2016/11/24 15:09:02 by sbeline          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC_NAME = main.c \
 			ft_cd.c \
 			ft_echo.c \
 			ft_variables.c \
+			manage_history.c \
 			termcaps_checker.c \
 			termcaps.c \
 			manage_error.c \

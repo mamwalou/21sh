@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move_cursr.c                                       :+:      :+:    :+:   */
+/*   manage_history.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbeline <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,15 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/termcaps/termcaps.h"
 #include "../../includes/minishell.h"
+#include "../../includes/termcaps/termcaps.h"
 
-void			move_cursr(t_win *win, int mode, int iteration)
+void 	push_history(t_memory *memory)
 {
-	if (mode == 0)
-		tputs(tgetstr("le", NULL), 1, ft_puts);
-	if (mode == 1)
-		tputs(tgetstr("ri", NULL), 1, ft_puts);
-	if (mode == 2)
-		tputs(tgetstr("up", NULL), 1, ft_puts);
+	if ()
 }

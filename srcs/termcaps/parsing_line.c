@@ -33,58 +33,62 @@ t_llist				*created_path(int *tabulation, t_llist *e, char *value)
 	return (ret);
 }
 
-char				*real_push(char *str, char c)
+void print_lsttmp(t_line *ptr)
 {
-	char			*tmp;
-	int				len;
-	int				i;
-
-	i = 0;
-	len = ft_strlen(str);
-	tmp = (char*)ft_memalloc(len + 2);
-	while (str[i])
+	while (ptr)
 	{
-		tmp[i] = str[i];
-		i++;
+		ft_putchar(ptr->l_char);
+		ptr = ptr->next;
 	}
-	tmp[i] = c;
-	tmp[i + 1] = 0;
-	free(str);
-	return (tmp);
 }
 
-void				push_line(char c, t_memory *memo, t_win *win)
+void				push_line(t_line **begin, t_line **end, t_win *win)
 {
-	win->x++;
-	ft_putchar(c);
-	if (memo->line == NULL)
+	t_line			*new;
+
+	new = (t_line*)ft_memalloc(sizeof(t_line));
+	new->l_char = win->buffer[0];
+	new->next = NULL;
+	new->prev = NULL;
+	ft_putchar(new->l_char);
+	win->pos_line++; 
+	if (*begin == NULL)
 	{
-		memo->line = (char*)ft_memalloc(1);
-		memo->line[0] = c;
-		memo->line[1] = '\0';
+		*begin = new;
+		*end = new;
 	}
 	else
-		memo->line = real_push(memo->line, c);
-}
-
-char				*depushline(char *line, t_win *win)
-{
-	int				i;
-	char			*ret;
-
-	if ((ret = (char*)ft_memalloc(win->x + 1)) == NULL)
-		return (NULL);
-	i = 0;
-	while (i < win->x)
 	{
-		ret[i] = line[i];
-		i++;
+	 	(*end)->next = new;
+		new->prev = *end;
+		(*end) = new;
 	}
-	ret[i] = '\0';
-	return (ret);
 }
 
-char				*parsing_term(int code, char *line, t_win *win)
+int					depushline(t_line **begin, t_line **end, t_win *win)
 {
-	return (line);
+	t_line			*to_free;
+
+	if (win->pos_line > 0)
+	{
+		if (win->pos_line > 1)
+		{
+			to_free = *end;
+			*end = (*end)->prev;
+			(*end)->next = NULL;
+			free(to_free);
+			win->pos_line--;
+		}
+		else if (win->pos_line == 1)
+		{
+			free(*begin);
+			*begin = NULL;
+			*end = NULL;
+			win->pos_line--;
+		}
+		move_cursr(win, 0, 1);
+		ft_putchar(' ');
+		move_cursr(win, 0, 1);
+	}
+	return (1);
 }

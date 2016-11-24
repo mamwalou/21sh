@@ -12,7 +12,7 @@
 
 #include "../../includes/termcaps/termcaps.h"
 #include "../../includes/minishell.h"
-
+/*
 int					count_line(char *s, int lenght, char **ptr)
 {
 	int				ret;
@@ -119,3 +119,4 @@ int					ft_search(t_win *win, t_llist *e, char *line, t_memory *mem)
 	}
 	return (TAB);
 }
+*/

@@ -57,15 +57,23 @@ typedef struct			s_win
 {
 	int					x;
 	int					y;
+	int					pos_line;
 	int					x_max;
 	int					y_max;
 	char				buffer[4];
 }						t_win;
 
+typedef struct			s_line
+{
+	char				l_char;
+	struct s_line		*next;
+	struct s_line		*prev;
+}						t_line;
+
 typedef struct	s_input
 {
 	int			input;
-	int			(*f)(t_win *, t_llist *, char *, t_memory *mem);
+	int			(*f)(t_line *blst,t_win *win, t_memory *mem);
 }				t_input;
 
 typedef	struct		s_term
@@ -77,8 +85,10 @@ typedef	struct		s_term
 
 t_term				g_term;
 
-int				termcaps(t_llist *env, t_memory *memo, int len);
+void 			print_lsttmp(t_line *ptr);
 
+int				termcaps(t_llist *env, t_memory *memo, int lenght_prompt);
+void 			push_history(t_memory *memory);
 
 int				init_varfcurs();
 
@@ -87,16 +97,16 @@ void			bring_back_shell(struct termios *term);
 
 t_llist			*created_path(int *tabulation, t_llist *e, char *value);
 char			*parsing_term(int code, char *line, t_win *win);
-char			*depushline(char *line, t_win *win);
-void			push_line(char c, t_memory *memo, t_win *win);
-char			*tabulation(char *line, t_win *win);
-int				termc_ctrl(char *l, t_win *w, t_llist *e, t_memory *mem);
+int				depushline(t_line **begin, t_line **end, t_win *win);
+void			push_line(t_line **begin, t_line **end, t_win *win);
 
-int				ft_space(t_win *win, t_llist *e, char *line, t_memory *mem);
-int				ft_del(t_win *win, t_llist *e, char *line, t_memory *mem);
-int				ft_search(t_win *win, t_llist *e, char *line, t_memory *mem);
-int				ft_clear(t_win *win, t_llist *e, char *line, t_memory *mem);
-int				ft_signal(t_win *win, t_llist *e, char *line, t_memory *mem);
+int				input(t_line **blst, t_line **end, t_memory *memory, t_win *win);
+char			*tabulation(char *line, t_win *win);
+
+int				ft_del(t_line *blst,t_win *win, t_memory *mem);
+int				ft_search(t_line *blst,t_win *win, t_memory *mem);
+int				ft_clear(t_line *blst,t_win *win, t_memory *mem);
+int				ft_signal(t_line *blst,t_win *win, t_memory *mem);
 
 void			move_cursr(t_win *win, int mode, int iteration);
 

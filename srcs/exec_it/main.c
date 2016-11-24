@@ -12,7 +12,6 @@
 
 #include "../../includes/minishell.h"
 #include "../../includes/termcaps/termcaps.h"
-#include <time.h>
 
 int					prompt(t_llist *env)
 {
@@ -54,8 +53,9 @@ int					main(int argc, char **argv, char **environ)
 		if ((termcaps(env, &memory, prompt(env))) == -1)
 			return (-1);
 		ft_putchar('\n');
-		if (memory.line)
-			ctrl = exec_cmd(&memory, &env);
+		/*if (memory.line)
+			ctrl = exec_cmd(&memory, &env);*/
+		push_history(memory);
 		free(memory.line);
 	}
 	return (0);
