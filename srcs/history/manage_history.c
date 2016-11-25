@@ -39,22 +39,37 @@ static t_hst		*newhistory(char *line)
 	return (maillon_hs);
 }
 
+void 				print_memory(t_hst *begin)
+{
+	t_hst			*ptr;
+
+	ptr = begin;
+	while (ptr)
+	{
+		ft_putendl(ptr->line);
+		ptr = ptr->next;
+	}
+}
+
 void 				push_history(t_memory *memory)
 {
 	t_hst			*new_maillon;
 
-	new_maillon = newhistory(memory->line);
-	if (memory->head == NULL)
+	if (memory->line != NULL)
 	{
-		memory->head = new_maillon;
-		memory->tail = memory->head;
+		new_maillon = newhistory(memory->line);
+		if (memory->head == NULL)
+		{
+			memory->head = new_maillon;
+			memory->tail = memory->head;
+		}
+		else
+		{
+			memory->tail->next = new_maillon;
+			new_maillon->prev = memory->tail;
+			memory->tail = new_maillon;
+		}
+		free(memory->line);
+		memory->line = NULL;
 	}
-	else
-	{
-		memory->tail->next = new_maillon;
-		new_maillon->prev = memory->tail;
-		memory->tail = new_maillon;
-	}
-	free(memory->line);
-	memory->line = NULL;
 }

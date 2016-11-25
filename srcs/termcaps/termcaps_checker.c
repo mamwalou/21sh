@@ -23,5 +23,11 @@ int				input(t_line **blst, t_line **end, t_memory *memory, t_win *win)
 {
 	if (*(unsigned int*)win->buffer == DELETE)
 		return (depushline(blst, end, win));
+	if (*(unsigned int*)win->buffer == DELETE)
+		return (depushline(blst, end, win));
+	if (*(unsigned int*)win->buffer == LEFT)
+		return (gest_crs(*blst, *end, win));
+	if (*(unsigned int*)win->buffer == RIGHT)
+		return (gest_crs(*blst, *end, win));
 	return(0);
 }

@@ -33,10 +33,8 @@
 # define END         4610843
 # define PAGEDOWN    2117491483
 # define PAGEUP      2117425947
-# define CTRL_C      3
 # define CTRL_D      4
 # define CTRL_L      12
-# define CTRL_Z      26
 # define CTRL_R      18
 # define SHIFT_LEFT  17458
 # define SHIFT_RIGHT 17202
@@ -58,6 +56,7 @@ typedef struct			s_win
 	int					x;
 	int					y;
 	int					pos_line;
+	int					mov_line;
 	int					x_max;
 	int					y_max;
 	char				buffer[4];
@@ -109,5 +108,6 @@ int				ft_clear(t_line *blst,t_win *win, t_memory *mem);
 int				ft_signal(t_line *blst,t_win *win, t_memory *mem);
 
 void			move_cursr(t_win *win, int mode, int iteration);
+int 			gest_crs(t_line *begin, t_line *end, t_win *win);
 
 #endif

@@ -39,12 +39,15 @@ int			parser_data(t_llist *env, char **line, t_data **data, t_memory **me)
 		{
 			if (((*data)->cmd) == NULL)
 				init_data(env, *line, data);
+			else if (operator_filters(*line) == 1)
+				push_data(data);
 			else
 			{
 				(*data)->index += 1;
 				if (option_ctrl(*data, *me, line) == QUOTE_OPT)
 					;
 			}
+
 			if (!(*data)->cmd)
 				return (-1);
 		}

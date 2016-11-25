@@ -12,6 +12,11 @@
 
 #include "../../includes/minishell.h"
 
+void 				push_data(t_data **data)
+{
+	;
+}
+
 void				init_data(t_llist *env, char *line, t_data **data)
 {
 	char			*blank;

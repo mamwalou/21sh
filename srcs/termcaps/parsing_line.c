@@ -12,28 +12,7 @@
 
 #include "../../includes/termcaps/termcaps.h"
 
-t_llist				*created_path(int *tabulation, t_llist *e, char *value)
-{
-	DIR				*ptr;
-	struct dirent	*fl;
-	t_llist			*ret;
-	int				lenght;
-
-	ret = 0;
-	if ((ptr = opendir(value)) == NULL)
-		exit(1);
-	while ((fl = readdir(ptr)) != NULL)
-	{
-		lenght = ft_strlen(fl->d_name);
-		if (fl->d_name[0] != '.')
-			ft_lstadd(&ret, ft_lstnew(fl->d_name, lenght));
-		if (lenght > *tabulation)
-			*tabulation = lenght;
-	}
-	return (ret);
-}
-
-void print_lsttmp(t_line *ptr)
+void 		print_lsttmp(t_line *ptr)
 {
 	while (ptr)
 	{
@@ -42,32 +21,59 @@ void print_lsttmp(t_line *ptr)
 	}
 }
 
-void				push_line(t_line **begin, t_line **end, t_win *win)
+void		pos_in_line(t_line *new, t_line **begin, t_line **end, t_win *win)
 {
-	t_line			*new;
+	t_line	*ptr;
+	t_line	*ptr_n;
+	int		i;
+
+	i = 0;
+	ptr = *begin;
+	while (++i < win->mov_line - 1)
+		ptr = ptr->next;
+	ptr_n = ptr->next;
+	ptr->next = new;
+	new->prev = ptr;
+	new->next = ptr_n;
+	win->pos_line++;
+	print_lsttmp(ptr->next);
+	move_cursr(win, 0, win->pos_line - win->mov_line);
+	win->mov_line++;
+}
+
+void		push_line(t_line **begin, t_line **end, t_win *win)
+{
+	t_line	*new;
 
 	new = (t_line*)ft_memalloc(sizeof(t_line));
 	new->l_char = win->buffer[0];
 	new->next = NULL;
 	new->prev = NULL;
-	ft_putchar(new->l_char);
-	win->pos_line++; 
 	if (*begin == NULL)
 	{
+		win->pos_line++;
+		win->mov_line++;
+		ft_putchar(new->l_char);
 		*begin = new;
 		*end = new;
 	}
-	else
+	else if ((win->mov_line - 1) == win->pos_line)
 	{
-	 	(*end)->next = new;
+		win->pos_line++;
+		win->mov_line++;
+		ft_putchar(new->l_char);
+		ft_putchar(win->mov_line);
+		(*end)->next = new;
 		new->prev = *end;
 		(*end) = new;
 	}
+	else
+		pos_in_line(new, begin, end, win);
 }
 
-int					depushline(t_line **begin, t_line **end, t_win *win)
+int			depushline(t_line **begin, t_line **end, t_win *win)
 {
-	t_line			*to_free;
+	t_line	*to_free;
 
 	if (win->pos_line > 0)
 	{
@@ -77,15 +83,15 @@ int					depushline(t_line **begin, t_line **end, t_win *win)
 			*end = (*end)->prev;
 			(*end)->next = NULL;
 			free(to_free);
-			win->pos_line--;
 		}
 		else if (win->pos_line == 1)
 		{
 			free(*begin);
 			*begin = NULL;
 			*end = NULL;
-			win->pos_line--;
 		}
+		win->pos_line--;
+		win->mov_line--;
 		move_cursr(win, 0, 1);
 		ft_putchar(' ');
 		move_cursr(win, 0, 1);

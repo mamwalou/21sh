@@ -25,21 +25,24 @@ void 			list_to_array(t_memory *memory, t_line *begin, t_win *win)
 	int			i;
 
 	i = 0;
-	memory->line = (char*)ft_memalloc(sizeof(win->pos_line));
-	ptr = begin;
-	while (i < win->pos_line)
+	if (begin != NULL)
 	{
-		memory->line[i] = ptr->l_char;
-		ptr = ptr->next;
-		i++;
-	}
-	i = 0;
-	while (i < win->pos_line)
-	{
-		begin->l_char = 0;
-		free(begin);
-		begin = begin->next;
-		i++;
+		memory->line = (char*)ft_memalloc(sizeof(win->pos_line));
+		ptr = begin;
+		while (i < win->pos_line)
+		{
+			memory->line[i] = ptr->l_char;
+			ptr = ptr->next;
+			i++;
+		}
+		i = 0;
+		while (i < win->pos_line)
+		{
+			begin->l_char = 0;
+			free(begin);
+			begin = begin->next;
+			i++;
+		}
 	}
 }
 
@@ -48,6 +51,7 @@ void			init_mv(t_win *win, int lenght, t_line **begin, t_line **end)
 	*begin = NULL;
 	*end = NULL;
 	win->pos_line = 0;
+	win->mov_line = 1;
 	win->x = lenght + 1;
 	ioctl(0, TIOCGWINSZ, &(g_term.apt));
 	win->x_max = g_term.apt.ws_row;
@@ -60,7 +64,7 @@ int				init_term(struct termios *term, struct termios *new_term)
 
 	tcgetattr(0, term);
 	if ((name_term = getenv("TERM")) == NULL)
-		return (-1);
+		name_term = "xterm-256color";
 	if (tgetent(NULL, name_term) == ERR)
 		return (-1);
 	if (tcgetattr(0, new_term) == -1)
@@ -73,12 +77,12 @@ int				init_term(struct termios *term, struct termios *new_term)
 	return (0);
 }
 
-int				termcaps(t_llist *env, t_memory *memo, int lenght_prompt)
+int					termcaps(t_llist *env, t_memory *memo, int lenght_prompt)
 {
-	struct termios		term;
-	t_line				*begin_l;
-	t_line				*end_l;
-	t_win				win;
+	struct termios	term;
+	t_line			*begin_l;
+	t_line			*end_l;
+	t_win			win;
 
 
 	init_term(&(g_term.terminal), &(g_term.new_term));

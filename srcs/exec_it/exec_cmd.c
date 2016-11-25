@@ -28,13 +28,13 @@ void					exect_it(t_data *data, t_llist *env, t_memory *memory)
 {
 	pid_t				father;
 
-	memory->father = fork();
-	if (memory->father > 0)
+	memory->child = fork();
+	if (memory->child > 0)
 	{
-		wait(&memory->father);
+		wait(&memory->child);
 		return ;
 	}
-	if (memory->father == 0)
+	if (memory->child == 0)
 		execve(data->cmd, data->option, NULL);
 }
 
