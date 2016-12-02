@@ -3,25 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   memory.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeline <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2016/10/17 17:05:15 by sbeline          ###   ########.fr       */
+/*   Updated: 2016/12/01 15:27:22 by salomon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../includes/shell.h"
 
 int			can_var(t_memory *memory, char *line, t_data *data)
 {
 	char	**array;
 	char	*cpy;
-	int		i;
 	int		len;
 
-	i = 0;
-	generate(';', 0, 2, data);
-	len = ft_strsplit(&array, memory->var, data->tableau);
+	generate(";", 1, data);
+	len = parser(&array, memory->var, data->tableau);
 	cpy = ft_strdup(memory->var);
 	free(memory->var);
 	memory->var = ft_strtrijoin(cpy, ";", line);
@@ -32,8 +30,6 @@ int			can_var(t_memory *memory, char *line, t_data *data)
 
 int			define_memory(t_memory *memory, char *line, t_data *data)
 {
-	char			*cpy;
-
 	if (memory->var)
 		can_var(memory, line, data);
 	else

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeline <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2016/10/17 17:05:15 by sbeline          ###   ########.fr       */
+/*   Updated: 2016/12/01 15:27:09 by salomon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../includes/shell.h"
 
 int			ctrl_var(char *line)
 {
@@ -24,10 +24,10 @@ int			ctrl_var(char *line)
 	return (1);
 }
 
-int			operator_filters(char *line)
+int				operator_filters(char *line)
 {
-	char	*tableau[8];
-	int		i;
+	const char	*tableau[7];
+	int			i;
 
 	tableau[0] = ">";
 	tableau[1] = "<";
@@ -84,38 +84,4 @@ int			is_bulltin(char *cmd)
 		|| ft_strcmp(cmd, "var") == 0)
 			return (1);
 	return (0);
-}
-
-char		*bin_checkout(char *line, t_llist *env, t_data *data)
-{
-	char	**b;
-	char	*cpy;
-	char	*bin_test;
-	int		lenght_bin;
-	int		i;
-
-	i = 0;
-	cpy = NULL;
-	generate(58, 0, 2, data);
-	if ((search_env(env, "PATH")) == NULL)
-		return (NULL);
-	lenght_bin = ft_strsplit(&b, search_env(env, "PATH"), data->tableau);
-	while (i < lenght_bin)
-	{
-		bin_test = ft_strtrijoin(b[i], "/", line);
-		if (((access(bin_test, X_OK)) == 0) || ((access(line, X_OK)) == 0))
-		{
-			if (ft_strrchr(line, '/'))
-				cpy = ft_strdup(line);
-			else
-				cpy = (ft_strtrijoin(b[i], "/", line));
-			free_d(b, lenght_bin);
-			free(bin_test);
-			return (cpy);
-		}
-		free(bin_test);
-		i++;
-	}
-	free_d(b, lenght_bin);
-	return (NULL);
 }

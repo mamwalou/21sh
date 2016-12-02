@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeline <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2016/10/17 17:05:15 by sbeline          ###   ########.fr       */
+/*   Updated: 2016/12/01 13:20:13 by salomon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void		push_line(t_line **begin, t_line **end, t_win *win)
 {
 	t_line	*new;
 
-	new = (t_line*)ft_memalloc(sizeof(t_line));
+	new = (t_line*)malloc(sizeof(t_line));
 	new->l_char = win->buffer[0];
 	new->next = NULL;
 	new->prev = NULL;
@@ -62,10 +62,9 @@ void		push_line(t_line **begin, t_line **end, t_win *win)
 		win->pos_line++;
 		win->mov_line++;
 		ft_putchar(new->l_char);
-		ft_putchar(win->mov_line);
 		(*end)->next = new;
 		new->prev = *end;
-		(*end) = new;
+		*end = new;
 	}
 	else
 		pos_in_line(new, begin, end, win);

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   my_setenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeline <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2016/10/17 17:05:15 by sbeline          ###   ########.fr       */
+/*   Updated: 2016/12/01 15:28:00 by salomon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../includes/shell.h"
 
 t_llist				*build_env(char **environ)
 {
@@ -25,7 +25,7 @@ t_llist				*build_env(char **environ)
 	return (ret);
 }
 
-int					ft_setenv(t_data *data, t_llist *env, t_memory *memory)
+/*int					ft_setenv(t_data *data, t_llist *env, t_memory *memory)
 {
 	t_llist			*ptr;
 
@@ -35,4 +35,4 @@ int					ft_setenv(t_data *data, t_llist *env, t_memory *memory)
 	else if (memory->var)
 		return (export_var(&env, memory->var, data));
 	return (0);
-}
+}*/

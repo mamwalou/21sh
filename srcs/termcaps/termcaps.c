@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   termcaps.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeline <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2016/10/17 17:05:15 by sbeline          ###   ########.fr       */
+/*   Updated: 2016/12/01 15:27:52 by salomon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/termcaps/termcaps.h"
-#include "../../includes/minishell.h"
+#include "../../includes/shell.h"
 
 void			bring_back_shell(struct termios *term)
 {
@@ -35,6 +35,7 @@ void 			list_to_array(t_memory *memory, t_line *begin, t_win *win)
 			ptr = ptr->next;
 			i++;
 		}
+		memory->line[i] = '\0';
 		i = 0;
 		while (i < win->pos_line)
 		{

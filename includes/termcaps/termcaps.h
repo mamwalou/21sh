@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   termcaps.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeline <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2016/10/17 17:05:15 by sbeline          ###   ########.fr       */
+/*   Updated: 2016/12/01 15:38:34 by salomon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <curses.h>
 # include <dirent.h>
 # include "../../libft/Includes/libft.h"
-# include "../minishell.h"
+# include "../shell.h"
 
 # define ESCAPE      27
 # define SPACE       32
@@ -97,7 +97,7 @@ void			bring_back_shell(struct termios *term);
 t_llist			*created_path(int *tabulation, t_llist *e, char *value);
 char			*parsing_term(int code, char *line, t_win *win);
 int				depushline(t_line **begin, t_line **end, t_win *win);
-void			push_line(t_line **begin, t_line **end, t_win *win);
+void		push_line(t_line **begin, t_line **end, t_win *win);
 
 int				input(t_line **blst, t_line **end, t_memory *memory, t_win *win);
 char			*tabulation(char *line, t_win *win);

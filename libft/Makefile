@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sbeline  <sbeline @student.42.fr>          +#+  +:+       +#+         #
+#    By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/14 14:10:26 by sbeline           #+#    #+#              #
-#    Updated: 2016/11/25 15:26:56 by sbeline          ###   ########.fr        #
+#    Updated: 2016/12/01 14:03:06 by salomon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRC += ft_strdup.c ft_strequ.c ft_striter.c ft_striteri.c
 SRC += ft_strjoin.c  ft_strlen.c ft_strmap.c
 SRC += ft_strmapi.c ft_strncat.c ft_strncmp.c ft_strncpy.c
 SRC += ft_strnew.c ft_strnstr.c ft_strrchr.c
-SRC += ft_strsplit.c ft_strstr.c ft_strsub.c ft_strtrim.c
+SRC += ft_strstr.c ft_strsub.c ft_strtrim.c
 SRC += ft_tolower.c ft_toupper.c ft_list_search.c
 SRC += ft_strconct.c ft_strnb.c ft_putstr_rev.c
 SRC += ft_nbsize.c ft_lenghtwchar.c ft_lenghtstrwchar.c

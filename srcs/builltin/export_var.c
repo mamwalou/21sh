@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeline <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2016/10/17 17:05:15 by sbeline          ###   ########.fr       */
+/*   Updated: 2016/12/01 15:25:49 by salomon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../includes/shell.h"
 
 static void	f_env_realloc(t_llist *ptr, char *new, int pos)
 {
@@ -51,8 +51,8 @@ int			export_var(t_llist **env, char *var, t_data *data)
 	int			i;
 
 	i = 0;
-	generate(59, 0, 2, data);
-	len = ft_strsplit(&var_memo, var, data->tableau);
+	generate(";", 1, data);
+	len = parser(&var_memo, var, data->tableau);
 	while (i < len)
 	{
 		if ((search_env(*env, var_memo[i] + 1)) != NULL)

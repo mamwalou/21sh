@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeline <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2016/10/17 17:05:15 by sbeline          ###   ########.fr       */
+/*   Updated: 2016/12/01 15:26:58 by salomon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../includes/shell.h"
 #include "../../includes/termcaps/termcaps.h"
 
 int					prompt(t_llist *env)
@@ -54,7 +54,7 @@ int					main(int argc, char **argv, char **environ)
 		ft_putchar('\n');
 		if (memory.line)
 		{
-			ctrl = exec_cmd(&memory, &env);
+			parser(memory.line);
 			push_history(&memory);
 		}
 	}
