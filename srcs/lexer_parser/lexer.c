@@ -3,40 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sbeline <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2016/12/05 16:30:04 by salomon          ###   ########.fr       */
+/*   Updated: 2016/10/17 17:05:15 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-int			ctrl_var(char *line)
+int			find_str(char *line)
 {
-	int		i;
+	int		count;
 
-	i = 0;
-	while (ft_isalpha(line[i]))
-		i++;
-	if (line[i] == '=' && i > 0)
-		return (0);
-	return (1);
+	count = 0;
+	while ((*line) && (ft_isalpha(*line) || ft_isdigit(*line)))
+	{
+		line++;
+		count++;
+	}
+	return (count);
 }
+
 
 int				operator_filters(char *line)
 {
-	const char	*tableau[7];
+	const char	*tableau[11];
 	int			i;
 
-	tableau[0] = ">";
-	tableau[1] = "<";
+	tableau[0] = ">!&";
+	tableau[1] = ">>&";
 	tableau[2] = ">&";
-	tableau[3] = ">!";
-	tableau[4] = ">!&";
-	tableau[5] = "|";
+	tableau[3] = "&&";
+	tableau[4] = "||";
+	tableau[5] = ">!";
 	tableau[6] = ">>";
-	tableau[7] = ">>&";
+	tableau[7] = ">";
+	tableau[8] = "<";
+	tableau[9] = ";";
+	tableau[10] = "|";
 	i = 0;
 	while (i < 8)
 	{

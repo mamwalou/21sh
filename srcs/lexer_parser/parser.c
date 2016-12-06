@@ -3,29 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: salomon <salomon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sbeline <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/01 14:21:25 by salomon           #+#    #+#             */
-/*   Updated: 2016/12/05 16:38:17 by salomon          ###   ########.fr       */
+/*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
+/*   Updated: 2016/10/17 17:05:15 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 #include "../../includes/ast/ast.h"
 
-void 			save_node(t_node **node, char *line, int begin, int end)
+
+static void		save_node(t_node **node, char *line, int end, int begin)
 {
 	t_node		*new_node;
+	t_node		*ptr;
 
 	new_node = (t_node*)ft_memalloc(sizeof(t_node));
+	new_node->name_node = ft_strndup(line, 0, end - begin);
+	new_node->next = NULL;
+	new_node->token_type = define_token(new_node->name_node)
+	ft_putendl(new_node->name_node);
 
-	*node = new_node;
+	if (*node == NULL)
+	{
+		*node = new_node;
+		return ;
+	}
+	else
+	{
+		ptr = *node;
+		while (ptr->next != NULL)
+			ptr = ptr->next;
+		ptr->next = new_node;
+	}
 }
 
 int				find_token(t_node **node, char *line)
 {
 	char		*tableau;
 	int			count;
+	int			pos;
 	int			lenght;
 	int			tmp;
 
@@ -35,34 +53,30 @@ int				find_token(t_node **node, char *line)
 	lenght = ft_strlen(line);
 	while (count < lenght)
 	{
-		ft_putchar(line[count]);
-		if ((tmp = operator_filters(line)) > 0)
+		pos = count;
+		if ((tmp = operator_filters(line + count)) > 0)
 		{
 			count += tmp;
-			//save_node(node, save + count, pos, count);
+			save_node(node, line + pos, count, pos);
 		}
-		if ((tmp = ft_strint(line + count, tableau)) > 0)
+		else if ((tmp = ft_strint(line + count, tableau)) > 0)
 			count += tmp;
-
+		if ((tmp = find_str(line + pos)) > 0)
+		{
+			count += tmp;
+			save_node(node, line + pos, count, pos);
+		}
 	}
 	exit(1);
 	free(tableau);
 	return (0);
 }
 
-t_node			*build_node(char *line)
-{
-	t_node		*node_bck;
-
-	node_bck = NULL;
-	find_token(&node_bck, line);
-	return (node_bck);
-}
 
 void 		parser(char *line)
 {
 	t_node	*node;
 
 	node = NULL;
-	node = build_node(line);
+	find_token(&node, line);
 }

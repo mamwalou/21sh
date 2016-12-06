@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strint.c                                        :+:      :+:    :+:   */
+/*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbeline <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,28 +10,29 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Includes/libft.h"
+#include "../includes/ast/ast.h"
 
-static int		cmp(int to_cmp, char *cmp)
+static	t_token		define_token(char *lexem)
 {
-	while (*cmp)
-	{
-		if (*cmp == to_cmp)
-			return (0);
-		cmp++;
-	}
-	return (1);
-}
-
-int				ft_strint(char *str, char *str_cmp)
-{
-	int		i;
-
-	i = 0;
-
-	while (str[i] && (cmp(str[i], str_cmp)) == 0)
-		i++;
-	if (i == 0)
-		return (0);
-	return (i);
+	if (!ft_strcmp(lexem, ">!&"))
+		;
+	if (!ft_strcmp(lexem, ">>&"))
+		;
+	if (!ft_strcmp(lexem, ">&"))
+		;
+	if (!ft_strcmp(lexem, "&&"))
+		;
+	if (!ft_strcmp(lexem, "||"))
+		;
+		;
+	if (!ft_strcmp(lexem, ">!"))
+		;
+	if (!ft_strcmp(lexem, ">>"))
+		;
+	if (!ft_strcmp(lexem, ">"))
+		;
+	if (!ft_strcmp(lexem, "|"))
+		;
+	if (!ft_strcmp(lexem, ";"))
+		;
 }
