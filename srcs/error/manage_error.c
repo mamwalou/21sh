@@ -6,13 +6,13 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2016/12/01 15:26:50 by salomon          ###   ########.fr       */
+/*   Updated: 2016/12/05 14:12:04 by salomon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-static void		error_memory(int cod, t_data *data, t_llist *env, t_memory *me)
+/*static void		error_memory(int cod, t_data *data, t_llist *env, t_memory *me)
 {
 	if (cod == ER_MMR)
 		ft_putendl("no variable in memory");
@@ -65,3 +65,4 @@ int				manage_error(int cod, t_data *data, t_llist **env, t_memory *me)
 		return (1);
 	return (0);
 }
+*/

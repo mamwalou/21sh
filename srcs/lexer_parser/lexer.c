@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2016/12/01 15:27:09 by salomon          ###   ########.fr       */
+/*   Updated: 2016/12/05 16:30:04 by salomon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ int				operator_filters(char *line)
 	i = 0;
 	while (i < 8)
 	{
-		if (!ft_strcmp(tableau[i], line))
-			return (1);
+		if (!ft_strncmp(tableau[i], line, ft_strlen(tableau[i])))
+			return (ft_strlen(tableau[i]));
 		i++;
 	}
-	return (-1);
+	return (0);
 }
 
 int			my_ctrl(int test)
@@ -57,6 +57,7 @@ int			my_ctrl(int test)
 		|| test == '='
 		|| test == '/'
 		|| test == '.'
+		|| test == '|'
 		|| test == '"'
 		|| test == '$'
 		|| test == '~'
@@ -71,8 +72,6 @@ int			my_ctrl(int test)
 
 int			is_bulltin(char *cmd)
 {
-	char	*ret;
-
 	if (ft_strcmp(cmd, "env") == 0
 		|| ft_strcmp(cmd, "export") == 0
 		|| ft_strcmp(cmd, "unset") == 0

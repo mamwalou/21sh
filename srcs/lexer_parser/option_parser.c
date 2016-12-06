@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2016/12/01 15:27:14 by salomon          ###   ########.fr       */
+/*   Updated: 2016/12/05 14:12:38 by salomon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ char				**init_option(char *opt, char **save, int index)
 	return (nw_opt);
 }
 
-int			option_ctrl(t_data *data, t_memory *memory, char **line)
+/*int			option_ctrl(t_data *data, t_memory *memory, char **line)
 {
 
 	data->option = init_option(*line, data->option, data->index);
 	return (SUCCESS);
-}
+}*/

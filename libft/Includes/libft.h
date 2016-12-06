@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeline <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2016/10/17 17:05:15 by sbeline          ###   ########.fr       */
+/*   Updated: 2016/12/05 14:15:04 by salomon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,7 @@
 # define REP 60
 # define LINK 70
 
-typedef	struct		s_fd
-{
-	int				fd;
-	int				nl;
-	size_t			pos_nl;
-	int				ret;
-	char			*buf;
-	struct s_fd		*next;
-}					t_fd;
-
+int					ft_strint(char *str, char *cmp);
 void				ft_realloc(void *del, size_t to_del, size_t to_alloc);
 char				*ft_chrstr(char *str, char *find);
 int					is_dir(char *s);

@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2016/12/01 15:28:01 by salomon          ###   ########.fr       */
+/*   Updated: 2016/12/05 14:13:12 by salomon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char			**my_env(t_llist *env)
 	return (ret);
 }
 
-int				ft_env(t_data *data, t_llist *env, t_memory *memory)
+/*int				ft_env(t_data *data, t_llist *env, t_memory *memory)
 {
 	t_llist		*ptr;
 
@@ -92,13 +92,13 @@ int				ft_env(t_data *data, t_llist *env, t_memory *memory)
 		ptr = ptr->next;
 	}
 	return (0);
-}
+}*/
 
-int				ft_toexport(t_data *data, t_llist *env, t_memory *memory)
+/*int				ft_toexport(t_data *data, t_llist *env, t_memory *memory)
 {
 	if (memory->var)
 		ft_putendl(memory->var);
 	else
 		ft_putendl("no variable set");
 	return (0);
-}
+}*/

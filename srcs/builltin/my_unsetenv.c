@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2016/12/01 15:27:59 by salomon          ###   ########.fr       */
+/*   Updated: 2016/12/05 14:12:15 by salomon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ int				unenv(char *unset, t_llist *env)
 	return (2);
 }
 
-int				ft_unsetenv(t_data *data, t_llist *env, t_memory *memory)
+/*int				ft_unsetenv(t_data *data, t_llist *env, t_memory *memory)
 {
 	if (data->option != NULL)
 		return (unenv(data->option[1], env));
 	return (45);
-}
+}*/

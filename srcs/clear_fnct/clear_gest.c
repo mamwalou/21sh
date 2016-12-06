@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2016/12/01 15:26:43 by salomon          ###   ########.fr       */
+/*   Updated: 2016/12/05 14:13:02 by salomon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void		free_d(char **dtab, int lenght)
 	}
 	free(dtab);
 }
-
+/*
 void 		clear_zone(t_data *data)
 {
 	int i;
@@ -47,3 +47,4 @@ void 		clear_zone(t_data *data)
 		free(data->operation);
 	free(data);
 }
+*/
