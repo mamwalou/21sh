@@ -27,8 +27,10 @@ typedef enum			s_token
 
 typedef struct			s_node
 {
-	t_token				*token_type;
+	t_token				token_type;
+	char				**option;
 	char				*name_node;
+	int					index;
 	struct s_node		*next;
 }						t_node;
 
@@ -40,5 +42,6 @@ typedef struct 			s_tree
 	struct s_tree		*right;
 }						t_tree;
 
+t_token					define_token(char *lexem);
 
 #endif

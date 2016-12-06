@@ -39,11 +39,11 @@ int				operator_filters(char *line)
 	tableau[5] = ">!";
 	tableau[6] = ">>";
 	tableau[7] = ">";
-	tableau[8] = "<";
-	tableau[9] = ";";
-	tableau[10] = "|";
+	tableau[8] = "|";
+	tableau[9] = "<";
+	tableau[10] = ";";
 	i = 0;
-	while (i < 8)
+	while (i < 11)
 	{
 		if (!ft_strncmp(tableau[i], line, ft_strlen(tableau[i])))
 			return (ft_strlen(tableau[i]));

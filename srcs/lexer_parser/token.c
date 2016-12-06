@@ -10,29 +10,30 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ast/ast.h"
+#include "../../includes/ast/ast.h"
+#include "../../includes/shell.h"
 
-static	t_token		define_token(char *lexem)
+t_token		define_token(char *lexem)
 {
 	if (!ft_strcmp(lexem, ">!&"))
-		;
+		return (PIPE);
 	if (!ft_strcmp(lexem, ">>&"))
-		;
+		return (PIPE);
 	if (!ft_strcmp(lexem, ">&"))
-		;
+		return (PIPE);
 	if (!ft_strcmp(lexem, "&&"))
-		;
+		return (PIPE);
 	if (!ft_strcmp(lexem, "||"))
-		;
-		;
+		return (PIPE);
 	if (!ft_strcmp(lexem, ">!"))
-		;
+		return (PIPE);
 	if (!ft_strcmp(lexem, ">>"))
-		;
+		return (PIPE);
 	if (!ft_strcmp(lexem, ">"))
-		;
+		return (PIPE);
 	if (!ft_strcmp(lexem, "|"))
-		;
+		return (PIPE);
 	if (!ft_strcmp(lexem, ";"))
-		;
+		return (PIPE);
+	return (CMD);
 }

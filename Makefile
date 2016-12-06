@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+         #
+#    By: sbeline  <sbeline @student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/17 17:09:35 by sbeline           #+#    #+#              #
-#    Updated: 2016/12/05 14:00:02 by salomon          ###   ########.fr        #
+#    Updated: 2016/12/06 17:27:28 by sbeline          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRC_NAME = main.c my_setenv.c my_env.c lexer.c parsing_line.c
 SRC_NAME += ft_variables.c manage_history.c termcaps_checker.c
 SRC_NAME += termcaps.c manage_error.c my_unsetenv.c search.c
 SRC_NAME += auto_compl.c option_parser.c move_cursr.c
-SRC_NAME += clear_gest.c quote_mode.c parser.c
+SRC_NAME += clear_gest.c quote_mode.c parser.c token.c
 
 INC_PATH = ./includes/
 SRC_PATH = ./srcs/*/

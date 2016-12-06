@@ -69,6 +69,8 @@ int					count_env(t_llist *env);
 char				*search_env(t_llist *env, const char *value);
 
 /*parser and lexer*/
+char				**init_option(char *opt, char **save, int index);
+void 				lexer_parser(char *line);
 int					operator_filters(char *line);
 int					ctrl_var(char *line);
 int					my_ctrl(int test);
