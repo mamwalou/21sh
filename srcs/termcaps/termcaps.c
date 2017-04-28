@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2016/12/01 15:27:52 by salomon          ###   ########.fr       */
+/*   Updated: 2017/04/28 05:25:06 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,85 +19,70 @@ void			bring_back_shell(struct termios *term)
 		return ;
 }
 
-void 			list_to_array(t_memory *memory, t_line *begin, t_win *win)
+void			init_mv(t_win *win)
 {
-	t_line		*ptr;
-	int			i;
-
-	i = 0;
-	if (begin != NULL)
-	{
-		memory->line = (char*)ft_memalloc(sizeof(win->pos_line));
-		ptr = begin;
-		while (i < win->pos_line)
-		{
-			memory->line[i] = ptr->l_char;
-			ptr = ptr->next;
-			i++;
-		}
-		memory->line[i] = '\0';
-		i = 0;
-		while (i < win->pos_line)
-		{
-			begin->l_char = 0;
-			free(begin);
-			begin = begin->next;
-			i++;
-		}
-	}
-}
-
-void			init_mv(t_win *win, int lenght, t_line **begin, t_line **end)
-{
-	*begin = NULL;
-	*end = NULL;
-	win->pos_line = 0;
-	win->mov_line = 1;
-	win->x = lenght + 1;
+	win->lenght_line = 0; //start at 1  0 = no line
+	win->cursor_line = 1; //cursor follow
+	win->y = 0;
+	win->begin = NULL;
+	win->end = NULL;
 	ioctl(0, TIOCGWINSZ, &(g_term.apt));
-	win->x_max = g_term.apt.ws_row;
-	win->y_max = g_term.apt.ws_col;
 }
 
-int				init_term(struct termios *term, struct termios *new_term)
+int					init_term(struct termios *term)
 {
+	struct termios	new_term;
 	char			*name_term;
 
 	tcgetattr(0, term);
-	if ((name_term = getenv("TERM")) == NULL)
-		name_term = "xterm-256color";
+	if ((name_term = search_env(g_env, "TERM=")) == NULL)
+	{
+		ft_putendl_fd("big failur", 2);
+		exit(1);
+	}
 	if (tgetent(NULL, name_term) == ERR)
 		return (-1);
-	if (tcgetattr(0, new_term) == -1)
+	if (tcgetattr(0, &new_term) == -1)
 		return (-1);
-	new_term->c_cc[VMIN] = 1;
-	new_term->c_lflag &= ~(ICANON | ECHO);
-	new_term->c_cc[VTIME] = 0;
-	if (tcsetattr(0, TCSANOW, new_term) == -1)
+	new_term.c_cc[VMIN] = 1;
+	new_term.c_lflag &= ~(ICANON | ECHO);
+	new_term.c_cc[VTIME] = 0;
+	if (tcsetattr(0, TCSANOW, &new_term) == -1)
 		return (-1);
 	return (0);
 }
 
-int					termcaps(t_llist *env, t_memory *memo, int lenght_prompt)
+void			print_ascii(void)
 {
-	struct termios	term;
-	t_line			*begin_l;
-	t_line			*end_l;
-	t_win			win;
+	ft_putstr("\033[1;36m");
+	ft_putendl(" _____  ______   _______ _______ _______ _____   _____   ");
+	ft_putendl("|  |  ||__    | |     __|   |   |    ___|     |_|     |_ ");
+	ft_putendl("|__    |    __| |__     |       |    ___|       |       |");
+	ft_putendl("   |__||______| |_______|___|___|_______|_______|_______|");
+	ft_putstr("\033[0m");
+}
 
+void			termcaps(void)
+{
+	t_line		begin;
+	t_line		end;
+	t_win		win;
 
-	init_term(&(g_term.terminal), &(g_term.new_term));
-	init_mv(&win, lenght_prompt, &begin_l, &end_l);
-	while (*(unsigned int*)win.buffer != RETURN)
+	if (init_term(&(g_term.terminal)) == -1)
+		return ;
+	init_mv(&win);
+	if (g_memory.launch++ == 0)
+		print_ascii();
+	if (g_memory.mode == SHELL)
 	{
-		ft_bzero(win.buffer, 4);
-		read(0, win.buffer, 4);
-		if ((ft_isalnum(win.buffer[0])) == 1 || (my_ctrl(win.buffer[0])) == 1)
-			push_line(&begin_l, &end_l, &win);
-		else
-			input(&begin_l, &end_l, memo, &win);
+		g_memory.mode = shell_mode(&win);
+		return ;
 	}
-	bring_back_shell(&(g_term.terminal));
-	list_to_array(memo, begin_l, &win);
-	return (0);
+	else if (g_memory.mode == HEREDOC)
+		g_memory.mode = hered_mode(&win);
+	else if (g_memory.mode == QUOTE)
+		g_memory.mode = quote_mode(&win);
+	else if (g_memory.mode == D_QUOTE)
+		g_memory.mode = d_quote_mode(&win);
+	return ;
 }

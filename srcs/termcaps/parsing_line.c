@@ -6,94 +6,49 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2016/12/01 13:20:13 by salomon          ###   ########.fr       */
+/*   Updated: 2017/04/23 20:25:52 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/termcaps/termcaps.h"
+#define MAX_LEN 2024
 
-void 		print_lsttmp(t_line *ptr)
+void 		read_display(t_win *win)
 {
-	while (ptr)
+	int		z;
+	int		y;
+	
+	z = 0;
+	while (y != 4 || (y != 0 && z != 0))
 	{
-		ft_putchar(ptr->l_char);
-		ptr = ptr->next;
+		ft_bzero(win->buffer, MAX_LEN + 1);
+		read(0, win->buffer, MAX_LEN);
+		if (win->buffer[0])
+			;
+		z = (win->buffer[0]) ? 1 :0;
 	}
 }
 
-void		pos_in_line(t_line *new, t_line **begin, t_line **end, t_win *win)
+int			my_ctrl(int test)
 {
-	t_line	*ptr;
-	t_line	*ptr_n;
-	int		i;
-
-	i = 0;
-	ptr = *begin;
-	while (++i < win->mov_line - 1)
-		ptr = ptr->next;
-	ptr_n = ptr->next;
-	ptr->next = new;
-	new->prev = ptr;
-	new->next = ptr_n;
-	win->pos_line++;
-	print_lsttmp(ptr->next);
-	move_cursr(win, 0, win->pos_line - win->mov_line);
-	win->mov_line++;
-}
-
-void		push_line(t_line **begin, t_line **end, t_win *win)
-{
-	t_line	*new;
-
-	new = (t_line*)malloc(sizeof(t_line));
-	new->l_char = win->buffer[0];
-	new->next = NULL;
-	new->prev = NULL;
-	if (*begin == NULL)
-	{
-		win->pos_line++;
-		win->mov_line++;
-		ft_putchar(new->l_char);
-		*begin = new;
-		*end = new;
-	}
-	else if ((win->mov_line - 1) == win->pos_line)
-	{
-		win->pos_line++;
-		win->mov_line++;
-		ft_putchar(new->l_char);
-		(*end)->next = new;
-		new->prev = *end;
-		*end = new;
-	}
-	else
-		pos_in_line(new, begin, end, win);
-}
-
-int			depushline(t_line **begin, t_line **end, t_win *win)
-{
-	t_line	*to_free;
-
-	if (win->pos_line > 0)
-	{
-		if (win->pos_line > 1)
-		{
-			to_free = *end;
-			*end = (*end)->prev;
-			(*end)->next = NULL;
-			free(to_free);
-		}
-		else if (win->pos_line == 1)
-		{
-			free(*begin);
-			*begin = NULL;
-			*end = NULL;
-		}
-		win->pos_line--;
-		win->mov_line--;
-		move_cursr(win, 0, 1);
-		ft_putchar(' ');
-		move_cursr(win, 0, 1);
-	}
-	return (1);
+	if (test == '-'
+		|| test == ';'
+		|| test == '<'
+		|| test == '>'
+		|| test == '&'
+		|| test == '='
+		|| test == '/'
+		|| test == '.'
+		|| test == '|'
+		|| test == '"'
+		|| test == '$'
+		|| test == '~'
+		|| test == '_'
+		|| test == 92
+		|| test == 96
+		|| test == 39
+		|| test == ' '
+		|| test == '!')
+		return (1);
+	return (0);
 }

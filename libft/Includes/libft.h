@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2016/12/05 14:15:04 by salomon          ###   ########.fr       */
+/*   Updated: 2017/04/25 15:14:15 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,14 @@
 # include <stdio.h>
 # include <termios.h>
 # include <unistd.h>
-# define BUF_SIZE 1496
+# define BUFF_SIZE 4096
 # define FILES 50
 # define REP 60
 # define LINK 70
 
+int					ft_stspchr(char *s, int t);
+int					find_occur(const char *s, int t);
 int					ft_strint(char *str, char *cmp);
-void				ft_realloc(void *del, size_t to_del, size_t to_alloc);
 char				*ft_chrstr(char *str, char *find);
 int					is_dir(char *s);
 char				*ft_strndup(char *s, int begin, int end);

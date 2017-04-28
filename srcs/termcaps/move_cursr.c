@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2016/12/01 15:27:35 by salomon          ###   ########.fr       */
+/*   Updated: 2017/04/20 19:56:06 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,26 @@ void			move_cursr(t_win *win, int mode, int iteration)
 			tputs(tgetstr("up", NULL), 1, ft_puts);
 		if (mode == 3)
 			tputs(tgetstr("do", NULL), 1, ft_puts);
+		if (mode == 4)
+			tputs(tgetstr("dc", NULL), 1, ft_puts);
 	}
 }
 
-int 			gest_crs(t_line *begin, t_line *end, t_win *win)
+int				gest_crs(t_win *win)
 {
 	if (*(unsigned int*)win->buffer == LEFT)
 	{
-		if (win->mov_line > 1)
+		if (win->cursor_line > 1)
 		{
-			win->mov_line--;
+			win->cursor_line--;
 			move_cursr(win, 0, 1);
 		}
 	}
 	if (*(unsigned int*)win->buffer == RIGHT)
 	{
-		if (win->mov_line <= win->pos_line)
+		if (win->cursor_line <= win->lenght_line)
 		{
-			win->mov_line++;
+			win->cursor_line++;
 			move_cursr(win, 1, 1);
 		}
 	}

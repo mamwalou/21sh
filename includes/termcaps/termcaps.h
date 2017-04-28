@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2016/12/01 15:38:34 by salomon          ###   ########.fr       */
+/*   Updated: 2017/04/23 20:20:15 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <term.h>
 # include <curses.h>
 # include <dirent.h>
+# include <signal.h>
 # include "../../libft/Includes/libft.h"
 # include "../shell.h"
 
@@ -51,28 +52,29 @@
 # define CRIGHT		95
 # define JTAB		100
 
-typedef struct			s_win
-{
-	int					x;
-	int					y;
-	int					pos_line;
-	int					mov_line;
-	int					x_max;
-	int					y_max;
-	char				buffer[4];
-}						t_win;
-
 typedef struct			s_line
 {
-	char				l_char;
+	uint64_t			l_char;
 	struct s_line		*next;
 	struct s_line		*prev;
 }						t_line;
 
+typedef struct			s_win
+{
+	int					y;
+	int					x;
+	int					lenght_line;
+	int					cursor_line;
+	char				buffer[BUFF_SIZE];
+	t_line				*begin;
+	t_line				*end;
+}						t_win;
+
+
 typedef struct	s_input
 {
 	int			input;
-	int			(*f)(t_line *blst,t_win *win, t_memory *mem);
+	int			(*f)(t_line *blst,t_win *win);
 }				t_input;
 
 typedef	struct		s_term
@@ -80,34 +82,47 @@ typedef	struct		s_term
 	struct termios 	terminal;
 	struct termios 	new_term;
 	struct winsize	apt;
+	int				lock;
 }					t_term;
 
 t_term				g_term;
 
-void 			print_lsttmp(t_line *ptr);
 
-int				termcaps(t_llist *env, t_memory *memo, int lenght_prompt);
-void 			push_history(t_memory *memory);
-
-int				init_varfcurs();
-
+void			termcaps(void);
 int				ft_puts(int c);
 void			bring_back_shell(struct termios *term);
+int				init_term(struct termios *term);
+void 			read_display(t_win *win);
 
-t_llist			*created_path(int *tabulation, t_llist *e, char *value);
-char			*parsing_term(int code, char *line, t_win *win);
-int				depushline(t_line **begin, t_line **end, t_win *win);
-void		push_line(t_line **begin, t_line **end, t_win *win);
+/*MODE*/
+t_mode			shell_mode(t_win *win);
+t_mode			hered_mode(t_win *win);
+t_mode			quote_mode(t_win *win);
+t_mode			d_quote_mode(t_win *win);
+int				stop_her(t_line *end);
+int				stoq(t_line *end, int key);
+void			depushline(t_win *win);
+void			push_line(t_win *win);
 
-int				input(t_line **blst, t_line **end, t_memory *memory, t_win *win);
+void			printline(t_line *begin);
+void			line_init(t_line **begin, t_line **end, t_win *win);
+
+/*signaux*/
+void			handl_sig(void);
+
+/*input*/
+int				input(t_win *win);
+
 char			*tabulation(char *line, t_win *win);
+int				ft_del(t_line *blst, t_win *win);
+int				ft_search(t_line *blst, t_win *win);
+int				ft_clear(t_line *blst, t_win *win);
 
-int				ft_del(t_line *blst,t_win *win, t_memory *mem);
-int				ft_search(t_line *blst,t_win *win, t_memory *mem);
-int				ft_clear(t_line *blst,t_win *win, t_memory *mem);
-int				ft_signal(t_line *blst,t_win *win, t_memory *mem);
-
+/*cursor*/
 void			move_cursr(t_win *win, int mode, int iteration);
-int 			gest_crs(t_line *begin, t_line *end, t_win *win);
+int 			gest_crs(t_win *win);
+
+/*list_to_array*/
+void 			list_to_array(t_win *win);
 
 #endif

@@ -3,106 +3,66 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeline <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2016/10/17 17:05:15 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/04/28 15:33:49 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
-#include "../../includes/ast/ast.h"
+#include "../../includes/lexer_parser/lexer_parser.h"
+#include "../../includes/prototypage/proto.h"
 
-static	t_node	*new_node(char *line, int end, int begin)
+static int			parser(t_st_lexem **lexem, t_memory *memory)
 {
-	t_node		*new_node;
-
-	new_node = (t_node*)ft_memalloc(sizeof(t_node));
-	new_node->name_node = line;
-	new_node->next = NULL;
-	new_node->index = 0;
-	new_node->option = (char**)ft_memalloc(sizeof(char*));
-	new_node->token_type = define_token(new_node->name_node);
-	return (new_node);
-}
-
-static void		save_node(t_node **node, char *line, int end, int begin)
-{
-	t_node		*ptr;
-	char		*tmp;
-
-	tmp = ft_strndup(line, 0, end - begin);
-	if (*node == NULL)
-	{
-		*node = new_node(tmp, end, begin);
-		return ;
-	}
-	else
-	{
-		ptr = *node;
-		while (ptr->next != NULL)
-			ptr = ptr->next;
-		if (ptr->token_type == CMD)
-			ptr->option = init_option(tmp, ptr->option, ptr->index);
-		else
-		{
-			ptr->next = new_node(tmp, end, begin);
-		}
-	}
-}
-
-void 			sw_list(t_node *l)
-{
-	int i;
-	while (l)
-	{
-		ft_putstr(l->name_node);
-		i = 0;
-		while (l->option[i])
-			ft_putstr(l->option[i++]);
-		l = l->next;
-	}
-}
-
-int				find_token(t_node **node, char *line)
-{
-	char		*tableau;
-	int			count;
-	int			pos;
-	int			lenght;
-	int			tmp;
+	int				count;
+	int				pos;
+	int				tmp;
 
 	count = 0;
-	tmp = 0;
-	tableau = ft_strdup(" ");
-	lenght = ft_strlen(line);
-	while (count < lenght)
+	while (count < memory->line_lenght)
 	{
+		tmp = 0;
 		pos = count;
-		if ((tmp = operator_filters(line + count)) > 0)
+		if ((tmp = ctrl_mode(memory->line + count, memory)) > 0)
+		{
+			if (tmp > SWITCH_MODE)
+				return (tmp);
+			count += tmp + 1;
+			save_lexem(*lexem, memory->line + pos + 1, count - 2, pos);
+		}
+		else if ((tmp = find_token(memory->line + pos)) > 0)
 		{
 			count += tmp;
-			save_node(node, line + pos, count, pos);
+			save_lexem(*lexem, memory->line + pos, count, pos);
 		}
-		else if ((tmp = ft_strint(line + count, tableau)) > 0)
-			count += tmp;
-		if ((tmp = find_str(line + pos)) > 0)
-		{
-			count += tmp;
-			save_node(node, line + pos, count, pos);
-		}
+		else if (memory->line[count] == ' ' || memory->line[count] == '\t')
+			count++;
 	}
-	sw_list(*node);
-	free(tableau);
-	exit(1);
 	return (0);
 }
 
-
-void 		lexer_parser(char *line)
+t_mode				lexer_parser(t_memory *memory)
 {
-	t_node	*node;
+	t_st_lexem		*lexem;
+	int				code_mode;
 
-	node = NULL;
-	find_token(&node, line);
+	code_mode = 0;
+	lexem = (t_st_lexem*)ft_memalloc(sizeof(t_st_lexem));
+	if ((code_mode = parser(&lexem, memory)) > SWITCH_MODE)
+	{
+		free_lexem(lexem->begin_lexem);
+		free(lexem);
+		stock_line(memory);
+		if (code_mode == HEREDOC_CODE)
+			return (HEREDOC);
+		else if (code_mode == QUOTE_CODE)
+			return (QUOTE);
+		else if (code_mode == D_QUOTE_CODE)
+			return (D_QUOTE);
+	}
+
+	sw_list(lexem);
+	generate_ast(lexem);
+	return (SHELL);
 }

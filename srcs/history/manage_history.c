@@ -6,70 +6,78 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2016/12/01 15:27:03 by salomon          ###   ########.fr       */
+/*   Updated: 2017/04/25 17:09:05 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-t_memory 			init_memory()
+void				history_path(void)
 {
-	t_memory		memory;
-	char			*var;
+	char			*home;
 
-	memory.var = NULL;
-	memory.line = NULL;
-	memory.mode_quote = 0;
-	memory.type_quote = 0;
-	memory.head = NULL;
-	memory.tail = NULL;
-	memory.father = 0;
-	memory.ll = 0;
-	return (memory);
-}
-
-static t_hst		*newhistory(char *line)
-{
-	t_hst			*maillon_hs;
-
-	maillon_hs = (t_hst*)ft_memalloc(sizeof(t_hst));
-	maillon_hs->line = ft_strdup(line);
-	maillon_hs->next = NULL;
-	maillon_hs->prev = NULL;
-	return (maillon_hs);
-}
-
-void 				print_memory(t_hst *begin)
-{
-	t_hst			*ptr;
-
-	ptr = begin;
-	while (ptr)
+	if ((home = search_env(g_env, "HOME=")))
 	{
-		ft_putendl(ptr->line);
-		ptr = ptr->next;
+		g_memory.history_path = ft_strtrijoin(home, "/", ".my_history");
+		g_memory.fd_history = open(g_memory.history_path,
+							O_RDWR | O_CREAT | O_APPEND, 0666);
 	}
 }
 
-void 				push_history(t_memory *memory)
+int					g_nb_hist(void)
 {
-	t_hst			*new_maillon;
+	char		*buf;
+	int			fd;
+	int			count;
 
-	if (memory->line != NULL)
+	count = 0;
+	fd = open(g_memory.history_path, O_RDWR | O_CREAT | O_APPEND, 0666);
+	while ((get_next_line(fd, &buf)) > 0)
 	{
-		new_maillon = newhistory(memory->line);
-		if (memory->head == NULL)
-		{
-			memory->head = new_maillon;
-			memory->tail = memory->head;
-		}
-		else
-		{
-			memory->tail->next = new_maillon;
-			new_maillon->prev = memory->tail;
-			memory->tail = new_maillon;
-		}
-		free(memory->line);
-		memory->line = NULL;
+		count++;
+		free(buf);
+	}
+	free(buf);
+	close(fd);
+	return (count);
+}
+
+void 				init_memory(void)
+{
+	g_memory.fd_history = 0;
+	g_memory.line = NULL;
+	g_memory.launch = 0;
+	g_memory.mode = SHELL;
+	g_memory.history_path = NULL;
+	history_path();
+	if (is_dir(g_memory.history_path) == FILES)
+		g_memory.code_history = g_nb_hist();
+	else
+		g_memory.code_history = 0;
+}
+
+static void 		write_history(t_memory *memory)
+{
+	char			*tmp;
+
+	tmp = ft_itoa(memory->code_history);
+	write(memory->fd_history, tmp, ft_strlen(tmp));
+	write(memory->fd_history, ";", 1);
+	write(memory->fd_history, memory->line, ft_strlen(memory->line));
+	write(memory->fd_history, "\n", 1);
+	free(tmp);
+	memory->code_history++;
+}
+
+void				push_history(void)
+{
+	int				fd;
+	char			*home;
+	char			*history_path;
+
+	if (g_memory.line)
+	{
+		if (g_memory.history_path)
+			write_history(&g_memory);
 	}
 }
