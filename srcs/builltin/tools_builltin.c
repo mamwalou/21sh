@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/21 14:48:42 by sbeline           #+#    #+#             */
-/*   Updated: 2017/04/28 16:06:24 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/04/29 11:30:21 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,17 +67,19 @@ char			*ctrl_access(char **path, char *name, int ctrl_type)
 	return (NULL);
 }
 
-t_code			find_command(char **cmd, t_code *code)
+t_code			find_command(char **cmd)
 {
 	char		*tmp;
 
 	if (is_bulltin(*cmd))
 		return (NONE);
+	if (access(*cmd, X_OK) == 0)
+		return (NONE);
 	if ((tmp = ctrl_access(get_in_env(g_env, "PATH="),
 		*cmd, 0)) == NULL)
 	{
 		free(tmp);
-		return (CMD);
+		return (CD_CMD);
 	}
 	else
 	{

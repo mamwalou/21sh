@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 16:45:53 by sbeline           #+#    #+#             */
-/*   Updated: 2017/04/28 16:12:32 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/04/29 10:29:45 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 typedef enum			s_code
 {
 	NONE,
-	FILES,
-	ARG,
-	CMD,
+	CD_FILES,
+	CD_ARG,
+	CD_CMD,
 }						t_code;
 
 typedef struct			s_exec
@@ -36,7 +36,9 @@ typedef struct			s_pipe
 }						t_pipe;
 
 char					**get_in_env(t_llist *env, const char *str);
-int						find_command(char **cmd);
+t_code					find_command(char **cmd);
+t_code					ctrl_arg(char **cmd, int *pos);
+
 /*exec_block*/
 int		         		pipe_function(t_node *ast, int *status);
 int						logique_fonction(t_node *ast, int *status);

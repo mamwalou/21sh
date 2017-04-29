@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/04/28 14:08:27 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/04/29 11:20:13 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,14 @@ int				find_str(char *line)
 	count = 0;
 
 	while ((line[count]) && (line[count] != ' ' && line[count] != '\t'))
-		count++;
-	if ((operator_filters(line + count)) > 0)
-		return (count);
-	if (ft_isdigit(line[count]) && !ft_isdigit(line[count - 1]))
-		if ((redirection_filters(line + count)) > 0)
+	{
+		if ((operator_filters(line + count)) > 0)
 			return (count);
-
+		if (ft_isdigit(line[count]) && !ft_isdigit(line[count - 1]))
+			if ((redirection_filters(line + count)) > 0)
+				return (count);
+		count++;
+	}
 	return (count);
 }
 

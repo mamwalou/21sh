@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/13 10:31:53 by sbeline           #+#    #+#             */
-/*   Updated: 2017/04/28 16:12:37 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/04/29 11:36:28 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,19 +92,15 @@ int					exec_fct(t_node *ast, int *status)
 	child_pid = 0;
 	pos = 1;
 	env = copy_env();
-	if ((code = find_command(&ast->body->lexem->option[0])) > 0 &&
-		code = ctrl_arg(ast->body->lexem->option, &pos))
+	if ((code = find_command(&ast->body->lexem->option[0])) == NONE &&
+		(code = ctrl_arg(ast->body->lexem->option, &pos)) == NONE)
 		exec_fct2(ast->body->lexem, child_pid, env);
 	else
 	{
-		if (code == CMD)
+		if (code == CD_CMD)
 		{
 			ft_putstr_fd("shell: command not found: ", 2);
 			ft_putendl_fd(ast->body->lexem->option[0], 2);
-		}
-		else if (code == FILES)
-		{
-
 		}
 		*status = 1;
 		return (-1);

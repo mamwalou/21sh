@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/04/28 15:33:49 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/04/29 11:15:17 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ t_mode				lexer_parser(t_memory *memory)
 		else if (code_mode == D_QUOTE_CODE)
 			return (D_QUOTE);
 	}
-
 	sw_list(lexem);
 	generate_ast(lexem);
 	return (SHELL);
