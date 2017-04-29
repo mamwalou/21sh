@@ -6,7 +6,7 @@
 /*   By: salomon <salomon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 22:38:41 by salomon           #+#    #+#             */
-/*   Updated: 2017/04/27 20:44:10 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/04/29 14:51:02 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,28 @@ void 			saw_ast(t_node *node, int indice)
 			ft_putstr("left;");
 		if (indice == 2)
 			ft_putstr("right;");
+		ft_putstr(">>>>>>");
+		ft_putstr(node->body->lexem->name_lexem);
+		ft_putstr("<<<<<<");
 		if (node->body->lexem->option)
 		{
 			int i = 0;
-			ft_putstr(node->body->lexem->name_lexem);
 			ft_putstr("index=");
 			ft_putnbr(node->body->lexem->index);
-			ft_putendl(";");
+			ft_putstr(";");
 			while (i < node->body->lexem->index)
 			{
-				ft_putstr("-");
-				ft_putendl(node->body->lexem->option[i]);
+				ft_putstr(" - ");
+				ft_putstr(node->body->lexem->option[i]);
 				i++;
 			}
 		}
 		else
 		{
 			ft_putstr(node->body->lexem->name_lexem);
-			ft_putstr("->");
+			ft_putstr("-------fd>");
 			ft_putnbr(node->body->fd);
-			ft_putstr("<-");
+			ft_putstr("<fd-------");
 		}
 		if (node->body->type_node == LEAF)
 			ft_putendl(";LEAF;");

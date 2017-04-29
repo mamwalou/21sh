@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/20 19:11:22 by sbeline           #+#    #+#             */
-/*   Updated: 2017/04/20 19:40:27 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/04/29 15:39:02 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void			add_node(t_node **node, t_node **parent_node, t_node *new_node)
 		return ;
 	}
 	else if ((*node)->body->lexem->priority == new_node->body->lexem->priority)
-		add_node(&(*node)->right_op, node, new_node);
+		add_node(&(*node)->left_op, node, new_node);
 	else if ((*node)->left_op == NULL ||
 			new_node->body->lexem->priority < (*node)->body->lexem->priority)
 		add_node(&(*node)->left_op, node, new_node);

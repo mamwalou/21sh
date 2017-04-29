@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 13:16:24 by sbeline           #+#    #+#             */
-/*   Updated: 2017/04/28 13:36:06 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/04/29 15:49:56 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static void			redirection_leftsimple(t_node *ast, int *status)
 	pid_t			pid;
 
 	pid = fork();
+	ast->right_op->body->fd = open(ast->right_op->body->lexem->name_lexem,
+							O_RDONLY | O_CREAT | O_APPEND, 0644);
 	if (pid == -1)
 		ft_putendl_fd("fork don't work", 2);
 	if (!pid)
@@ -32,8 +34,15 @@ static void			redirection_leftsimple(t_node *ast, int *status)
 static void			redirection_rightsimple(t_node *ast, int *status)
 {
 	pid_t			pid;
+	int				fd;
 
 	pid = fork();
+	if (!ft_strncmp(ast->body->lexem->name_lexem, ">>", 2))
+		ast->right_op->body->fd = open(ast->right_op->body->lexem->name_lexem,
+								O_WRONLY | O_CREAT | O_APPEND, 0644);
+	else
+		ast->right_op->body->fd = open(ast->right_op->body->lexem->name_lexem,
+								O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (pid == -1)
 		ft_putendl_fd("fork don't work", 2);
 	if (!pid)

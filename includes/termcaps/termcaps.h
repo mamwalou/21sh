@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/04/23 20:20:15 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/04/29 13:30:34 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ typedef struct			s_win
 typedef struct	s_input
 {
 	int			input;
-	int			(*f)(t_line *blst,t_win *win);
+	void		(*f)(t_win *win);
 }				t_input;
 
 typedef	struct		s_term
@@ -111,7 +111,7 @@ void			line_init(t_line **begin, t_line **end, t_win *win);
 void			handl_sig(void);
 
 /*input*/
-int				input(t_win *win);
+void			input(t_win *win);
 
 char			*tabulation(char *line, t_win *win);
 int				ft_del(t_line *blst, t_win *win);
@@ -120,8 +120,8 @@ int				ft_clear(t_line *blst, t_win *win);
 
 /*cursor*/
 void			move_cursr(t_win *win, int mode, int iteration);
-int 			gest_crs(t_win *win);
-
+void			gest_crs(t_win *win);
+void			history_termcaps(t_win *win);
 /*list_to_array*/
 void 			list_to_array(t_win *win);
 

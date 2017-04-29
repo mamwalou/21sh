@@ -6,7 +6,7 @@
 #    By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/17 17:09:35 by sbeline           #+#    #+#              #
-#    Updated: 2017/04/28 15:47:37 by sbeline          ###   ########.fr        #
+#    Updated: 2017/04/29 13:36:48 by sbeline          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRC_NAME += parser.c token.c lexem.c lexem_pt2.c tool_lexem.c tools_env.c
 SRC_NAME += tools_lexer.c
 SRC_NAME += manage_history.c termcaps_checker.c mode_termcaps.c
 SRC_NAME += termcaps.c parsing_line.c line_and_array.c signal.c push_line.c
-SRC_NAME += depush_line.c
+SRC_NAME += depush_line.c history_termcaps.c
 SRC_NAME += tools_for_mode.c move_cursr.c
 SRC_NAME += ast.c an_ll.c node_tool.c fd_file.c
 SRC_NAME += exec_tree.c pipe_function.c pipe_function2.c

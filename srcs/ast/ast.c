@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/04/29 10:30:06 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/04/29 14:50:59 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ void			generate_ast(t_st_lexem *lex)
 		prev_d(max, &ast, find_next_max(max->next), lex);
 	free_lexem(max);
 	free(lex);
-	gestion_fd(ast);
+//	gestion_fd(ast);
+	saw_ast(ast, 0);
 	exec_tree(ast, &status);
 	free_ast(ast);
 }

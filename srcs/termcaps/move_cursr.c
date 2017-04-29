@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/04/20 19:56:06 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/04/29 13:27:28 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void			move_cursr(t_win *win, int mode, int iteration)
 	}
 }
 
-int				gest_crs(t_win *win)
+void			gest_crs(t_win *win)
 {
 	if (*(unsigned int*)win->buffer == LEFT)
 	{
@@ -48,5 +48,4 @@ int				gest_crs(t_win *win)
 			move_cursr(win, 1, 1);
 		}
 	}
-	return (0);
 }

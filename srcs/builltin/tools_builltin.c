@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/21 14:48:42 by sbeline           #+#    #+#             */
-/*   Updated: 2017/04/29 11:30:21 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/04/29 13:19:51 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ t_code			find_command(char **cmd)
 	if ((tmp = ctrl_access(get_in_env(g_env, "PATH="),
 		*cmd, 0)) == NULL)
 	{
+		ft_putstr_fd("shell: command not found: ", 2);
+		ft_putendl_fd(*cmd, 2);
 		free(tmp);
 		return (CD_CMD);
 	}
