@@ -52,11 +52,11 @@ t_line		*nw_char(unsigned int buffer)
 	return (nw);
 }
 
-void		push_line(t_win *win)
+void		push_line(t_win *win, unsigned int buffer)
 {
 	t_line	*nw;
 
-	nw = nw_char(*(unsigned int*)win->buffer);
+	nw = nw_char(buffer);
 	if (win->cursor_line - 1 == win->lenght_line)
 	{
 		win->lenght_line++;

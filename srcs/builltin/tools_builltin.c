@@ -56,7 +56,6 @@ char			*ctrl_access(char **path, char *name, int ctrl_type)
 		{
 			free_d(path);
 			free(path);
-			free(tmp);
 			return (tmp);
 		}
 		free(tmp);
@@ -71,6 +70,7 @@ t_code			find_command(char **cmd)
 {
 	char		*tmp;
 
+	tmp = NULL;
 	if (is_bulltin(*cmd))
 		return (NONE);
 	if (access(*cmd, X_OK) == 0)
@@ -87,6 +87,7 @@ t_code			find_command(char **cmd)
 	{
 		free(*cmd);
 		*cmd = ft_strdup(tmp);
+		free(tmp);
 	}
 	return (NONE);
 }

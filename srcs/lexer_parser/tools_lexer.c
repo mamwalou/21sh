@@ -17,6 +17,7 @@ int				ctrl_tab(char *line, const char **tableau, int itr)
 	int			count;
 	int			i;
 
+
 	i = 0;
 	count = 0;
 	while (i < itr)

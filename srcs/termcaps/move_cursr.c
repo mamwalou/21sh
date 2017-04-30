@@ -13,20 +13,22 @@
 #include "../../includes/termcaps/termcaps.h"
 #include "../../includes/shell.h"
 
-void			move_cursr(t_win *win, int mode, int iteration)
+void			move_cursr(t_win *win, t_iter iter, int iteration)
 {
 	while (iteration-- > 0)
 	{
-		if (mode == 0)
+		if (iter == M_LEFT)
 			tputs(tgetstr("le", NULL), 1, ft_puts);
-		if (mode == 1)
+		if (iter == M_RIGHT)
 			tputs(tgetstr("nd", NULL), 1, ft_puts);
-		if (mode == 2)
+		if (iter == M_UP)
 			tputs(tgetstr("up", NULL), 1, ft_puts);
-		if (mode == 3)
+		if (iter == M_DOWN)
 			tputs(tgetstr("do", NULL), 1, ft_puts);
-		if (mode == 4)
+		if (iter == M_DEL)
 			tputs(tgetstr("dc", NULL), 1, ft_puts);
+		if (iter == DELETING)
+			depushline(win);
 	}
 }
 
@@ -37,7 +39,7 @@ void			gest_crs(t_win *win)
 		if (win->cursor_line > 1)
 		{
 			win->cursor_line--;
-			move_cursr(win, 0, 1);
+			move_cursr(win, M_LEFT, 1);
 		}
 	}
 	if (*(unsigned int*)win->buffer == RIGHT)
@@ -45,7 +47,7 @@ void			gest_crs(t_win *win)
 		if (win->cursor_line <= win->lenght_line)
 		{
 			win->cursor_line++;
-			move_cursr(win, 1, 1);
+			move_cursr(win, M_RIGHT, 1);
 		}
 	}
 }

@@ -97,6 +97,7 @@ void 				init_memory(void);
 void				push_history(void);
 void 				end_memory(void);
 void				history_path(void);
+char				**convert_history(char *path_memory, int lenght);
 
 /*free gestion*/
 void				*ft_realloc(void *mem, size_t size);

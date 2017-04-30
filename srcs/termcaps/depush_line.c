@@ -52,6 +52,6 @@ void			depushline(t_win *win)
 		limit_depush(win);
 	win->lenght_line--;
 	win->cursor_line--;
-	move_cursr(win, 0, 1);
-	move_cursr(win, 4, 1);
+	move_cursr(win, M_LEFT, 1);
+	move_cursr(win, M_DEL, 1);
 }

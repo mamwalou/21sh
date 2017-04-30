@@ -23,9 +23,11 @@ void			init_mv(t_win *win)
 {
 	win->lenght_line = 0; //start at 1  0 = no line
 	win->cursor_line = 1; //cursor follow
+	win->pos_history = 1;
 	win->y = 0;
 	win->begin = NULL;
 	win->end = NULL;
+	win->hst = convert_history(g_memory.history_path, g_memory.code_history);
 	ioctl(0, TIOCGWINSZ, &(g_term.apt));
 }
 

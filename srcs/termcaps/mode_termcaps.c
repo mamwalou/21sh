@@ -24,7 +24,7 @@ t_mode		shell_mode(t_win *win)
 		read(0, win->buffer, 4);
 		//read_display(win);
 		if ((ft_isalnum(win->buffer[0])) == 1 || (my_ctrl(win->buffer[0])) == 1)
-			push_line(win);
+			push_line(win, win->buffer[0]);
 		else
 			input(win);
 		if (*(unsigned int*)win->buffer == RETURN)
@@ -48,7 +48,7 @@ t_mode		hered_mode(t_win *win)
 		ft_bzero(win->buffer, 4);
 		read(0, win->buffer, 4);
 		if ((ft_isalnum(win->buffer[0])) == 1 || (my_ctrl(win->buffer[0])) == 1)
-			push_line(win);
+			push_line(win, win->buffer[0]);
 		else
 			input(win);
 		if (stop_her(win->end) == 0 && *(unsigned int*)win->buffer == RETURN)
@@ -73,7 +73,7 @@ t_mode		quote_mode(t_win *win)
 		ft_bzero(win->buffer, 4);
 		read(0, win->buffer, 4);
 		if ((ft_isalnum(win->buffer[0])) == 1 || (my_ctrl(win->buffer[0])) == 1)
-			push_line(win);
+			push_line(win, win->buffer[0]);
 		else
 			input(win);
 		if (win->end->l_char == 39 && *(unsigned int*)win->buffer == RETURN)
@@ -98,7 +98,7 @@ t_mode		d_quote_mode(t_win *win)
 		ft_bzero(win->buffer, 4);
 		read(0, win->buffer, 4);
 		if ((ft_isalnum(win->buffer[0])) == 1 || (my_ctrl(win->buffer[0])) == 1)
-			push_line(win);
+			push_line(win, win->buffer[0]);
 		else
 			input(win);
 		if (win->end->l_char == 34 && *(unsigned int*)win->buffer == RETURN)

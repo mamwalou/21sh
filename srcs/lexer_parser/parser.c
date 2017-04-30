@@ -48,6 +48,7 @@ t_mode				lexer_parser(t_memory *memory)
 	int				code_mode;
 
 	code_mode = 0;
+
 	lexem = (t_st_lexem*)ft_memalloc(sizeof(t_st_lexem));
 	if ((code_mode = parser(&lexem, memory)) > SWITCH_MODE)
 	{
@@ -61,6 +62,7 @@ t_mode				lexer_parser(t_memory *memory)
 		else if (code_mode == D_QUOTE_CODE)
 			return (D_QUOTE);
 	}
+	sw_list(lexem);
 	generate_ast(lexem);
 	return (SHELL);
 }

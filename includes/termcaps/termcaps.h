@@ -52,6 +52,17 @@
 # define CRIGHT		95
 # define JTAB		100
 
+typedef enum 			s_iter
+{
+	DELETING,
+	PUSH,
+	M_UP,
+	M_RIGHT,
+	M_DOWN,
+	M_LEFT,
+	M_DEL,
+}						t_iter;
+
 typedef struct			s_line
 {
 	uint64_t			l_char;
@@ -65,27 +76,29 @@ typedef struct			s_win
 	int					x;
 	int					lenght_line;
 	int					cursor_line;
+	int					pos_history;
 	char				buffer[BUFF_SIZE];
+	char				**hst;
 	t_line				*begin;
 	t_line				*end;
 }						t_win;
 
 
-typedef struct	s_input
+typedef struct			s_input
 {
-	int			input;
-	void		(*f)(t_win *win);
-}				t_input;
+	int					input;
+	void				(*f)(t_win *win);
+}						t_input;
 
-typedef	struct		s_term
+typedef	struct			s_term
 {
-	struct termios 	terminal;
-	struct termios 	new_term;
-	struct winsize	apt;
-	int				lock;
-}					t_term;
+	struct termios 		terminal;
+	struct termios 		new_term;
+	struct winsize		apt;
+	int					lock;
+}						t_term;
 
-t_term				g_term;
+t_term					g_term;
 
 
 void			termcaps(void);
@@ -102,7 +115,7 @@ t_mode			d_quote_mode(t_win *win);
 int				stop_her(t_line *end);
 int				stoq(t_line *end, int key);
 void			depushline(t_win *win);
-void			push_line(t_win *win);
+void			push_line(t_win *win, unsigned int buffer);
 
 void			printline(t_line *begin);
 void			line_init(t_line **begin, t_line **end, t_win *win);
@@ -114,15 +127,17 @@ void			handl_sig(void);
 void			input(t_win *win);
 
 char			*tabulation(char *line, t_win *win);
-int				ft_del(t_line *blst, t_win *win);
-int				ft_search(t_line *blst, t_win *win);
-int				ft_clear(t_line *blst, t_win *win);
+void			autocompletion(t_win *win);
 
 /*cursor*/
-void			move_cursr(t_win *win, int mode, int iteration);
+void			move_cursr(t_win *win, t_iter iter, int iteration);
 void			gest_crs(t_win *win);
 void			history_termcaps(t_win *win);
+void			dhistory_termcaps(t_win *win);
+
 /*list_to_array*/
 void 			list_to_array(t_win *win);
+void			list_lchar(char *str, t_win *win);
+char			*lchar_list(t_line *line, int lenght);
 
 #endif

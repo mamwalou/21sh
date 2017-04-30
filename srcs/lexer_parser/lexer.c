@@ -38,12 +38,13 @@ int				redirection_filters(char *line)
 	int			count;
 	int			tmp;
 
+	tmp = 0;
 	count = ft_isdigit(line[count])? 1 : 0;
 	count = (line[count] == '&')? 1 :0;
 	tableau[0] = ">>";
 	tableau[1] = ">";
 	tableau[2] = "<";
-	if ((tmp = ctrl_tab(line + count, tableau, 3)) > 0)
+	if ((tmp = ctrl_tab(line, tableau, 3)) > 0)
 		return (tmp + count);
 	return (0);
 }

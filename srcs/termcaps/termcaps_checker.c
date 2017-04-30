@@ -12,14 +12,16 @@
 
 #include "../../includes/termcaps/termcaps.h"
 #include "../../includes/shell.h"
-# define NB_INPUT 5
+#define NB_INPUT 6
 
 static const t_input		g_input[NB_INPUT] =
 {
 	{DELETE, depushline},
+	{TAB, autocompletion},
 	{LEFT, gest_crs},
 	{RIGHT, gest_crs},
 	{UP, history_termcaps},
+	{DOWN, dhistory_termcaps},
 };
 
 int			ft_puts(int c)
