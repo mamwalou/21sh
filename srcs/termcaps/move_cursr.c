@@ -29,6 +29,8 @@ void			move_cursr(t_win *win, t_iter iter, int iteration)
 			tputs(tgetstr("dc", NULL), 1, ft_puts);
 		if (iter == DELETING)
 			depushline(win);
+		if (iter == PUSH)
+			depushline(win);
 	}
 }
 

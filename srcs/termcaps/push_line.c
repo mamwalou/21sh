@@ -38,7 +38,7 @@ void		list_line_push(t_line *nw, t_win *win)
 	printline(nw);
 	win->lenght_line++;
 	win->cursor_line++;
-	move_cursr(win, 0, win->lenght_line - win->cursor_line + 1);
+	move_cursr(win, M_LEFT, win->lenght_line - win->cursor_line + 1);
 }
 
 t_line		*nw_char(unsigned int buffer)

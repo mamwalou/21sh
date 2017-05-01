@@ -38,13 +38,11 @@ void			handl_sigcont(int sig)
 {
 	char		cp[2];
 
-	cp[0] = '.';
-	cp[1] = 0;
 	if (init_term(&(g_term.terminal)) == -1)
 		return ;
 	g_term.lock = 1;
 	signal(SIGTSTP, handl_sigstrp);
-	ioctl(0, TIOCSTI, cp);
+	ioctl(0, TIOCSTI, prompt());
 }
 
 void			handl_sig(void)

@@ -15,14 +15,13 @@
 
 t_mode		shell_mode(t_win *win)
 {
-	prompt();
+	win->x = prompt();
 	ft_bzero(win->buffer, 4);
 	while (42)
 	{
 		handl_sig();
 		ft_bzero(win->buffer, 4);
 		read(0, win->buffer, 4);
-		//read_display(win);
 		if ((ft_isalnum(win->buffer[0])) == 1 || (my_ctrl(win->buffer[0])) == 1)
 			push_line(win, win->buffer[0]);
 		else
@@ -34,6 +33,7 @@ t_mode		shell_mode(t_win *win)
 			ft_putchar('\n');
 			return (SHELL);
 		}
+		win->x += win->lenght_line;
 	}
 	return (ERROR);
 }

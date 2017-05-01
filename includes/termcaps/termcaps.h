@@ -100,26 +100,29 @@ typedef	struct			s_term
 
 t_term					g_term;
 
+typedef struct			s_autocompl
+{
+	t_llist				*match;
+	int					occurance;
+}						t_autocmp;
 
-void			termcaps(void);
-int				ft_puts(int c);
-void			bring_back_shell(struct termios *term);
-int				init_term(struct termios *term);
-void 			read_display(t_win *win);
+void					termcaps(void);
+int						ft_puts(int c);
+void					bring_back_shell(struct termios *term);
+int						init_term(struct termios *term);
+void 					read_display(t_win *win);
 
-/*MODE*/
-t_mode			shell_mode(t_win *win);
-t_mode			hered_mode(t_win *win);
-t_mode			quote_mode(t_win *win);
-t_mode			d_quote_mode(t_win *win);
-int				stop_her(t_line *end);
-int				stoq(t_line *end, int key);
-void			depushline(t_win *win);
+t_mode					shell_mode(t_win *win);
+t_mode					hered_mode(t_win *win);
+t_mode					quote_mode(t_win *win);
+t_mode					d_quote_mode(t_win *win);
+int						stop_her(t_line *end);
+int						stoq(t_line *end, int key);
+void					depushline(t_win *win);
 void			push_line(t_win *win, unsigned int buffer);
 
 void			printline(t_line *begin);
 void			line_init(t_line **begin, t_line **end, t_win *win);
-
 /*signaux*/
 void			handl_sig(void);
 
@@ -128,6 +131,7 @@ void			input(t_win *win);
 
 char			*tabulation(char *line, t_win *win);
 void			autocompletion(t_win *win);
+void 			aff_auto(t_autocmp *autocmpl, t_win *win);
 
 /*cursor*/
 void			move_cursr(t_win *win, t_iter iter, int iteration);

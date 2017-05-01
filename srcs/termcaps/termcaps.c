@@ -25,6 +25,7 @@ void			init_mv(t_win *win)
 	win->cursor_line = 1; //cursor follow
 	win->pos_history = 1;
 	win->y = 0;
+	win->x = 0;
 	win->begin = NULL;
 	win->end = NULL;
 	win->hst = convert_history(g_memory.history_path, g_memory.code_history);

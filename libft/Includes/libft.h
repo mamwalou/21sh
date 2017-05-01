@@ -38,8 +38,6 @@
 # define REP 60
 # define LINK 70
 
-int					ft_stspchr(char *s, int t);
-int					find_occur(const char *s, int t);
 int					ft_strint(char *str, char *cmp);
 char				*ft_chrstr(char *str, char *find);
 int					is_dir(char *s);
@@ -130,6 +128,7 @@ char				*ft_strtrim(char const *s);
 int					ft_strsplit(char ***dst, char const *s, int *t);
 int					ft_strisdigit(char *str);
 int					get_next_line(int fd, char **line);
+int					*generate(int c, int c1, int size);
 
 typedef struct		s_llist
 {
