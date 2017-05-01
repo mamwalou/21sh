@@ -65,6 +65,7 @@ t_memory			g_memory;
 
 /*exec_cmd*/
 int					prompt();
+void				print_ascii(void);
 /*data*/
 
 /*env*/

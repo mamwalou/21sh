@@ -16,30 +16,13 @@ char			**get_in_env(t_llist *env, const char *str)
 {
 	t_llist		*ptr;
 	char		**dstr;
-	char		*begin;
-	int			lenght;
 
-	lenght = 0;
 	ptr = env;
-	while (ptr)
+	while (ptr && ft_strncmp(ptr->content, str, ft_strlen(str)))
 	{
-		if (!ft_strncmp(ptr->content, str, ft_strlen(str)))
-		{
-			begin = ft_strrchr((const char*)ptr->content, '=');
-			lenght = find_occur(begin, ':');
-			lenght += 1;
-		}
 		ptr = ptr->next;
 	}
-	dstr = (char**)ft_memalloc(sizeof(char*) * lenght + 1);
-	dstr[lenght] = NULL;
-	lenght--;
-	while (lenght >= 0)
-	{
-		dstr[lenght] = ft_strndup(begin, 0, ft_stspchr(begin, ':'));
-		begin = ft_strrchr(begin, ':');
-		lenght--;
-	}
+	ft_strsplit(&dstr, ptr->content, generate(':', '=', 3));
 	return (dstr);
 }
 

@@ -35,7 +35,7 @@ void			history_termcaps(t_win *win)
 
 	if (win->pos_history == g_memory.code_history)
 		win->pos_history = 1;
-	while (win->cursor_line < win->lenght_line + 1)
+	while (win->cursor_line < win->lenght_line)
 	{
 		move_cursr(win, M_RIGHT, 1);
 		win->cursor_line++;

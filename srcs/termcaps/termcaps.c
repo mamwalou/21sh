@@ -28,8 +28,15 @@ void			init_mv(t_win *win)
 	win->x = 0;
 	win->begin = NULL;
 	win->end = NULL;
+	win->hst = NULL;
 	win->hst = convert_history(g_memory.history_path, g_memory.code_history);
 	ioctl(0, TIOCGWINSZ, &(g_term.apt));
+}
+
+void			finish_mv(t_win *win)
+{
+	if (win->hst)
+	 	free_d(win->hst);
 }
 
 int					init_term(struct termios *term)
@@ -55,16 +62,6 @@ int					init_term(struct termios *term)
 	return (0);
 }
 
-void			print_ascii(void)
-{
-	ft_putstr("\033[1;36m");
-	ft_putendl(" _____  ______   _______ _______ _______ _____   _____   ");
-	ft_putendl("|  |  ||__    | |     __|   |   |    ___|     |_|     |_ ");
-	ft_putendl("|__    |    __| |__     |       |    ___|       |       |");
-	ft_putendl("   |__||______| |_______|___|___|_______|_______|_______|");
-	ft_putstr("\033[0m");
-}
-
 void			termcaps(void)
 {
 	t_line		begin;
@@ -87,5 +84,6 @@ void			termcaps(void)
 		g_memory.mode = quote_mode(&win);
 	else if (g_memory.mode == D_QUOTE)
 		g_memory.mode = d_quote_mode(&win);
+	finish_mv(&win);
 	return ;
 }

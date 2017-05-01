@@ -23,8 +23,6 @@ void 				rsearch(char *str, char *trep, t_win *win, t_autocmp *autc)
 		if (!ft_strncmp(str, files->d_name, ft_strlen(str)))
 		{
 			autc->occurance++;
-			if (!ft_strcmp(str, files->d_name))
-				return ;
 			ft_lstadd(&(autc)->match, ft_lstnew(files->d_name,
 						ft_strlen(files->d_name)));
 		}

@@ -13,6 +13,16 @@
 #include "../../includes/shell.h"
 #include "../../includes/termcaps/termcaps.h"
 
+void			print_ascii(void)
+{
+	ft_putstr("\033[1;36m");
+	ft_putendl(" _____  ______   _______ _______ _______ _____   _____   ");
+	ft_putendl("|  |  ||__    | |     __|   |   |    ___|     |_|     |_ ");
+	ft_putendl("|__    |    __| |__     |       |    ___|       |       |");
+	ft_putendl("   |__||______| |_______|___|___|_______|_______|_______|");
+	ft_putstr("\033[0m");
+}
+
 int					prompt(void)
 {
 	char			*user;

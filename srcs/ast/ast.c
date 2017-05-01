@@ -84,7 +84,7 @@ void			generate_ast(t_st_lexem *lex)
 		prev_d(max, &ast, find_next_max(max->next), lex);
 	free_lexem(max);
 	free(lex);
-	//saw_ast(ast, 0);
+	saw_ast(ast, 0);
 	exec_tree(ast, &status);
 	free_ast(ast);
 }

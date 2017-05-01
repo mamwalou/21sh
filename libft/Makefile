@@ -33,7 +33,7 @@ SRC += ft_nbsize.c ft_lenghtwchar.c ft_lenghtstrwchar.c
 SRC += ft_printunint.c ft_lenghtunint.c ft_isdir.c
 SRC += ft_strint.c ft_stradd.c ft_strmove.c
 SRC += ft_strtrijoin.c ft_strndup.c ft_findstr.c ft_chrstr.c
-SRC += get_next_line.c ft_stspchr.c ft_occur.c
+SRC += get_next_line.c ft_occur.c
 
 DEL = rm -f
 
