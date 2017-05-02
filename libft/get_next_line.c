@@ -6,82 +6,90 @@
 /*   By: mdriay <mdriay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/23 21:50:21 by mdriay            #+#    #+#             */
-/*   Updated: 2017/04/25 16:48:22 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/02 13:16:45 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Includes/libft.h"
 
-static int		get_concat(char **line, char *buf, int n)
+static t_fd		*new_data_fd(int const fd)
 {
-	char	*ret;
-	int		len;
+	t_fd	*new;
 
-	len = (*line ? ft_strlen(*line) : 0);
-	if (!(ret = (char*)malloc(sizeof(ret) * (len + n + 1))))
-		return (0);
-	ft_bzero(ret, len + n + 1);
-	if (*line)
+	if ((new = (t_fd *)malloc(sizeof(t_fd))) != NULL)
 	{
-		ft_strcpy(ret, *line);
-		free(*line);
+		new->fd = fd;
+		new->nl = 0;
+		new->pos_nl = 0;
+		new->ret = 0;
+		new->buf = NULL;
+		new->next = NULL;
 	}
-	ft_strncat(ret, buf, n);
-	*line = ret;
-	return (1);
+	return (new);
 }
 
-static int		get_refresh(char *buf, int i)
+static t_fd		*get_data_fd(t_fd **lst_fd, int const fd)
 {
-	ft_strncpy(buf, &(buf[i]), BUFF_SIZE);
-	return (1);
+	t_fd	*tmp;
+
+	if (*lst_fd == NULL)
+		return ((*lst_fd = new_data_fd(fd)));
+	tmp = *lst_fd;
+	while (tmp)
+	{
+		if (tmp->fd == fd)
+			return (tmp);
+		else if (tmp->next == NULL)
+			return ((tmp->next = new_data_fd(fd)));
+		tmp = tmp->next;
+	}
+	return (NULL);
 }
 
-static int		get_loop(int const fd, int *check, char **buf, char **line)
+static void		ft_read(t_fd *d_fd)
 {
-	int i;
+	char		*tmp;
 
-	i = 0;
-	while ((*buf)[i] != '\n' && !((*buf)[i] == '\0' && *check == 0))
+	tmp = (char *)malloc(sizeof(char) * (BUFF_SIZE + 1));
+	if ((d_fd->ret = read(d_fd->fd, tmp, BUFF_SIZE)) == -1)
+		return ;
+	tmp[d_fd->ret] = '\0';
+	d_fd->buf = ft_stradd(&d_fd->buf, &tmp);
+	while ((d_fd->pos_nl = ft_strchr(d_fd->buf, '\n')) == 0 && d_fd->ret > 0)
 	{
-		if ((*buf)[i] == '\0')
-		{
-			if (!get_concat(line, *buf, i))
-				return (-1);
-			*check = read(fd, (*buf), BUFF_SIZE);
-			(*buf)[*check] = 0;
-			i = -1;
-		}
-		i++;
+		tmp = (char *)malloc(sizeof(char) * (BUFF_SIZE + 1));
+		if ((d_fd->ret = read(d_fd->fd, tmp, BUFF_SIZE)) == -1)
+			return ;
+		tmp[d_fd->ret] = '\0';
+		d_fd->buf = ft_stradd(&d_fd->buf, &tmp);
 	}
-	return (i);
+	if (d_fd->ret > 0)
+		d_fd->ret = 1;
 }
 
 int				get_next_line(int const fd, char **line)
 {
-	static char *buf;
-	static int	check;
-	int			i;
+	static t_fd		*lst_fd = NULL;
+	t_fd			*d_fd;
 
-	if (fd < 0 || fd >= 99 || (fd == 1 && line == NULL))
+	if (fd < 0 || line == NULL || (d_fd = get_data_fd(&lst_fd, fd)) == NULL)
+	{
+		printf("%p", lst_fd);
 		return (-1);
-	*line = NULL;
-	if (!check)
-	{
-		if (!(buf = (char*)malloc(sizeof(char) * (BUFF_SIZE + 1))))
-			return (-1);
-		check = read(fd, buf, BUFF_SIZE);
-		buf[check] = 0;
 	}
-	if (check == 0)
-		return (0);
-	i = get_loop(fd, &check, &buf, line);
-	if (buf[i] == '\n' || buf[i] == '\0')
+	if (d_fd->buf == NULL)
+		d_fd->buf = ft_strnew(BUFF_SIZE + 1, "");
+	if ((d_fd->pos_nl = ft_strchr(d_fd->buf, '\n')) == 0)
+		ft_read(d_fd);
+	if (d_fd->ret == 0 && d_fd->pos_nl == 0)
+		d_fd->pos_nl = ft_strlen(d_fd->buf) + 1;
+	if (d_fd->ret != -1 && d_fd->pos_nl != 0)
 	{
-		if (!get_concat(line, buf, i) || !get_refresh(buf, i + 1))
-			return (-1);
+		*line = ft_strsub(d_fd->buf, 0, d_fd->pos_nl - 1);
+		ft_strmove(&(d_fd->buf), d_fd->pos_nl);
+		d_fd->pos_nl = 0;
+		if (*d_fd->buf == '\0' && d_fd->ret == 0)
+			ft_strdel(&(d_fd->buf));
 	}
-	if (check == 0 && buf[0] != '\0')
-		return (1);
-	return (check ? 1 : 0);
+	return (d_fd->ret);
 }

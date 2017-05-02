@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/02 10:58:27 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/02 13:17:31 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,6 @@ void			init_mv(t_win *win)
 	win->hst = NULL;
 	win->hst = convert_history(g_memory.history_path, g_memory.code_history);
 	ioctl(0, TIOCGWINSZ, &(g_term.apt));
-}
-
-void			finish_mv(t_win *win)
-{
-	if (win->hst)
-		free_d(win->hst);
 }
 
 int				init_term(struct termios *term)
@@ -70,20 +64,18 @@ void			termcaps(void)
 
 	if (init_term(&(g_term.terminal)) == -1)
 		return ;
-	init_mv(&win);
 	if (g_memory.launch++ == 0)
 		print_ascii();
+	init_mv(&win);
 	if (g_memory.mode == SHELL)
-	{
 		g_memory.mode = shell_mode(&win);
-		return ;
-	}
 	else if (g_memory.mode == HEREDOC)
 		g_memory.mode = hered_mode(&win);
 	else if (g_memory.mode == QUOTE)
 		g_memory.mode = quote_mode(&win);
 	else if (g_memory.mode == D_QUOTE)
 		g_memory.mode = d_quote_mode(&win);
-	finish_mv(&win);
+	if (win.hst != NULL)
+		free_d(win.hst);
 	return ;
 }

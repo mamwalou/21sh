@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/02 10:44:20 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/02 12:49:47 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,6 @@ static void			write_history(t_memory *memory)
 
 void				push_history(void)
 {
-	int				fd;
-	char			*home;
-	char			*history_path;
-
 	if (g_memory.line)
 	{
 		if (g_memory.history_path)

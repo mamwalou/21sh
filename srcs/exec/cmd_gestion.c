@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/13 10:31:53 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/02 10:22:14 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/02 12:27:13 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,11 @@ static int			check_builltins(char **cmd, int index)
 		return (check_builltins_bis(cmd, index));
 }
 
-void				exec_fct2(t_lexem *lexem, pid_t child, char **env)
+void				exec_fct2(t_lexem *lexem, pid_t child)
 {
+	char			**env;
+
+	env = copy_env();
 	if (!(check_builltins(lexem->option, lexem->index)))
 	{
 		child = fork();
@@ -75,29 +78,22 @@ void				exec_fct2(t_lexem *lexem, pid_t child, char **env)
 		else
 			wait(0);
 	}
-	if (env)
-	{
-		free_d(env);
-		free(env);
-	}
+	free_d(env);
+	free(env);
 }
 
 int					exec_fct(t_node *ast, int *status)
 {
-	char			**env;
 	t_code			code;
 	pid_t			child_pid;
 	int				pos;
 
 	child_pid = 0;
 	pos = 1;
-	env = copy_env();
 	if ((code = find_command(&ast->body->lexem->option[0])) == NONE)
-		exec_fct2(ast->body->lexem, child_pid, env);
+		exec_fct2(ast->body->lexem, child_pid);
 	else
 	{
-		free_d(env);
-		free(env);
 		*status = 1;
 		return (-1);
 	}

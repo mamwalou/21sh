@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/04/25 15:14:15 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/02 13:01:22 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,20 @@
 # include <stdio.h>
 # include <termios.h>
 # include <unistd.h>
-# define BUFF_SIZE 4096
+# define BUFF_SIZE 246
 # define FILES 50
 # define REP 60
 # define LINK 70
+
+typedef	struct		s_fd
+{
+	int				fd;
+	int				nl;
+	size_t			pos_nl;
+	int				ret;
+	char			*buf;
+	struct s_fd		*next;
+}					t_fd;
 
 int					ft_strint(char *str, char *cmp);
 char				*ft_chrstr(char *str, char *find);

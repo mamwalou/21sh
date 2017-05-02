@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 09:25:59 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/02 10:39:07 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/02 12:53:23 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,14 @@ char			**convert_history(char *path_memory, int lenght)
 
 	i = 0;
 	fd = open(path_memory, O_RDONLY | O_CREAT | O_APPEND, 0666);
-	str = (char**)ft_memalloc(sizeof(char*) * lenght);
+	str = (char**)malloc(sizeof(char*) * lenght + 1);
 	while ((get_next_line(fd, &buf)) > 0)
 	{
 		str[i] = ft_strdup(buf);
 		free(buf);
 		i++;
 	}
-	str[i] = 0;
 	free(buf);
-	close(fd);
+	str[lenght + 1] = 0;
 	return (str);
 }
