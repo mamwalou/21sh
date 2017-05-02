@@ -61,7 +61,7 @@ t_mode				lexer_parser(t_memory *memory)
 		else if (code_mode == D_QUOTE_CODE)
 			return (D_QUOTE);
 	}
-	sw_list(lexem);
+//	sw_list(lexem);
 	generate_ast(lexem);
 	return (SHELL);
 }

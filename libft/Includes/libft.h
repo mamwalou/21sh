@@ -33,20 +33,10 @@
 # include <stdio.h>
 # include <termios.h>
 # include <unistd.h>
-# define BUFF_SIZE 246
+# define BUFF_SIZE 1
 # define FILES 50
 # define REP 60
 # define LINK 70
-
-typedef	struct		s_fd
-{
-	int				fd;
-	int				nl;
-	size_t			pos_nl;
-	int				ret;
-	char			*buf;
-	struct s_fd		*next;
-}					t_fd;
 
 int					ft_strint(char *str, char *cmp);
 char				*ft_chrstr(char *str, char *find);

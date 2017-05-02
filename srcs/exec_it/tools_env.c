@@ -56,20 +56,23 @@ t_llist					*build_env(char **environ)
 {
 	t_llist				*ret;
 	char				*tmp;
+	int					lenght;
 
+	lenght = 0;
 	ret = NULL;
 	if (!*environ)
 	{
 		tmp = ft_strjoin("TERM=", "xterm-256color");
 		ft_putendl_fd("Shell , may not be effective", 2);
 		ft_lstadd(&ret, ft_lstnew(tmp, ft_strlen(tmp)));
+		g_memory.env_lenght = 1;
 		free(tmp);
 	}
 	while (*environ)
 	{
 		ft_lstadd(&ret, ft_lstnew(*environ, ft_strlen(*environ)));
-		ret->maillon_nb++;
 		environ++;
+		g_memory.env_lenght++;
 	}
 	return (ret);
 }

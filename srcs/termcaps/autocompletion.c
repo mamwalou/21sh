@@ -50,7 +50,7 @@ void				binary_search(char *str, t_win *win, t_autocmp *autocmpl)
 	lenght = ft_strsplit(&path, search_env(g_env, "PATH="), generate(58, 0, 2));
 	while (lenght--)
 		rsearch(str, path[lenght], win, autocmpl);
-	free_d(path);
+	free_d(path, lenght);
 }
 
 void				autocompletion(t_win *win)
@@ -74,5 +74,5 @@ void				autocompletion(t_win *win)
 	else if (autocmpl.occurance > 1)
 		aff_auto(&autocmpl, win);
 	ft_lstdel(&(autocmpl).match, ft_bzero);
-	free_d(tmp2);
+	free_d(tmp2, lenght);
 }

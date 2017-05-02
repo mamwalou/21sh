@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   history_tools.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/02 09:25:59 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/02 12:53:23 by sbeline          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../includes/shell.h"
 
 char			**convert_history(char *path_memory, int lenght)
@@ -20,15 +8,17 @@ char			**convert_history(char *path_memory, int lenght)
 	int			i;
 
 	i = 0;
-	fd = open(path_memory, O_RDONLY | O_CREAT | O_APPEND, 0666);
-	str = (char**)malloc(sizeof(char*) * lenght + 1);
+	buf = NULL;
+	fd = open(path_memory, O_RDWR | O_CREAT | O_APPEND, 0666);
+	str = (char**)malloc(sizeof(char*) * lenght);
 	while ((get_next_line(fd, &buf)) > 0)
 	{
 		str[i] = ft_strdup(buf);
-		free(buf);
 		i++;
 	}
+	ft_putnbr(lenght);
+	ft_putchar('\n');
 	free(buf);
-	str[lenght + 1] = 0;
+	close(fd);
 	return (str);
 }

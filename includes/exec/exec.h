@@ -59,6 +59,7 @@ void					history(char **cmd);
 
 void					ft_unsetenv(char *name);
 void					ft_echo(char **cmd);
+void					fnc_exit();
 void					print_env(void);
 
 #endif

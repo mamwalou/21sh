@@ -50,10 +50,18 @@ int					prompt(void)
 
 void				end_memory(void)
 {
-	g_memory.code_history = 0;
-	g_memory.line = NULL;
-	g_memory.launch = 0;
-	g_memory.mode = SHELL;
+	if (g_memory.history_path)
+		free(g_memory.history_path);
+	if (g_memory.line)
+		free(g_memory.line);
+	if (g_memory.key_ctrl)
+		free(g_memory.key_ctrl);
+	if (g_memory.var == NULL)
+		ft_lstdel(&(g_memory.var), ft_bzero);
+	if (g_memory.line_mode == NULL);
+		free(g_memory.line_mode);
+	if (g_memory.line_mode_tmp)
+		free(g_memory.line_mode_tmp);
 }
 
 int					main(int argc, char **argv, char **environ)

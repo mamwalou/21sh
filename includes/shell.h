@@ -50,6 +50,7 @@ typedef struct		s_memory
 	int				fd_history;
 	int				code_history;
 	char			*line;
+	int				env_lenght;
 	char			*key_ctrl;
 	char			key;
 	t_llist			*var;
@@ -95,7 +96,7 @@ void				history_path(void);
 char				**convert_history(char *path_memory, int lenght);
 
 void				*ft_realloc(void *mem, size_t size);
-void				free_d(char **dtab);
+void				free_d(char **dtab, int lenght);
 
 char				*get_pwd(void);
 int					reset_fd(int fd, char *new_fd);

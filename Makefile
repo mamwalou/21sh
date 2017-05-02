@@ -32,7 +32,7 @@ OBJ_PATH = ./obj/
 LIB_PATH = ./libft/
 LIB_NAME = libft.a
 CC = gcc
-CFLAGS = -Werror -Wall -Wextra
+CFLAGS =  -Werror -Wall -Wextra
 OBJ_NAME = $(SRC_NAME:.c=.o)
 SRC = $(addprefix $(SRC_PATH),$(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH),$(OBJ_NAME))
@@ -42,7 +42,7 @@ INC = $(addprefix -I,$(INC_PATH))
 all:$(NAME)
 
 $(NAME): $(OBJ) libf
-	$(CC) $(CFLAGS) $(OBJ) $(LIB) $(INC) -lncurses -o $@
+	$(CC) $(CFLAGS) $(OBJ) $(LIB) $(INC) -g -lncurses -o $@
 
 $(OBJ_PATH)%.o:$(SRC_PATH)%.c
 	@mkdir -p $(OBJ_PATH)

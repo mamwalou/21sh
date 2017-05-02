@@ -34,6 +34,8 @@ static int			check_builltins_bis(char **cmd, int index)
 		history(cmd);
 		return (1);
 	}
+	else if (!ft_strcmp(cmd[0], "cmd"))
+		fnc_exit();
 	return (0);
 }
 
@@ -64,6 +66,7 @@ void				exec_fct2(t_lexem *lexem, pid_t child)
 {
 	char			**env;
 
+	env = NULL;
 	env = copy_env();
 	if (!(check_builltins(lexem->option, lexem->index)))
 	{
@@ -78,7 +81,7 @@ void				exec_fct2(t_lexem *lexem, pid_t child)
 		else
 			wait(0);
 	}
-	free_d(env);
+	free_d(env, g_memory.env_lenght - 1);
 	free(env);
 }
 

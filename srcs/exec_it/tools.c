@@ -36,18 +36,18 @@ char					**copy_env(void)
 	char				**cpy;
 	int					count;
 
+	count = 0;
 	if (g_env != NULL)
 	{
-		count = 0;
 		ptr = g_env;
-		cpy = (char**)malloc(sizeof(char*) * g_env->maillon_nb + 1);
-		while (count < g_env->maillon_nb)
+		cpy = (char**)malloc(sizeof(char*) * g_memory.env_lenght);
+		while (count < g_memory.env_lenght - 1)
 		{
 			cpy[count] = ft_strdup(ptr->content);
 			count++;
 			ptr = ptr->next;
 		}
-		cpy[count] = NULL;
+		cpy[count - 1] = NULL;
 		return (cpy);
 	}
 	return (NULL);
@@ -68,11 +68,14 @@ void					*ft_realloc(void *mem, size_t size)
 	return (buff);
 }
 
-void					free_d(char **dtab)
+void					free_d(char **dtab, int lenght)
 {
-	while (*dtab)
+	int					i;
+
+	i = 0;
+	while (i < lenght)
 	{
-		free(*dtab);
-		dtab++;
+		free(dtab[i]);
+		i++;
 	}
 }

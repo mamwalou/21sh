@@ -21,7 +21,6 @@ void			aff_history(void)
 	while ((get_next_line(fd, &buf)) > 0)
 	{
 		ft_putendl(buf);
-		free(buf);
 	}
 	free(buf);
 	close(fd);

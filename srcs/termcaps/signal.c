@@ -47,6 +47,7 @@ void			handl_sigcont(int sig)
 
 void			handl_sig(void)
 {
+	signal(SIGINT, SIG_IGN);
 	signal(SIGKILL, SIG_IGN);
 	signal(SIGSEGV, SIG_IGN);
 	signal(SIGWINCH, handl_sigws);

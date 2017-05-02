@@ -76,6 +76,9 @@ void			termcaps(void)
 	else if (g_memory.mode == D_QUOTE)
 		g_memory.mode = d_quote_mode(&win);
 	if (win.hst != NULL)
-		free_d(win.hst);
+	{
+		free_d(win.hst, g_memory.code_history);
+		free(win.hst);
+	}
 	return ;
 }

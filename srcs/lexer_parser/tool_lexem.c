@@ -15,10 +15,7 @@
 void				free_lexem(t_lexem *lexem)
 {
 	free(lexem->name_lexem);
-	if (lexem->index > 0)
-		free_d(lexem->option);
-	if (lexem->option)
-		free(lexem->option);
+	free_d(lexem->option, lexem->index);
 	lexem->priority = 0;
 	free(lexem);
 }

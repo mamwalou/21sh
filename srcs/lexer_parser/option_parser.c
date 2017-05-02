@@ -18,7 +18,7 @@ static char			**push_option(char *opt, char **save, int index)
 	int				count;
 
 	count = 0;
-	nw_opt = (char**)malloc(sizeof(char*) * (index + 2));
+	nw_opt = (char**)malloc(sizeof(char*) * (index + 1));
 	while (count < index)
 	{
 		nw_opt[count] = ft_strdup(save[count]);

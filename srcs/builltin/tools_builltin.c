@@ -27,7 +27,7 @@ char			**get_in_env(t_llist *env, const char *str)
 	return (dstr);
 }
 
-char			*ctrl_access(char **path, char *name, int ctrl_type)
+char			*ctrl_access(char **path, char *name)
 {
 	char		*tmp;
 	int			count;
@@ -37,30 +37,34 @@ char			*ctrl_access(char **path, char *name, int ctrl_type)
 	{
 		tmp = ft_strtrijoin(path[count], "/", name);
 		if (access(tmp, X_OK) == 0)
-		{
-			free_d(path);
-			free(path);
 			return (tmp);
-		}
 		free(tmp);
 		count++;
 	}
-	free_d(path);
-	free(path);
+	free(tmp);
 	return (NULL);
 }
 
 t_code			find_command(char **cmd)
 {
+	char		**dstr;
 	char		*tmp;
+	int			*tableau;
+	int			lenght;
+	int			i;
 
+	i = 0;
 	tmp = NULL;
+	dstr = NULL;
+	lenght = 0;
 	if (is_bulltin(*cmd))
 		return (NONE);
 	if (access(*cmd, X_OK) == 0)
 		return (NONE);
-	if ((tmp = ctrl_access(get_in_env(g_env, "PATH="),
-		*cmd, 0)) == NULL)
+	tableau = generate(':', 0 , 3);
+	lenght = ft_strsplit(&dstr, search_env(g_env, "PATH="), tableau);
+	free(tableau);
+	if ((tmp = ctrl_access(dstr, *cmd)) == NULL)
 	{
 		ft_putstr_fd("shell: command not found: ", 2);
 		ft_putendl_fd(*cmd, 2);
@@ -68,11 +72,7 @@ t_code			find_command(char **cmd)
 		return (CD_CMD);
 	}
 	else
-	{
-		free(*cmd);
-		*cmd = ft_strdup(tmp);
-		free(tmp);
-	}
+		MACREALLOC(*cmd, tmp, ft_strlen(tmp) + 1);
 	return (NONE);
 }
 
