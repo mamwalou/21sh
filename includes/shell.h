@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/04/25 17:37:03 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/02 09:56:00 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct		s_memory
 	char			*line;
 	char			*key_ctrl;
 	char			key;
+	t_llist			*var;
 	char			*line_mode;
 	char			*line_mode_tmp;
 	t_mode			mode;

@@ -6,14 +6,14 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/04/25 16:55:10 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/02 10:43:45 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 #include "../../includes/termcaps/termcaps.h"
 
-void			print_ascii(void)
+void				print_ascii(void)
 {
 	ft_putstr("\033[1;36m");
 	ft_putendl(" _____  ______   _______ _______ _______ _____   _____   ");
@@ -48,7 +48,7 @@ int					prompt(void)
 	return (lenght_prompt + 3);
 }
 
-void 				end_memory(void)
+void				end_memory(void)
 {
 	g_memory.code_history = 0;
 	g_memory.line = NULL;

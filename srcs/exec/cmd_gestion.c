@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/13 10:31:53 by sbeline           #+#    #+#             */
-/*   Updated: 2017/04/29 13:44:15 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/02 10:22:14 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int			check_builltins_bis(char **cmd, int index)
 	}
 	else if (!ft_strcmp(cmd[0], "setenv"))
 	{
-		ft_setenv(cmd);
+		ft_setenv(cmd[1], cmd[2]);
 		return (1);
 	}
 	else if (!ft_strcmp(cmd[0], "history"))

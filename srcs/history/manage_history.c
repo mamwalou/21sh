@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/04/25 17:09:05 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/02 10:44:20 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int					g_nb_hist(void)
 	return (count);
 }
 
-void 				init_memory(void)
+void				init_memory(void)
 {
 	g_memory.fd_history = 0;
 	g_memory.line = NULL;
@@ -56,7 +56,7 @@ void 				init_memory(void)
 		g_memory.code_history = 0;
 }
 
-static void 		write_history(t_memory *memory)
+static void			write_history(t_memory *memory)
 {
 	char			*tmp;
 

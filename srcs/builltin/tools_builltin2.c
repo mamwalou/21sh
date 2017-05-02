@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/28 15:47:11 by sbeline           #+#    #+#             */
-/*   Updated: 2017/04/29 11:36:24 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/02 10:42:32 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ t_code				ctrl_arg(char **cmd, int *pos)
 	{
 		if (cmd[*pos][0] != '-')
 		{
-
 			test = is_dir(cmd[*pos]);
 			if (test != FILES && test != REP)
 			{

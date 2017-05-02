@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/04/29 15:39:18 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/02 10:45:02 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ t_mode				lexer_parser(t_memory *memory)
 	int				code_mode;
 
 	code_mode = 0;
-
 	lexem = (t_st_lexem*)ft_memalloc(sizeof(t_st_lexem));
 	if ((code_mode = parser(&lexem, memory)) > SWITCH_MODE)
 	{

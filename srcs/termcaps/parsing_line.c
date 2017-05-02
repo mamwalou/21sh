@@ -6,18 +6,18 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/04/23 20:25:52 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/02 10:49:31 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/termcaps/termcaps.h"
 #define MAX_LEN 2024
 
-void 		read_display(t_win *win)
+void		read_display(t_win *win)
 {
 	int		z;
 	int		y;
-	
+
 	z = 0;
 	while (y != 4 || (y != 0 && z != 0))
 	{
@@ -25,7 +25,7 @@ void 		read_display(t_win *win)
 		read(0, win->buffer, MAX_LEN);
 		if (win->buffer[0])
 			;
-		z = (win->buffer[0]) ? 1 :0;
+		z = (win->buffer[0]) ? 1 : 0;
 	}
 }
 

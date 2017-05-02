@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/04/28 05:25:06 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/02 10:50:26 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void			bring_back_shell(struct termios *term)
 
 void			init_mv(t_win *win)
 {
-	win->lenght_line = 0; //start at 1  0 = no line
-	win->cursor_line = 1; //cursor follow
-	win->pos_history = 1;
+	win->lenght_line = 0;
+	win->cursor_line = 1;
+	win->pos_history = g_memory.code_history - 1;
 	win->y = 0;
 	win->x = 0;
 	win->begin = NULL;
@@ -36,10 +36,10 @@ void			init_mv(t_win *win)
 void			finish_mv(t_win *win)
 {
 	if (win->hst)
-	 	free_d(win->hst);
+		free_d(win->hst);
 }
 
-int					init_term(struct termios *term)
+int				init_term(struct termios *term)
 {
 	struct termios	new_term;
 	char			*name_term;

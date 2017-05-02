@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   autocompletion.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/02 09:28:41 by sbeline           #+#    #+#             */
+/*   Updated: 2017/05/02 10:48:25 by sbeline          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/termcaps/termcaps.h"
 #include "../../includes/shell.h"
 #include "../../includes/lexer_parser/lexer_parser.h"
 
-void		auto_push(char *str, t_win *win, int pos)
+void				auto_push(char *str, t_win *win, int pos)
 {
 	while (str[pos])
 	{
@@ -11,7 +23,7 @@ void		auto_push(char *str, t_win *win, int pos)
 	}
 }
 
-void 				rsearch(char *str, char *trep, t_win *win, t_autocmp *autc)
+void				rsearch(char *str, char *trep, t_win *win, t_autocmp *autc)
 {
 	struct dirent	*files;
 	DIR				*rep;
@@ -30,10 +42,10 @@ void 				rsearch(char *str, char *trep, t_win *win, t_autocmp *autc)
 	closedir(rep);
 }
 
-void			binary_search(char *str, t_win *win, t_autocmp *autocmpl)
+void				binary_search(char *str, t_win *win, t_autocmp *autocmpl)
 {
-	int 	lenght;
-	char	**path;
+	int				lenght;
+	char			**path;
 
 	lenght = ft_strsplit(&path, search_env(g_env, "PATH="), generate(58, 0, 2));
 	while (lenght--)
@@ -41,12 +53,12 @@ void			binary_search(char *str, t_win *win, t_autocmp *autocmpl)
 	free_d(path);
 }
 
-void 			autocompletion(t_win *win)
+void				autocompletion(t_win *win)
 {
-	t_autocmp	autocmpl;
-	char		*tmp;
-	char		**tmp2;
-	int			lenght;
+	t_autocmp		autocmpl;
+	char			*tmp;
+	char			**tmp2;
+	int				lenght;
 
 	autocmpl.match = NULL;
 	autocmpl.occurance = 0;
@@ -56,7 +68,7 @@ void 			autocompletion(t_win *win)
 		|| redirection_filters(tmp2[lenght - 2]) > 0)
 		binary_search(tmp2[lenght - 1], win, &autocmpl);
 	else
-		rsearch(tmp2[lenght - 1], search_env(g_env, "PWD=") ,win, &autocmpl);
+		rsearch(tmp2[lenght - 1], search_env(g_env, "PWD="), win, &autocmpl);
 	if (autocmpl.occurance == 1)
 		auto_push(autocmpl.match->content, win, ft_strlen(tmp2[lenght - 1]));
 	else if (autocmpl.occurance > 1)

@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/04/29 15:39:08 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/02 10:46:17 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int					token_rr(char *line)
 
 	i = 0;
 	count = 0;
-	count = ft_isdigit(line[count])? 1 : 0;
+	count = ft_isdigit(line[count]) ? 1 : 0;
 	if (line[count] == '&')
 		count++;
 	tableau[0] = ">>";
@@ -51,7 +51,7 @@ int					token_left(char *line)
 
 	i = 0;
 	count = 0;
-	count = ft_isdigit(line[count])? 1 : 0;
+	count = ft_isdigit(line[count]) ? 1 : 0;
 	if (line[count] == '&')
 		count++;
 	if (line[count] == '<')

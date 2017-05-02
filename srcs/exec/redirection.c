@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 13:16:24 by sbeline           #+#    #+#             */
-/*   Updated: 2017/04/29 15:49:56 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/02 10:42:56 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ static void			redirection_complex(t_node *ast, int *status)
 		}
 		close(ast->right_op->body->fd);
 		wait(0);
-
 	}
 }
 

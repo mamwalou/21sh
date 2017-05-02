@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/04/29 13:36:51 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/02 10:49:47 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@ static const t_input		g_input[NB_INPUT] =
 	{TAB, autocompletion},
 	{LEFT, gest_crs},
 	{RIGHT, gest_crs},
-	{UP, history_termcaps},
-	{DOWN, dhistory_termcaps},
+	{UP, dhistory_termcaps},
+	{DOWN, history_termcaps},
 };
 
-int			ft_puts(int c)
+int							ft_puts(int c)
 {
 	write(1, &c, 1);
 	return (0);
 }
 
-void			input(t_win *win)
+void						input(t_win *win)
 {
 	int						count;
 

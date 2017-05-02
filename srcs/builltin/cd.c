@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 10:27:23 by sbeline           #+#    #+#             */
-/*   Updated: 2017/04/25 11:35:23 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/02 10:42:01 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void			replace_env(char *sigle, char *new)
 	free(to_env);
 }
 
-void 			go_home(void)
+void			go_home(void)
 {
 	char		*home;
 	char		*pwd;
@@ -40,7 +40,7 @@ void 			go_home(void)
 
 void			dash_one(char *str)
 {
-	char 		*tmp;
+	char		*tmp;
 	char		buff[BUFF_SIZE];
 	char		*save_pwd;
 	char		*pwd;
@@ -61,7 +61,6 @@ void			dash_one(char *str)
 	}
 }
 
-
 void			ft_cd(char **cmd, int index)
 {
 	if (index == 4)
@@ -76,8 +75,8 @@ void			ft_cd(char **cmd, int index)
 			dash_one(cmd[1]);
 		else
 		{
-			ft_putstr_fd("cd: no such file or directory:" , 2);
-			ft_putendl_fd(cmd[1] , 2);
+			ft_putstr_fd("cd: no such file or directory:", 2);
+			ft_putendl_fd(cmd[1], 2);
 		}
 	}
 }

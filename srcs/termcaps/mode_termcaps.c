@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/04/29 13:36:52 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/02 10:57:52 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_mode		shell_mode(t_win *win)
 	ft_bzero(win->buffer, 4);
 	while (42)
 	{
-		//handl_sig();
+		handl_sig();
 		ft_bzero(win->buffer, 4);
 		read(0, win->buffer, 4);
 		if ((ft_isalnum(win->buffer[0])) == 1 || (my_ctrl(win->buffer[0])) == 1)
@@ -107,7 +107,6 @@ t_mode		d_quote_mode(t_win *win)
 			ft_putchar('\n');
 			return (SHELL);
 		}
-
 	}
 	return (ERROR);
 }

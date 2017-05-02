@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 16:45:53 by sbeline           #+#    #+#             */
-/*   Updated: 2017/04/29 10:29:45 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/02 10:02:55 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,7 @@ pid_t					verif_pid(t_pipe *pipe);
 char					*create_var_env(t_llist *env, char *sigle, char *var);
 void					ft_get_pwd(void);
 void					ft_cd(char **cmd, int index);
-
-void					ft_setenv(char **cmd);
+void					ft_setenv(char *name, char *value);
 void					history(char **cmd);
 
 void					ft_unsetenv(char *name);
