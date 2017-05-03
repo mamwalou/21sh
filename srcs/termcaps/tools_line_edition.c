@@ -55,13 +55,16 @@ void			list_to_array(t_win *win)
 
 void			list_lchar(char *str, t_win *win)
 {
-	while (*str != ';')
-		str++;
-	str++;
-	while (*str)
+	int 		i;
+
+	i = 0;
+	while (str[i] && str[i] != ';')
+		i++;
+	i++;
+	while (str[i])
 	{
-		push_line(win, *str);
-		str++;
+			push_line(win, str[i]);
+		i++;
 	}
 }
 
@@ -74,12 +77,12 @@ char			*lchar_list(t_line *line, int lenght)
 	i = 0;
 	ptr = line;
 	str = (char*)ft_memalloc(sizeof(char) * lenght + 1);
-	while (ptr)
+	while (i < lenght)
 	{
 		str[i] = ptr->l_char;
 		ptr = ptr->next;
 		i++;
 	}
-	str[lenght + 1] = 0;
+	str[i] = '\0';
 	return (str);
 }

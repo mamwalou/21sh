@@ -33,12 +33,12 @@ char			*ctrl_access(char **path, char *name)
 	int			count;
 
 	count = 0;
+	tmp = NULL;
 	while (path[count])
 	{
 		tmp = ft_strtrijoin(path[count], "/", name);
 		if (access(tmp, X_OK) == 0)
 			return (tmp);
-		free(tmp);
 		count++;
 	}
 	free(tmp);
@@ -66,13 +66,17 @@ t_code			find_command(char **cmd)
 	free(tableau);
 	if ((tmp = ctrl_access(dstr, *cmd)) == NULL)
 	{
+		free(dstr);
 		ft_putstr_fd("shell: command not found: ", 2);
 		ft_putendl_fd(*cmd, 2);
 		free(tmp);
 		return (CD_CMD);
 	}
 	else
+	{
+		free(dstr);
 		MACREALLOC(*cmd, tmp, ft_strlen(tmp) + 1);
+	}
 	return (NONE);
 }
 

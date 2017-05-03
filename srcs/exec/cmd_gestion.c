@@ -34,8 +34,11 @@ static int			check_builltins_bis(char **cmd, int index)
 		history(cmd);
 		return (1);
 	}
-	else if (!ft_strcmp(cmd[0], "cmd"))
-		fnc_exit();
+	else if (!ft_strcmp(cmd[0], "exit"))
+	{
+		ft_putendl_fd("exit_is_ok", 1);
+		exit(0);
+	}
 	return (0);
 }
 

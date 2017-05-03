@@ -19,7 +19,7 @@ t_mode		shell_mode(t_win *win)
 	ft_bzero(win->buffer, 4);
 	while (42)
 	{
-		handl_sig();
+		//handl_sig();
 		ft_bzero(win->buffer, 4);
 		read(0, win->buffer, 4);
 		if ((ft_isalnum(win->buffer[0])) == 1 || (my_ctrl(win->buffer[0])) == 1)

@@ -12,12 +12,6 @@
 
 #include "../../includes/exec/exec.h"
 
-void				fnc_exit(char *cmd)
-{
-	ft_putendl_fd("exit_is_ok", 1);
-	exit(1);
-}
-
 t_code				ctrl_arg(char **cmd, int *pos)
 {
 	int				test;
