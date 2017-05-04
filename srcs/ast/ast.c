@@ -13,7 +13,7 @@
 #include "../../includes/ast/ast.h"
 #include "../../includes/prototypage/proto.h"
 
-void			free_ast(t_node *ast)
+void		free_ast(t_node *ast)
 {
 	if (ast == NULL)
 		return ;
@@ -24,67 +24,56 @@ void			free_ast(t_node *ast)
 	free(ast);
 }
 
-void			prev_g(t_lexem *max, t_node **ast, t_lexem *tmp, t_st_lexem *l)
+void 		create(t_node **parent, t_node **ast, t_lexem *pos, t_st_lexem *lex)
 {
-	if (tmp->priority == 0)
-		full_leaf(&(*ast)->left_op, ast, create_node(tmp, l));
-	else
-		add_node(&(*ast)->left_op, ast, create_node(tmp, l));
-}
+	t_lexem	*prev;
+	t_lexem	*next;
 
-void			prev_d(t_lexem *max, t_node **ast, t_lexem *tmp, t_st_lexem *l)
-{
-	if (tmp->priority == 0)
-		full_leaf(&(*ast), ast, create_node(tmp, l));
-	else
-		add_node(&(*ast)->right_op, ast, create_node(tmp, l));
-}
-
-static t_node	*create_node_frst(t_lexem *ptr, int index)
-{
-	t_node		*new_node;
-
-	new_node = (t_node*)ft_memalloc(sizeof(t_node));
-	new_node->body = (t_body_node*)ft_memalloc(sizeof(t_body_node));
-	new_node->body->lexem = (t_lexem*)ft_memalloc(sizeof(t_lexem));
-	new_node->left_op = NULL;
-	new_node->right_op = NULL;
-	new_node->body->type_node = BEGIN;
-	new_node->body->lexem->token_type = ptr->token_type;
-	new_node->body->lexem->index = 0;
-	new_node->body->fd = 1;
-	new_node->body->lexem->index = 0;
-	new_node->body->lexem->option = NULL;
-	while (index > 0)
+	prev = NULL;
+	next = NULL;
+	ft_putstr("node=");
+	ft_putstr(pos->name_lexem);
+	if (pos->next)
 	{
-		new_node->body->lexem->option = init_option(
-				ptr->option[new_node->body->lexem->index],
-				new_node->body->lexem->option, new_node->body->lexem->index);
-		new_node->body->lexem->index++;
-		index--;
+		ft_putstr(" -- pos_next=");
+		next = find_next_max(pos->next);
+		ft_putstr(next->name_lexem);
 	}
-	new_node->body->lexem->name_lexem = ft_strdup(ptr->name_lexem);
-	new_node->body->lexem->priority = ptr->priority;
-	return (new_node);
+	if (pos->prev)
+	{
+		ft_putstr(" -- pos_prev=");
+		prev = find_prev_max(pos->prev);
+		ft_putstr(prev->name_lexem);
+	}
+	ft_putchar('\n');
+	if (next && next->priority > 0)
+	{
+		pos->next->prev = NULL;
+		pos->next = NULL;
+	}
+	if (*ast == NULL)
+	{
+		*ast = create_node(pos, lex, parent);
+		if (next != NULL)
+			create(&(*ast), &(*ast)->right_op, next, lex);
+		if (prev != NULL)
+			create(&(*ast), &(*ast)->left_op, prev, lex);
+	}
 }
 
 void			generate_ast(t_st_lexem *lex)
 {
-	t_node		*ast;
-	t_lexem		*max;
-	t_lexem		*tmp;
-	int			status;
+	t_node	*ast;
+	t_lexem	*begin;
+	int		status;
+	int		max;
 
+	ast = NULL;
 	status = 0;
-	max = find_op(lex);
-	ast = create_node_frst(max, max->index);
-	while (max->prev)
-		prev_g(max, &ast, find_prev_max(max->prev), lex);
-	while (max->next)
-		prev_d(max, &ast, find_next_max(max->next), lex);
-	free_lexem(max);
-	free(lex);
-	saw_ast(ast, 0);
+	begin = find_op(lex);
+	create(NULL, &ast, begin, lex);
+	//saw_ast(ast, 0);
+	//exit(1);
 	exec_tree(ast, &status);
 	free_ast(ast);
 }

@@ -45,7 +45,9 @@ struct						s_body_node
 };
 
 void						gestion_fd(t_node *ast);
-t_node						*create_node(t_lexem *ptr, t_st_lexem *lex);
+t_node						*create_node(t_lexem *ptr, t_st_lexem *lex,
+										t_node **parent);
+
 int							full_leaf(t_node **node, t_node **parent_node,
 									t_node *new_node);
 void						add_node(t_node	**node, t_node **parent_node,
@@ -55,5 +57,5 @@ t_lexem						*find_op(t_st_lexem *statement);
 t_lexem						*find_next_max(t_lexem *ptr);
 t_lexem						*find_prev_max(t_lexem *ptr);
 void						exec_tree(t_node *ast, int *status);
-
+t_lexem						*rechatch_lexm(t_lexem *ptr);
 #endif

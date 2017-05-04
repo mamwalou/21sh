@@ -57,6 +57,7 @@ void					*ft_realloc(void *mem, size_t size)
 {
 	char				*buff;
 
+	buff = NULL;
 	if (mem == NULL)
 		return (malloc(size));
 	if (size <= 0)

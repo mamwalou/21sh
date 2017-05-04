@@ -16,15 +16,24 @@ void 			saw_ast(t_node *node, int indice)
 {
 	if (node != NULL)
 	{
+		if (node->parent)
+		{
+			ft_putstr("parent is;");
+			ft_putstr(node->parent->body->lexem->name_lexem);
+		}
 		if (indice == 0)
 			ft_putstr("begin;");
 		if (indice == 1)
 			ft_putstr("left;");
 		if (indice == 2)
 			ft_putstr("right;");
-		ft_putstr(">>>>>>");
+		ft_putstr("\"");
 		ft_putstr(node->body->lexem->name_lexem);
+		ft_putstr("\"");
+		ft_putstr(">>>>>>");
+		ft_putnbr(node->body->lexem->priority);
 		ft_putstr("<<<<<<");
+
 		if (node->body->lexem->option)
 		{
 			int i = 0;

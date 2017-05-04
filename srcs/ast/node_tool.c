@@ -13,32 +13,28 @@
 #include "../../includes/ast/ast.h"
 #include "../../includes/prototypage/proto.h"
 
-t_lexem			*rechatch_lexm(t_lexem *ptr, t_st_lexem *lex)
+t_lexem			*rechatch_lexm(t_lexem *ptr)
 {
-	t_lexem		*save;
-
-	save = ptr;
-	if (ptr->prev == NULL)
+	if (ptr->next != NULL)
 	{
-		ptr->next->prev = NULL;
-		lex->begin_lexem = ptr->next;
+		if (ptr->prev)
+			ptr->next->prev = ptr->prev;
+		else
+			ptr->next->prev = NULL;
 	}
-	else if (ptr->next == NULL)
+	if (ptr->prev != NULL)
 	{
-		ptr->prev->next = NULL;
-		lex->end_lexem = ptr->prev;
+		if (ptr->next)
+			ptr->prev->next = ptr->next;
+		else
+			ptr->prev->next = NULL;
 	}
-	else
-	{
-		ptr->prev->next = ptr->next;
-		ptr->next->prev = ptr->prev;
-	}
-	save->next = NULL;
-	save->prev = NULL;
-	return (save);
+	ptr->next = NULL;
+	ptr->prev = NULL;
+	return (ptr);
 }
 
-t_node			*create_node(t_lexem *ptr, t_st_lexem *lex)
+t_node			*create_node(t_lexem *ptr, t_st_lexem *lex, t_node **parent)
 {
 	t_node		*new_node;
 
@@ -46,8 +42,9 @@ t_node			*create_node(t_lexem *ptr, t_st_lexem *lex)
 	new_node->body = (t_body_node*)ft_memalloc(sizeof(t_body_node));
 	new_node->left_op = NULL;
 	new_node->right_op = NULL;
-	new_node->parent = NULL;
-	new_node->body->lexem = rechatch_lexm(ptr, lex);
+	if (parent != NULL)
+		new_node->parent = *parent;
+	new_node->body->lexem = rechatch_lexm(ptr);
 	if (new_node->body->lexem->priority > 0)
 		new_node->body->type_node = OP;
 	else
@@ -56,7 +53,7 @@ t_node			*create_node(t_lexem *ptr, t_st_lexem *lex)
 	return (new_node);
 }
 
-int				full_leaf(t_node **node, t_node **parent_node, t_node *new_node)
+/*int				full_leaf(t_node **node, t_node **parent_node, t_node *new_node)
 {
 	if (*node == NULL)
 	{
@@ -97,4 +94,4 @@ void			add_node(t_node **node, t_node **parent_node, t_node *new_node)
 		add_node(&(*node)->left_op, node, new_node);
 	else
 		add_node(&(*node)->right_op, node, new_node);
-}
+}*/

@@ -14,28 +14,27 @@
 
 static char			**push_option(char *opt, char **save, int index)
 {
-	char			**nw_opt;
+	char			**re_opt;
 	int				count;
 
 	count = 0;
-	nw_opt = (char**)malloc(sizeof(char*) * (index + 1));
-	while (count < index)
+	re_opt = (char**)malloc(sizeof(char*) * (index + 2));
+	while (save[count] != NULL)
 	{
-		nw_opt[count] = ft_strdup(save[count]);
-		free(save[count]);
+		re_opt[count] = ft_strdup(save[count]);
 		count++;
 	}
-	nw_opt[count] = ft_strdup(opt);
-	nw_opt[count + 1] = NULL;
-	free(save);
-	return (nw_opt);
+	re_opt[count] = ft_strdup(opt);
+	count++;
+	re_opt[count] = NULL;
+	return (re_opt);
 }
 
 char				**init_option(char *opt, char **save, int index)
 {
 	char			**nw_opt;
-	int				pos;
 
+	nw_opt = NULL;
 	if (index == 0)
 	{
 		nw_opt = (char**)malloc(sizeof(char*) * 2);

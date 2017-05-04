@@ -37,10 +37,12 @@ t_lexem			*find_prev_max(t_lexem *ptr)
 	max = pcr;
 	while (pcr != NULL)
 	{
-		if (max->priority <= pcr->priority)
+		if (max->priority < pcr->priority)
 			max = pcr;
 		pcr = pcr->prev;
 	}
+	if (max->priority == 0)
+		max = rechatch_lexm(ptr);
 	return (max);
 }
 
@@ -53,9 +55,11 @@ t_lexem			*find_next_max(t_lexem *ptr)
 	max = pcr;
 	while (pcr != NULL)
 	{
-		if (max->priority <= pcr->priority)
+		if (max->priority < pcr->priority)
 			max = pcr;
 		pcr = pcr->next;
 	}
+	if (max->priority == 0)
+		max = rechatch_lexm(ptr);
 	return (max);
 }

@@ -16,8 +16,18 @@ void					new_pid(t_pipe *pipe, pid_t pid)
 {
 	if (pid < 0)
 		return ;
-	MACREALLOC(pipe->list, pipe->list, ++pipe->count * sizeof(pid_t));
-	pipe->list[pipe->count - 1] = pid;
+	if (pipe->list == NULL)
+	{
+		pipe->list = (pid_t*)malloc(sizeof(char*) * 2);
+		pipe->list[0] = pid;
+		pipe->list[1] = 0;
+		pipe->count++;
+	}
+	else
+	{
+		MACREALLOC(pipe->list, pipe->list, ++pipe->count * sizeof(pid_t));
+		pipe->list[pipe->count - 1] = pid;
+	}
 }
 
 pid_t					verif_pid(t_pipe *pipe)

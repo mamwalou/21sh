@@ -117,7 +117,7 @@ int					pipe_function(t_node *ast, int *status)
 	if (!(ret = exec_pipe(&pipe, ast, status)))
 	{
 		*status = 1;
-		ft_putendl("Error Pipe");
+		ft_putendl_fd("Error Pipe", 2);
 	}
 	wait_pipe(&pipe, !ret);
 	free(pipe.list);

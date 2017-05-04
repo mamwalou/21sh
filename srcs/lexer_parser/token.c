@@ -18,7 +18,7 @@ int					define_prio(t_token token)
 		return (0);
 	else if (token == OP_PIPE)
 		return (1);
-	else if (token == OP_REDIR_LEFT || token == OP_REDIR_RIGHT)
+	else if (token == OP_REDIR_LEFT || token == OP_REDIR_RIGHT )
 		return (2);
 	else if (token == OP_SP_LOG)
 		return (3);
