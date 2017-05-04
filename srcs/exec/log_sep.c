@@ -24,12 +24,9 @@ void			exec_fonc_sep(t_node *ast, int *status)
 {
 	int			tmp;
 
+	tmp = 0;
 	exec_tree(ast->left_op, &tmp);
 	exec_tree(ast->right_op, status);
-	if (tmp == 1 && *status == 1)
-		*status = 1;
-	else
-		*status = 0;
 }
 
 void			exec_fonc_or(t_node *ast, int *status)

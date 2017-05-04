@@ -47,7 +47,7 @@ void			dash_one(char *str)
 
 	save_pwd = get_pwd();
 	chdir(str);
-	if (!search_env(g_env, "PWD="))
+/*	if (!search_env(g_env, "PWD="))
 	{
 		pwd = ft_strjoin("PWD=", get_pwd());
 		ft_lstadd(&g_env, ft_lstnew(pwd, ft_strlen(pwd)));
@@ -58,7 +58,7 @@ void			dash_one(char *str)
 	{
 		replace_env("OLDPWD=", save_pwd);
 		replace_env("PWD=", get_pwd());
-	}
+	}*/
 }
 
 void			ft_cd(char **cmd, int index)

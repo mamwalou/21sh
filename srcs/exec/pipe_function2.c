@@ -25,8 +25,10 @@ void					new_pid(t_pipe *pipe, pid_t pid)
 	}
 	else
 	{
-		MACREALLOC(pipe->list, pipe->list, ++pipe->count * sizeof(pid_t));
+		MACREALLOC(pipe->list, pipe->list, ++pipe->count + 1 * sizeof(pid_t));
 		pipe->list[pipe->count - 1] = pid;
+		pipe->list[pipe->count] = pid;
+
 	}
 }
 
