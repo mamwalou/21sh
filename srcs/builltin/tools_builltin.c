@@ -80,7 +80,7 @@ t_code			find_command(char **cmd)
 	return (NONE);
 }
 
-char			*create_var_env(t_llist *env, char *sigle, char *var)
+char			*create_var_env(char *sigle, char *var)
 {
 	char		*to_return;
 

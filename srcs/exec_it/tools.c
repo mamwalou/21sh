@@ -24,9 +24,9 @@ int						reset_fd(int fd, char *new_fd)
 char					*get_pwd(void)
 {
 	char		*pwd;
-	char		buff[BUFF_SIZE];
+	char		buff[256];
 
-	pwd = getcwd(buff, BUFF_SIZE);
+	pwd = getcwd(buff, 256);
 	return (pwd);
 }
 

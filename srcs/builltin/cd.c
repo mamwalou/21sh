@@ -17,7 +17,9 @@ void			replace_env(char *sigle, char *new)
 	char		*to_env;
 
 	clear_env(&g_env, sigle);
-	to_env = create_var_env(g_env, sigle, new);
+	ft_putendl(sigle);
+	ft_putendl(new);
+	to_env = ft_strjoin(sigle, new);
 	ft_lstadd(&g_env, ft_lstnew(to_env, ft_strlen(to_env)));
 	free(to_env);
 }
@@ -47,7 +49,7 @@ void			dash_one(char *str)
 
 	save_pwd = get_pwd();
 	chdir(str);
-/*	if (!search_env(g_env, "PWD="))
+	if (!search_env(g_env, "PWD="))
 	{
 		pwd = ft_strjoin("PWD=", get_pwd());
 		ft_lstadd(&g_env, ft_lstnew(pwd, ft_strlen(pwd)));
@@ -58,7 +60,7 @@ void			dash_one(char *str)
 	{
 		replace_env("OLDPWD=", save_pwd);
 		replace_env("PWD=", get_pwd());
-	}*/
+	}
 }
 
 void			ft_cd(char **cmd, int index)

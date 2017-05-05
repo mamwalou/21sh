@@ -51,7 +51,7 @@ pid_t					exec_left_pipe(t_pipe *pipe, t_node *left, int fd[2]);
 void					new_pid(t_pipe *pipe, pid_t pid);
 pid_t					verif_pid(t_pipe *pipe);
 
-char					*create_var_env(t_llist *env, char *sigle, char *var);
+char					*create_var_env(char *sigle, char *var);
 void					ft_get_pwd(void);
 void					ft_cd(char **cmd, int index);
 void					ft_setenv(char *name, char *value);

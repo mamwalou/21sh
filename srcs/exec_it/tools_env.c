@@ -29,25 +29,28 @@ char					*search_env(t_llist *env, const char *value)
 void					clear_env(t_llist **env, const char *value)
 {
 	t_llist				*ptr;
-	t_llist				*save;
+	t_llist				*save_after;
+	t_llist				*save_before;
 
 	ptr = *env;
-	save = ptr->next;
-	if ((ft_findstr(ptr->content, (char*)value)) == 1)
+	save_before = NULL;
+	while (ptr != NULL)
 	{
-		free(ptr);
-		*env = save;
-		(*env)->next = NULL;
-	}
-	while (ptr->next != NULL)
-	{
-		if ((ft_findstr(ptr->next->content, (char*)value)) == 1)
+		if ((ft_findstr(ptr->content, (char*)value)) == 1)
 		{
-			save = ptr->next->next;
-			free(ptr->next->content);
-			free(ptr->next);
-			ptr->next = save;
+			if (ptr->next != NULL)
+				save_after = ptr->next;
+			else
+				save_after = NULL;
+			free(ptr->content);
+			free(ptr);
+			if (save_after == NULL)
+				 save_before->next = NULL;
+			else
+				save_before->next = save_after;
+
 		}
+		save_before = ptr;
 		ptr = ptr->next;
 	}
 }
