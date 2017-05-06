@@ -36,7 +36,8 @@ typedef struct			s_pipe
 }						t_pipe;
 
 char					**get_in_env(t_llist *env, const char *str);
-t_code					find_command(char **cmd);
+int						find_command(char **cmd);
+
 t_code					ctrl_arg(char **cmd, int *pos);
 
 int						pipe_function(t_node *ast, int *status);
@@ -50,7 +51,6 @@ pid_t					exec_right_pipe(t_pipe *pipe, t_node *right, int fd[2]);
 pid_t					exec_left_pipe(t_pipe *pipe, t_node *left, int fd[2]);
 void					new_pid(t_pipe *pipe, pid_t pid);
 pid_t					verif_pid(t_pipe *pipe);
-
 char					*create_var_env(char *sigle, char *var);
 void					ft_get_pwd(void);
 void					ft_cd(char **cmd, int index);

@@ -85,7 +85,7 @@ int				is_bulltin(char *cmd)
 {
 	if (ft_strcmp(cmd, "env") == 0
 		|| ft_strcmp(cmd, "export") == 0
-		|| ft_strcmp(cmd, "unset") == 0
+		|| ft_strcmp(cmd, "unsetenv") == 0
 		|| ft_strcmp(cmd, "setenv") == 0
 		|| ft_strcmp(cmd, "cd") == 0
 		|| ft_strcmp(cmd, "exit") == 0

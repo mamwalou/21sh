@@ -35,4 +35,5 @@ void			ft_setenv(char *name, char *value)
 
 void			ft_unsetenv(char *name)
 {
+	clear_env(&g_env, name);
 }

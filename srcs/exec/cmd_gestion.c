@@ -34,11 +34,6 @@ static int			check_builltins_bis(char **cmd, int index)
 		history(cmd);
 		return (1);
 	}
-	else if (!ft_strcmp(cmd[0], "exit"))
-	{
-		ft_putendl_fd("exit_is_ok", 1);
-		exit(0);
-	}
 	return (0);
 }
 
@@ -60,6 +55,11 @@ static int			check_builltins(char **cmd, int index)
 	{
 		ft_putendl(get_pwd());
 		return (1);
+	}
+	else if (!ft_strcmp(cmd[0], "exit"))
+	{
+		ft_putendl_fd("exit_is_ok", 1);
+		exit(0);
 	}
 	else
 		return (check_builltins_bis(cmd, index));
@@ -96,7 +96,7 @@ int					exec_fct(t_node *ast, int *status)
 
 	child_pid = 0;
 	pos = 1;
-	if ((code = find_command(&ast->body->lexem->option[0])) == NONE)
+	if ((find_command(&ast->body->lexem->option[0])) > 0)
 		exec_fct2(ast->body->lexem, child_pid);
 	else
 	{

@@ -97,6 +97,7 @@ char				**convert_history(char *path_memory, int lenght);
 
 void				*ft_realloc(void *mem, size_t size);
 void				free_d(char **dtab, int lenght);
+char				**find_path(void);
 
 char				*get_pwd(void);
 int					reset_fd(int fd, char *new_fd);
