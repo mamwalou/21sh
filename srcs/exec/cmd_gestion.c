@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/13 10:31:53 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/02 12:27:13 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/07 21:31:00 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static int			check_builltins_bis(char **cmd, int index)
 
 static int			check_builltins(char **cmd, int index)
 {
+
 	if (cmd[0] == '\0')
 		return (1);
 	else if (!ft_strcmp(cmd[0], "env"))
@@ -77,6 +78,8 @@ void				exec_fct2(t_lexem *lexem, pid_t child)
 		if (!child)
 		{
 			execve(lexem->option[0], lexem->option, env);
+			free_d(env, g_memory.env_lenght);
+			free(env);
 			exit(1);
 		}
 		else if (child < 0)
@@ -84,7 +87,7 @@ void				exec_fct2(t_lexem *lexem, pid_t child)
 		else
 			wait(0);
 	}
-	free_d(env, g_memory.env_lenght - 1);
+	free_d(env, g_memory.env_lenght);
 	free(env);
 }
 
@@ -94,8 +97,8 @@ int					exec_fct(t_node *ast, int *status)
 	pid_t			child_pid;
 	int				pos;
 
-	child_pid = 0;
 	pos = 1;
+	child_pid = 0;
 	if ((find_command(&ast->body->lexem->option[0])) > 0)
 		exec_fct2(ast->body->lexem, child_pid);
 	else

@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/02 12:55:25 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/07 18:02:25 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,13 @@ int						reset_fd(int fd, char *new_fd)
 char					*get_pwd(void)
 {
 	char		*pwd;
-	char		buff[256];
+	char		*buff;
+	long		size;
 
-	pwd = getcwd(buff, 256);
+	buff = NULL;
+	size = 1024;
+	if ((buff = (char *)malloc((size_t)size)) != NULL)
+	    pwd = getcwd(buff, (size_t)size);
 	return (pwd);
 }
 
@@ -47,7 +51,8 @@ char					**copy_env(void)
 			count++;
 			ptr = ptr->next;
 		}
-		cpy[count - 1] = NULL;
+		cpy[count] = ft_strdup(ptr->content);
+		cpy[g_memory.env_lenght] = NULL;
 		return (cpy);
 	}
 	return (NULL);

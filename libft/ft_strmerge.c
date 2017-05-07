@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmove.c                                       :+:      :+:    :+:   */
+/*   ft_strmerge.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeline <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2016/10/17 17:05:15 by sbeline          ###   ########.fr       */
+/*   Created: 2017/05/07 13:12:55 by sbeline           #+#    #+#             */
+/*   Updated: 2017/05/07 13:13:03 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Includes/libft.h"
 
-void	ft_strmove(char **s, int pos)
+char	*ft_strmerge(char *a, char *b)
 {
-	char	*tmp;
+	char	*ret;
 
-	tmp = ft_strnew(ft_strlen(*s) - pos + 1, (*s + pos));
-	ft_strdel(s);
-	*s = tmp;
+	ret = ft_strjoin(a, b);
+	ft_strdel(&a);
+	ft_strdel(&b);
+	return (ret);
 }

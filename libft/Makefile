@@ -6,7 +6,7 @@
 #    By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/14 14:10:26 by sbeline           #+#    #+#              #
-#    Updated: 2017/02/01 20:03:10 by sbeline          ###   ########.fr        #
+#    Updated: 2017/05/07 13:21:08 by sbeline          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRC += ft_putendl.c ft_putendl_fd.c ft_putnbr.c ft_putnbr_fd.c
 SRC += ft_putstr.c ft_putstr_fd.c ft_strcat.c ft_strchr.c
 SRC += ft_strclr.c ft_strcmp.c ft_strcpy.c ft_strdel.c
 SRC += ft_strdup.c ft_strequ.c ft_striter.c ft_striteri.c
-SRC += ft_strjoin.c  ft_strlen.c ft_strmap.c
+SRC += ft_strjoin.c  ft_strlen.c ft_strmap.c ft_strmerge.c
 SRC += ft_strmapi.c ft_strncat.c ft_strncmp.c ft_strncpy.c
 SRC += ft_strnew.c ft_strnstr.c ft_strrchr.c ft_strsplit.c
 SRC += ft_strstr.c ft_strsub.c ft_strtrim.c
@@ -31,7 +31,7 @@ SRC += ft_tolower.c ft_toupper.c ft_list_search.c
 SRC += ft_strconct.c ft_strnb.c ft_putstr_rev.c
 SRC += ft_nbsize.c ft_lenghtwchar.c ft_lenghtstrwchar.c
 SRC += ft_printunint.c ft_lenghtunint.c ft_isdir.c
-SRC += ft_strint.c ft_stradd.c ft_strmove.c
+SRC += ft_strint.c ft_stradd.c
 SRC += ft_strtrijoin.c ft_strndup.c ft_findstr.c ft_chrstr.c
 SRC += get_next_line.c ft_occur.c
 

@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/23 14:43:41 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/02 13:10:43 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/07 21:23:55 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void			aff_history(void)
 	while ((get_next_line(fd, &buf)) > 0)
 	{
 		ft_putendl(buf);
+		free(buf);
 	}
 	free(buf);
 	close(fd);

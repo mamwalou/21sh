@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/02 12:39:19 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/07 21:23:54 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,14 @@ static char			**push_option(char *opt, char **save, int index)
 	while (save[count] != NULL)
 	{
 		re_opt[count] = ft_strdup(save[count]);
+		free(save[count]);
+		printf("re_opt[count](%p),save[count](%p)\n",re_opt[count], save[count]);
 		count++;
 	}
 	re_opt[count] = ft_strdup(opt);
 	count++;
 	re_opt[count] = NULL;
+	free(save);
 	return (re_opt);
 }
 

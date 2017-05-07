@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/02 11:22:39 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/07 12:03:02 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ char				**convert_history(char *path_memory, int lenght);
 
 void				*ft_realloc(void *mem, size_t size);
 void				free_d(char **dtab, int lenght);
-char				**find_path(void);
+char				**find_path(int *lenght);
 
 char				*get_pwd(void);
 int					reset_fd(int fd, char *new_fd);

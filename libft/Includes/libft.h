@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/02 13:01:22 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/07 19:03:19 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,21 @@
 # include <stdio.h>
 # include <termios.h>
 # include <unistd.h>
-# define BUFF_SIZE 1
 # define FILES 50
 # define REP 60
 # define LINK 70
+# define BUFF_SIZE 5122
 
+typedef struct	s_gnl
+{
+	char		*buf;
+	int			count;
+	int			i;
+	int			nl;
+	int			fd;
+}				t_gnl;
+
+int					get_next_line(int const fd, char **line);
 int					ft_strint(char *str, char *cmp);
 char				*ft_chrstr(char *str, char *find);
 int					is_dir(char *s);
@@ -111,7 +121,7 @@ char				*ft_strdup(const char *s1);
 char				*ft_strndup(char *s, int begin, int end);
 void				*ft_memalloc(size_t size);
 void				ft_memdel(void **ap);
-char				*ft_strnew(size_t size, const char *s);
+char				*ft_strnew(size_t size);
 char				*ft_stradd(char **s1, char **s2);
 void				ft_strdel(char **as);
 void				ft_strclr(char *s);
@@ -129,6 +139,7 @@ int					ft_strsplit(char ***dst, char const *s, int *t);
 int					ft_strisdigit(char *str);
 int					get_next_line(int fd, char **line);
 int					*generate(int c, int c1, int size);
+char				*ft_strmerge(char *a, char *b);
 
 typedef struct		s_llist
 {

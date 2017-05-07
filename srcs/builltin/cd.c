@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 10:27:23 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/02 10:42:01 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/07 08:57:37 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,8 @@ void			replace_env(char *sigle, char *new)
 {
 	char		*to_env;
 
-	clear_env(&g_env, sigle);
-	ft_putendl(sigle);
 	ft_putendl(new);
+	clear_env(&g_env, sigle);
 	to_env = ft_strjoin(sigle, new);
 	ft_lstadd(&g_env, ft_lstnew(to_env, ft_strlen(to_env)));
 	free(to_env);
@@ -58,6 +57,7 @@ void			dash_one(char *str)
 		ft_lstadd(&g_env, ft_lstnew(save_pwd, ft_strlen(save_pwd)));
 	else if (search_env(g_env, "OLDPWD=") && search_env(g_env, "PWD="))
 	{
+		ft_putendl(save_pwd);
 		replace_env("OLDPWD=", save_pwd);
 		replace_env("PWD=", get_pwd());
 	}

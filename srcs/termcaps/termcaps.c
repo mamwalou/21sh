@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/02 13:17:31 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/07 21:17:04 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void			bring_back_shell(struct termios *term)
 
 void			init_mv(t_win *win)
 {
+	static int	i = 0;
+
 	win->lenght_line = 0;
 	win->cursor_line = 1;
 	win->pos_history = g_memory.code_history - 1;

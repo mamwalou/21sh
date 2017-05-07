@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/02 12:51:57 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/07 21:27:51 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void				end_memory(void)
 		free(g_memory.key_ctrl);
 	if (g_memory.var == NULL)
 		ft_lstdel(&(g_memory.var), ft_bzero);
-	if (g_memory.line_mode == NULL);
+	if (g_memory.line_mode == NULL)
 		free(g_memory.line_mode);
 	if (g_memory.line_mode_tmp)
 		free(g_memory.line_mode_tmp);

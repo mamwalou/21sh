@@ -3,22 +3,21 @@
 char			**convert_history(char *path_memory, int lenght)
 {
 	char		**str;
-	char		*buf;
+	char		*line;
 	int			fd;
 	int			i;
 
 	i = 0;
-	buf = NULL;
+	line = NULL;
 	fd = open(path_memory, O_RDWR | O_CREAT | O_APPEND, 0666);
 	str = (char**)malloc(sizeof(char*) * lenght);
-	while ((get_next_line(fd, &buf)) > 0)
+	while ((get_next_line(fd, &line)) > 0)
 	{
-		str[i] = ft_strdup(buf);
+		str[i] = ft_strdup(line);
+		if (line)
+			ft_strdel(&line);
 		i++;
 	}
-	ft_putnbr(lenght);
-	ft_putchar('\n');
-	free(buf);
 	close(fd);
 	return (str);
 }

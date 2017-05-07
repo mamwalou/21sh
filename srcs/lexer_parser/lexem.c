@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/04/28 03:24:39 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/07 21:18:17 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@ t_lexem				*new_lexem(char *line)
 
 static void			option_lexem(t_st_lexem *lex, t_lexem *new)
 {
-	new->option = init_option(new->name_lexem, new->option, new->index);
-	lex->save = new;
-	new->index++;
+	if ((new->option = init_option(new->name_lexem, new->option, new->index)))
+	{
+		lex->save = new;
+		new->index++;
+	}
 }
 
 void				push_lexem(t_st_lexem *lex, t_lexem *new)

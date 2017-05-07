@@ -1,10 +1,12 @@
 #include "../../includes/exec/exec.h"
 
-int  			print_error(char *cmd, t_code code)
+int  			print_error(char *cmd, t_code code, char **path, int lenght)
 {
-	if (code = CD_CMD)
+	if (code == CD_CMD)
 		ft_putstr_fd("shell: command not found: ", 2);
 	ft_putendl_fd(cmd, 2);
+	free_d(path, lenght);
+	free(path);
 	return (-1);
 }
 
@@ -20,50 +22,52 @@ char			*ctrl_access(char **path, char *name)
 		tmp = ft_strtrijoin(path[count], "/", name);
 		if (access(tmp, X_OK) == 0)
 			return (tmp);
+		free(tmp);
 		count++;
 	}
-	free(tmp);
 	return (NULL);
 }
 
-char			**find_path(void)
+char			**find_path(int *lenght)
 {
 	char		**path;
 	int			*tableau;
-	int			lenght;
 
-	lenght = 0;
-	path = NULL;
 	tableau = generate(':', 0 , 3);
-	lenght = ft_strsplit(&path, search_env(g_env, "PATH="), tableau);
-	free(tableau);
-	if (!lenght)
+	if (!(*lenght = ft_strsplit(&path, search_env(g_env, "PATH="), tableau)))
+	{
+		free(tableau);
 		return (NULL);
+	}
+	free(tableau);
 	return (path);
 }
 
 int				find_command(char **cmd)
 {
 	char		**path;
+	int			lenght_path;
 	char		*tmp;
 
 	tmp = NULL;
+	lenght_path = 0;
 	if (is_bulltin(*cmd))
-		return (0);
+		return (1);
 	else if (access(*cmd, X_OK) == 0)
-		return (0);
-	if ((path = find_path()) == NULL)
-		return (print_error(*cmd, CD_CMD));
+		return (1);
+	if ((path = find_path(&lenght_path)) == NULL)
+		return (print_error(*cmd, CD_CMD, path, lenght_path));
 	if ((tmp = ctrl_access(path, *cmd)) == NULL)
 	{
-		free(path);
 		free(tmp);
-		return (print_error(*cmd, CD_CMD));
+		return (print_error(*cmd, CD_CMD, path, lenght_path));
 	}
 	else
 	{
-		free(path);
+		free(*cmd);
 		MACREALLOC(*cmd, tmp, ft_strlen(tmp) + 1);
 	}
+	free_d(path, lenght_path);
+	free(path);
 	return (1);
 }

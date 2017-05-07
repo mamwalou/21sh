@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/04/29 14:50:59 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/07 21:31:19 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,10 @@ void 		create(t_node **parent, t_node **ast, t_lexem *pos, t_st_lexem *lex)
 
 	prev = NULL;
 	next = NULL;
-	ft_putstr("node=");
-	ft_putstr(pos->name_lexem);
 	if (pos->next)
-	{
-		ft_putstr(" -- pos_next=");
-		next = find_next_max(pos->next);
-		ft_putstr(next->name_lexem);
-	}
+		next = find_next_max(pos->next, lex);
 	if (pos->prev)
-	{
-		ft_putstr(" -- pos_prev=");
-		prev = find_prev_max(pos->prev);
-		ft_putstr(prev->name_lexem);
-	}
-	ft_putchar('\n');
+		prev = find_prev_max(pos->prev, lex);
 	if (next && next->priority > 0)
 	{
 		pos->next->prev = NULL;

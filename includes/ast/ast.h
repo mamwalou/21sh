@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/02 11:13:56 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/07 18:29:13 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,9 @@ void						add_node(t_node	**node, t_node **parent_node,
 									t_node *new_node);
 
 t_lexem						*find_op(t_st_lexem *statement);
-t_lexem						*find_next_max(t_lexem *ptr);
-t_lexem						*find_prev_max(t_lexem *ptr);
+t_lexem						*find_prev_max(t_lexem *ptr, t_st_lexem *lex);
+t_lexem						*find_next_max(t_lexem *ptr, t_st_lexem *lex);
 void						exec_tree(t_node *ast, int *status);
-t_lexem						*rechatch_lexm(t_lexem *ptr);
+t_lexem						*rechatch_lexm(t_lexem *ptr, t_st_lexem *lex);
+
 #endif

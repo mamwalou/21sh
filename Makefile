@@ -6,7 +6,7 @@
 #    By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/17 17:09:35 by sbeline           #+#    #+#              #
-#    Updated: 2017/05/02 09:30:50 by sbeline          ###   ########.fr        #
+#    Updated: 2017/05/07 13:15:18 by sbeline          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRC_NAME += tools_line_edition.c
 SRC_NAME += termcaps.c parsing_line.c signal.c push_line.c
 SRC_NAME += depush_line.c history_termcaps.c history_tools.c autocompletion.c
 SRC_NAME += tools_for_mode.c move_cursr.c autocompletion2.c
-SRC_NAME += ast.c an_ll.c node_tool.c
+SRC_NAME += ast.c an_ll.c node_tool.c 
 SRC_NAME += exec_tree.c pipe_function.c pipe_function2.c access_gestion.c
 SRC_NAME += redirection.c cmd_gestion.c log_sep.c tools_builltin2.c
 SRC_NAME += echo.c setenv.c cd.c env.c tools_builltin.c history.c

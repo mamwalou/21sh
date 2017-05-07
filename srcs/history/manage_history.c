@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/02 12:49:47 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/07 21:12:53 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,18 @@ void				history_path(void)
 
 int					g_nb_hist(void)
 {
-	char		*buf;
+	char		*line;
 	int			fd;
 	int			count;
 
 	count = 0;
-	fd = open(g_memory.history_path, O_RDWR | O_CREAT | O_APPEND, 0666);
-	while ((get_next_line(fd, &buf)) > 0)
+	fd = open(g_memory.history_path, O_RDONLY | O_CREAT | O_APPEND, 0666);
+	while ((get_next_line(fd, &line)) > 0)
 	{
+		if (line)
+			ft_strdel(&line);
 		count++;
-		free(buf);
 	}
-	free(buf);
 	close(fd);
 	return (count);
 }
