@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/20 19:11:22 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/07 19:01:28 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/07 22:09:29 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,6 @@ t_lexem			*rechatch_lexm(t_lexem *ptr, t_st_lexem *lex)
 	}
 	ptr->next = NULL;
 	ptr->prev = NULL;
-	if (ptr->prev == NULL && ptr->next == NULL)
-	{
-		lex->end_lexem = NULL;
-		lex->begin_lexem = NULL;
-		free(lex);
-		lex = NULL;
-	}
 	return (ptr);
 }
 

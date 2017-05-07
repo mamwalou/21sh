@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/07 21:31:19 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/07 22:09:27 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ void			generate_ast(t_st_lexem *lex)
 	status = 0;
 	begin = find_op(lex);
 	create(NULL, &ast, begin, lex);
-	//saw_ast(ast, 0);
-	//exit(1);
 	exec_tree(ast, &status);
 	free_ast(ast);
 }
