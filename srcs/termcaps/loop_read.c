@@ -24,24 +24,24 @@ int			my_ctrl(int test)
 		return (1);
 }
 
-static void 		loop(t_win *win, char buffer[MAX_LEN + 4], int i, uint64_t *y)
+static void 		loop(t_win *win, char buff[MAX_LEN + 4], int i, uint64_t *y)
 {
    unsigned char	*s;
 
    i = 0;
    *y = 0;
-   if (buffer[0] != 10 && buffer[0] != 4)
+   if (buff[0] != 10 && buff[0] != 4)
    {
-	   while (buffer[i])
+	   while (buff[i])
 	   {
-		   push_line(win, (int)buffer[i]);
+		   push_line(win, (int)buff[i]);
 		   i++;
 	   }
    }
    else
    {
 	   i = 0;
-	   s = (unsigned char*)buffer;
+	   s = (unsigned char*)buff;
 	   while (i < 8)
 	   {
 		   *y += (s[i] << (8 * i));
@@ -49,6 +49,21 @@ static void 		loop(t_win *win, char buffer[MAX_LEN + 4], int i, uint64_t *y)
 	   }
 	   push_line(win, *y);
    }
+}
+
+void 			cursor_replace(t_win *win)
+{
+	ft_putnbr((win->prompt + win->lenght_line));
+	while (win->y-- > 0)
+		move_cursr(win, M_UP, 1);
+	if (win->new_x > (win->prompt + win->lenght_line))
+		while (win->new_x--)
+			move_cursr(win, M_LEFT, 1);
+	else if (win->new_x > (win->prompt + win->lenght_line))
+
+		while(win->new_x++ < (win->prompt + win->lenght_line))
+			move_cursr(win, M_RIGHT, 1);
+	win->new_x = 0;
 }
 
 void 			read_instance(t_win *win)
@@ -59,6 +74,7 @@ void 			read_instance(t_win *win)
 	z = 0;
 	y = 0;
 	ft_bzero(win->buffer, MAX_LEN + 1);
+	win->x = win->lenght_line + win->prompt;
 	while (y != 10 || (y == 10 && z != 0))
 	{
 		ft_bzero(win->buffer, MAX_LEN +1);
@@ -67,7 +83,6 @@ void 			read_instance(t_win *win)
 			;
 		else if (win->buffer[0] != RETURN)
 			loop(win, win->buffer, 0, &y);
-
 		else
 		{
 			list_to_array(win);
@@ -76,6 +91,7 @@ void 			read_instance(t_win *win)
 			return ;
 		}
 		z = (win->lenght_line > 0) ? 1 : 0;
+		if (win->y > 0 || win->new_x > 0)
+			cursor_replace(win);
 	}
-	exit(1);
 }

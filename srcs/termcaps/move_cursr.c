@@ -34,7 +34,7 @@ void			move_cursr(t_win *win, t_iter iter, int iteration)
 	}
 }
 
-void			gest_crs(t_win *win)
+int				gest_crs(t_win *win)
 {
 	if (*(unsigned int*)win->buffer == LEFT)
 	{
@@ -52,4 +52,5 @@ void			gest_crs(t_win *win)
 			move_cursr(win, M_RIGHT, 1);
 		}
 	}
+	return (1);
 }

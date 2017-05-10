@@ -21,24 +21,26 @@ void		aff_less(t_autocmp *autocmpl, t_win *win)
 	count = 0;
 	move_cursr(win, M_DOWN, 1);
 	win->y++;
+	win->new_x = 0;
 	while (autocmpl->match)
 	{
 		ft_putstr(autocmpl->match->content);
 		if (autocmpl->match->next != NULL)
 			ft_putstr("  ");
-		win->x += ft_strlen(autocmpl->match->content) + 2;
+		win->new_x += ft_strlen(autocmpl->match->content) + 2;
 		autocmpl->match = autocmpl->match->next;
 	}
 }
 
 void		aff_auto(t_autocmp *autocmpl, t_win *win)
 {
+	win->new_x = 0;
 	if (autocmpl->occurance > 5)
 	{
 		move_cursr(win, M_DOWN, 1);
 		win->y++;
 		ft_putstr("to much possibilities");
-		win->x += 21;
+		win->new_x += 21;
 	}
 	else
 		aff_less(autocmpl, win);

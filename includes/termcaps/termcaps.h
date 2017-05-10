@@ -71,6 +71,7 @@ typedef struct			s_line
 typedef struct			s_win
 {
 	int					x;
+	int					new_x;
 	int					y;
 	int					prompt;
 	int					lenght_line;
@@ -101,6 +102,7 @@ t_term					g_term;
 typedef struct			s_autocompl
 {
 	t_llist				*match;
+	int					lenght;
 	int					occurance;
 }						t_autocmp;
 

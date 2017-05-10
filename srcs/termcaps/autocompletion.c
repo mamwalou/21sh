@@ -57,15 +57,37 @@ void				binary_search(char *str, t_win *win, t_autocmp *autocmpl)
 		rsearch(str, path[i], win, autocmpl);
 		i++;
 	}
+	if (autocmpl->occurance == 1)
+		auto_push(autocmpl->match->content, win, ft_strlen(str));
+	else if (autocmpl->occurance > 1)
+		aff_auto(autocmpl, win);
 	free_d(path, lenght);
+	free(path);
+}
+
+void				folder_search(char *str, t_win *win, t_autocmp *autocmpl)
+{
+	int				lenght;
+	char			*path;
+	int				i;
+
+	i = 0;
+	if (!(path = ft_strdup(search_env(g_env, "PWD="))))
+		return ;
+	rsearch(str, path, win, autocmpl);
+	if (autocmpl->occurance == 1)
+		auto_push(autocmpl->match->content, win, ft_strlen(str));
+	else if (autocmpl->occurance > 1)
+		aff_auto(autocmpl, win);
+	if (path)
+		free(path);
 }
 
 int					autocompletion(t_win *win)
 {
 	t_autocmp		autocmpl;
-	char			*tmp;
 	char			**tmp2;
-	int				lenght;
+	char			*tmp;
 	int				*tableau;
 
 	tmp = NULL;
@@ -74,15 +96,15 @@ int					autocompletion(t_win *win)
 	autocmpl.occurance = 0;
 	tmp = lchar_list(win->begin, win->lenght_line);
 	tableau = generate(9, 32, 3);
-	lenght = ft_strsplit(&tmp2, tmp, tableau);
-	if (lenght == 0)
+	autocmpl.lenght = ft_strsplit(&tmp2, tmp, tableau);
+	if (autocmpl.lenght == 0)
 		return (1);
-	binary_search(tmp2[lenght - 1], win, &autocmpl);
-	if (autocmpl.occurance == 1)
-		auto_push(autocmpl.match->content, win, ft_strlen(tmp2[lenght - 1]));
-	else if (autocmpl.occurance > 1)
-		aff_auto(&autocmpl, win);
+	if (autocmpl.lenght > 1 && ((!operator_filters(tmp2[autocmpl.lenght - 1]) &&
+		!redirection_filters(tmp2[autocmpl.lenght - 1]))))
+		folder_search(tmp2[autocmpl.lenght - 1], win, &autocmpl);
+	else
+		binary_search(tmp2[autocmpl.lenght - 1], win, &autocmpl);
 	free(tableau);
 	ft_lstdel(&(autocmpl).match, ft_bzero);
-	free_d(tmp2, lenght);
+	free_d(tmp2, autocmpl.lenght);
 }
