@@ -30,7 +30,7 @@ int							ft_puts(int c)
 	return (0);
 }
 
-void						input(t_win *win)
+int							input(t_win *win)
 {
 	int						count;
 
@@ -39,5 +39,6 @@ void						input(t_win *win)
 		g_input[count].input != *(unsigned int*)win->buffer)
 		count++;
 	if (count != NB_INPUT)
-		g_input[count].f(win);
+		return (g_input[count].f(win));
+	return (-1);
 }

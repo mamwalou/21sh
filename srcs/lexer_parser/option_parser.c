@@ -23,7 +23,6 @@ static char			**push_option(char *opt, char **save, int index)
 	{
 		re_opt[count] = ft_strdup(save[count]);
 		free(save[count]);
-		printf("re_opt[count](%p),save[count](%p)\n",re_opt[count], save[count]);
 		count++;
 	}
 	re_opt[count] = ft_strdup(opt);

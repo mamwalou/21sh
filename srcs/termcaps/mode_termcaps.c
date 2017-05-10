@@ -13,28 +13,14 @@
 #include "../../includes/termcaps/termcaps.h"
 #include "../../includes/shell.h"
 
-t_mode		shell_mode(t_win *win)
+t_mode			shell_mode(t_win *win)
 {
-	win->x = prompt();
-	ft_bzero(win->buffer, 4);
-	while (42)
-	{
-		//handl_sig();
-		ft_bzero(win->buffer, 4);
-		read(0, win->buffer, 4);
-		if ((ft_isalnum(win->buffer[0])) == 1 || (my_ctrl(win->buffer[0])) == 1)
-			push_line(win, win->buffer[0]);
-		else
-			input(win);
-		if (*(unsigned int*)win->buffer == RETURN)
-		{
-			list_to_array(win);
-			bring_back_shell(&(g_term.terminal));
-			ft_putchar('\n');
-			return (SHELL);
-		}
-	}
-	return (ERROR);
+	int			z;
+
+	win->prompt = prompt();
+	ft_bzero(win->buffer, MAX_LEN);
+	read_instance(win);
+	return (SHELL);
 }
 
 t_mode		hered_mode(t_win *win)

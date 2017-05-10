@@ -38,10 +38,10 @@ static void		limit_depush(t_win *win)
 	}
 }
 
-void			depushline(t_win *win)
+int				depushline(t_win *win)
 {
 	if (win->cursor_line == 1)
-		return ;
+		return (1);
 	if (win->lenght_line == 1)
 	{
 		free((win->begin));
@@ -54,4 +54,5 @@ void			depushline(t_win *win)
 	win->cursor_line--;
 	move_cursr(win, M_LEFT, 1);
 	move_cursr(win, M_DEL, 1);
+	return (1);
 }

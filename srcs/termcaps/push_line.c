@@ -52,7 +52,7 @@ t_line		*nw_char(unsigned int buffer)
 	return (nw);
 }
 
-void		push_line(t_win *win, unsigned int buffer)
+int			push_line(t_win *win, unsigned int buffer)
 {
 	t_line	*nw;
 
@@ -77,4 +77,5 @@ void		push_line(t_win *win, unsigned int buffer)
 	}
 	else
 		list_line_push(nw, win);
+	return (1);
 }

@@ -14,16 +14,16 @@
 
 void			aff_history(void)
 {
-	char		*buf;
+	char		*line;
 	int			fd;
 
 	fd = open(g_memory.history_path, O_RDWR | O_CREAT | O_APPEND, 0666);
-	while ((get_next_line(fd, &buf)) > 0)
+	while ((get_next_line(fd, &line)) > 0)
 	{
-		ft_putendl(buf);
-		free(buf);
+		if (line)
+			ft_strdel(&line);
+		free(line);
 	}
-	free(buf);
 	close(fd);
 }
 

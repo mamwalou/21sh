@@ -16,7 +16,6 @@ void			replace_env(char *sigle, char *new)
 {
 	char		*to_env;
 
-	ft_putendl(new);
 	clear_env(&g_env, sigle);
 	to_env = ft_strjoin(sigle, new);
 	ft_lstadd(&g_env, ft_lstnew(to_env, ft_strlen(to_env)));
@@ -57,7 +56,6 @@ void			dash_one(char *str)
 		ft_lstadd(&g_env, ft_lstnew(save_pwd, ft_strlen(save_pwd)));
 	else if (search_env(g_env, "OLDPWD=") && search_env(g_env, "PWD="))
 	{
-		ft_putendl(save_pwd);
 		replace_env("OLDPWD=", save_pwd);
 		replace_env("PWD=", get_pwd());
 	}
@@ -73,6 +71,8 @@ void			ft_cd(char **cmd, int index)
 	{
 		if (*cmd[1] == '~')
 			go_home();
+		else if (*cmd[1] == '-' && search_env(g_env, "OLDPWD="))
+			dash_one(search_env(g_env, "OLDPWD="));
 		else if (index == 2 && is_dir(cmd[1]) == REP)
 			dash_one(cmd[1]);
 		else

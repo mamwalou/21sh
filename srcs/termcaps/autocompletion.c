@@ -60,7 +60,7 @@ void				binary_search(char *str, t_win *win, t_autocmp *autocmpl)
 	free_d(path, lenght);
 }
 
-void				autocompletion(t_win *win)
+int					autocompletion(t_win *win)
 {
 	t_autocmp		autocmpl;
 	char			*tmp;
@@ -76,7 +76,7 @@ void				autocompletion(t_win *win)
 	tableau = generate(9, 32, 3);
 	lenght = ft_strsplit(&tmp2, tmp, tableau);
 	if (lenght == 0)
-		return ;
+		return (1);
 	binary_search(tmp2[lenght - 1], win, &autocmpl);
 	if (autocmpl.occurance == 1)
 		auto_push(autocmpl.match->content, win, ft_strlen(tmp2[lenght - 1]));

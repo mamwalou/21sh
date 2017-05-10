@@ -34,9 +34,6 @@
 # define END         4610843
 # define PAGEDOWN    2117491483
 # define PAGEUP      2117425947
-# define CTRL_D      4
-# define CTRL_L      12
-# define CTRL_R      18
 # define SHIFT_LEFT  17458
 # define SHIFT_RIGHT 17202
 # define SHIFT_UP    16690
@@ -51,6 +48,7 @@
 # define CLEFT		96
 # define CRIGHT		95
 # define JTAB		100
+# define MAX_LEN	4
 
 typedef enum			e_iter
 {
@@ -72,12 +70,13 @@ typedef struct			s_line
 
 typedef struct			s_win
 {
-	int					y;
 	int					x;
+	int					y;
+	int					prompt;
 	int					lenght_line;
 	int					cursor_line;
 	int					pos_history;
-	char				buffer[BUFF_SIZE];
+	char				buffer[MAX_LEN + 1];
 	char				**hst;
 	t_line				*begin;
 	t_line				*end;
@@ -86,7 +85,7 @@ typedef struct			s_win
 typedef struct			s_input
 {
 	int					input;
-	void				(*f)(t_win *win);
+	int					(*f)(t_win *win);
 }						t_input;
 
 typedef	struct			s_term
@@ -109,7 +108,8 @@ void					termcaps(void);
 int						ft_puts(int c);
 void					bring_back_shell(struct termios *term);
 int						init_term(struct termios *term);
-void					read_display(t_win *win);
+void 					read_instance(t_win *win);
+
 
 t_mode					shell_mode(t_win *win);
 t_mode					hered_mode(t_win *win);
@@ -117,23 +117,23 @@ t_mode					quote_mode(t_win *win);
 t_mode					d_quote_mode(t_win *win);
 int						stop_her(t_line *end);
 int						stoq(t_line *end, int key);
-void					depushline(t_win *win);
-void					push_line(t_win *win, unsigned int buffer);
+int						depushline(t_win *win);
+int						push_line(t_win *win, unsigned int buffer);
 
 void					printline(t_line *begin);
 void					line_init(t_line **begin, t_line **end, t_win *win);
 void					handl_sig(void);
 
-void					input(t_win *win);
+int						input(t_win *win);
 
 char					*tabulation(char *line, t_win *win);
-void					autocompletion(t_win *win);
+int						autocompletion(t_win *win);
 void					aff_auto(t_autocmp *autocmpl, t_win *win);
 
 void					move_cursr(t_win *win, t_iter iter, int iteration);
-void					gest_crs(t_win *win);
-void					history_termcaps(t_win *win);
-void					dhistory_termcaps(t_win *win);
+int						gest_crs(t_win *win);
+int						history_termcaps(t_win *win);
+int						dhistory_termcaps(t_win *win);
 
 void					list_to_array(t_win *win);
 void					list_lchar(char *str, t_win *win);

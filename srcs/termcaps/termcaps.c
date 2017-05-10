@@ -28,6 +28,7 @@ void			init_mv(t_win *win)
 	win->pos_history = g_memory.code_history - 1;
 	win->y = 0;
 	win->x = 0;
+	win->prompt = 0;
 	win->begin = NULL;
 	win->end = NULL;
 	win->hst = NULL;

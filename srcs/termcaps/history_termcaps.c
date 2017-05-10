@@ -13,7 +13,7 @@
 #include "../../includes/termcaps/termcaps.h"
 #include "../../includes/shell.h"
 
-void			dhistory_termcaps(t_win *win)
+int				dhistory_termcaps(t_win *win)
 {
 	int			i;
 
@@ -27,9 +27,10 @@ void			dhistory_termcaps(t_win *win)
 	move_cursr(win, DELETING, win->cursor_line);
 	list_lchar(win->hst[win->pos_history], win);
 	win->pos_history--;
+	return (1);
 }
 
-void			history_termcaps(t_win *win)
+int				history_termcaps(t_win *win)
 {
 	int			i;
 
@@ -43,4 +44,5 @@ void			history_termcaps(t_win *win)
 	move_cursr(win, DELETING, win->cursor_line);
 	list_lchar(win->hst[win->pos_history], win);
 	win->pos_history++;
+	return (1);
 }

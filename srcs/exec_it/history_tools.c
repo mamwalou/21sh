@@ -18,6 +18,7 @@ char			**convert_history(char *path_memory, int lenght)
 			ft_strdel(&line);
 		i++;
 	}
+
 	close(fd);
 	return (str);
 }

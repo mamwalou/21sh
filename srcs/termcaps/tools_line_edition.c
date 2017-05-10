@@ -56,14 +56,16 @@ void			list_to_array(t_win *win)
 void			list_lchar(char *str, t_win *win)
 {
 	int 		i;
+	int			y;
 
 	i = 0;
-	while (str[i] && str[i] != ';')
-		i++;
-	i++;
+	y = 0;
+	while (str[y++])
+		if (str[y] == ';')
+			i = y + 1;
 	while (str[i])
 	{
-			push_line(win, str[i]);
+		push_line(win, str[i]);
 		i++;
 	}
 }

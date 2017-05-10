@@ -44,7 +44,7 @@ char					**copy_env(void)
 	if (g_env != NULL)
 	{
 		ptr = g_env;
-		cpy = (char**)malloc(sizeof(char*) * g_memory.env_lenght);
+		cpy = (char**)malloc(sizeof(char*) * g_memory.env_lenght + 1);
 		while (count < g_memory.env_lenght - 1)
 		{
 			cpy[count] = ft_strdup(ptr->content);
