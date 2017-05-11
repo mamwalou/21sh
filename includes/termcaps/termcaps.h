@@ -79,6 +79,7 @@ typedef struct			s_win
 	int					pos_history;
 	char				buffer[MAX_LEN + 1];
 	char				**hst;
+	unsigned int		repetition;
 	t_line				*begin;
 	t_line				*end;
 }						t_win;
@@ -104,6 +105,7 @@ typedef struct			s_autocompl
 	t_llist				*match;
 	int					lenght;
 	int					occurance;
+	int					max_word;
 }						t_autocmp;
 
 void					termcaps(void);

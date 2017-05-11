@@ -27,7 +27,10 @@ void				rsearch(char *str, char *trep, t_win *win, t_autocmp *autc)
 {
 	struct dirent	*files;
 	DIR				*rep;
+	int				lenght;
 
+	lenght = 0;
+	autocmpl->max_word = 0;
 	if (!(rep = opendir(trep)))
 		return ;
 	while ((files = readdir(rep)) != NULL)
@@ -35,10 +38,13 @@ void				rsearch(char *str, char *trep, t_win *win, t_autocmp *autc)
 		if (!ft_strncmp(str, files->d_name, ft_strlen(str)))
 		{
 			autc->occurance++;
-			ft_lstadd(&(autc)->match, ft_lstnew(files->d_name,
-						ft_strlen(files->d_name)));
+			lenght = ft_strlen(files->d_name);
+			ft_lstadd(&(autc)->match, ft_lstnew(files->d_name, lenght));
+			if (lenght > autocmpl->max_word)
+				autocmpl->max_word = lenght;
 		}
 	}
+	autocmpl->max_word += 2;
 	closedir(rep);
 }
 

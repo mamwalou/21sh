@@ -53,17 +53,18 @@ static void 		loop(t_win *win, char buff[MAX_LEN + 4], int i, uint64_t *y)
 
 void 			cursor_replace(t_win *win)
 {
-	ft_putnbr((win->prompt + win->lenght_line));
+	/*ft_putnbr((win->prompt + win->cursor_line));
+	ft_putchar('\n');
+	ft_putnbr(win->new_x);*/
 	while (win->y-- > 0)
 		move_cursr(win, M_UP, 1);
-	if (win->new_x > (win->prompt + win->lenght_line))
+	if (win->new_x > (win->prompt + win->cursor_line))
 		while (win->new_x--)
 			move_cursr(win, M_LEFT, 1);
-	else if (win->new_x > (win->prompt + win->lenght_line))
-
-		while(win->new_x++ < (win->prompt + win->lenght_line))
+	else if (win->new_x < (win->prompt + win->cursor_line))
+		while(win->new_x++ < (win->prompt + win->cursor_line))
 			move_cursr(win, M_RIGHT, 1);
-	win->new_x = 0;
+	win->new_x = 1;
 }
 
 void 			read_instance(t_win *win)
@@ -74,9 +75,9 @@ void 			read_instance(t_win *win)
 	z = 0;
 	y = 0;
 	ft_bzero(win->buffer, MAX_LEN + 1);
-	win->x = win->lenght_line + win->prompt;
 	while (y != 10 || (y == 10 && z != 0))
 	{
+		handl_sig();
 		ft_bzero(win->buffer, MAX_LEN +1);
 		read(0, win->buffer, MAX_LEN);
 		if (input(win) > 0)
@@ -91,7 +92,7 @@ void 			read_instance(t_win *win)
 			return ;
 		}
 		z = (win->lenght_line > 0) ? 1 : 0;
-		if (win->y > 0 || win->new_x > 0)
+		if (win->y > 0 || win->new_x > 1)
 			cursor_replace(win);
 	}
 }

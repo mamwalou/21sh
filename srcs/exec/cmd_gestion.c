@@ -12,6 +12,16 @@
 
 #include "../../includes/exec/exec.h"
 
+static int			check_builltins_tris(char **cmd, int index)
+{
+	if (!ft_strcmp(cmd[0], "export"))
+	{
+		ft_unsetenv(cmd[1]);
+		return (1);
+	}
+	return (0);
+}
+
 static int			check_builltins_bis(char **cmd, int index)
 {
 	if (!ft_strcmp(cmd[0], "unsetenv"))
@@ -34,7 +44,7 @@ static int			check_builltins_bis(char **cmd, int index)
 		history(cmd);
 		return (1);
 	}
-	return (0);
+	return (check_builltins_bis(cmd, index));
 }
 
 static int			check_builltins(char **cmd, int index)
