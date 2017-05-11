@@ -15,10 +15,7 @@
 
 t_mode			shell_mode(t_win *win)
 {
-	int			z;
-
 	win->prompt = prompt();
-	ft_bzero(win->buffer, MAX_LEN);
 	read_instance(win);
 	return (SHELL);
 }

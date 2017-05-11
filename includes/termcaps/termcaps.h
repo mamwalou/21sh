@@ -132,6 +132,7 @@ int						input(t_win *win);
 
 char					*tabulation(char *line, t_win *win);
 int						autocompletion(t_win *win);
+void					auto_push(char *str, t_win *win, int pos);
 void					aff_auto(t_autocmp *autocmpl, t_win *win);
 
 void					move_cursr(t_win *win, t_iter iter, int iteration);

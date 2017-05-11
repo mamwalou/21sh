@@ -14,36 +14,37 @@
 #include "../../includes/shell.h"
 #include "../../includes/lexer_parser/lexer_parser.h"
 
-void		aff_less(t_autocmp *autocmpl, t_win *win)
+void				auto_push(char *str, t_win *win, int pos)
 {
-	int		count;
-
-	count = 0;
-	move_cursr(win, M_DOWN, 1);
-	win->y++;
-	while (autocmpl->match)
+	while (str[pos])
 	{
-		ft_putstr(autocmpl->match->content);
-
+		push_line(win, str[pos]);
+		pos++;
 	}
-	win->new_x -= 2;
 }
 
 void		aff_auto(t_autocmp *autocmpl, t_win *win)
 {
-	int		x;
-	int		y;
+	int		count;
+	t_llist	*ptr;
 
-	while (autocmpl->match)
+	count = 0;
+	ptr = autocmpl->match;
+	move_cursr(win, M_DOWN, 1);
+	while (ptr)
 	{
-		ft_putstr(autocmpl->match->content);
-		if (autocmpl->match->next != NULL)
-		{
-			win->new_x += 2;
+		ft_putstr(ptr->content);
+		if (ptr->next != NULL)
 			ft_putstr("  ");
+		if (count >= g_term.apt.ws_row)
+		{
+			move_cursr(win, M_DOWN, 1);
+			count = 0;
 		}
-		win->new_x += ft_strlen(autocmpl->match->content);
-		autocmpl->match = autocmpl->match->next;
+		count += ft_strlen(autocmpl->match->content);
+		ptr = ptr->next;
 	}
-
+	move_cursr(win, M_DOWN, 1);
+	prompt();
+	printline(win->begin);
 }

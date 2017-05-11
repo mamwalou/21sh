@@ -44,7 +44,7 @@ static int			check_builltins_bis(char **cmd, int index)
 		history(cmd);
 		return (1);
 	}
-	return (check_builltins_bis(cmd, index));
+	return (check_builltins_tris(cmd, index));
 }
 
 static int			check_builltins(char **cmd, int index)

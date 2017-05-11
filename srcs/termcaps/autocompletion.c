@@ -14,23 +14,12 @@
 #include "../../includes/shell.h"
 #include "../../includes/lexer_parser/lexer_parser.h"
 
-void				auto_push(char *str, t_win *win, int pos)
-{
-	while (str[pos])
-	{
-		push_line(win, str[pos]);
-		pos++;
-	}
-}
-
 void				rsearch(char *str, char *trep, t_win *win, t_autocmp *autc)
 {
 	struct dirent	*files;
 	DIR				*rep;
-	int				lenght;
 
-	lenght = 0;
-	autocmpl->max_word = 0;
+	autc->max_word = 0;
 	if (!(rep = opendir(trep)))
 		return ;
 	while ((files = readdir(rep)) != NULL)
@@ -38,14 +27,53 @@ void				rsearch(char *str, char *trep, t_win *win, t_autocmp *autc)
 		if (!ft_strncmp(str, files->d_name, ft_strlen(str)))
 		{
 			autc->occurance++;
-			lenght = ft_strlen(files->d_name);
-			ft_lstadd(&(autc)->match, ft_lstnew(files->d_name, lenght));
-			if (lenght > autocmpl->max_word)
-				autocmpl->max_word = lenght;
+			ft_lstadd(&(autc)->match, ft_lstnew(files->d_name,
+						ft_strlen(files->d_name)));
 		}
 	}
-	autocmpl->max_word += 2;
 	closedir(rep);
+}
+
+void				sawfolder(t_win *win, char *path, t_autocmp *autc)
+{
+	struct dirent	*files;
+	DIR				*rep;
+
+	autc->max_word = 0;
+	if (!(rep = opendir(path)))
+		return ;
+	while ((files = readdir(rep)) != NULL)
+	{
+		autc->occurance++;
+		ft_lstadd(&(autc)->match, ft_lstnew(files->d_name,
+					ft_strlen(files->d_name)));
+	}
+	if (win->end->l_char != '/')
+		push_line(win, '/');
+	closedir(rep);
+}
+
+void				folder_search(char *str, t_win *win, t_autocmp *autocmpl)
+{
+	char			*path;
+	int				i;
+
+	i = 0;
+	path = NULL;
+	if (is_dir(str) == REP)
+		sawfolder(win, str, autocmpl);
+	else
+	{
+		if (!(path = ft_strdup(get_pwd())))
+			return ;
+		rsearch(str, path, win, autocmpl);
+	}
+	if (autocmpl->occurance == 1)
+		auto_push(autocmpl->match->content, win, ft_strlen(str));
+	else if (autocmpl->occurance > 1)
+		aff_auto(autocmpl, win);
+	if (path)
+		free(path);
 }
 
 void				binary_search(char *str, t_win *win, t_autocmp *autocmpl)
@@ -71,23 +99,6 @@ void				binary_search(char *str, t_win *win, t_autocmp *autocmpl)
 	free(path);
 }
 
-void				folder_search(char *str, t_win *win, t_autocmp *autocmpl)
-{
-	int				lenght;
-	char			*path;
-	int				i;
-
-	i = 0;
-	if (!(path = ft_strdup(search_env(g_env, "PWD="))))
-		return ;
-	rsearch(str, path, win, autocmpl);
-	if (autocmpl->occurance == 1)
-		auto_push(autocmpl->match->content, win, ft_strlen(str));
-	else if (autocmpl->occurance > 1)
-		aff_auto(autocmpl, win);
-	if (path)
-		free(path);
-}
 
 int					autocompletion(t_win *win)
 {
@@ -105,7 +116,8 @@ int					autocompletion(t_win *win)
 	autocmpl.lenght = ft_strsplit(&tmp2, tmp, tableau);
 	if (autocmpl.lenght == 0)
 		return (1);
-	if (autocmpl.lenght > 1 && ((!operator_filters(tmp2[autocmpl.lenght - 1]) &&
+	if (win->end->l_char == ' ' || autocmpl.lenght > 1 &&
+		((!operator_filters(tmp2[autocmpl.lenght - 1]) &&
 		!redirection_filters(tmp2[autocmpl.lenght - 1]))))
 		folder_search(tmp2[autocmpl.lenght - 1], win, &autocmpl);
 	else
