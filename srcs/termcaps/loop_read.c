@@ -75,6 +75,7 @@ void 			read_instance(t_win *win)
 	ft_bzero(win->buffer, MAX_LEN + 1);
 	while (y != 10 || (y == 10 && z != 0))
 	{
+		handl_sig();
 		ft_bzero(win->buffer, MAX_LEN +1);
 		read(0, win->buffer, MAX_LEN);
 		if (input(win) > 0)

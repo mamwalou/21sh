@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/20 19:11:22 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/07 22:09:29 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/12 21:01:23 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,46 +52,3 @@ t_node			*create_node(t_lexem *ptr, t_st_lexem *lex, t_node **parent)
 	new_node->body->fd = 1;
 	return (new_node);
 }
-
-/*int				full_leaf(t_node **node, t_node **parent_node, t_node *new_node)
-{
-	if (*node == NULL)
-	{
-		new_node->parent = *parent_node;
-		*node = new_node;
-		return (1);
-	}
-	if ((*node)->body->type_node != LEAF)
-	{
-		if ((*node)->left_op != NULL)
-			if ((full_leaf(&(*node)->left_op, node, new_node)) == 1)
-				return (1);
-		if ((*node)->left_op == NULL)
-			if ((full_leaf(&(*node)->left_op, node, new_node)) == 1)
-				return (1);
-		if ((*node)->right_op != NULL)
-			if ((full_leaf(&(*node)->right_op, node, new_node)) == 1)
-				return (1);
-		if ((*node)->right_op == NULL)
-			if ((full_leaf(&(*node)->right_op, node, new_node)) == 1)
-				return (1);
-	}
-	return (0);
-}
-
-void			add_node(t_node **node, t_node **parent_node, t_node *new_node)
-{
-	if (*node == NULL)
-	{
-		new_node->parent = *parent_node;
-		*node = new_node;
-		return ;
-	}
-	else if ((*node)->body->lexem->priority == new_node->body->lexem->priority)
-		add_node(&(*node)->left_op, node, new_node);
-	else if ((*node)->left_op == NULL ||
-			new_node->body->lexem->priority < (*node)->body->lexem->priority)
-		add_node(&(*node)->left_op, node, new_node);
-	else
-		add_node(&(*node)->right_op, node, new_node);
-}*/

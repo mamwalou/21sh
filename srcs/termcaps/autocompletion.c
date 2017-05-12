@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 09:28:41 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/12 19:47:44 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/12 20:54:50 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,8 @@ int					autocompletion(t_win *win)
 	tmp2 = NULL;
 	autocmpl.match = NULL;
 	autocmpl.occurance = 0;
+	if (!search_env(g_env, "PATH="))
+		return (1);
 	tmp = lchar_list(win->begin, win->lenght_line);
 	tableau = generate(9, 32, 3);
 	autocmpl.lenght = ft_strsplit(&tmp2, tmp, tableau);

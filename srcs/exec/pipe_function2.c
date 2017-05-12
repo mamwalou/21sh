@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 10:58:06 by sbeline           #+#    #+#             */
-/*   Updated: 2017/04/20 19:39:30 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/12 22:52:06 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,8 @@ void					new_pid(t_pipe *pipe, pid_t pid)
 	}
 	else
 	{
-		MACREALLOC(pipe->list, pipe->list, ++pipe->count + 1 * sizeof(pid_t));
+		MACREALLOC(pipe->list, pipe->list, ++pipe->count * sizeof(pid_t));
 		pipe->list[pipe->count - 1] = pid;
-		pipe->list[pipe->count] = pid;
-
 	}
 }
 
