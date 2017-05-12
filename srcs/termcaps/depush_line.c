@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 17:31:36 by sbeline           #+#    #+#             */
-/*   Updated: 2017/04/29 15:39:33 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/12 14:48:18 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,21 @@ static void		limit_depush(t_win *win)
 
 int				depushline(t_win *win)
 {
+	t_line		*save;
+
 	if (win->cursor_line == 1)
 		return (1);
-	if (win->lenght_line == 1)
+	else if (win->lenght_line == 1)
 	{
 		free((win->begin));
 		win->begin = NULL;
 		win->end = NULL;
+	}
+	else if (win->cursor_line == 2)
+	{
+		save = win->begin->next;
+		free(win->begin);
+		win->begin = save;
 	}
 	else
 		limit_depush(win);

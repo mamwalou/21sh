@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/02 12:51:55 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/12 19:47:46 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,8 @@ char					*tabulation(char *line, t_win *win);
 int						autocompletion(t_win *win);
 void					auto_push(char *str, t_win *win, int pos);
 void					aff_auto(t_autocmp *autocmpl, t_win *win);
+int						home(t_win *win);
+int						end(t_win *win);
 
 void					move_cursr(t_win *win, t_iter iter, int iteration);
 int						gest_crs(t_win *win);

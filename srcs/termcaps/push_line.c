@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 17:27:30 by sbeline           #+#    #+#             */
-/*   Updated: 2017/04/23 20:25:47 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/12 18:17:12 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ void		list_line_push(t_line *nw, t_win *win)
 	{
 		while (++i != win->cursor_line - 1)
 			ptr = ptr->next;
-		save = ptr;
+		save = ptr->next;
 		nw->next = ptr->next;
-		save->next = nw;
 		nw->prev = ptr;
+		save->prev = nw;
+		ptr->next = nw;
 	}
 	else
 	{

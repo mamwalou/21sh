@@ -6,29 +6,33 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/23 14:43:41 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/07 21:23:55 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/12 18:50:29 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/exec/exec.h"
 
-void			aff_history(void)
+void			aff_history(char **history, int lenght)
 {
-	char		*line;
-	int			fd;
+	int			i;
 
-	fd = open(g_memory.history_path, O_RDWR | O_CREAT | O_APPEND, 0666);
-	while ((get_next_line(fd, &line)) > 0)
+	i = 0;
+	if (lenght > 10)
+		i = lenght - 10;
+	while (i < lenght)
 	{
-		if (line)
-			ft_strdel(&line);
-		free(line);
+		ft_putendl(history[i]);
+		i++;
 	}
-	close(fd);
 }
 
 void			history(char **cmd)
 {
+	char		**history;
+
+	history = convert_history(g_memory.history_path, g_memory.code_history);
 	if (!ft_strcmp(cmd[0], "history"))
-		aff_history();
+		aff_history(history ,g_memory.code_history);
+	free_d(history, g_memory.code_history);
+	free(history);
 }

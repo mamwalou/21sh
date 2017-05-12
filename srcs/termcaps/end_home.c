@@ -1,20 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   end_home.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/12 18:59:48 by sbeline          ###   ########.fr       */
+/*   Created: 2017/05/12 13:56:37 by sbeline           #+#    #+#             */
+/*   Updated: 2017/05/12 15:15:27 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Includes/libft.h"
+#include "../../includes/termcaps/termcaps.h"
+#include "../../includes/shell.h"
 
-void	ft_lstdelone(t_llist **alst, void (*del)(void*, size_t))
+int						end(t_win *win)
 {
-	if (*alst)
-		(*del)((*alst)->content, (*alst)->content_size);
-	ft_memdel((void**)alst);
+	while (win->cursor_line < win->lenght_line + 1)
+	{
+		win->cursor_line++;
+		move_cursr(win, M_RIGHT, 1);
+	}
+	return (1);
+}
+
+int						home(t_win *win)
+{
+	while (win->cursor_line > 1)
+	{
+		win->cursor_line--;
+		move_cursr(win, M_LEFT, 1);
+	}
+	return (1);
 }

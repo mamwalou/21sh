@@ -22,6 +22,7 @@ int			my_ctrl(int test)
 		|| test == ' '
 		|| test == '!')
 		return (1);
+	return (0);
 }
 
 static void 		loop(t_win *win, char buff[MAX_LEN + 4], int i, uint64_t *y)
@@ -53,9 +54,6 @@ static void 		loop(t_win *win, char buff[MAX_LEN + 4], int i, uint64_t *y)
 
 void 			cursor_replace(t_win *win)
 {
-	/*ft_putnbr((win->prompt + win->cursor_line));
-	ft_putchar('\n');
-	ft_putnbr(win->new_x);*/
 	while (win->y-- > 0)
 		move_cursr(win, M_UP, 1);
 	if (win->new_x > (win->prompt + win->cursor_line))

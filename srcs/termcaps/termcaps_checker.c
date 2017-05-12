@@ -6,16 +6,18 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/02 10:58:28 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/12 18:23:53 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/termcaps/termcaps.h"
 #include "../../includes/shell.h"
-#define NB_INPUT 6
+#define NB_INPUT 8
 
 static const t_input		g_input[NB_INPUT] =
 {
+	{HOME, home},
+	{END, end},
 	{DELETE, depushline},
 	{TAB, autocompletion},
 	{LEFT, gest_crs},
