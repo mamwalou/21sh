@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 16:45:53 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/15 03:50:53 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/15 17:39:42 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int						find_command(char **cmd);
 
 t_code					ctrl_arg(char **cmd, int *pos);
 
-
 int						set_varible(t_node *ast, int *status);
 int						pipe_function(t_node *ast, int *status);
 int						logique_fonction(t_node *ast, int *status);
@@ -59,8 +58,7 @@ void					ft_get_pwd(void);
 void					ft_cd(char **cmd, int index);
 void					ft_setenv(char *name, char *value);
 void					history(char **cmd);
-void 					ft_export(char *cmd, char *arg);
-
+void					ft_export(char *cmd, char *arg);
 void					ft_unsetenv(char *name);
 void					ft_echo(char *cmd);
 void					fnc_exit();

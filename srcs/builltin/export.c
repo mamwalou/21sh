@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/15 03:13:05 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/15 07:44:11 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/15 17:01:37 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ int					set_varible(t_node *ast, int *status)
 		g_memory.var_lenght++;
 	}
 	else
-		replace_env(g_memory.variable, sigle, name, &(g_memory).var_lenght);
+		replace_env(&g_memory.variable, sigle, name, &(g_memory).var_lenght);
 	free(sigle);
 	free(name);
 	return (1);
 }
 
-static void 		exp_env(char *str)
+static void			exp_env(char *str)
 {
 	t_llist			*ptr;
 	t_llist			*save;
@@ -64,15 +64,20 @@ static void 		exp_env(char *str)
 	}
 }
 
-static void 		export_env(char *str)
+static void			export_env(char *str)
 {
 	char			*sigle;
 	char			*name;
 	int				count;
 
 	count = 0;
-	while (str[count] != '=')
+	while (str[count] && str[count] != '=')
 		count++;
+	if (!str[count])
+	{
+		exp_env(str);
+		return ;
+	}
 	sigle = ft_strndup(str, 0, count + 1);
 	name = ft_strdup(str + count + 1);
 	if ((find_varibale(str, '=')) > 0)
@@ -82,14 +87,12 @@ static void 		export_env(char *str)
 		ft_lstadd(&g_env, ft_lstnew(str, ft_strlen(str)));
 	}
 	else if ((search_env(g_env, str)) == NULL)
-		replace_env(g_env, sigle, name, &(g_memory).env_lenght);
-	else
-		exp_env(str);
+		replace_env(&g_env, sigle, name, &(g_memory).env_lenght);
 	free(sigle);
 	free(name);
 }
 
-void 				ft_export(char *cmd, char *arg)
+void				ft_export(char *cmd, char *arg)
 {
 	if (!arg)
 		saw_varible();

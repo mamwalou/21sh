@@ -6,11 +6,18 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 17:27:30 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/14 16:08:36 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/15 17:01:19 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/termcaps/termcaps.h"
+
+void		i_need_place(t_line *nw, t_win *win)
+{
+	nw->next = win->begin;
+	(win->begin)->prev = nw;
+	win->begin = nw;
+}
 
 void		list_line_push(t_line *nw, t_win *win)
 {
@@ -31,11 +38,7 @@ void		list_line_push(t_line *nw, t_win *win)
 		ptr->next = nw;
 	}
 	else
-	{
-		nw->next = win->begin;
-		(win->begin)->prev = nw;
-		win->begin = nw;
-	}
+		i_need_place(nw, win);
 	printline(nw);
 	win->lenght_line++;
 	win->cursor_line++;

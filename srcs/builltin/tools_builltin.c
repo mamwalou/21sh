@@ -6,40 +6,20 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/21 14:48:42 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/15 07:44:14 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/15 15:10:29 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/exec/exec.h"
 
-void 		free_mai(t_llist **env,t_llist *ptr, t_llist *saveb, t_llist *save)
-{
-	if (saveb == NULL)
-	{
-		free(ptr->content);
-		free(ptr);
-		if (ptr->next != NULL)
-			(*env)->next = save;
-		else
-			*env = NULL;
-		return ;
-	}
-	if (save != NULL && saveb != NULL)
-		saveb->next = save;
-	else if (save == NULL && saveb)
-		saveb->next = NULL;
-	free(ptr->content);
-	free(ptr);
-}
-
-void			replace_env(t_llist *list, char *sigle, char *new, int *lenght)
+void			replace_env(t_llist **list, char *sigle, char *new, int *lenght)
 {
 	char		*to_env;
 
-	clear_env(&list, sigle, lenght);
+	clear_env(list, sigle, lenght);
 	to_env = ft_strjoin(sigle, new);
-	ft_lstadd(&list, ft_lstnew(to_env, ft_strlen(to_env)));
-	g_memory.env_lenght++;
+	ft_lstadd(list, ft_lstnew(to_env, ft_strlen(to_env)));
+	*lenght += 1;
 	free(to_env);
 }
 

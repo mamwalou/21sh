@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/13 10:31:53 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/15 05:43:45 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/15 20:28:54 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ static int			check_builltins_bis(char **cmd, int index)
 
 static int			check_builltins(char **cmd, int index)
 {
-
 	if (cmd[0] == '\0')
 		return (1);
 	else if (!ft_strcmp(cmd[0], "env"))

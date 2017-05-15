@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/14 17:13:41 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/15 17:41:38 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,7 @@ void					termcaps(void);
 int						ft_puts(int c);
 void					bring_back_shell(struct termios *term);
 int						init_term(struct termios *term);
-void 					read_instance(t_win *win);
-
+void					read_instance(t_win *win);
 
 t_mode					shell_mode(t_win *win);
 t_mode					hered_mode(t_win *win);
@@ -135,6 +134,9 @@ int						input(t_win *win);
 
 char					*tabulation(char *line, t_win *win);
 int						autocompletion(t_win *win);
+void					rsearch(char *str, char *trep, t_win *win,
+								t_autocmp *autc);
+void					remove_autc(t_autocmp *autocmp);
 void					auto_push(char *str, t_win *win, int pos);
 void					aff_auto(t_autocmp *autocmpl, t_win *win);
 int						home(t_win *win);

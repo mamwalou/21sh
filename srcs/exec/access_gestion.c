@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   access_gestion.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/15 16:36:53 by sbeline           #+#    #+#             */
+/*   Updated: 2017/05/15 16:37:46 by sbeline          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/exec/exec.h"
 
-int  			print_error(char *cmd, t_code code, char **path, int lenght)
+int				print_error(char *cmd, t_code code, char **path, int lenght)
 {
 	if (code == CD_CMD)
 		ft_putstr_fd("shell: command not found: ", 2);
@@ -33,7 +45,7 @@ char			**find_path(int *lenght)
 	char		**path;
 	int			*tableau;
 
-	tableau = generate(':', 0 , 3);
+	tableau = generate(':', 0, 3);
 	if (!(*lenght = ft_strsplit(&path, search_env(g_env, "PATH="), tableau)))
 	{
 		free(tableau);

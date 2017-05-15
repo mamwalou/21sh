@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/15 03:54:23 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/15 16:33:55 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void		free_ast(t_node *ast)
 	free(ast);
 }
 
-void 		create(t_node **parent, t_node **ast, t_lexem *pos, t_st_lexem *lex)
+void		create(t_node **parent, t_node **ast, t_lexem *pos, t_st_lexem *lex)
 {
 	t_lexem	*prev;
 	t_lexem	*next;
@@ -50,7 +50,7 @@ void 		create(t_node **parent, t_node **ast, t_lexem *pos, t_st_lexem *lex)
 	}
 }
 
-void			generate_ast(t_st_lexem *lex)
+void		generate_ast(t_st_lexem *lex)
 {
 	t_node	*ast;
 	t_lexem	*begin;

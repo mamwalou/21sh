@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 09:30:05 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/15 07:55:15 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/15 16:53:16 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void			list_to_array(t_win *win)
 
 void			list_lchar(char *str, t_win *win)
 {
-	int 		i;
+	int			i;
 	int			y;
 
 	y = 0;

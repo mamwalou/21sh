@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/15 01:29:01 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/15 16:42:45 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int					define_prio(t_token token)
 		return (0);
 	else if (token == OP_PIPE)
 		return (1);
-	else if (token == OP_REDIR_LEFT || token == OP_REDIR_RIGHT )
+	else if (token == OP_REDIR_LEFT || token == OP_REDIR_RIGHT)
 		return (2);
 	else if (token == OP_SP_LOG)
 		return (3);

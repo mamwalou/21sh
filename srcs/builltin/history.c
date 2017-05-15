@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/23 14:43:41 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/15 07:44:13 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/15 16:34:34 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void			history(char **cmd)
 		return ;
 	history = convert_history();
 	if (!ft_strcmp(cmd[0], "history"))
-		aff_history(history ,g_memory.code_history);
+		aff_history(history, g_memory.code_history);
 	free_d(history, g_memory.code_history);
 	free(history);
 }

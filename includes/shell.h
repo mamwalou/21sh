@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/15 07:44:29 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/15 17:40:58 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ t_llist				*my_setenv();
 char				**my_env(t_llist *env);
 int					unenv(char *unset, t_llist *env);
 int					env_collapse(t_llist *env, const char *value);
-void				replace_env(t_llist *list, char *sigle, char *new, int *lenght);
+void				replace_env(t_llist **list, char *sigle, char *new,
+								int *lenght);
 
 void				init_memory(void);
 void				push_history(void);
@@ -103,7 +104,7 @@ char				**find_path(int *lenght);
 char				*get_pwd(void);
 int					reset_fd(int fd, char *new_fd);
 int					find_varibale(char *str, char c);
-void 				free_mai(t_llist **env,t_llist *ptr, t_llist *saveb,
+void				free_mai(t_llist **env, t_llist *ptr, t_llist *sb,
 								t_llist *save);
 
 void				print_env(void);

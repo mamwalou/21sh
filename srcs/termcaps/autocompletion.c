@@ -6,33 +6,13 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 09:28:41 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/15 07:55:10 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/15 16:50:54 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/termcaps/termcaps.h"
 #include "../../includes/shell.h"
 #include "../../includes/lexer_parser/lexer_parser.h"
-
-void				rsearch(char *str, char *trep, t_win *win, t_autocmp *autc)
-{
-	struct dirent	*files;
-	DIR				*rep;
-
-	autc->max_word = 0;
-	if (!(rep = opendir(trep)))
-		return ;
-	while ((files = readdir(rep)) != NULL)
-	{
-		if (!ft_strncmp(str, files->d_name, ft_strlen(str)))
-		{
-			autc->occurance++;
-			ft_lstadd(&(autc)->match, ft_lstnew(files->d_name,
-						ft_strlen(files->d_name)));
-		}
-	}
-	closedir(rep);
-}
 
 void				sawfolder(t_win *win, char *path, t_autocmp *autc)
 {
@@ -98,25 +78,10 @@ void				binary_search(char *str, t_win *win, t_autocmp *autocmpl)
 	free(path);
 }
 
-void				remove_autc(t_autocmp *autocmp)
+static void			gestion_auto(t_autocmp *autocmpl, t_win *win, char **tmp2)
 {
-	t_llist			*save;
-	t_llist			*ptr;
-
-	ptr = autocmp->match;
-	while (ptr)
-	{
-		save = ptr;
-		ptr = ptr->next;
-		free(save->content);
-		free(save);
-	}
-}
-
-static void 		gestion_auto(t_autocmp *autocmpl, t_win *win, char **tmp2)
-{
-	if (autocmpl->lenght > 1 &&((!operator_filters(tmp2[autocmpl->lenght - 1]) &&
-		!redirection_filters(tmp2[autocmpl->lenght - 1]))))
+	if (autocmpl->lenght > 1 && ((!operator_filters(tmp2[autocmpl->lenght - 1])
+		&& !redirection_filters(tmp2[autocmpl->lenght - 1]))))
 		folder_search(tmp2[autocmpl->lenght - 1], win, autocmpl);
 	else
 		binary_search(tmp2[autocmpl->lenght - 1], win, autocmpl);
@@ -139,7 +104,6 @@ int					autocompletion(t_win *win)
 	tableau = generate(9, 32, 3);
 	if ((autocmpl.lenght = ft_strsplit(&tmp2, tmp, tableau)) > 0)
 	{
-		ft_putnbr(autocmpl.lenght);
 		gestion_auto(&autocmpl, win, tmp2);
 		remove_autc(&autocmpl);
 		free_d(tmp2, autocmpl.lenght);

@@ -6,13 +6,13 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/12 23:04:42 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/14 10:58:08 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/15 16:38:24 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-char			**convert_history()
+char			**convert_history(void)
 {
 	char		**str;
 	char		*line;

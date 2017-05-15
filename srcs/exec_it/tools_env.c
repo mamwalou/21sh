@@ -6,15 +6,15 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/21 14:39:18 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/15 06:35:33 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/15 20:28:52 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-int					find_varibale(char *str, char c)
+int			find_varibale(char *str, char c)
 {
-	int				count;
+	int		count;
 
 	count = 0;
 	while (str[count])
@@ -26,9 +26,9 @@ int					find_varibale(char *str, char c)
 	return (-1);
 }
 
-char					*search_env(t_llist *env, const char *value)
+char		*search_env(t_llist *env, const char *value)
 {
-	t_llist				*ptr;
+	t_llist	*ptr;
 
 	ptr = env;
 	while (ptr != NULL)
@@ -40,14 +40,33 @@ char					*search_env(t_llist *env, const char *value)
 	return (NULL);
 }
 
-void					clear_env(t_llist **env, const char *value, int *lenght)
+void		free_mai(t_llist **env, t_llist *ptr, t_llist *sb, t_llist *save)
 {
-	t_llist				*ptr;
-	t_llist				*save;
-	t_llist				*saveb;
+	if (sb == NULL)
+	{
+		free(ptr->content);
+		free(ptr);
+		if (save != NULL)
+			(*env) = save;
+		else
+			*env = NULL;
+		return ;
+	}
+	if (save != NULL && sb != NULL)
+		sb->next = save;
+	else if (save == NULL && sb)
+		sb->next = NULL;
+	free(ptr->content);
+	free(ptr);
+}
+
+void		clear_env(t_llist **env, const char *value, int *lenght)
+{
+	t_llist	*ptr;
+	t_llist	*save;
+	t_llist	*saveb;
 
 	ptr = *env;
-	save = NULL;
 	saveb = NULL;
 	while (ptr)
 	{
@@ -66,13 +85,38 @@ void					clear_env(t_llist **env, const char *value, int *lenght)
 	}
 }
 
-t_llist					*build_env(char **environ)
+static t_llist		*constuct_env(char **environ)
 {
-	t_llist				*ret;
-	char				*tmp;
-	int					lenght;
+	t_llist	*ret;
+	char	*new;
+	char	*new1;
+	int		pos;
 
-	lenght = 0;
+	ret = NULL;
+	while (*environ)
+	{
+		if (!(ft_strncmp("SHLVL=", *environ, ft_strlen("SHLVL="))))
+		{
+			pos = 6;
+			new1 = ft_itoa(ft_atoi(*environ + 6) + 1);
+			new = ft_strjoin("SHLVL=", new1);
+			ft_lstadd(&ret, ft_lstnew(new, ft_strlen(new)));
+			free(new);
+			free(new1);
+		}
+		else
+			ft_lstadd(&ret, ft_lstnew(*environ, ft_strlen(*environ)));
+		environ++;
+		g_memory.env_lenght++;
+	}
+	return (ret);
+}
+
+t_llist		*build_env(char **environ)
+{
+	t_llist	*ret;
+	char	*tmp;
+
 	ret = NULL;
 	if (!*environ)
 	{
@@ -83,11 +127,7 @@ t_llist					*build_env(char **environ)
 		free(tmp);
 		return (ret);
 	}
-	while (*environ)
-	{
-		ft_lstadd(&ret, ft_lstnew(*environ, ft_strlen(*environ)));
-		environ++;
-		g_memory.env_lenght++;
-	}
-	return (ret);
+	else
+		return (constuct_env(environ));
+	return (NULL);
 }

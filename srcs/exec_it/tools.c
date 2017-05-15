@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/14 10:36:20 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/15 16:38:38 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char					*get_pwd(void)
 	buff = NULL;
 	size = 1024;
 	if ((buff = (char *)malloc((size_t)size)) != NULL)
-	    pwd = getcwd(buff, (size_t)size);
+		pwd = getcwd(buff, (size_t)size);
 	return (pwd);
 }
 

@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/14 17:17:07 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/15 18:11:18 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_mode			shell_mode(t_win *win)
 	return (SHELL);
 }
 
-t_mode		hered_mode(t_win *win)
+t_mode			hered_mode(t_win *win)
 {
 	ft_putstr("heredoc>");
 	ft_bzero(win->buffer, 4);
@@ -45,7 +45,7 @@ t_mode		hered_mode(t_win *win)
 	return (ERROR);
 }
 
-t_mode		quote_mode(t_win *win)
+t_mode			quote_mode(t_win *win)
 {
 	ft_putstr("quote>");
 	ft_bzero(win->buffer, 4);
@@ -60,6 +60,7 @@ t_mode		quote_mode(t_win *win)
 			input(win);
 		if (win->end->l_char == 39 && *(unsigned int*)win->buffer == RETURN)
 		{
+			list_to_array(win);
 			bring_back_shell(&(g_term.terminal));
 			ft_putchar('\n');
 			return (SHELL);
@@ -70,7 +71,7 @@ t_mode		quote_mode(t_win *win)
 	return (ERROR);
 }
 
-t_mode		d_quote_mode(t_win *win)
+t_mode			d_quote_mode(t_win *win)
 {
 	ft_putstr("dquote>");
 	ft_bzero(win->buffer, 4);
