@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/20 19:32:22 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/07 22:09:28 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/15 05:00:01 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static const t_exec			g_exec[NB_TOKEN] =
 	{OP_REDIR_RIGHT, redirection_fonction},
 	{OP_REDIR_LEFT, redirection_fonction},
 	{OP_PIPE, pipe_function},
+	{VARIABLE, set_varible},
 	{CMD, exec_fct},
 };
 

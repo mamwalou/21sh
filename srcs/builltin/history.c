@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/23 14:43:41 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/12 20:45:08 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/15 07:44:13 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void			history(char **cmd)
 
 	if (!search_env(g_env, "HISTORY="))
 		return ;
-	history = convert_history(g_memory.history_path, g_memory.code_history);
+	history = convert_history();
 	if (!ft_strcmp(cmd[0], "history"))
 		aff_history(history ,g_memory.code_history);
 	free_d(history, g_memory.code_history);

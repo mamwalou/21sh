@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/12 14:39:17 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/14 14:22:32 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void			move_cursr(t_win *win, t_iter iter, int iteration)
 {
-	while (iteration-- > 0)
+	while (iteration > 0)
 	{
 		if (iter == M_LEFT)
 			tputs(tgetstr("le", NULL), 1, ft_puts);
@@ -31,6 +31,7 @@ void			move_cursr(t_win *win, t_iter iter, int iteration)
 			depushline(win);
 		if (iter == PUSH)
 			depushline(win);
+		iteration--;
 	}
 }
 

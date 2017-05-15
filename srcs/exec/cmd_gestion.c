@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/13 10:31:53 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/12 18:38:28 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/15 05:43:45 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int			check_builltins_tris(char **cmd, int index)
 {
 	if (!ft_strcmp(cmd[0], "export"))
 	{
-		ft_unsetenv(cmd[1]);
+		ft_export(cmd[0], cmd[1]);
 		return (1);
 	}
 	return (0);
@@ -29,9 +29,9 @@ static int			check_builltins_bis(char **cmd, int index)
 		ft_unsetenv(cmd[1]);
 		return (1);
 	}
-	else if (!ft_strcmp(cmd[0], "/bin/echo"))
+	else if (!ft_strncmp(cmd[0], "echo", 4))
 	{
-		ft_echo(cmd);
+		ft_echo(cmd[0]);
 		return (1);
 	}
 	else if (!ft_strcmp(cmd[0], "setenv"))

@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 09:28:41 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/12 20:54:50 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/15 07:55:10 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,15 @@ void				remove_autc(t_autocmp *autocmp)
 	}
 }
 
+static void 		gestion_auto(t_autocmp *autocmpl, t_win *win, char **tmp2)
+{
+	if (autocmpl->lenght > 1 &&((!operator_filters(tmp2[autocmpl->lenght - 1]) &&
+		!redirection_filters(tmp2[autocmpl->lenght - 1]))))
+		folder_search(tmp2[autocmpl->lenght - 1], win, autocmpl);
+	else
+		binary_search(tmp2[autocmpl->lenght - 1], win, autocmpl);
+}
+
 int					autocompletion(t_win *win)
 {
 	t_autocmp		autocmpl;
@@ -128,18 +137,15 @@ int					autocompletion(t_win *win)
 		return (1);
 	tmp = lchar_list(win->begin, win->lenght_line);
 	tableau = generate(9, 32, 3);
-	autocmpl.lenght = ft_strsplit(&tmp2, tmp, tableau);
-	if (autocmpl.lenght == 0)
-		return (1);
-	if (autocmpl.lenght > 1 &&((!operator_filters(tmp2[autocmpl.lenght - 1]) &&
-		!redirection_filters(tmp2[autocmpl.lenght - 1]))))
-		folder_search(tmp2[autocmpl.lenght - 1], win, &autocmpl);
-	else
-		binary_search(tmp2[autocmpl.lenght - 1], win, &autocmpl);
+	if ((autocmpl.lenght = ft_strsplit(&tmp2, tmp, tableau)) > 0)
+	{
+		ft_putnbr(autocmpl.lenght);
+		gestion_auto(&autocmpl, win, tmp2);
+		remove_autc(&autocmpl);
+		free_d(tmp2, autocmpl.lenght);
+		free(tmp2);
+	}
 	free(tableau);
 	free(tmp);
-	remove_autc(&autocmpl);
-	free_d(tmp2, autocmpl.lenght);
-	free(tmp2);
 	return (1);
 }

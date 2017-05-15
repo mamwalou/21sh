@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/07 18:29:13 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/15 03:50:44 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 
 # define RD 0
 # define WRT 1
-# define NB_TOKEN 5
 
 typedef struct s_body_node	t_body_node;
 

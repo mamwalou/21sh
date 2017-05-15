@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/12 20:54:51 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/14 17:13:41 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@
 # define TAB		 9
 # define CTRL_SPACE  0
 # define CTRL_X      24
+# define CTRL_L      12
+# define CTRL_F		6
 # define CNT_TERM	5
 # define CDOWN		98
 # define CUP		97
@@ -123,6 +125,7 @@ int						stop_her(t_line *end);
 int						stoq(t_line *end, int key);
 int						depushline(t_win *win);
 int						push_line(t_win *win, unsigned int buffer);
+int						clean_term(t_win *win);
 
 void					printline(t_line *begin);
 void					line_init(t_line **begin, t_line **end, t_win *win);
@@ -145,5 +148,5 @@ int						dhistory_termcaps(t_win *win);
 void					list_to_array(t_win *win);
 void					list_lchar(char *str, t_win *win);
 char					*lchar_list(t_line *line, int lenght);
-
+void					free_lchar(t_win *win);
 #endif

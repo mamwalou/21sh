@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 10:37:46 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/12 20:55:00 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/15 06:40:18 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,12 @@ void			ft_setenv(char *name, char *value)
 	}
 	str = ft_strtrijoin(name, "=", value);
 	ft_lstadd(&g_env, ft_lstnew(str, ft_strlen(str)));
+	g_memory.env_lenght++;
 	free(str);
 }
 
 void			ft_unsetenv(char *name)
 {
-	clear_env(&g_env, name);
+	if (ft_strcmp(name, "TERM"))
+		clear_env(&g_env, name, &g_memory.env_lenght);
 }

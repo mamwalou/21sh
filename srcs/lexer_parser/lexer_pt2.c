@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/04/27 22:02:29 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/15 03:53:51 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,21 @@ int				ctrl_mode(char *line, t_memory *memory)
 		}
 		return (tmp);
 	}
+	return (0);
+}
+
+int				is_bulltin(char *cmd)
+{
+	if (ft_strcmp(cmd, "env") == 0
+		|| ft_strcmp(cmd, "export") == 0
+		|| ft_strcmp(cmd, "unsetenv") == 0
+		|| ft_strcmp(cmd, "setenv") == 0
+		|| ft_strcmp(cmd, "cd") == 0
+		|| ft_strcmp(cmd, "exit") == 0
+		|| ft_strcmp(cmd, "history") == 0
+		|| ft_strcmp(cmd, "var") == 0)
+		return (1);
+	else if (!ft_strncmp("echo", cmd, 4))
+		return (1);
 	return (0);
 }

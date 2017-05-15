@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/02 10:46:17 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/15 01:29:01 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int					define_prio(t_token token)
 {
-	if (token == CMD || token == ARG_FILES || token == OP_FILES)
+	if (token == CMD || token == ARG_FILES || token == OP_FILES ||
+		token == VARIABLE)
 		return (0);
 	else if (token == OP_PIPE)
 		return (1);

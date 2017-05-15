@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/02 11:15:49 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/15 01:49:57 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef enum			e_token
 	OP_REDIR_LEFT,
 	OP_PIPE,
 	OP_FILES,
+	VARIABLE,
 	CMD,
 	ARG_FILES,
 }						t_token;
@@ -41,7 +42,6 @@ typedef struct			s_lexem
 typedef struct			s_st_lexem
 {
 	t_lexem				*pos;
-	int					cnt_op;
 	int					nb_of_lexem;
 	int					fd_count;
 	struct s_lexem		*save;

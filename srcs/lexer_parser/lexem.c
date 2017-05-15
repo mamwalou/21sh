@@ -6,26 +6,11 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/07 21:18:17 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/15 04:43:13 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/lexer_parser/lexer_parser.h"
-
-t_lexem				*new_lexem(char *line)
-{
-	t_lexem			*new_lexem;
-
-	new_lexem = (t_lexem*)ft_memalloc(sizeof(t_lexem));
-	new_lexem->name_lexem = ft_strdup(line);
-	new_lexem->next = NULL;
-	new_lexem->prev = NULL;
-	new_lexem->index = 0;
-	new_lexem->option = NULL;
-	new_lexem->token_type = define_token(new_lexem->name_lexem);
-	new_lexem->priority = define_prio(new_lexem->token_type);
-	return (new_lexem);
-}
 
 static void			option_lexem(t_st_lexem *lex, t_lexem *new)
 {
@@ -42,6 +27,12 @@ void				push_lexem(t_st_lexem *lex, t_lexem *new)
 		lex->end_lexem->token_type == OP_REDIR_RIGHT))
 	{
 		new->token_type = OP_FILES;
+		new->priority = define_prio(new->token_type);
+	}
+	else if (find_varibale(new->name_lexem, '=') > 0 &&
+				lex->end_lexem->token_type != CMD)
+	{
+		new->token_type = VARIABLE;
 		new->priority = define_prio(new->token_type);
 	}
 	new->prev = lex->end_lexem;
@@ -82,13 +73,13 @@ void				save_lexem(t_st_lexem *lex, char *line, int end, int begin)
 
 	tmp = ft_strndup(line, 0, end - begin);
 	new = new_lexem(tmp);
-	if (new->token_type == CMD)
-		lex->cnt_op++;
 	if (lex->begin_lexem == NULL)
 	{
 		lex->begin_lexem = new;
 		lex->end_lexem = new;
 		lex->nb_of_lexem = 1;
+		if ((find_varibale(new->name_lexem, '=')) > 0)
+			new->token_type = VARIABLE;
 		if (new->token_type == CMD)
 			option_lexem(lex, new);
 		free(tmp);

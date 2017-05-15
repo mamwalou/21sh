@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/07 12:03:02 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/15 07:44:29 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ typedef	enum		e_mode
 
 typedef struct		s_memory
 {
-	char			*history_path;
 	int				fd_history;
 	int				code_history;
 	char			*line;
 	int				env_lenght;
 	char			*key_ctrl;
 	char			key;
-	t_llist			*var;
+	t_llist			*variable;
+	int				var_lenght;
 	char			*line_mode;
 	char			*line_mode_tmp;
 	t_mode			mode;
@@ -70,7 +70,7 @@ t_llist				*build_env(char **environ);
 int					count_env(t_llist *env);
 char				*search_env(t_llist *env, const char *value);
 char				**copy_env(void);
-void				clear_env(t_llist **env, const char *value);
+void				clear_env(t_llist **env, const char *value, int *lenght);
 void				set_env(t_llist **env, t_llist *new);
 
 t_mode				lexer_parser(t_memory *memory);
@@ -88,12 +88,13 @@ t_llist				*my_setenv();
 char				**my_env(t_llist *env);
 int					unenv(char *unset, t_llist *env);
 int					env_collapse(t_llist *env, const char *value);
+void				replace_env(t_llist *list, char *sigle, char *new, int *lenght);
 
 void				init_memory(void);
 void				push_history(void);
 void				end_memory(void);
 void				history_path(void);
-char				**convert_history(char *path_memory, int lenght);
+char				**convert_history();
 
 void				*ft_realloc(void *mem, size_t size);
 void				free_d(char **dtab, int lenght);
@@ -101,5 +102,10 @@ char				**find_path(int *lenght);
 
 char				*get_pwd(void);
 int					reset_fd(int fd, char *new_fd);
+int					find_varibale(char *str, char c);
+void 				free_mai(t_llist **env,t_llist *ptr, t_llist *saveb,
+								t_llist *save);
+
+void				print_env(void);
 
 #endif

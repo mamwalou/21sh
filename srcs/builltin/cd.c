@@ -6,21 +6,11 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 10:27:23 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/12 21:01:24 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/15 06:36:52 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/exec/exec.h"
-
-void			replace_env(char *sigle, char *new)
-{
-	char		*to_env;
-
-	clear_env(&g_env, sigle);
-	to_env = ft_strjoin(sigle, new);
-	ft_lstadd(&g_env, ft_lstnew(to_env, ft_strlen(to_env)));
-	free(to_env);
-}
 
 void			go_home(void)
 {
@@ -33,15 +23,15 @@ void			go_home(void)
 	else
 	{
 		chdir(home);
-		replace_env("PWD=", home);
-		replace_env("OLDPWD=", pwd);
+		replace_env(g_env, "PWD=", home, &g_memory.env_lenght);
+		replace_env(g_env, "OLDPWD=", pwd, &g_memory.env_lenght);
 	}
+	free(pwd);
 }
 
 void			dash_one(char *str)
 {
 	char		*tmp;
-	char		buff[BUFF_SIZE];
 	char		*save_pwd;
 	char		*pwd;
 
@@ -51,14 +41,18 @@ void			dash_one(char *str)
 	{
 		pwd = ft_strjoin("PWD=", get_pwd());
 		ft_lstadd(&g_env, ft_lstnew(pwd, ft_strlen(pwd)));
+		free(pwd);
 	}
 	if (!search_env(g_env, "OLDPWD="))
 		ft_lstadd(&g_env, ft_lstnew(save_pwd, ft_strlen(save_pwd)));
 	else if (search_env(g_env, "OLDPWD=") && search_env(g_env, "PWD="))
 	{
-		replace_env("OLDPWD=", save_pwd);
-		replace_env("PWD=", get_pwd());
+		replace_env(g_env, "OLDPWD=", save_pwd, &g_memory.env_lenght);
+		tmp = get_pwd();
+		replace_env(g_env, "PWD=", tmp, &g_memory.env_lenght);
+		free(tmp);
 	}
+	free(save_pwd);
 }
 
 void			ft_cd(char **cmd, int index)

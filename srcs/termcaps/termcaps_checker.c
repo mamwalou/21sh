@@ -6,13 +6,13 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/12 18:23:53 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/14 17:17:54 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/termcaps/termcaps.h"
 #include "../../includes/shell.h"
-#define NB_INPUT 8
+#define NB_INPUT 10
 
 static const t_input		g_input[NB_INPUT] =
 {
@@ -24,7 +24,16 @@ static const t_input		g_input[NB_INPUT] =
 	{RIGHT, gest_crs},
 	{UP, dhistory_termcaps},
 	{DOWN, history_termcaps},
+	{CTRL_L, clean_term},
 };
+
+int							clean_term(t_win *win)
+{
+	tputs(tgetstr("cl", NULL), 1, ft_puts);
+	move_cursr(win, DELETING, win->lenght_line);
+	prompt();
+	return (1);
+}
 
 int							ft_puts(int c)
 {

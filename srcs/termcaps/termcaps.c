@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/12 18:16:31 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/14 15:57:28 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void			init_mv(t_win *win)
 
 	win->lenght_line = 0;
 	win->cursor_line = 1;
-	win->pos_history = g_memory.code_history;
+	win->pos_history = g_memory.code_history - 1;
 	win->y = 0;
 	win->x = 0;
 	win->new_x = 1;
@@ -33,7 +33,7 @@ void			init_mv(t_win *win)
 	win->begin = NULL;
 	win->end = NULL;
 	win->hst = NULL;
-	win->hst = convert_history(g_memory.history_path, g_memory.code_history);
+	win->hst = convert_history();
 	ioctl(0, TIOCGWINSZ, &(g_term.apt));
 }
 

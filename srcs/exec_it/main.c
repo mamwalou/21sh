@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/13 00:25:30 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/15 03:47:59 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,12 @@ int					prompt(void)
 
 void				end_memory(void)
 {
-	if (g_memory.history_path)
-		free(g_memory.history_path);
 	if (g_memory.line)
 		free(g_memory.line);
 	if (g_memory.key_ctrl)
 		free(g_memory.key_ctrl);
-	if (g_memory.var == NULL)
-		ft_lstdel(&(g_memory.var), ft_bzero);
+	if (g_memory.variable == NULL)
+		ft_lstdel(&(g_memory.variable), ft_bzero);
 	if (g_memory.line_mode == NULL)
 		free(g_memory.line_mode);
 	if (g_memory.line_mode_tmp)

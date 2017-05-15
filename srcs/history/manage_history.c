@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/12 20:46:15 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/15 06:14:28 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,17 @@
 
 void				history_path(void)
 {
-	char			*home;
+	char			*tmp;
+	char			*tmp2;
 
-	if ((home = search_env(g_env, "HOME=")))
+	if (search_env(g_env, "HOME="))
 	{
-		g_memory.history_path = ft_strtrijoin(home, "/", ".my_history");
-		g_memory.fd_history = open(g_memory.history_path,
-							O_RDWR | O_CREAT | O_APPEND, 0666);
+		tmp = ft_strtrijoin("HISTORY=", search_env(g_env, "HOME="), "/");
+		tmp2 = ft_strjoin(tmp, ".my_history");
+		ft_lstadd(&g_env, ft_lstnew(tmp2, ft_strlen(tmp2)));
+		g_memory.env_lenght++;
+		free(tmp);
+		free(tmp2);
 	}
 }
 
@@ -31,7 +35,8 @@ int					g_nb_hist(void)
 	int			count;
 
 	count = 0;
-	fd = open(g_memory.history_path, O_RDONLY | O_CREAT | O_APPEND, 0666);
+	fd = open(search_env(g_env, "HISTORY="),
+			O_RDONLY | O_CREAT | O_APPEND, 0666);
 	while ((get_next_line(fd, &line)) > 0)
 	{
 		if (line)
@@ -46,11 +51,12 @@ void				init_memory(void)
 {
 	g_memory.fd_history = 0;
 	g_memory.line = NULL;
+	g_memory.variable = NULL;
+	g_memory.var_lenght = 0;
 	g_memory.launch = 0;
 	g_memory.mode = SHELL;
-	g_memory.history_path = NULL;
 	history_path();
-	if (is_dir(g_memory.history_path) == FILES)
+	if (is_dir(search_env(g_env, "HISTORY=")) == FILES)
 		g_memory.code_history = g_nb_hist();
 	else
 		g_memory.code_history = 0;
@@ -59,12 +65,15 @@ void				init_memory(void)
 static void			write_history(t_memory *memory)
 {
 	char			*tmp;
+	int				fd;
 
+	fd = open(search_env(g_env, "HISTORY="),
+			O_WRONLY | O_CREAT | O_APPEND, 0666);
 	tmp = ft_itoa(memory->code_history);
-	write(memory->fd_history, tmp, ft_strlen(tmp));
-	write(memory->fd_history, ";", 1);
-	write(memory->fd_history, memory->line, ft_strlen(memory->line));
-	write(memory->fd_history, "\n", 1);
+	write(fd, tmp, ft_strlen(tmp));
+	write(fd, ";", 1);
+	write(fd, memory->line, ft_strlen(memory->line));
+	write(fd, "\n", 1);
 	free(tmp);
 	memory->code_history++;
 }
@@ -73,7 +82,7 @@ void				push_history(void)
 {
 	if (g_memory.line)
 	{
-		if (g_memory.history_path)
+		if (search_env(g_env, "HISTORY="))
 			write_history(&g_memory);
 	}
 }

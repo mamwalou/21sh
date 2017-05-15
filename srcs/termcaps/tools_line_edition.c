@@ -6,12 +6,27 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 09:30:05 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/12 23:13:08 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/15 07:55:15 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/termcaps/termcaps.h"
 #include "../../includes/shell.h"
+
+void			free_lchar(t_win *win)
+{
+	t_line		*ptr;
+
+	ptr = win->begin;
+	while (ptr)
+	{
+		ptr = ptr->next;
+		free(win->begin);
+		win->begin = ptr;
+	}
+	win->begin = NULL;
+	win->end = NULL;
+}
 
 static char		*simpl_lchar(t_win *win)
 {
@@ -58,11 +73,14 @@ void			list_lchar(char *str, t_win *win)
 	int 		i;
 	int			y;
 
-	i = 0;
 	y = 0;
-	while (str[y++])
+	i = 0;
+	while (str[y])
+	{
 		if (str[y] == ';')
 			i = y + 1;
+		y++;
+	}
 	while (str[i])
 	{
 		push_line(win, str[i]);
