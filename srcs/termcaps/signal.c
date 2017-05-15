@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 11:21:00 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/15 17:53:15 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/15 21:03:57 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void			handl_sigws(int sig)
 	cp[1] = 0;
 	ioctl(0, TIOCGWINSZ, &(g_term.apt));
 	ioctl(0, TIOCSTI, cp);
+	
 }
 
 void			handl_sigstrp(int sig)
