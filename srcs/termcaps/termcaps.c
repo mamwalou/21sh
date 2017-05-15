@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/14 15:57:28 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/15 20:49:40 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,11 @@ void			init_mv(t_win *win)
 	win->begin = NULL;
 	win->end = NULL;
 	win->hst = NULL;
-	win->hst = convert_history();
+	if (search_env(g_env, "HISTORY="))
+	{
+		ft_putendl("in");
+		win->hst = convert_history();
+	}
 	ioctl(0, TIOCGWINSZ, &(g_term.apt));
 }
 

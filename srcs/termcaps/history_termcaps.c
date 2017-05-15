@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/29 13:28:43 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/14 16:02:14 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/15 20:50:51 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int				dhistory_termcaps(t_win *win)
 {
 	int			i;
 
-	if (g_memory.code_history == 0)
+	if (!search_env(g_env, "HISTORY="))
 		return (1);
 	while (win->cursor_line < win->lenght_line)
 	{
@@ -37,7 +37,7 @@ int				history_termcaps(t_win *win)
 {
 	int			i;
 
-	if (g_memory.code_history == 0)
+	if (!search_env(g_env, "HISTORY="))
 		return (1);
 	if (win->pos_history + 1 == g_memory.code_history)
 		win->pos_history = 1;
