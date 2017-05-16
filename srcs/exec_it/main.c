@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/16 23:24:25 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/17 01:53:34 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ int					main(int argc, char **argv, char **environ)
 	while (42)
 	{
 		termcaps();
-		ft_putendl(g_memory.line);
 		if (g_memory.line)
 		{
 			g_memory.mode = lexer_parser(&g_memory);

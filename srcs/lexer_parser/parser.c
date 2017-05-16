@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/16 23:49:07 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/17 01:55:17 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ t_mode				lexer_parser(t_memory *memory)
 			return (D_QUOTE);
 	}
 	sw_list(lexem);
-	/*if (lexem->begin_lexem)
+	if (lexem->begin_lexem)
 	{
 		generate_ast(lexem);
 		free(lexem);
-	}*/
+	}
 	return (SHELL);
 }
