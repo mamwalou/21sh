@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/15 03:47:43 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/16 16:51:38 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,14 @@ int				operator_filters(char *line)
 
 int				redirection_filters(char *line)
 {
-	const char	*tableau[3];
+	const char	*tableau[4];
 	int			count;
 	int			tmp;
 
 	tmp = 0;
 	count = 0;
 	tableau[0] = ">>";
+	tableau[0] = "<<";
 	tableau[1] = ">";
 	tableau[2] = "<";
 	count = ft_isdigit(line[count]) ? 1 : 0;
@@ -50,23 +51,6 @@ int				redirection_filters(char *line)
 	return (0);
 }
 
-int				lexer_echo(char *line, int *count)
-{
-	int			i;
-
-	i = 5;
-	if ((ft_strncmp(line, "echo", 4)))
-		return (-1);
-	if (line[i] == ' ')
-		return (-1);
-	i++;
-	while ((line[i]) && (!(redirection_filters(line + i)) &&
-			(!operator_filters(line + i))))
-		i++;
-	*count = i;
-	return (i);
-}
-
 int				find_str(char *line)
 {
 	int			count;
@@ -74,8 +58,6 @@ int				find_str(char *line)
 	count = 0;
 	while ((line[count]) && (line[count] != ' ' && line[count] != '\t'))
 	{
-		if (lexer_echo(line + count, &count) > 0)
-			return (count);
 		if ((operator_filters(line + count)) > 0)
 			return (count);
 		if (ft_isdigit(line[count]) && !ft_isdigit(line[count - 1]))
@@ -86,7 +68,7 @@ int				find_str(char *line)
 	return (count);
 }
 
-int				find_token(char *line)
+int				find_token(char *line, t_lexem *end)
 {
 	int			tmp;
 

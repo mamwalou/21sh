@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/15 20:55:22 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/16 16:26:29 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void				init_memory(void)
 	g_memory.variable = NULL;
 	g_memory.var_lenght = 0;
 	g_memory.launch = 0;
+	g_memory.heredoc_sw = 0;
 	g_memory.mode = SHELL;
 	history_path();
 	if (is_dir(search_env(g_env, "HISTORY=")) == FILES)

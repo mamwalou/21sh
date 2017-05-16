@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/15 16:42:45 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/16 16:51:29 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ int					token_rr(char *line)
 
 int					token_left(char *line)
 {
+	const char	*tableau[2];
 	int			count;
+	int			tmp;
 	int			i;
 
 	i = 0;
@@ -55,17 +57,10 @@ int					token_left(char *line)
 	count = ft_isdigit(line[count]) ? 1 : 0;
 	if (line[count] == '&')
 		count++;
-	if (line[count] == '<')
-	{
-		count += 1;
-		if (line[count] == '&')
-		{
-			count++;
-			while (ft_isdigit(line[count]))
-				count++;
-		}
-		return (count);
-	}
+	tableau[0] = "<";
+	tableau[1] = "<<";
+	if ((tmp = ctrl_tab(line + count, tableau, 2)) > 0)
+		return (tmp + count);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/15 03:53:51 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/16 16:51:36 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int				ctrl_quot(int first, int second)
 		return (QUOTE_CODE);
 	else if (first == 96)
 		return (BACKQUOTE_CODE);
-	else if (first == '<' && second == '<')
+	else if (first == '<' && second == '<' && g_memory.heredoc_sw == 0)
 		return (HEREDOC_CODE);
 	return (0);
 }
@@ -61,11 +61,11 @@ int				ctrl_mode(char *line, t_memory *memory)
 		if (tmp == HEREDOC_CODE)
 			return (ctrl_heredoc(memory, line + 3));
 		if (tmp == D_QUOTE_CODE)
-			memory->key_ctrl = ft_strdup("\34");
+			memory->key_ctrl = ft_strdup("\"");
 		if (tmp == QUOTE_CODE)
-			memory->key_ctrl = ft_strdup("\39");
+			memory->key_ctrl = ft_strdup("\'");
 		if (tmp == BACKQUOTE)
-			memory->key_ctrl = ft_strdup("\39");
+			memory->key_ctrl = ft_strdup("`");
 		while (line[count])
 		{
 			if (tmp == ctrl_quot(line[count], 0))
@@ -85,10 +85,9 @@ int				is_bulltin(char *cmd)
 		|| ft_strcmp(cmd, "setenv") == 0
 		|| ft_strcmp(cmd, "cd") == 0
 		|| ft_strcmp(cmd, "exit") == 0
+		|| ft_strcmp(cmd, "echo") == 0
 		|| ft_strcmp(cmd, "history") == 0
 		|| ft_strcmp(cmd, "var") == 0)
-		return (1);
-	else if (!ft_strncmp("echo", cmd, 4))
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/15 04:30:22 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/16 16:51:40 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int			parser(t_st_lexem **lexem, t_memory *memory)
 			count += tmp + 1;
 			save_lexem(*lexem, memory->line + pos + 1, count - 2, pos);
 		}
-		else if ((tmp = find_token(memory->line + pos)) > 0)
+		else if ((tmp = find_token(memory->line + pos, (*lexem)->end_lexem)) > 0)
 		{
 			count += tmp;
 			save_lexem(*lexem, memory->line + pos, count, pos);
@@ -53,7 +53,7 @@ t_mode				lexer_parser(t_memory *memory)
 	{
 		free_lexem(lexem->begin_lexem);
 		free(lexem);
-		stock_line(memory);
+		stock_line(memory, code_mode);
 		if (code_mode == HEREDOC_CODE)
 			return (HEREDOC);
 		else if (code_mode == QUOTE_CODE)
@@ -61,10 +61,11 @@ t_mode				lexer_parser(t_memory *memory)
 		else if (code_mode == D_QUOTE_CODE)
 			return (D_QUOTE);
 	}
-	if (lexem->begin_lexem)
+	sw_list(lexem);
+	/*if (lexem->begin_lexem)
 	{
 		generate_ast(lexem);
 		free(lexem);
-	}
+	}*/
 	return (SHELL);
 }
