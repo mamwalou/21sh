@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/16 16:51:36 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/16 19:21:45 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,13 @@
 
 int				ctrl_heredoc(t_memory *memory, char *line)
 {
+	char		*tmp;
+
+	tmp = NULL;
 	memory->key_ctrl = ft_strndup(line, 0,
 						(memory->line_lenght = find_str(line)));
+	if (line + memory->line_lenght + 1)
+		memory->line_mode_after = ft_strdup(line + memory->line_lenght + 1);
 	return (HEREDOC_CODE);
 }
 
@@ -30,23 +35,6 @@ int				ctrl_quot(int first, int second)
 	else if (first == '<' && second == '<' && g_memory.heredoc_sw == 0)
 		return (HEREDOC_CODE);
 	return (0);
-}
-
-void			save_mode(t_memory *memory, char *line, int end)
-{
-	int			i;
-	int			y;
-
-	i = 0;
-	y = 1;
-	memory->line_mode_tmp = (char*)ft_memalloc(sizeof(char) * end);
-	while (i < end - 1)
-	{
-		memory->line_mode_tmp[i] = line[y];
-		line++;
-		y++;
-	}
-	memory->line_mode_tmp[end] = 0;
 }
 
 int				ctrl_mode(char *line, t_memory *memory)

@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/16 16:51:38 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/16 23:21:20 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ int				redirection_filters(char *line)
 	tmp = 0;
 	count = 0;
 	tableau[0] = ">>";
-	tableau[0] = "<<";
-	tableau[1] = ">";
-	tableau[2] = "<";
+	tableau[1] = "<<";
+	tableau[2] = ">";
+	tableau[3] = "<";
 	count = ft_isdigit(line[count]) ? 1 : 0;
 	count = (line[count] == '&') ? 1 : 0;
 	if ((tmp = ctrl_tab(line, tableau, 3)) > 0)

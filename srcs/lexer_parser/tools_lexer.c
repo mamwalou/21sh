@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 21:05:10 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/16 16:48:05 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/16 23:05:27 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int				ctrl_tab(char *line, const char **tableau, int itr)
 		if (!ft_strncmp(tableau[i], line, ft_strlen(tableau[i])))
 		{
 			count += ft_strlen(tableau[i]);
+			if (!(ft_strcmp(tableau[i], "<<")))
+				g_memory.heredoc_sw = 0;
 			if (line[count] == '&')
 			{
 				count++;

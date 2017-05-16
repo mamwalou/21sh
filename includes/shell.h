@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/16 16:26:04 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/16 20:47:36 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct		s_memory
 	t_llist			*variable;
 	int				var_lenght;
 	char			*line_mode;
-	char			*line_mode_tmp;
+	char			*line_mode_after;
 	t_mode			mode;
 	int				launch;
 	int				line_lenght;

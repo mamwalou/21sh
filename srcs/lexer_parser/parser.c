@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/16 16:51:40 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/16 23:49:07 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,12 @@ t_mode				lexer_parser(t_memory *memory)
 	lexem = (t_st_lexem*)ft_memalloc(sizeof(t_st_lexem));
 	if ((code_mode = parser(&lexem, memory)) > SWITCH_MODE)
 	{
+		stock_line(lexem->begin_lexem ,memory, code_mode);
 		free_lexem(lexem->begin_lexem);
 		free(lexem);
-		stock_line(memory, code_mode);
+		free(g_memory.line);
+		g_memory.line_lenght = 0;
+		g_memory.line = NULL;
 		if (code_mode == HEREDOC_CODE)
 			return (HEREDOC);
 		else if (code_mode == QUOTE_CODE)

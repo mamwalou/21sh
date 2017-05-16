@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 11:25:09 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/16 16:35:25 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/16 19:46:12 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,16 @@ void		printline(t_line *begin)
 	}
 }
 
-int			stop_her(t_line *end)
+int			stop_her(t_line **end)
 {
 	int 	len;
 	t_line	*ptr;
+	t_line	*save;
 
-	ptr = end;
+	ptr = *end;
 	len = ft_strlen(g_memory.key_ctrl) - 1;
 	while (ptr && g_memory.key_ctrl[len] == ptr->l_char)
 	{
-		ft_putchar(g_memory.key_ctrl[len]);
 		len--;
 		ptr = ptr->prev;
 	}

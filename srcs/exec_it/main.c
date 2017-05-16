@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/16 16:51:31 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/16 23:24:25 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ void				end_memory(void)
 		ft_lstdel(&(g_memory.variable), ft_bzero);
 	if (g_memory.line_mode == NULL)
 		free(g_memory.line_mode);
-	if (g_memory.line_mode_tmp)
-		free(g_memory.line_mode_tmp);
 }
 
 int					main(int argc, char **argv, char **environ)
@@ -74,6 +72,7 @@ int					main(int argc, char **argv, char **environ)
 	while (42)
 	{
 		termcaps();
+		ft_putendl(g_memory.line);
 		if (g_memory.line)
 		{
 			g_memory.mode = lexer_parser(&g_memory);
@@ -82,6 +81,7 @@ int					main(int argc, char **argv, char **environ)
 				push_history();
 				free(g_memory.line);
 				g_memory.line = NULL;
+				g_memory.line_lenght = 0;
 			}
 		}
 	}

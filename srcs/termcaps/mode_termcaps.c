@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/16 16:45:17 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/16 21:21:18 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_mode			hered_mode(t_win *win)
 			push_line(win, win->buffer[0]);
 		else
 			input(win);
-		if (*(unsigned int*)win->buffer == RETURN && stop_her(win->end) == 0)
+		if (*(unsigned int*)win->buffer == RETURN && stop_her(&(win)->end) == 0)
 		{
 			list_to_array(win);
 			bring_back_shell(&(g_term.terminal));
@@ -92,6 +92,8 @@ t_mode			d_quote_mode(t_win *win)
 			ft_putchar('\n');
 			return (SHELL);
 		}
+		if (*(unsigned int*)win->buffer == RETURN)
+			ft_putstr("\ndquote>");
 	}
 	return (ERROR);
 }

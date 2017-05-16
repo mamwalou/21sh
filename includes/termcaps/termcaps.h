@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/15 17:41:38 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/16 19:40:56 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,8 @@ t_mode					shell_mode(t_win *win);
 t_mode					hered_mode(t_win *win);
 t_mode					quote_mode(t_win *win);
 t_mode					d_quote_mode(t_win *win);
-int						stop_her(t_line *end);
+int						stop_her(t_line **end);
+
 int						stoq(t_line *end, int key);
 int						depushline(t_win *win);
 int						push_line(t_win *win, unsigned int buffer);
