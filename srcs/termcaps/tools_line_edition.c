@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 09:30:05 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/17 03:36:48 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/17 08:28:36 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@ static char		*simpl_lchar(t_win *win)
 	int			i;
 
 	i = 0;
-	str = (char*)ft_memalloc(sizeof(char) * win->lenght_line + 1);
+	str = (char*)ft_memalloc(sizeof(char) * win->lenght_line);
 	g_memory.line_lenght += win->lenght_line;
 	ptr = win->begin;
 	while (ptr)
 	{
-		str[i] = ptr->l_char;
+		if (ptr->l_char != RETURN)
+			str[i] = ptr->l_char;
 		ptr = ptr->next;
 		free(win->begin);
 		win->begin = ptr;

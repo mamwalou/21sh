@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strint.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeline <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2016/10/17 17:05:15 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/17 04:31:01 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int				ft_strint(char *str, char *str_cmp)
 	int		i;
 
 	i = 0;
-
 	while (str[i] && (cmp(str[i], str_cmp)) == 0)
 		i++;
 	if (i == 0)

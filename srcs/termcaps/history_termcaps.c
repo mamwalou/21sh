@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/29 13:28:43 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/17 02:56:46 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/17 07:56:44 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int				history_termcaps(t_win *win)
 	if (!search_env(g_env, "HISTORY="))
 		return (1);
 	if (win->pos_history + 1 == g_memory.code_history)
-		win->pos_history = 1;
+		win->pos_history = 0;
 	else
 		win->pos_history++;
 	while (win->cursor_line < win->lenght_line + 1)

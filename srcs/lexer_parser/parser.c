@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/17 03:41:08 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/17 14:24:32 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int			parser(t_st_lexem **lex, t_memory *memory)
 			if (tmp > SWITCH_MODE)
 				return (tmp);
 			count += tmp + 1;
-			save_lexem(*lex, memory->line + pos + 1, count - 2, pos);
+			save_lexem(*lex, memory->line + pos, count, pos);
 		}
 		else if ((tmp = find_token(memory->line + pos, (*lex)->end_lexem)) > 0)
 		{

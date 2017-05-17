@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/16 19:38:59 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/17 14:43:40 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void				save_lexem(t_st_lexem *lex, char *line, int end, int begin)
 
 	tmp = ft_strndup(line, 0, end - begin);
 	new = new_lexem(tmp);
+	ft_putendl(new->name_lexem);
 	if (lex->begin_lexem == NULL)
 	{
 		lex->begin_lexem = new;

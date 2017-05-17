@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/07 19:03:19 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/17 04:31:43 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@
 # define LINK 70
 # define BUFF_SIZE 5122
 
-typedef struct	s_gnl
+typedef struct		s_gnl
 {
-	char		*buf;
-	int			count;
-	int			i;
-	int			nl;
-	int			fd;
-}				t_gnl;
+	char			*buf;
+	int				count;
+	int				i;
+	int				nl;
+	int				fd;
+}					t_gnl;
 
 int					get_next_line(int const fd, char **line);
 int					ft_strint(char *str, char *cmp);
