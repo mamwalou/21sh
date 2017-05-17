@@ -6,29 +6,15 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/21 14:39:18 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/15 20:28:52 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/17 03:39:45 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-int			find_varibale(char *str, char c)
+char			*search_env(t_llist *env, const char *value)
 {
-	int		count;
-
-	count = 0;
-	while (str[count])
-	{
-		if (str[count] == c)
-			return (1);
-		count++;
-	}
-	return (-1);
-}
-
-char		*search_env(t_llist *env, const char *value)
-{
-	t_llist	*ptr;
+	t_llist		*ptr;
 
 	ptr = env;
 	while (ptr != NULL)
@@ -40,31 +26,31 @@ char		*search_env(t_llist *env, const char *value)
 	return (NULL);
 }
 
-void		free_mai(t_llist **env, t_llist *ptr, t_llist *sb, t_llist *save)
+void			free_mai(t_llist **env, t_llist *ptr, t_llist *sb, t_llist *s)
 {
 	if (sb == NULL)
 	{
 		free(ptr->content);
 		free(ptr);
-		if (save != NULL)
-			(*env) = save;
+		if (s != NULL)
+			(*env) = s;
 		else
 			*env = NULL;
 		return ;
 	}
-	if (save != NULL && sb != NULL)
-		sb->next = save;
-	else if (save == NULL && sb)
+	if (s != NULL && sb != NULL)
+		sb->next = s;
+	else if (s == NULL && sb)
 		sb->next = NULL;
 	free(ptr->content);
 	free(ptr);
 }
 
-void		clear_env(t_llist **env, const char *value, int *lenght)
+void			clear_env(t_llist **env, const char *value, int *lenght)
 {
-	t_llist	*ptr;
-	t_llist	*save;
-	t_llist	*saveb;
+	t_llist			*ptr;
+	t_llist			*save;
+	t_llist			*saveb;
 
 	ptr = *env;
 	saveb = NULL;
@@ -85,7 +71,7 @@ void		clear_env(t_llist **env, const char *value, int *lenght)
 	}
 }
 
-static t_llist		*constuct_env(char **environ)
+static t_llist	*constuct_env(char **environ)
 {
 	t_llist	*ret;
 	char	*new;
@@ -112,7 +98,7 @@ static t_llist		*constuct_env(char **environ)
 	return (ret);
 }
 
-t_llist		*build_env(char **environ)
+t_llist			*build_env(char **environ)
 {
 	t_llist	*ret;
 	char	*tmp;

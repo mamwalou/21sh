@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 13:16:24 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/02 10:42:56 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/17 03:26:11 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,16 @@ static void			redirection_complex(t_node *ast, int *status)
 
 int					redirection_fonction(t_node *ast, int *status)
 {
+	if (!ast->right_op)
+	{
+		ft_putendl_fd("parser prbl", 2);
+		return (0);
+	}
 	if (!ft_strncmp(ast->body->lexem->name_lexem, ">>", 2) ||
 		!ft_strncmp(ast->body->lexem->name_lexem, ">", 1))
 		redirection_rightsimple(ast, status);
-	else if (!ft_strncmp(ast->body->lexem->name_lexem, "<", 1))
+	else if (!ft_strncmp(ast->body->lexem->name_lexem, "<", 1)
+	|| !ft_strncmp(ast->body->lexem->name_lexem, "<<", 2))
 		redirection_leftsimple(ast, status);
 	else
 		redirection_complex(ast, status);

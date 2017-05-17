@@ -6,27 +6,12 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 09:30:05 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/17 01:53:11 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/17 03:36:48 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/termcaps/termcaps.h"
 #include "../../includes/shell.h"
-
-void			free_lchar(t_win *win)
-{
-	t_line		*ptr;
-
-	ptr = win->begin;
-	while (ptr)
-	{
-		ptr = ptr->next;
-		free(win->begin);
-		win->begin = ptr;
-	}
-	win->begin = NULL;
-	win->end = NULL;
-}
 
 static char		*simpl_lchar(t_win *win)
 {
@@ -52,7 +37,7 @@ static char		*simpl_lchar(t_win *win)
 	return (str);
 }
 
-int 			purge_key(char *key, t_win **win)
+int				purge_key(char *key, t_win **win)
 {
 	t_line		*ptr;
 	t_line		*save;
@@ -70,16 +55,7 @@ int 			purge_key(char *key, t_win **win)
 		free(save);
 		pos--;
 	}
-	if (ptr == NULL)
-	{
-		(*win)->end = NULL;
-		(*win)->begin = NULL;
-	}
-	else
-	{
-		(*win)->end = ptr;
-		(*win)->end->next = NULL;
-	}
+	toto_function(ptr, win);
 	free(g_memory.key_ctrl);
 	g_memory.key_ctrl = NULL;
 	return (ft_strlen(key));
@@ -137,43 +113,4 @@ void			list_to_array(t_win *win)
 		tmp += after_array();
 	if (tmp)
 		g_memory.line_lenght += tmp;
-}
-
-void			list_lchar(char *str, t_win *win)
-{
-	int			i;
-	int			y;
-
-	y = 0;
-	i = 0;
-	while (str[y])
-	{
-		if (str[y] == ';')
-			i = y + 1;
-		y++;
-	}
-	while (str[i])
-	{
-		push_line(win, str[i]);
-		i++;
-	}
-}
-
-char			*lchar_list(t_line *line, int lenght)
-{
-	char	*str;
-	t_line	*ptr;
-	int		i;
-
-	i = 0;
-	ptr = line;
-	str = (char*)ft_memalloc(sizeof(char) * lenght + 1);
-	while (i < lenght)
-	{
-		str[i] = ptr->l_char;
-		ptr = ptr->next;
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
 }

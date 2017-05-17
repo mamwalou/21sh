@@ -6,12 +6,26 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/14 14:22:32 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/17 03:36:46 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/termcaps/termcaps.h"
 #include "../../includes/shell.h"
+
+void			toto_function(t_line *ptr, t_win **win)
+{
+	if (ptr == NULL)
+	{
+		(*win)->end = NULL;
+		(*win)->begin = NULL;
+	}
+	else
+	{
+		(*win)->end = ptr;
+		(*win)->end->next = NULL;
+	}
+}
 
 void			move_cursr(t_win *win, t_iter iter, int iteration)
 {

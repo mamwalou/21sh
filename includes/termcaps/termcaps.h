@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/16 19:40:56 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/17 03:36:49 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ int						push_line(t_win *win, unsigned int buffer);
 int						clean_term(t_win *win);
 
 void					printline(t_line *begin);
+void 					toto_function(t_line *ptr, t_win **win);
 void					line_init(t_line **begin, t_line **end, t_win *win);
 void					handl_sig(void);
 

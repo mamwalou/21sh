@@ -6,14 +6,13 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/17 01:55:17 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/17 03:41:08 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/lexer_parser/lexer_parser.h"
-#include "../../includes/prototypage/proto.h"
 
-static int			parser(t_st_lexem **lexem, t_memory *memory)
+static int			parser(t_st_lexem **lex, t_memory *memory)
 {
 	int				count;
 	int				pos;
@@ -29,17 +28,34 @@ static int			parser(t_st_lexem **lexem, t_memory *memory)
 			if (tmp > SWITCH_MODE)
 				return (tmp);
 			count += tmp + 1;
-			save_lexem(*lexem, memory->line + pos + 1, count - 2, pos);
+			save_lexem(*lex, memory->line + pos + 1, count - 2, pos);
 		}
-		else if ((tmp = find_token(memory->line + pos, (*lexem)->end_lexem)) > 0)
+		else if ((tmp = find_token(memory->line + pos, (*lex)->end_lexem)) > 0)
 		{
 			count += tmp;
-			save_lexem(*lexem, memory->line + pos, count, pos);
+			save_lexem(*lex, memory->line + pos, count, pos);
 		}
 		else if (memory->line[count] == ' ' || memory->line[count] == '\t')
 			count++;
 	}
 	return (0);
+}
+
+static t_mode		mode_gestion(t_st_lexem *lexem, int code)
+{
+	stock_line(lexem->begin_lexem, code);
+	free_lexem(lexem->begin_lexem);
+	free(lexem);
+	free(g_memory.line);
+	g_memory.line_lenght = 0;
+	g_memory.line = NULL;
+	if (code == HEREDOC_CODE)
+		return (HEREDOC);
+	else if (code == QUOTE_CODE)
+		return (QUOTE);
+	else if (code == D_QUOTE_CODE)
+		return (D_QUOTE);
+	return (SHELL);
 }
 
 t_mode				lexer_parser(t_memory *memory)
@@ -50,21 +66,7 @@ t_mode				lexer_parser(t_memory *memory)
 	code_mode = 0;
 	lexem = (t_st_lexem*)ft_memalloc(sizeof(t_st_lexem));
 	if ((code_mode = parser(&lexem, memory)) > SWITCH_MODE)
-	{
-		stock_line(lexem->begin_lexem ,memory, code_mode);
-		free_lexem(lexem->begin_lexem);
-		free(lexem);
-		free(g_memory.line);
-		g_memory.line_lenght = 0;
-		g_memory.line = NULL;
-		if (code_mode == HEREDOC_CODE)
-			return (HEREDOC);
-		else if (code_mode == QUOTE_CODE)
-			return (QUOTE);
-		else if (code_mode == D_QUOTE_CODE)
-			return (D_QUOTE);
-	}
-	sw_list(lexem);
+		return (mode_gestion(lexem, code_mode));
 	if (lexem->begin_lexem)
 	{
 		generate_ast(lexem);

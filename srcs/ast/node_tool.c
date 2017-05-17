@@ -6,12 +6,11 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/20 19:11:22 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/12 21:01:23 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/17 03:42:06 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/ast/ast.h"
-#include "../../includes/prototypage/proto.h"
 
 t_lexem			*rechatch_lexm(t_lexem *ptr, t_st_lexem *lex)
 {

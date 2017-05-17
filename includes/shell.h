@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/16 20:47:36 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/17 03:39:02 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ char				*get_pwd(void);
 int					reset_fd(int fd, char *new_fd);
 int					find_varibale(char *str, char c);
 void				free_mai(t_llist **env, t_llist *ptr, t_llist *sb,
-								t_llist *save);
+								t_llist *s);
 
 void				print_env(void);
 

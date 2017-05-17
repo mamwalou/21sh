@@ -6,12 +6,11 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/15 16:33:55 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/17 03:41:56 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/ast/ast.h"
-#include "../../includes/prototypage/proto.h"
 
 void		free_ast(t_node *ast)
 {

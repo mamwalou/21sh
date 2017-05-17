@@ -6,12 +6,26 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/17 01:53:34 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/17 03:37:17 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 #include "../../includes/termcaps/termcaps.h"
+
+int					find_varibale(char *str, char c)
+{
+	int				count;
+
+	count = 0;
+	while (str[count])
+	{
+		if (str[count] == c)
+			return (1);
+		count++;
+	}
+	return (-1);
+}
 
 void				print_ascii(void)
 {
