@@ -70,5 +70,6 @@ int						redirection_filters(char *line);
 int						find_token(char *line, t_lexem *end);
 int						ctrl_tab(char *line, const char **tableau, int itr);
 void					stock_line(t_lexem *begin, int code_mode);
+char					*define_name_lexem(char *line);
 
 #endif

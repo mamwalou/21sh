@@ -30,6 +30,7 @@
 # define D_QUOTE_CODE 262147
 # define BACKQUOTE_CODE 262148
 # define HEREDOC_CODE 262149
+# define BCKSLASH_CODE 262150
 # define MACREALLOC(ret, name, size) (ret = ft_realloc(name, size));
 
 t_llist				*g_env;

@@ -17,7 +17,7 @@ t_lexem				*new_lexem(char *line)
 	t_lexem			*new_lexem;
 
 	new_lexem = (t_lexem*)ft_memalloc(sizeof(t_lexem));
-	new_lexem->name_lexem = ft_strdup(line);
+	new_lexem->name_lexem = define_name_lexem(line);
 	new_lexem->next = NULL;
 	new_lexem->prev = NULL;
 	new_lexem->index = 0;

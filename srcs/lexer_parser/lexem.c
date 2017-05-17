@@ -73,7 +73,6 @@ void				save_lexem(t_st_lexem *lex, char *line, int end, int begin)
 
 	tmp = ft_strndup(line, 0, end - begin);
 	new = new_lexem(tmp);
-	ft_putendl(new->name_lexem);
 	if (lex->begin_lexem == NULL)
 	{
 		lex->begin_lexem = new;

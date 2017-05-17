@@ -13,7 +13,7 @@
 #include "../../includes/termcaps/termcaps.h"
 #include "../../includes/shell.h"
 
-static char		*simpl_lchar(t_win *win)
+static char		*simpl_lchar(t_win *win, int minus)
 {
 	t_line		*ptr;
 	char		*str;
@@ -21,7 +21,13 @@ static char		*simpl_lchar(t_win *win)
 
 	i = 0;
 	str = (char*)ft_memalloc(sizeof(char) * win->lenght_line);
-	g_memory.line_lenght += win->lenght_line;
+	if (minus > win->lenght_line)
+	{
+		g_memory.line_lenght = 0;
+		return (NULL);
+	}
+	else
+		g_memory.line_lenght += win->lenght_line - minus;
 	ptr = win->begin;
 	while (ptr)
 	{
@@ -57,9 +63,10 @@ int				purge_key(char *key, t_win **win)
 		pos--;
 	}
 	toto_function(ptr, win);
+	pos = ft_strlen(key) - 1;
 	free(g_memory.key_ctrl);
 	g_memory.key_ctrl = NULL;
-	return (ft_strlen(key));
+	return (pos);
 }
 
 static int		after_array(void)
@@ -103,12 +110,10 @@ void			list_to_array(t_win *win)
 		tmp += before_array();
 	if (win->begin != NULL)
 	{
-		if (minus)
-			g_memory.line_lenght -= minus;
 		if (g_memory.line)
-			g_memory.line = ft_strjoin(g_memory.line, simpl_lchar(win));
+			g_memory.line = ft_strjoin(g_memory.line, simpl_lchar(win, minus));
 		else
-			g_memory.line = simpl_lchar(win);
+			g_memory.line = simpl_lchar(win, minus);
 	}
 	if (g_memory.line_mode_after)
 		tmp += after_array();

@@ -17,21 +17,28 @@ int				ctrl_heredoc(t_memory *memory, char *line)
 	char		*tmp;
 
 	tmp = NULL;
-	memory->key_ctrl = ft_strndup(line, 0,
-						(memory->line_lenght = find_str(line)));
-	if (line + memory->line_lenght + 1)
-		memory->line_mode_after = ft_strdup(line + memory->line_lenght + 1);
+	memory->key_ctrl = ft_strndup(line, 0, (find_str(line)));
+	if (line + (find_str(line)))
+		memory->line_mode_after = ft_strdup(line + find_str(line));
 	return (HEREDOC_CODE);
 }
 
-int				ctrl_quot(int first, int second)
+int				ctrl_backslh(char *line)
 {
+	
+}
+
+int				ctrl_quot(int first, int second, char *line)
+{
+
 	if (first == 34)
 		return (D_QUOTE_CODE);
 	else if (first == 39)
 		return (QUOTE_CODE);
 	else if (first == 96)
 		return (BACKQUOTE_CODE);
+	else if (first == '\\')
+		return (ctrl_backslh(line));
 	else if (first == '<' && second == '<' && g_memory.heredoc_sw == 0)
 		return (HEREDOC_CODE);
 	return (0);
@@ -43,7 +50,7 @@ int				ctrl_mode(char *line, t_memory *memory)
 	int			tmp;
 
 	count = 0;
-	if ((tmp = ctrl_quot(line[count], line[count + 1])) > 0)
+	if ((tmp = ctrl_quot(line[count], line[count + 1], line)) > 0)
 	{
 		count++;
 		if (tmp == HEREDOC_CODE)

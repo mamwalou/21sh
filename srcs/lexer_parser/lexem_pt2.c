@@ -32,23 +32,24 @@ static int			lenght_name_lexem(char *line)
 
 }
 
-static char			*define_name_lexem(char *line)
+char				*define_name_lexem(char *line)
 {
 	char			*str;
-	int				count;
 	int				lenght;
+	int				i;
+	int				j;
 
-	count = 0;
-	str = (char*)ft_memalloc(sizeof(char) * lenght_name_lexem(line) + 1);
-	while (line[count])
+	i = 0;
+	j = 0;
+	lenght = lenght_name_lexem(line);
+	str = (char*)ft_memalloc(sizeof(char) * lenght);
+	while (line[j])
 	{
-		if (line[count] != '\\')
-			str[count] = line[count];
-		else
-			;
-		count++;
+		if (line[j] != '\\')
+			str[i++] = line[j];
+		j++;
 	}
-	ft_putendl(str);
+	str[i] = 0;
 	return (str);
 }
 
