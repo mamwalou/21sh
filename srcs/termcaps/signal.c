@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 11:21:00 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/17 03:29:33 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/18 19:49:43 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void			handl_sigws(int sig)
 {
 	char		cp[2];
 
-	cp[0] = '.';
+	cp[0] = 0;
 	cp[1] = 0;
 	ioctl(0, TIOCGWINSZ, &(g_term.apt));
 	ioctl(0, TIOCSTI, cp);
