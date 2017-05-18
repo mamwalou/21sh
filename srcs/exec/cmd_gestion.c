@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/13 10:31:53 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/17 03:29:26 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/18 19:36:13 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void				exec_fct2(t_lexem *lexem, pid_t child)
 		else
 			wait(0);
 	}
-	free_d(env, g_memory.env_lenght);
+	free_d(env, g_memory.env_lenght + 1);
 	free(env);
 }
 

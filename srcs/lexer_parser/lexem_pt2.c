@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 20:26:51 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/17 15:03:18 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/18 19:35:19 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static int			lenght_name_lexem(char *line)
 	int				lenght;
 
 	count = 0;
+	lenght = 0;
 	while (line[count])
 	{
 		if (line[count] != '\\')
@@ -47,7 +48,8 @@ char				*define_name_lexem(char *line)
 	{
 		if (line[j] != '\\')
 		{
-			str[i++] = line[j];
+			str[i] = line[j];
+			i++;
 		}
 		j++;
 	}

@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/29 13:28:43 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/17 07:56:44 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/18 18:54:11 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int				dhistory_termcaps(t_win *win)
 
 	if (!search_env(g_env, "HISTORY="))
 		return (1);
-	while (win->cursor_line < win->lenght_line)
+	while (win->cursor_line < win->lenght_line + 1)
 	{
-		move_cursr(win, M_RIGHT, win->lenght_line);
+		move_cursr(win, M_RIGHT, 1);
 		win->cursor_line++;
 	}
 	move_cursr(win, DELETING, win->cursor_line);
