@@ -97,3 +97,29 @@ t_mode			d_quote_mode(t_win *win)
 	}
 	return (ERROR);
 }
+
+t_mode			backslash_mode(t_win *win)
+{
+	ft_putstr(">");
+	ft_bzero(win->buffer, 4);
+	while (42)
+	{
+		handl_sig();
+		ft_bzero(win->buffer, 4);
+		read(0, win->buffer, 4);
+		if ((ft_isalnum(win->buffer[0])) == 1 || (my_ctrl(win->buffer[0])) == 1)
+			push_line(win, win->buffer[0]);
+		else
+			input(win);
+		if (*(unsigned int*)win->buffer == RETURN)
+		{
+			list_to_array(win);
+			bring_back_shell(&(g_term.terminal));
+			ft_putchar('\n');
+			return (SHELL);
+		}
+		if (*(unsigned int*)win->buffer == RETURN)
+			ft_putstr("\nquote>");
+	}
+	return (ERROR);
+}

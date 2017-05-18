@@ -80,6 +80,8 @@ void			termcaps(void)
 		g_memory.mode = quote_mode(&win);
 	else if (g_memory.mode == D_QUOTE)
 		g_memory.mode = d_quote_mode(&win);
+	else if (g_memory.mode == BCKSLASH)
+		g_memory.mode = backslash_mode(&win);
 	if (win.hst != NULL)
 	{
 		free_d(win.hst, g_memory.code_history);

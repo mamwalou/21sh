@@ -46,7 +46,9 @@ char				*define_name_lexem(char *line)
 	while (line[j])
 	{
 		if (line[j] != '\\')
+		{
 			str[i++] = line[j];
+		}
 		j++;
 	}
 	str[i] = 0;

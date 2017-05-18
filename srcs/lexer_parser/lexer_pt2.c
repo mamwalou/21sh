@@ -25,7 +25,26 @@ int				ctrl_heredoc(t_memory *memory, char *line)
 
 int				ctrl_backslh(char *line)
 {
-	
+	int			pos;
+	int			y;
+
+	pos = 0;
+	y = 0;
+	while (line[pos])
+	{
+		if (ft_isalnum(line[pos]) || line[pos] == ':')
+		{
+			y = 0;
+			while (line[y] && !operator_filters(line + y) &&
+					!redirection_filters(line + y))
+				y++;;
+
+		}
+		pos++;
+	}
+	if (y)
+		return (y);
+	return (BCKSLASH_CODE);
 }
 
 int				ctrl_quot(int first, int second, char *line)
@@ -53,6 +72,8 @@ int				ctrl_mode(char *line, t_memory *memory)
 	if ((tmp = ctrl_quot(line[count], line[count + 1], line)) > 0)
 	{
 		count++;
+		if (tmp == BCKSLASH_CODE)
+			return (BCKSLASH_CODE);
 		if (tmp == HEREDOC_CODE)
 			return (ctrl_heredoc(memory, line + 3));
 		if (tmp == D_QUOTE_CODE)
@@ -63,7 +84,7 @@ int				ctrl_mode(char *line, t_memory *memory)
 			memory->key_ctrl = ft_strdup("`");
 		while (line[count])
 		{
-			if (tmp == ctrl_quot(line[count], 0))
+			if (tmp == ctrl_quot(line[count], 0, line))
 				return (count);
 			count++;
 		}

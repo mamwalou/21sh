@@ -42,6 +42,7 @@ typedef	enum		e_mode
 	QUOTE,
 	D_QUOTE,
 	BACKQUOTE,
+	BCKSLASH,
 	ERROR,
 }					t_mode;
 
@@ -83,7 +84,7 @@ int					is_bulltin(char *cmd);
 int					operator_ctrl(int test);
 int					find_str(char *line);
 int					ctrl_mode(char *line, t_memory *memory);
-int					ctrl_quot(int first, int second);
+int					ctrl_quot(int first, int second, char *line);
 
 t_llist				*my_setenv();
 char				**my_env(t_llist *env);

@@ -55,6 +55,8 @@ static t_mode		mode_gestion(t_st_lexem *lexem, int code)
 		return (QUOTE);
 	else if (code == D_QUOTE_CODE)
 		return (D_QUOTE);
+	else if (code == BCKSLASH_CODE)
+		return (BCKSLASH);
 	return (SHELL);
 }
 
@@ -67,10 +69,10 @@ t_mode				lexer_parser(t_memory *memory)
 	lexem = (t_st_lexem*)ft_memalloc(sizeof(t_st_lexem));
 	if ((code_mode = parser(&lexem, memory)) > SWITCH_MODE)
 		return (mode_gestion(lexem, code_mode));
-/*	if (lexem->begin_lexem)
+	if (lexem->begin_lexem)
 	{
 		generate_ast(lexem);
 		free(lexem);
-	}*/
+	}
 	return (SHELL);
 }

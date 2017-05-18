@@ -86,7 +86,6 @@ int					main(int argc, char **argv, char **environ)
 	while (42)
 	{
 		termcaps();
-		ft_putendl(g_memory.line);
 		if (g_memory.line)
 		{
 			g_memory.mode = lexer_parser(&g_memory);

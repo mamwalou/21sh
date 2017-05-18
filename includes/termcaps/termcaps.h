@@ -120,6 +120,7 @@ t_mode					shell_mode(t_win *win);
 t_mode					hered_mode(t_win *win);
 t_mode					quote_mode(t_win *win);
 t_mode					d_quote_mode(t_win *win);
+t_mode					backslash_mode(t_win *win);
 int						stop_her(t_line **end);
 
 int						stoq(t_line *end, int key);
