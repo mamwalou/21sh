@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 11:21:00 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/18 19:49:43 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/18 20:51:06 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void			handl_sig(void)
 {
 	signal(SIGKILL, SIG_IGN);
 	signal(SIGSEGV, SIG_IGN);
-	signal(SIGWINCH, handl_sigws);
 	signal(SIGTSTP, handl_sigstrp);
 	signal(SIGCONT, handl_sigcont);
 }

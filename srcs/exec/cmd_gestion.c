@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/13 10:31:53 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/18 19:50:15 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/18 20:20:04 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ void				exec_fct2(t_lexem *lexem, pid_t child)
 		else
 			wait(0);
 	}
-
 }
 
 int					exec_fct(t_node *ast, int *status)

@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 11:14:20 by sbeline           #+#    #+#             */
-/*   Updated: 2017/04/29 15:39:07 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/18 20:51:01 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ void			exec_fonc_sep(t_node *ast, int *status)
 	int			tmp;
 
 	tmp = 0;
-	exec_tree(ast->left_op, &tmp);
-	exec_tree(ast->right_op, status);
+	if (*status == 0)
+		exec_tree(ast->left_op, &tmp);
+	if (tmp == 1)
+		exec_tree(ast->right_op, status);
 }
 
 void			exec_fonc_or(t_node *ast, int *status)
