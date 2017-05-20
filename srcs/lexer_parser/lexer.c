@@ -44,9 +44,10 @@ int				redirection_filters(char *line)
 	tableau[1] = "<<";
 	tableau[2] = ">";
 	tableau[3] = "<";
-	count = ft_isdigit(line[count]) ? 1 : 0;
-	count = (line[count] == '&') ? 1 : 0;
-	if ((tmp = ctrl_tab(line, tableau, 3)) > 0)
+	while (ft_isdigit(line[count]))
+		count++;
+	count += (line[count] == '&') ? 1 : 0;
+	if ((tmp = ctrl_tab(line + count, tableau, 4)) > 0)
 		return (tmp + count);
 	return (0);
 }
@@ -56,7 +57,7 @@ int				find_str(char *line)
 	int			count;
 
 	count = 0;
-	while ((line[count]) && (line[count] != ' ' && line[count] != '\t'))
+	while ((line[count]) && (line[count] != ' '))
 	{
 		if (line[count] == '\\' && !line[count + 1])
 			return (BCKSLASH_CODE);

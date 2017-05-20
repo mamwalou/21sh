@@ -27,7 +27,10 @@ void			exec_fonc_and(t_node *ast, int *status)
 	if (*status == 0)
 	{
 		if (ast->right_op == NULL)
+		{
 			ft_putendl_fd("bash: syntax error near unexpected token `&&'", 2);
+			*status = 1;
+		}
 		else
 			exec_tree(ast->right_op, status);
 	}
