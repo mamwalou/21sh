@@ -119,7 +119,7 @@ t_mode			backslash_mode(t_win *win)
 			return (SHELL);
 		}
 		if (*(unsigned int*)win->buffer == RETURN)
-			ft_putstr("\nquote>");
+			ft_putstr(">");
 	}
 	return (ERROR);
 }

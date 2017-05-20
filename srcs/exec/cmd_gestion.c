@@ -106,7 +106,7 @@ int					exec_fct(t_node *ast, int *status)
 
 	pos = 1;
 	child_pid = 0;
-	if ((find_command(&ast->body->lexem->option[0])) > 0)
+	if (ast && (find_command(&ast->body->lexem->option[0])) > 0)
 		exec_fct2(ast->body->lexem, child_pid);
 	else
 	{

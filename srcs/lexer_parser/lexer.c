@@ -58,11 +58,12 @@ int				find_str(char *line)
 	count = 0;
 	while ((line[count]) && (line[count] != ' ' && line[count] != '\t'))
 	{
+		if (line[count] == '\\' && !line[count + 1])
+			return (BCKSLASH_CODE);
 		if ((operator_filters(line + count)) > 0)
 			return (count);
-		if (ft_isdigit(line[count]) && !ft_isdigit(line[count - 1]))
-			if ((redirection_filters(line + count)) > 0)
-				return (count);
+		if ((redirection_filters(line + count)) > 0)
+			return (count);
 		count++;
 	}
 	return (count);
@@ -71,12 +72,28 @@ int				find_str(char *line)
 int				find_token(char *line, t_lexem *end)
 {
 	int			tmp;
+	int			iter;
 
 	tmp = 0;
+	iter = 0;
 	if ((tmp = redirection_filters(line)) > 0)
 		return (tmp);
 	if ((tmp = operator_filters(line)) > 0)
-		return (tmp);
+	{
+		iter = tmp;
+		if (!line[iter])
+			return (BCKSLASH_CODE);
+		else
+		{
+			while (line[iter] && line[iter] == ' ')
+			{
+				if (!line[iter + 1])
+					return (BCKSLASH_CODE);
+				iter++;
+			}
+			return (tmp);
+		}
+	}
 	if ((tmp = find_str(line)) > 0)
 		return (tmp);
 	return (tmp);

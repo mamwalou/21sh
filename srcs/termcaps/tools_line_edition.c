@@ -104,7 +104,7 @@ void			list_to_array(t_win *win)
 	tmp = 0;
 	minus = 0;
 	if (g_memory.key_ctrl && g_memory.key_ctrl[0] != 39
-		&& g_memory.key_ctrl[0] != 34)
+		&& g_memory.key_ctrl[0] != 34 && g_memory.key_ctrl[0] != '\\')
 		minus = purge_key(g_memory.key_ctrl, &win);
 	if (g_memory.line_mode)
 		tmp += before_array();

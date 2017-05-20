@@ -27,11 +27,13 @@ static int			parser(t_st_lexem **lex, t_memory *memory)
 		{
 			if (tmp > SWITCH_MODE)
 				return (tmp);
-			count += tmp + 1;
+			count += tmp;
 			save_lexem(*lex, memory->line + pos, count, pos);
 		}
 		else if ((tmp = find_token(memory->line + pos, (*lex)->end_lexem)) > 0)
 		{
+			if (tmp > SWITCH_MODE)
+				return (tmp);
 			count += tmp;
 			save_lexem(*lex, memory->line + pos, count, pos);
 		}
