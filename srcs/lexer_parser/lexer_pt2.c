@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/16 19:21:45 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/21 22:12:43 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,9 @@ int				ctrl_mode(char *line, t_memory *memory)
 		while (line[count])
 		{
 			if (tmp == ctrl_quot(line[count], 0, line))
-				return (count);
+			{
+				return (count + 1);
+			}
 			count++;
 		}
 		return (tmp);

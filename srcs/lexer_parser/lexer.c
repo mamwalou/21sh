@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/17 14:21:23 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/21 22:11:02 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,10 @@ int				redirection_filters(char *line)
 	tableau[1] = "<<";
 	tableau[2] = ">";
 	tableau[3] = "<";
-	while ( ft_isdigit(line[count]))
+	while (ft_isdigit(line[count]))
 		count++;
+	if (count > 1)
+		return (count);
 	count += (line[count] == '&') ? 1 : 0;
 	if ((tmp = ctrl_tab(line + count, tableau, 4)) > 0)
 		return (tmp + count);
@@ -55,16 +57,18 @@ int				redirection_filters(char *line)
 int				find_str(char *line)
 {
 	int			count;
+	int			itr;
 
+	itr = 0;
 	count = 0;
-	while ((line[count]) && (line[count] != ' '))
+	while ((line[count]) && ((line[count] != ' ') || (line[count - 1] == '\\')))
 	{
-		if (line[count] == '\\' && !line[count + 1])
-			return (BCKSLASH_CODE);
 		if ((operator_filters(line + count)) > 0)
 			return (count);
 		if ((redirection_filters(line + count)) > 0)
 			return (count);
+		if (line[count] == '\\' && (!line[count + 1]))
+			return (BCKSLASH_CODE);
 		count++;
 	}
 	return (count);

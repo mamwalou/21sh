@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 16:45:53 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/17 03:10:06 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/21 22:03:11 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,6 @@ void					ft_unsetenv(char *name);
 void					ft_echo(char **cmd);
 void					fnc_exit();
 void					print_env(void);
+void					treat_redirection(t_node *ast, int fd[3], int *status);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/18 20:51:05 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/21 22:11:14 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,6 @@ void 			rev_sw_list(t_st_lexem *l)
 	}
 }
 
-
-
 /*****************************************************/
 static int			parser(t_st_lexem **lex, t_memory *memory)
 {
@@ -114,7 +112,7 @@ static int			parser(t_st_lexem **lex, t_memory *memory)
 			count += tmp;
 			save_lexem(*lex, memory->line + pos, count, pos);
 		}
-		else if (memory->line[count] == ' ' || memory->line[count] == '\t')
+		else if (memory->line[count] == ' ')
 			count++;
 	}
 	return (0);
