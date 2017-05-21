@@ -6,13 +6,12 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/12 23:05:07 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/21 22:03:08 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/22 00:15:14 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/termcaps/termcaps.h"
 #include "../../includes/shell.h"
-
 int					my_ctrl(int test)
 {
 	if (test == '-'
@@ -87,7 +86,7 @@ void				read_instance(t_win *win)
 	ft_bzero(win->buffer, MAX_LEN + 1);
 	while (y != 10 || (y == 10 && z != 0))
 	{
-		handl_sig();
+		//handl_sig();
 		ft_bzero(win->buffer, MAX_LEN + 1);
 		read(0, win->buffer, MAX_LEN);
 		if (input(win) > 0)

@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 20:26:51 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/18 20:51:06 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/21 23:27:33 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int			lenght_name_lexem(char *line)
 	lenght = 0;
 	while (line[count])
 	{
-		if (line[count] != '\\')
+		if (line[count] != '\\' && line[count] != '\"' && line[count] != '\'')
 		{
 			lenght++;
 			count++;
@@ -30,6 +30,29 @@ static int			lenght_name_lexem(char *line)
 			count++;
 	}
 	return (lenght);
+
+}
+
+char				*name_lex_quo(char *line, int lenght)
+{
+	char			*str;
+	str = (char*)ft_memalloc(sizeof(char) * lenght);
+
+	int				i;
+	int				j;
+	i = 0;
+	j = 0;
+	while (line[j])
+	{
+		if (line[j] != '\\')
+		{
+			str[i] = line[j];
+			i++;
+		}
+		j++;
+	}
+	str[i] = 0;
+	return (str);
 
 }
 
@@ -43,6 +66,8 @@ char				*define_name_lexem(char *line)
 	i = 0;
 	j = 0;
 	lenght = lenght_name_lexem(line);
+	if (*line == '\"' || *line == '\'')
+		return (name_lex_quo(line + 1, lenght));
 	str = (char*)ft_memalloc(sizeof(char) * lenght);
 	while (line[j])
 	{

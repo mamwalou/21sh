@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/15 16:36:53 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/15 16:37:46 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/22 00:01:21 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,9 @@ int				find_command(char **cmd)
 
 	tmp = NULL;
 	lenght_path = 0;
-	if (access(*cmd, X_OK) == 0 || is_bulltin(*cmd))
+	if (access(*cmd, X_OK) == 0)
+		return (1);
+	if (is_bulltin(*cmd) == 1)
 		return (1);
 	if ((path = find_path(&lenght_path)) == NULL)
 		return (print_error(*cmd, CD_CMD, path, lenght_path));

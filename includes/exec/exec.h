@@ -6,14 +6,14 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 16:45:53 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/21 22:03:11 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/21 23:37:19 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXEC_H
 # define EXEC_H
 # include "../../includes/ast/ast.h"
-# define NB_TOKEN 7
+# define NB_TOKEN 6
 
 typedef enum			e_code
 {

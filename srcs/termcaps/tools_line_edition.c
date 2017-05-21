@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 09:30:05 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/17 08:28:36 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/22 00:49:51 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static char		*simpl_lchar(t_win *win, int minus)
 	}
 	win->begin = NULL;
 	win->end = NULL;
-	str[i] = '\0';
+	str[win->lenght_line] = 0;
 	return (str);
 }
 
@@ -103,20 +103,20 @@ void			list_to_array(t_win *win)
 
 	tmp = 0;
 	minus = 0;
-	if (g_memory.key_ctrl && g_memory.key_ctrl[0] != 39
+/*	if (g_memory.key_ctrl && g_memory.key_ctrl[0] != 39
 		&& g_memory.key_ctrl[0] != 34 && g_memory.key_ctrl[0] != '\\')
 		minus = purge_key(g_memory.key_ctrl, &win);
 	if (g_memory.line_mode)
-		tmp += before_array();
+		tmp += before_array();*/
 	if (win->begin != NULL)
 	{
-		if (g_memory.line)
+		/*if (g_memory.line)
 			g_memory.line = ft_strjoin(g_memory.line, simpl_lchar(win, minus));
-		else
-			g_memory.line = simpl_lchar(win, minus);
+		else*/
+		g_memory.line = simpl_lchar(win, minus);
 	}
-	if (g_memory.line_mode_after)
+	/*if (g_memory.line_mode_after)
 		tmp += after_array();
 	if (tmp)
-		g_memory.line_lenght += tmp;
+		g_memory.line_lenght += tmp;*/
 }

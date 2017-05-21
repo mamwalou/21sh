@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/21 22:03:17 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/22 00:15:17 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ static void			write_history(t_memory *memory)
 	write(fd, memory->line, ft_strlen(memory->line));
 	write(fd, "\n", 1);
 	free(tmp);
+	close(fd);
 	memory->code_history++;
 }
 

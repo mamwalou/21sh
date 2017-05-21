@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/13 12:36:06 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/21 14:31:12 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/22 00:15:09 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_lexem				*new_lexem(char *line)
 	t_lexem			*new_lexem;
 
 	new_lexem = (t_lexem*)ft_memalloc(sizeof(t_lexem));
-	new_lexem->name_lexem = define_name_lexem(line);
+	new_lexem->name_lexem = ft_strdup(line);
 	new_lexem->next = NULL;
 	new_lexem->prev = NULL;
 	new_lexem->index = 0;

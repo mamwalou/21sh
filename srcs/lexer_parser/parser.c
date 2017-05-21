@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/21 22:11:14 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/22 00:38:47 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,25 +94,27 @@ static int			parser(t_st_lexem **lex, t_memory *memory)
 	int				tmp;
 
 	count = 0;
+	printf("before_a->>>%s\n", memory->line);
 	while (count < memory->line_lenght)
 	{
 		tmp = 0;
 		pos = count;
+		printf("boucle_a->>>%s\n", memory->line);
 		if ((tmp = ctrl_mode(memory->line + count, memory)) > 0)
 		{
 			if (tmp > SWITCH_MODE)
 				return (tmp);
-			count += tmp;
-			save_lexem(*lex, memory->line + pos, count, pos);
+			count += tmp + 1;
+			save_lexem(*lex, memory->line + pos + 1, count - 2, pos);
+			printf("boucle_b->>>%s\n", memory->line);
 		}
 		else if ((tmp = find_token(memory->line + pos, (*lex)->end_lexem)) > 0)
 		{
-			if (tmp > SWITCH_MODE)
-				return (tmp);
 			count += tmp;
 			save_lexem(*lex, memory->line + pos, count, pos);
+			printf("boucle_c->>>%s\n", memory->line);
 		}
-		else if (memory->line[count] == ' ')
+		else if (memory->line[count] == ' ' || memory->line[count] == '\t')
 			count++;
 	}
 	return (0);

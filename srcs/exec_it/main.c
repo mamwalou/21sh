@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/17 08:28:38 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/22 00:51:50 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int					main(int argc, char **argv, char **environ)
 			g_memory.mode = lexer_parser(&g_memory);
 			if (g_memory.mode == SHELL)
 			{
-				push_history();
+				//push_history();
 				free(g_memory.line);
 				g_memory.line = NULL;
 				g_memory.line_lenght = 0;

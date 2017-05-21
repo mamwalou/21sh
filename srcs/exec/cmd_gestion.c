@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/13 10:31:53 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/18 20:20:04 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/22 00:15:19 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,7 @@ void				exec_fct2(t_lexem *lexem, pid_t child)
 		child = fork();
 		if (!child)
 		{
-			env = copy_env();
-			execve(lexem->option[0], lexem->option, env);
-			free_d(env, g_memory.env_lenght);
-			free(env);
+			execve(lexem->option[0], lexem->option, NULL);
 			exit(1);
 		}
 		else if (child < 0)
