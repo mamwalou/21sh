@@ -1,8 +1,1 @@
-21sh
-auteur
-includes
-libft
-Makefile
-obj
-srcs
-test
+ls: cannot access 'qwd': No such file or directory

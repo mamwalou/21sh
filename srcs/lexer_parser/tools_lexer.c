@@ -26,12 +26,6 @@ int				ctrl_tab(char *line, const char **tableau, int itr)
 			count += ft_strlen(tableau[i]);
 			if (!(ft_strcmp(tableau[i], "<<")))
 				g_memory.heredoc_sw = 0;
-			if (line[count] == '&')
-			{
-				count++;
-				while (ft_isdigit(line[count]))
-					count++;
-			}
 			return (count);
 		}
 		i++;

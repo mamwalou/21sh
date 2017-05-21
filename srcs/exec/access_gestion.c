@@ -63,7 +63,7 @@ int				find_command(char **cmd)
 
 	tmp = NULL;
 	lenght_path = 0;
-	if (access(*cmd, X_OK) == 0 && is_bulltin(*cmd))
+	if (access(*cmd, X_OK) == 0 || is_bulltin(*cmd))
 		return (1);
 	if ((path = find_path(&lenght_path)) == NULL)
 		return (print_error(*cmd, CD_CMD, path, lenght_path));

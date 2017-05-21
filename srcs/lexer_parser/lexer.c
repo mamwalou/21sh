@@ -44,7 +44,7 @@ int				redirection_filters(char *line)
 	tableau[1] = "<<";
 	tableau[2] = ">";
 	tableau[3] = "<";
-	while (ft_isdigit(line[count]))
+	while ( ft_isdigit(line[count]))
 		count++;
 	count += (line[count] == '&') ? 1 : 0;
 	if ((tmp = ctrl_tab(line + count, tableau, 4)) > 0)
