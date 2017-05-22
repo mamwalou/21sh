@@ -67,7 +67,8 @@ int				find_str(char *line)
 			return (count);
 		if ((redirection_filters(line + count)) > 0)
 			return (count);
-		if (ctrl_mode())
+		if (ctrl_mode(line + count, &g_memory) > 0)
+			return (count);
 		if (line[count] == '\\' && (!line[count + 1]))
 			return (BCKSLASH_CODE);
 		count++;
@@ -75,7 +76,7 @@ int				find_str(char *line)
 	return (count);
 }
 
-int				find_token(char *line, t_lexem *end)
+int				find_token(char *line)
 {
 	int			tmp;
 	int			iter;
@@ -83,6 +84,8 @@ int				find_token(char *line, t_lexem *end)
 	tmp = 0;
 	iter = 0;
 	if ((tmp = redirection_filters(line)) > 0)
+		return (tmp);
+	if ((tmp = ctrl_mode(line, &g_memory)) > 0)
 		return (tmp);
 	if ((tmp = operator_filters(line)) > 0)
 	{

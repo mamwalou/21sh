@@ -12,12 +12,65 @@
 
 #include "../../includes/lexer_parser/lexer_parser.h"
 
+int 				recall_q(char *line)
+{
+	int				count;
+
+	count = 0;
+	while (line[count] != '\"')
+	{
+		ft_putchar(line[count]);
+		count++;
+	}
+	return (count - 1);
+}
+
+int 				recall_ob(char *line)
+{
+	int				count;
+
+	count = 0;
+
+	if (line[count] == '\\')
+	{
+		count++;
+		ft_putchar(line[count]);
+	}
+	else
+		ft_putchar(line[count]);
+	count++;
+	return (count);
+}
+
+char				*define_name_lexem(char *line)
+{
+	int				count;
+	int				mode;
+
+
+	count = 0;
+	while (line[count])
+	{
+		mode = (line[count] == '\'' || line[count] == '\"') ? 1 : 0;
+		if (mode == 1)
+		{
+			count++;
+			count += recall_q(line + count);
+			count++;
+			mode = 0;
+		}
+		else
+			count += recall_ob(line + count);
+	}
+	return (NULL);
+}
+
 t_lexem				*new_lexem(char *line)
 {
 	t_lexem			*new_lexem;
 
 	new_lexem = (t_lexem*)ft_memalloc(sizeof(t_lexem));
-	new_lexem->name_lexem = define_name_lexem(line);
+	new_lexem->name_lexem = ft_strdup(line);
 	new_lexem->next = NULL;
 	new_lexem->prev = NULL;
 	new_lexem->index = 0;

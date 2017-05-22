@@ -98,14 +98,8 @@ static int			parser(t_st_lexem **lex, t_memory *memory)
 	{
 		tmp = 0;
 		pos = count;
-		if ((tmp = ctrl_mode(memory->line + count, memory)) > 0)
-		{
-			if (tmp > SWITCH_MODE)
-				return (tmp);
-			count += tmp + 1;
-			save_lexem(*lex, memory->line + pos, count - 1, pos);
-		}
-		else if ((tmp = find_token(memory->line + pos, (*lex)->end_lexem)) > 0)
+		printf("%s\n", memory->line + pos);
+		if ((tmp = find_token(memory->line + pos)) > 0)
 		{
 			if (tmp > SWITCH_MODE)
 				return (tmp);
@@ -121,7 +115,8 @@ static int			parser(t_st_lexem **lex, t_memory *memory)
 static t_mode		mode_gestion(t_st_lexem *lexem, int code)
 {
 	stock_line(lexem->begin_lexem, code);
-	free_lexem(lexem->begin_lexem);
+	if (lexem->begin_lexem)
+		free_lexem(lexem->begin_lexem);
 	free(lexem);
 	free(g_memory.line);
 	g_memory.line_lenght = 0;

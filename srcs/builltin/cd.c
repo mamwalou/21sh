@@ -75,8 +75,8 @@ void			dash_one(char *str)
 	char		*save_pwd;
 	char		*pwd;
 
-	chdir(str);
 	save_pwd = get_pwd();
+	chdir(str);
 	if ((!search_env(g_env, "PWD") || !search_env(g_env, "OLDPWD=")))
 		cd_pwd(save_pwd);
 	if (search_env(g_env, "OLDPWD="))

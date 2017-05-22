@@ -67,7 +67,7 @@ void					arg_files(t_st_lexem *lex);
 void					generate_ast(t_st_lexem *lex);
 
 int						redirection_filters(char *line);
-int						find_token(char *line, t_lexem *end);
+int						find_token(char *line);
 int						ctrl_tab(char *line, const char **tableau, int itr);
 void					stock_line(t_lexem *begin, int code_mode);
 char					*define_name_lexem(char *line);
