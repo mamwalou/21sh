@@ -16,43 +16,28 @@ static int			lenght_name_lexem(char *line)
 {
 	int				count;
 	int				lenght;
+	int				mode;
 
+	mode = 0;
 	count = 0;
 	lenght = 0;
 	while (line[count])
 	{
-		if (line[count] != '\\' && line[count] != '\"' && line[count] != '\'')
-		{
-			lenght++;
-			count++;
-		}
+		if (line[count] == '\"' || line[count] == '\'')
+			mode = (mode == 0) ? 1 : 0;
 		else
-			count++;
+		{
+			if (mode == 1)
+				lenght++;
+			else if (mode == 0)
+			{
+				if (line[count] != '\\' || line[count - 1] == '\\')
+					lenght++;
+			}
+		}
+		count++;
 	}
 	return (lenght);
-
-}
-
-char				*name_lex_quo(char *line, int lenght)
-{
-	char			*str;
-	str = (char*)ft_memalloc(sizeof(char) * lenght);
-
-	int				i;
-	int				j;
-	i = 0;
-	j = 0;
-	while (line[j])
-	{
-		if (line[j] != '\\')
-		{
-			str[i] = line[j];
-			i++;
-		}
-		j++;
-	}
-	str[i] = 0;
-	return (str);
 
 }
 
@@ -60,23 +45,39 @@ char				*define_name_lexem(char *line)
 {
 	char			*str;
 	int				lenght;
+	int				mode;
 	int				i;
 	int				j;
 
 	i = 0;
 	j = 0;
+	mode = 0;
 	lenght = lenght_name_lexem(line);
-	if (*line == '\"' || *line == '\'')
-		return (name_lex_quo(line + 1, lenght));
-	str = (char*)ft_memalloc(sizeof(char) * lenght);
+	str = (char*)ft_memalloc(sizeof(char) * lenght + 1);
 	while (line[j])
 	{
-		if (line[j] != '\\')
+		if (line[j] == '\"' || line[j] == '\'')
 		{
-			str[i] = line[j];
-			i++;
+			mode = (mode == 0) ? 1 : 0;
+			j++;
 		}
-		j++;
+		else
+		{
+			if (mode == 1)
+			{
+				str[i] = line[j];
+				i++;
+			}
+			else if (mode == 0)
+			{
+				if (line[j] != '\\' || line[j - 1] == '\\')
+				{
+					str[i] = line[j];
+					i++;
+				}
+			}
+			j++;
+		}
 	}
 	str[i] = 0;
 	return (str);

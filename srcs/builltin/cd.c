@@ -12,9 +12,11 @@
 
 #include "../../includes/exec/exec.h"
 
-void			go_home(void)
+static void		go_home(char *home_bis)
 {
+	int			*tableau;
 	char		*home;
+	char		*joint;
 	char		*pwd;
 
 	pwd = get_pwd();
@@ -22,9 +24,26 @@ void			go_home(void)
 		ft_putendl_fd("no home set", 2);
 	else
 	{
-		chdir(home);
-		replace_env(&g_env, "PWD=", home, &g_memory.env_lenght);
-		replace_env(&g_env, "OLDPWD=", pwd, &g_memory.env_lenght);
+		if (home_bis == NULL || !home_bis[1])
+		{
+			chdir(home);
+			replace_env(&g_env, "PWD=", home, &g_memory.env_lenght);
+			replace_env(&g_env, "OLDPWD=", pwd, &g_memory.env_lenght);
+		}
+		else
+		{
+			joint = ft_strtrijoin(home, "/", home_bis + 2);
+			if ((is_dir(joint)) != REP)
+			{
+				ft_putstr_fd("cd: no such file or directory:", 2);
+				ft_putendl_fd(joint, 2);
+			}
+			else
+			{
+				replace_env(&g_env, "PWD=", joint, &g_memory.env_lenght);
+				replace_env(&g_env, "OLDPWD=", pwd, &g_memory.env_lenght);
+			}
+		}
 	}
 	free(pwd);
 }
@@ -76,11 +95,11 @@ void			ft_cd(char **cmd, int index)
 	if (index == 4)
 		ft_putendl_fd("cd: too many arguments", 2);
 	if (index == 1)
-		go_home();
+		go_home(NULL);
 	if (index > 1)
 	{
 		if (*cmd[1] == '~')
-			go_home();
+			go_home(cmd[1]);
 		else if (*cmd[1] == '-' && search_env(g_env, "OLDPWD="))
 			dash_one(search_env(g_env, "OLDPWD="));
 		else if (index == 2 && is_dir(cmd[1]) == REP)

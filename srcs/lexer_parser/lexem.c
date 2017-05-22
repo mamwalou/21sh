@@ -70,14 +70,12 @@ void				save_lexem(t_st_lexem *lex, char *line, int end, int begin)
 {
 	t_lexem			*new;
 	char			*tmp;
+	char			*tmp2;
 
-	tmp = NULL;
-	printf("in_lexem_before_strndup->>>%s(%p)\n", line, line);
-	printf("value of end%d value of begin%d\n", end, begin);
 	tmp = ft_strndup(line, 0, end - begin);
-	printf("in_lexem_afer_strndup_before new_lexem->>>%s\n", line);
-	new = new_lexem(tmp);
-	printf("in_lexem_afer_strndup->>>%s, (%p)\n", line, line);
+	tmp2 = define_name_lexem(tmp);
+	free(tmp);
+	new = new_lexem(tmp2);
 	if (lex->begin_lexem == NULL)
 	{
 		lex->begin_lexem = new;
@@ -87,12 +85,12 @@ void				save_lexem(t_st_lexem *lex, char *line, int end, int begin)
 			new->token_type = VARIABLE;
 		if (new->token_type == CMD)
 			option_lexem(lex, new);
-		free(tmp);
+		free(tmp2);
 		return ;
 	}
 	else
 	{
-		ctrl_lexem(lex, tmp, new);
-		free(tmp);
+		ctrl_lexem(lex, tmp2, new);
+		free(tmp2);
 	}
 }

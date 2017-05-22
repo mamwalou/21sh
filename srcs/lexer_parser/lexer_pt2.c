@@ -25,7 +25,6 @@ int				ctrl_heredoc(t_memory *memory, char *line)
 
 int				ctrl_quot(int first, int second, char *line)
 {
-
 	if (first == 34)
 		return (D_QUOTE_CODE);
 	else if (first == 39)

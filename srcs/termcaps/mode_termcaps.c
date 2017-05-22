@@ -26,7 +26,6 @@ t_mode			hered_mode(t_win *win)
 	ft_bzero(win->buffer, 4);
 	while (42)
 	{
-		handl_sig();
 		ft_bzero(win->buffer, 4);
 		read(0, win->buffer, 4);
 		if ((ft_isalnum(win->buffer[0])) == 1 || (my_ctrl(win->buffer[0])) == 1)
@@ -52,7 +51,6 @@ t_mode			quote_mode(t_win *win)
 	ft_bzero(win->buffer, 4);
 	while (42)
 	{
-		handl_sig();
 		ft_bzero(win->buffer, 4);
 		read(0, win->buffer, 4);
 		if ((ft_isalnum(win->buffer[0])) == 1 || (my_ctrl(win->buffer[0])) == 1)
@@ -78,7 +76,6 @@ t_mode			d_quote_mode(t_win *win)
 	ft_bzero(win->buffer, 4);
 	while (42)
 	{
-		handl_sig();
 		ft_bzero(win->buffer, 4);
 		read(0, win->buffer, 4);
 		if ((ft_isalnum(win->buffer[0])) == 1 || (my_ctrl(win->buffer[0])) == 1)
@@ -104,7 +101,6 @@ t_mode			backslash_mode(t_win *win)
 	ft_bzero(win->buffer, 4);
 	while (42)
 	{
-		handl_sig();
 		ft_bzero(win->buffer, 4);
 		read(0, win->buffer, 4);
 		if ((ft_isalnum(win->buffer[0])) == 1 || (my_ctrl(win->buffer[0])) == 1)

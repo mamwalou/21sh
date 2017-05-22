@@ -91,7 +91,7 @@ int					main(int argc, char **argv, char **environ)
 			g_memory.mode = lexer_parser(&g_memory);
 			if (g_memory.mode == SHELL)
 			{
-				//push_history();
+				push_history();
 				free(g_memory.line);
 				g_memory.line = NULL;
 				g_memory.line_lenght = 0;

@@ -47,7 +47,7 @@ int				redirection_filters(char *line)
 	while (ft_isdigit(line[count]))
 		count++;
 	if (count > 1)
-		return (count);
+		return (0);
 	count += (line[count] == '&') ? 1 : 0;
 	if ((tmp = ctrl_tab(line + count, tableau, 4)) > 0)
 		return (tmp + count);
@@ -67,8 +67,9 @@ int				find_str(char *line)
 			return (count);
 		if ((redirection_filters(line + count)) > 0)
 			return (count);
-		/*if (line[count] == '\\' && (!line[count + 1]))
-			return (BCKSLASH_CODE);*/
+		if (ctrl_mode())
+		if (line[count] == '\\' && (!line[count + 1]))
+			return (BCKSLASH_CODE);
 		count++;
 	}
 	return (count);
@@ -85,7 +86,7 @@ int				find_token(char *line, t_lexem *end)
 		return (tmp);
 	if ((tmp = operator_filters(line)) > 0)
 	{
-		/*iter = tmp;
+		iter = tmp;
 		if (!line[iter])
 			return (BCKSLASH_CODE);
 		else
@@ -96,7 +97,7 @@ int				find_token(char *line, t_lexem *end)
 					return (BCKSLASH_CODE);
 				iter++;
 			}
-		}*/
+		}
 		return (tmp);
 
 	}

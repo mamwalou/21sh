@@ -20,7 +20,7 @@ static char		*simpl_lchar(t_win *win, int minus)
 	int			i;
 
 	i = 0;
-	str = (char*)ft_memalloc(sizeof(char) * win->lenght_line);
+	str = (char*)ft_memalloc(sizeof(char) * win->lenght_line + 1);
 	if (minus > win->lenght_line)
 	{
 		g_memory.line_lenght = 0;
@@ -31,8 +31,7 @@ static char		*simpl_lchar(t_win *win, int minus)
 	ptr = win->begin;
 	while (ptr)
 	{
-		if (ptr->l_char != RETURN)
-			str[i] = ptr->l_char;
+		str[i] = ptr->l_char;
 		ptr = ptr->next;
 		free(win->begin);
 		win->begin = ptr;
@@ -40,7 +39,7 @@ static char		*simpl_lchar(t_win *win, int minus)
 	}
 	win->begin = NULL;
 	win->end = NULL;
-	str[win->lenght_line] = 0;
+	str[i] = 0;
 	return (str);
 }
 
@@ -103,11 +102,11 @@ void			list_to_array(t_win *win)
 
 	tmp = 0;
 	minus = 0;
-/*	if (g_memory.key_ctrl && g_memory.key_ctrl[0] != 39
+	if (g_memory.key_ctrl && g_memory.key_ctrl[0] != 39
 		&& g_memory.key_ctrl[0] != 34 && g_memory.key_ctrl[0] != '\\')
 		minus = purge_key(g_memory.key_ctrl, &win);
 	if (g_memory.line_mode)
-		tmp += before_array();*/
+		tmp += before_array();
 	if (win->begin != NULL)
 	{
 		/*if (g_memory.line)
