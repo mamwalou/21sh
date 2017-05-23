@@ -6,63 +6,82 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/13 12:36:06 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/22 00:15:09 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/23 11:45:25 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/lexer_parser/lexer_parser.h"
 
-int 				recall_q(char *line)
+int 				recall_q(char **str, char *line)
 {
+	char			*tmp;
 	int				count;
 
 	count = 0;
-	while (line[count] != '\"')
+	tmp = NULL;
+	while (line[count] != '\"' && line[count] != '\'')
 	{
-		ft_putchar(line[count]);
 		count++;
 	}
-	return (count - 1);
+	if (*str == NULL)
+		*str = ft_strndup(line, 0, count);
+	else
+	{
+		tmp = ft_strndup(line, 0, count);
+		*str = ft_strjoin(*str, tmp);
+		free(tmp);
+	}
+	return (count);
 }
 
-int 				recall_ob(char *line)
+int 				recall_ob(char **str, char *line)
 {
+	char			*tmp;
 	int				count;
 
 	count = 0;
-
-	if (line[count] == '\\')
+	tmp = NULL;
+	while (line[count] && (line[count] != '\'' && line[count] != '\"'))
 	{
 		count++;
-		ft_putchar(line[count]);
 	}
+	if (*str == NULL)
+		*str = ft_strndup(line, 0, count);
 	else
-		ft_putchar(line[count]);
-	count++;
+	{
+		tmp = ft_strndup(line, 0, count);
+		*str = ft_strjoin(*str, tmp);
+		free(tmp);
+	}
+	*str = epur_str(*str, '\\');
 	return (count);
 }
 
 char				*define_name_lexem(char *line)
 {
+	char			*str;
 	int				count;
 	int				mode;
 
-
+	mode = 0;
 	count = 0;
+	str = NULL;
 	while (line[count])
 	{
-		mode = (line[count] == '\'' || line[count] == '\"') ? 1 : 0;
-		if (mode == 1)
+		if ((line[count] == '\'' || line[count] == '\"'))
 		{
-			count++;
-			count += recall_q(line + count);
-			count++;
-			mode = 0;
+			if (mode == 1)
+				mode = 0;
+			if (mode == 0)
+				mode = 1;
 		}
-		else
-			count += recall_ob(line + count);
+		else if  (mode == 1)
+			count += recall_q(&str, line + count);
+		else if (mode == 0)
+			count += recall_ob(&str, line + count);
+		count++;
 	}
-	return (NULL);
+	return (str);
 }
 
 t_lexem				*new_lexem(char *line)

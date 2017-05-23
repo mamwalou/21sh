@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/22 00:38:47 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/23 11:07:45 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ static int			parser(t_st_lexem **lex, t_memory *memory)
 	{
 		tmp = 0;
 		pos = count;
-		printf("%s\n", memory->line + pos);
 		if ((tmp = find_token(memory->line + pos)) > 0)
 		{
 			if (tmp > SWITCH_MODE)
