@@ -6,11 +6,11 @@
 /*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/23 15:28:33 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/23 20:31:07 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
+#include "termcaps.h"
 
 void				history_path(void)
 {
@@ -31,6 +31,7 @@ void				history_path(void)
 int					g_nb_hist(void)
 {
 	char		*line;
+	char		*cmd;
 	int			fd;
 	int			count;
 
@@ -40,7 +41,11 @@ int					g_nb_hist(void)
 	while ((get_next_line(fd, &line)) > 0)
 	{
 		if (line)
+		{
+			if ((cmd = ft_strchr(line, ';')) != NULL && (cmd + 1) != NULL)
+				hst_push(&g_memory, cmd + 1);
 			ft_strdel(&line);
+		}
 		count++;
 	}
 	close(fd);

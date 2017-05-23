@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/21 22:03:15 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/23 20:42:48 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void				ft_putendl(char const *s);
 void				ft_putendl_fd(char const *s, int fd);
 char				*ft_strcat(char *s1, const char *s2);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);
-int					ft_strchr(char *s, char c);
+char				*ft_strchr(const char *s, int c);
 void				ft_strmove(char **s, int pos);
 char				*ft_strrchr(const char *s, int c);
 char				*ft_strstr(const char *s1, const char *s2);

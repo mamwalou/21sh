@@ -6,7 +6,7 @@
 /*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/23 17:22:06 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/23 20:28:16 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ t_llist				*g_env;
 typedef struct s_cursor			t_cursor;
 typedef struct s_input			t_input;
 typedef struct s_clipboard		t_clipboard;
+typedef struct s_history		t_history;
+typedef struct s_history_list	t_hlst;
 
 typedef	enum		e_mode
 {
@@ -92,6 +94,25 @@ struct	s_clipboard
 	size_t	len;
 };
 
+struct	s_history_list
+{
+	t_hlst	*prev;
+	t_hlst	*next;
+	char	*cmd;
+	size_t	cmdlen;
+};
+
+struct	s_history
+{
+	t_hlst		*head;
+	t_hlst		*tmphead;
+	t_hlst		*end;
+	t_hlst		*current;
+	char		*last_cmd;
+	size_t		last_cmdlen;
+	bool		browsing;
+};
+
 typedef struct		s_memory
 {
 	int				fd_history;
@@ -113,6 +134,7 @@ typedef struct		s_memory
 	t_input			inp;
 	t_cursor		curs;
 	t_clipboard		cb;
+	t_history		hst;
 }					t_memory;
 
 t_memory			g_memory;

@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   evt_newline.c                                      :+:      :+:    :+:   */
+/*   hst_browse_next.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/14 04:17:20 by mbourget          #+#    #+#             */
-/*   Updated: 2017/05/23 18:30:24 by mbourget         ###   ########.fr       */
+/*   Created: 2017/01/13 22:55:27 by mbourget          #+#    #+#             */
+/*   Updated: 2017/01/14 00:57:38 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "termcaps.h"
 
-void			evt_newline(t_memory *sh)
+void	hst_browse_next(t_memory *sh)
 {
-	if (sh->state == HGL)
-	{
-		cb_copy_internal(sh, false);
-		return ;
-	}
-	sh->inp.ready = true;
-	ft_putchar('\n');
-	// cbuf_reset(sh);
+	if (sh->hst.current->next)
+		sh->hst.current = sh->hst.current->next;
+	else
+		sh->hst.browsing = false;
+	hst_update_cbuf(sh);
 }

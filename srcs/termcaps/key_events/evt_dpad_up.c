@@ -6,7 +6,7 @@
 /*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 11:12:47 by mbourget          #+#    #+#             */
-/*   Updated: 2017/05/23 17:15:11 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/23 20:16:41 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ void	evt_dpad_up(t_memory *sh)
 			return ;
 		highlight(sh);
 	}
-	else if (sh->state == IDLE) //&& sh->hst.head)
-		; //hst_browse_prev(sh);
+	else if (sh->state == IDLE && sh->hst.head)
+		hst_browse_prev(sh);
 }
