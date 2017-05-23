@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/ast/ast.h"
+#include "ast.h"
 
 void		free_ast(t_node *ast)
 {

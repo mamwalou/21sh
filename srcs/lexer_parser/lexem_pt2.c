@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/lexer_parser/lexer_parser.h"
+#include "lexer_parser.h"
 
 void				arg_spe_sep(t_st_lexem *lex, char *line)
 {

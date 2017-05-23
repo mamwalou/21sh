@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/17 03:39:02 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/23 17:22:06 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHELL_H
 # define SHELL_H
 
-# include "../libft/Includes/libft.h"
+# include "libft.h"
 # include <unistd.h>
 # include <signal.h>
 # include <stdio.h>
@@ -21,8 +21,11 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <fcntl.h>
+# include <stdbool.h>
 # define NB_BUILT 8
-
+# define RBUF_SIZE	8
+# define PROMPT		"$ "
+# define PROMPT_SIZE	2
 # define SUCCESS 0
 # define SWITCH_MODE 262144
 # define SHELL_CODE 262145
@@ -33,7 +36,13 @@
 # define BCKSLASH_CODE 262150
 # define MACREALLOC(ret, name, size) (ret = ft_realloc(name, size));
 
+
+
 t_llist				*g_env;
+
+typedef struct s_cursor			t_cursor;
+typedef struct s_input			t_input;
+typedef struct s_clipboard		t_clipboard;
 
 typedef	enum		e_mode
 {
@@ -45,6 +54,43 @@ typedef	enum		e_mode
 	BCKSLASH,
 	ERROR,
 }					t_mode;
+
+enum e_sh_state
+{
+	IDLE,
+	HGL,
+	ENCL
+};
+
+struct	s_input
+{
+	char	rbuf[RBUF_SIZE + 1];
+	char	missing;
+	char	*cbuf;
+	char	*cmd;
+	size_t	cbuflen;
+	size_t	cmdlen;
+	size_t	maxlen;
+	bool	multi_line;
+	bool	ready;
+};
+
+struct	s_cursor
+{
+	unsigned int	x;
+	unsigned int	y;
+	unsigned int	x_max;
+	unsigned int	y_max;
+	unsigned int	win_x;
+	unsigned int	i;
+	unsigned int	s_i;
+};
+
+struct	s_clipboard
+{
+	char	*buf;
+	size_t	len;
+};
 
 typedef struct		s_memory
 {
@@ -61,6 +107,12 @@ typedef struct		s_memory
 	t_mode			mode;
 	int				launch;
 	int				line_lenght;
+	struct termios	term;
+	struct termios	term_d;
+	enum e_sh_state	state;
+	t_input			inp;
+	t_cursor		curs;
+	t_clipboard		cb;
 }					t_memory;
 
 t_memory			g_memory;

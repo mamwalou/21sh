@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/lexer_parser/lexer_parser.h"
+#include "lexer_parser.h"
 
 int 				recall_q(char **str, char *line)
 {

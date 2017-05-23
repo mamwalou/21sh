@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 16:45:53 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/21 23:37:19 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/23 16:14:38 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXEC_H
 # define EXEC_H
-# include "../../includes/ast/ast.h"
+# include "ast.h"
 # define NB_TOKEN 6
 
 typedef enum			e_code

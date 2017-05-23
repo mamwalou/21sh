@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/exec/exec.h"
+#include "exec.h"
 
 void			exec_fonc_and(t_node *ast, int *status)
 {

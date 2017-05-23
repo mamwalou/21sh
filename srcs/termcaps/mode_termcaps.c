@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/termcaps/termcaps.h"
-#include "../../includes/shell.h"
+#include "termcaps.h"
+#include "shell.h"
 
 t_mode			shell_mode(t_win *win)
 {

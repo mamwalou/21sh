@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/termcaps/termcaps.h"
-#include "../../includes/shell.h"
+#include "termcaps.h"
+#include "shell.h"
 #define NB_INPUT 10
 
 static const t_input		g_input[NB_INPUT] =

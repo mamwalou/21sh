@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/termcaps/termcaps.h"
-#include "../../includes/shell.h"
+#include "termcaps.h"
+#include "shell.h"
 
 void			toto_function(t_line *ptr, t_win **win)
 {

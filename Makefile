@@ -1,65 +1,135 @@
-# **************************************************************************** #
+#******************************************************************************#
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+         #
+#    By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2016/10/17 17:09:35 by sbeline           #+#    #+#              #
-#    Updated: 2017/05/21 19:45:38 by sbeline          ###   ########.fr        #
+#    Created: 2016/01/14 01:34:45 by mbourget          #+#    #+#              #
+#    Updated: 2016/04/27 23:43:53 by mbourget         ###   ########.fr        #
 #                                                                              #
-# **************************************************************************** #
+#******************************************************************************#
 
+CC = clang
 NAME = 21sh
 
-SRC_NAME = main.c tools.c lexer.c lexer_pt2.c option_parser.c stock_line.c
-SRC_NAME += parser.c token.c lexem.c lexem_pt2.c tool_lexem.c tools_env.c
-SRC_NAME += tools_lexer.c
-SRC_NAME += manage_history.c termcaps_checker.c mode_termcaps.c
-SRC_NAME += tools_line_edition.c end_home.c
-SRC_NAME += termcaps.c signal.c push_line.c loop_read.c
-SRC_NAME += depush_line.c history_termcaps.c history_tools.c autocompletion.c
-SRC_NAME += tools_for_mode.c move_cursr.c autocompletion2.c
-SRC_NAME += ast.c an_ll.c node_tool.c gestion_redirection.c
-SRC_NAME += exec_tree.c pipe_function.c pipe_function2.c access_gestion.c
-SRC_NAME += redirection.c cmd_gestion.c log_sep.c tools_builltin2.c
-SRC_NAME += echo.c setenv.c cd.c env.c tools_builltin.c history.c export.c
+CPPFLAGS = -Iincludes -Ilibft/Includes
+CFLAGS =  -g -Wall -Wextra
+# -Werror
+# -O1 -g -fsanitize=address -fno-omit-frame-pointer
+LIBFT = libft.a
+LIBFTDIR = libft
 
-INC_PATH = ./includes/
-SRC_PATH = ./srcs/*/
-OBJ_PATH = ./obj/
-LIB_PATH = ./libft/
-LIB_NAME = libft.a
-CC = gcc
-CFLAGS =  -Werror -Wall -Wextra
-OBJ_NAME = $(SRC_NAME:.c=.o)
-SRC = $(addprefix $(SRC_PATH),$(SRC_NAME))
-OBJ = $(addprefix $(OBJ_PATH),$(OBJ_NAME))
-LIB = $(addprefix $(LIB_PATH),$(LIB_NAME))
-INC = $(addprefix -I,$(INC_PATH))
+LDFLAGS = -L$(LIBFTDIR)
+LDLIBS = -lft -ltermcap
 
-all:$(NAME)
+SRCS =	srcs/ast/an_ll.c\
+		srcs/ast/ast.c\
+		srcs/ast/node_tool.c\
+		srcs/builltin/cd.c\
+		srcs/builltin/echo.c\
+		srcs/builltin/env.c\
+		srcs/builltin/export.c\
+		srcs/builltin/history.c\
+		srcs/builltin/setenv.c\
+		srcs/builltin/tools_builltin.c\
+		srcs/builltin/tools_builltin2.c\
+		srcs/exec/access_gestion.c\
+		srcs/exec/cmd_gestion.c\
+		srcs/exec/exec_tree.c\
+		srcs/exec/gestion_redirection.c\
+		srcs/exec/log_sep.c\
+		srcs/exec/pipe_function.c\
+		srcs/exec/pipe_function2.c\
+		srcs/exec/redirection.c\
+		srcs/exec_it/history_tools.c\
+		srcs/exec_it/main.c\
+		srcs/exec_it/tools.c\
+		srcs/exec_it/tools_env.c\
+		srcs/history/manage_history.c\
+		srcs/lexer_parser/lexem.c\
+		srcs/lexer_parser/lexem_pt2.c\
+		srcs/lexer_parser/lexer.c\
+		srcs/lexer_parser/lexer_pt2.c\
+		srcs/lexer_parser/option_parser.c\
+		srcs/lexer_parser/parser.c\
+		srcs/lexer_parser/stock_line.c\
+		srcs/lexer_parser/token.c\
+		srcs/lexer_parser/tool_lexem.c\
+		srcs/lexer_parser/tools_lexer.c\
+		srcs/termcaps/clipboard/cb_copy_internal.c\
+		srcs/termcaps/clipboard/cb_cut_internal.c\
+		srcs/termcaps/clipboard/cb_paste_external.c\
+		srcs/termcaps/clipboard/cb_paste_internal.c\
+		srcs/termcaps/command_buffer/cbuf_append.c\
+		srcs/termcaps/command_buffer/cbuf_check_size.c\
+		srcs/termcaps/command_buffer/cbuf_insert.c\
+		srcs/termcaps/command_buffer/cbuf_print.c\
+		srcs/termcaps/command_buffer/cbuf_reset.c\
+		srcs/termcaps/highlighting/highlight.c\
+		srcs/termcaps/highlighting/highlight_cleanup.c\
+		srcs/termcaps/key_events/evt_backspace.c\
+		srcs/termcaps/key_events/evt_ctrl_d.c\
+		srcs/termcaps/key_events/evt_ctrl_dpad_down.c\
+		srcs/termcaps/key_events/evt_ctrl_dpad_left.c\
+		srcs/termcaps/key_events/evt_ctrl_dpad_right.c\
+		srcs/termcaps/key_events/evt_ctrl_dpad_up.c\
+		srcs/termcaps/key_events/evt_ctrl_h.c\
+		srcs/termcaps/key_events/evt_ctrl_p.c\
+		srcs/termcaps/key_events/evt_del.c\
+		srcs/termcaps/key_events/evt_dpad_down.c\
+		srcs/termcaps/key_events/evt_dpad_left.c\
+		srcs/termcaps/key_events/evt_dpad_right.c\
+		srcs/termcaps/key_events/evt_dpad_up.c\
+		srcs/termcaps/key_events/evt_end.c\
+		srcs/termcaps/key_events/evt_handler.c\
+		srcs/termcaps/key_events/evt_home.c\
+		srcs/termcaps/key_events/evt_newline.c\
+		srcs/termcaps/key_events/evt_printable.c\
+		srcs/termcaps/tc_restore_default.c\
+		srcs/termcaps/tc_set_blocking_read.c\
+		srcs/termcaps/tc_set_timed_read.c\
+		srcs/termcaps/tc_unset_canonical.c\
+		srcs/termcaps/tc_write.c\
+		srcs/termcaps/termcaps.c
 
-$(NAME): $(OBJ) libf
-	$(CC) $(CFLAGS) $(OBJ) $(LIB) $(INC) -g -lncurses -o $@
+OBJS = $(SRCS:.c=.o)
 
-$(OBJ_PATH)%.o:$(SRC_PATH)%.c
-	@mkdir -p $(OBJ_PATH)
-	$(CC) -c $< -o $@
+DEPS = $(LIBFTDIR)/$(LIBFT)\
+		includes/ast/ast.h\
+		includes/exec/exec.h\
+		includes/lexer_parser/lexer_parser.h\
+		includes/shell.h\
+		includes/termcaps/termcaps.h
 
-libf:
-	make -C $(LIB_PATH)
+.PHONY: target makelib clean fclean re
+
+all: target makelib $(NAME)
+
+target:
+	@echo 'Target name: $(NAME)'
+
+$(NAME): $(OBJS)
+	@echo 'Linking objects...'
+	@$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS) $(LDLIBS)
+	@echo 'Done :)'
+
+%.o: %.c $(DEPS)
+	@echo 'Compiling $<...'
+	@$(CC) -c $(CFLAGS) $(CPPFLAGS) $< -o $@
+
+makelib:
+	@echo 'Building library...'
+	@$(MAKE) -C $(LIBFTDIR)
 
 clean:
-	make -C $(LIB_PATH) fclean
-	rm -rf $(OBJ)
-	rm -rf $(OBJ_PATH)
+	@$(RM) $(OBJS)
+	@$(MAKE) -C $(LIBFTDIR) clean
+	@echo 'Cleared objects.'
 
 fclean: clean
-	rm -rf $(NAME)
+	@$(RM) $(NAME)
+	@$(MAKE) -C $(LIBFTDIR) fclean
+	@echo 'Cleared binary.'
 
 re: fclean all
-
-norme:
-	norminette $(SRC)
-	norminette $(INC_PATH)*.h

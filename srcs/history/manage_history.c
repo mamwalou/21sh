@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   manage_history.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/22 00:15:17 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/23 15:28:33 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+#include "shell.h"
 
 void				history_path(void)
 {
@@ -49,21 +49,12 @@ int					g_nb_hist(void)
 
 void				init_memory(void)
 {
-	g_memory.fd_history = 0;
-	g_memory.line = NULL;
-	g_memory.variable = NULL;
-	g_memory.var_lenght = 0;
-	g_memory.launch = 0;
-	g_memory.key_ctrl = NULL;
-	g_memory.heredoc_sw = 0;
-	g_memory.line_mode = NULL;
-	g_memory.line_mode_after = NULL;
+	ft_bzero(&g_memory, sizeof(t_memory));
+	init_term(&g_memory);
 	g_memory.mode = SHELL;
 	history_path();
 	if (is_dir(search_env(g_env, "HISTORY=")) == FILES)
 		g_memory.code_history = g_nb_hist();
-	else
-		g_memory.code_history = 0;
 }
 
 static void			write_history(t_memory *memory)

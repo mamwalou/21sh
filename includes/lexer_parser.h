@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_parser.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/23 11:10:16 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/23 16:14:42 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_PARSER_H
 # define LEXER_PARSER_H
 
-# include "../../includes/shell.h"
+# include "shell.h"
 
 typedef enum			e_token
 {

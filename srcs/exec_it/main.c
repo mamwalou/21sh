@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/22 00:51:50 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/23 17:43:59 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
-#include "../../includes/termcaps/termcaps.h"
+#include "shell.h"
 
 int					find_varibale(char *str, char c)
 {
@@ -83,16 +82,18 @@ int					main(int argc, char **argv, char **environ)
 	mode = SHELL;
 	g_env = build_env(environ);
 	init_memory();
+	ft_putstr_fd(PROMPT, STDERR_FILENO);
 	while (42)
 	{
-		termcaps();
+		termcaps(&g_memory);
 		if (g_memory.line)
 		{
 			g_memory.mode = lexer_parser(&g_memory);
 			if (g_memory.mode == SHELL)
 			{
 				push_history();
-				free(g_memory.line);
+				cbuf_reset(&g_memory);
+				//free(g_memory.line);
 				g_memory.line = NULL;
 				g_memory.line_lenght = 0;
 			}

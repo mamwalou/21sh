@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_gestion.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/13 10:31:53 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/22 00:15:19 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/23 17:41:59 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/exec/exec.h"
+#include "exec.h"
 
 static int			check_builltins_tris(char **cmd, int index)
 {
@@ -68,6 +68,7 @@ static int			check_builltins(char **cmd, int index)
 	}
 	else if (!ft_strcmp(cmd[0], "exit"))
 	{
+		tc_restore_default(&g_memory);
 		ft_putendl_fd("exit_is_ok", 1);
 		exit(0);
 	}

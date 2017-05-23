@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   tools_line_edition.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 09:30:05 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/22 00:49:51 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/23 16:10:37 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/termcaps/termcaps.h"
-#include "../../includes/shell.h"
+#include "termcaps.h"
+#include "shell.h"
 
 static char		*simpl_lchar(t_win *win, int minus)
 {

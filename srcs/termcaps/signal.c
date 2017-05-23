@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 11:21:00 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/21 22:03:05 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/23 17:20:39 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/termcaps/termcaps.h"
+#include "termcaps.h"
 
 void			handl_sigws(int sig)
 {
@@ -40,8 +40,8 @@ void			handl_sigcont(int sig)
 
 	cp[0] = '.';
 	cp[1] = 0;
-	if (init_term(&(g_term.terminal)) == -1)
-		return ;
+	// if (init_term(&(g_term.terminal)) == -1)
+	// 	return ;
 	g_term.lock = 1;
 	signal(SIGTSTP, handl_sigstrp);
 	ioctl(0, TIOCSTI, prompt());

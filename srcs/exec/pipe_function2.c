@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/exec/exec.h"
+#include "exec.h"
 
 void					new_pid(t_pipe *pipe, pid_t pid)
 {

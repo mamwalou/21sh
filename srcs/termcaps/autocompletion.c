@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/termcaps/termcaps.h"
-#include "../../includes/shell.h"
-#include "../../includes/lexer_parser/lexer_parser.h"
+#include "termcaps.h"
+#include "shell.h"
+#include "lexer_parser.h"
 
 void				sawfolder(t_win *win, char *path, t_autocmp *autc)
 {

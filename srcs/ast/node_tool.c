@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/ast/ast.h"
+#include "ast.h"
 
 t_lexem			*rechatch_lexm(t_lexem *ptr, t_st_lexem *lex)
 {

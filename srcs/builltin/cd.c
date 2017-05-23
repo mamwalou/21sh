@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/exec/exec.h"
+#include "exec.h"
 
 static void		go_home(char *home_bis)
 {

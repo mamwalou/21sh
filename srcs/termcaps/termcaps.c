@@ -3,89 +3,69 @@
 /*                                                        :::      ::::::::   */
 /*   termcaps.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/17 07:58:04 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/23 17:33:44 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/termcaps/termcaps.h"
-#include "../../includes/shell.h"
+#include "termcaps.h"
+#include "shell.h"
 
-void			bring_back_shell(struct termios *term)
+// void			bring_back_shell(struct termios *term)
+// {
+// 	if (tcsetattr(0, 0, term) == -1)
+// 		return ;
+// }
+
+void	sh_abort(char *msg)
 {
-	if (tcsetattr(0, 0, term) == -1)
-		return ;
+	ft_putstr_fd("21sh: ", STDERR_FILENO);
+	ft_putendl_fd(msg, STDERR_FILENO);
+	exit(EXIT_FAILURE);
 }
 
-void			init_mv(t_win *win)
+void	init_term(t_memory *sh)
 {
-	static int	i = 0;
+	struct ttysize	ts;
 
-	win->lenght_line = 0;
-	win->cursor_line = 1;
-	win->pos_history = g_memory.code_history - 1;
-	win->y = 0;
-	win->x = 0;
-	win->new_x = 1;
-	win->prompt = 0;
-	win->begin = NULL;
-	win->end = NULL;
-	win->hst = NULL;
-	if (search_env(g_env, "HISTORY="))
-		win->hst = convert_history();
-	ioctl(0, TIOCGWINSZ, &(g_term.apt));
+	if (!isatty(STDIN_FILENO))
+		sh_abort("not a tty");
+	if (strncmp(ttyname(STDIN_FILENO), "/dev/", 5))
+		sh_abort("invalid tty name");
+	if (tgetent(NULL, getenv("TERM")) < 0)
+		sh_abort("loading terminal entry failed");
+	if (tcgetattr(STDIN_FILENO, &(sh->term)) < 0)
+		sh_abort("cannot get terminal attributes");
+	sh->term_d = sh->term;
+	tc_unset_canonical(sh);
+	sh->inp.maxlen = 1024;
+	sh->inp.cbuf = (char *)ft_memalloc(sh->inp.maxlen);
+	sh->inp.cmd = &(sh->inp.cbuf[PROMPT_SIZE]);
+	sh->inp.cbuflen = PROMPT_SIZE;
+	ft_strcpy(sh->inp.cbuf, PROMPT);
+	ioctl(STDIN_FILENO, TIOCGWINSZ, &ts);
+	sh->curs.win_x = ts.ts_cols;
+	sh->curs.x_max = ts.ts_cols - 1;
+	sh->curs.x = PROMPT_SIZE;
+	sh->curs.i = PROMPT_SIZE;
 }
 
-int				init_term(struct termios *term)
+void			termcaps(t_memory *sh)
 {
-	struct termios	new_term;
-	char			*name_term;
+	int		ret;
 
-	tcgetattr(0, term);
-	if ((name_term = search_env(g_env, "TERM=")) == NULL)
+	while ((ret = read(STDIN_FILENO, sh->inp.rbuf, RBUF_SIZE)) >= 0)
 	{
-		ft_putendl_fd("big failur", 2);
-		exit(1);
+		evt_handler(sh);
+		ft_bzero(sh->inp.rbuf, sizeof(sh->inp.rbuf));
+		if (sh->inp.ready)
+		{
+			sh->line = sh->inp.cmd;
+			sh->line_lenght = sh->inp.cmdlen;
+			sh->inp.ready = false;
+			break ;
+		}
 	}
-	if (tgetent(NULL, name_term) == ERR)
-		return (-1);
-	if (tcgetattr(0, &new_term) == -1)
-		return (-1);
-	new_term.c_cc[VMIN] = 1;
-	new_term.c_lflag &= ~(ICANON | ECHO);
-	new_term.c_cc[VTIME] = 0;
-	if (tcsetattr(0, TCSANOW, &new_term) == -1)
-		return (-1);
-	return (0);
-}
-
-void			termcaps(void)
-{
-	t_line		begin;
-	t_line		end;
-	t_win		win;
-
-	if (init_term(&(g_term.terminal)) == -1)
-		return ;
-	if (g_memory.launch++ == 0)
-		print_ascii();
-	init_mv(&win);
-	if (g_memory.mode == SHELL)
-		g_memory.mode = shell_mode(&win);
-	else if (g_memory.mode == HEREDOC)
-		g_memory.mode = hered_mode(&win);
-	else if (g_memory.mode == QUOTE)
-		g_memory.mode = quote_mode(&win);
-	else if (g_memory.mode == D_QUOTE)
-		g_memory.mode = d_quote_mode(&win);
-	else if (g_memory.mode == BCKSLASH)
-		g_memory.mode = backslash_mode(&win);
-	if (win.hst != NULL)
-	{
-		free_d(win.hst, g_memory.code_history);
-		free(win.hst);
-	}
-	return ;
 }
