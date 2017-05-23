@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/lexer_parser/lexer_parser.h"
+#include "lexer_parser.h"
 
 int				ctrl_heredoc(t_memory *memory, char *line)
 {

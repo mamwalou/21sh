@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
-#include "../../includes/termcaps/termcaps.h"
+#include "shell.h"
+#include "termcaps.h"
 
 int					find_varibale(char *str, char c)
 {

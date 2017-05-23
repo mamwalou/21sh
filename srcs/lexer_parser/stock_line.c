@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/lexer_parser/lexer_parser.h"
+#include "lexer_parser.h"
 
 void				stock_line(t_lexem *begin, int code_mode)
 {

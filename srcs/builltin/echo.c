@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/exec/exec.h"
+#include "exec.h"
 
 static void	echo_n_mode(char **tab)
 {

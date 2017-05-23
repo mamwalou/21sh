@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   node_tool.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/20 19:11:22 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/17 03:43:41 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/23 15:50:55 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/ast/ast.h"
+#include "ast.h"
 
 t_lexem			*rechatch_lexm(t_lexem *ptr, t_st_lexem *lex)
 {
+	(void)lex;
 	if (ptr->next != NULL)
 	{
 		if (ptr->prev)

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/termcaps/termcaps.h"
+#include "termcaps.h"
 
 void			handl_sigws(int sig)
 {

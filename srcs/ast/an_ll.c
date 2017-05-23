@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/ast/ast.h"
+#include "ast.h"
 
 t_lexem			*find_op(t_st_lexem *statement)
 {

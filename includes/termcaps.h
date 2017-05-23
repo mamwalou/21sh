@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   termcaps.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/17 04:32:32 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/23 15:49:29 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <curses.h>
 # include <dirent.h>
 # include <signal.h>
-# include "../../libft/Includes/libft.h"
-# include "../shell.h"
+# include "libft.h"
+# include "shell.h"
 
 # define ESCAPE      27
 # define SPACE       32

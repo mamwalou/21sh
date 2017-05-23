@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/termcaps/termcaps.h"
+#include "termcaps.h"
 
 static void		limit_depush(t_win *win)
 {

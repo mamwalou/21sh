@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/exec/exec.h"
+#include "exec.h"
 
 void			replace_env(t_llist **list, char *sigle, char *new, int *lenght)
 {

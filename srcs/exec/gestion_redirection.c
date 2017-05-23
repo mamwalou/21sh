@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/exec/exec.h"
-#include "../../includes/termcaps/termcaps.h"
+#include "exec.h"
+#include "termcaps.h"
 
 void				treat_redirection(t_node *ast, int fd[3], int *status)
 {

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/termcaps/termcaps.h"
+#include "termcaps.h"
 
 void		i_need_place(t_line *nw, t_win *win)
 {
