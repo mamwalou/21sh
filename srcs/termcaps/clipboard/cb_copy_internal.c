@@ -6,13 +6,13 @@
 /*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 03:53:40 by mbourget          #+#    #+#             */
-/*   Updated: 2016/11/18 01:21:06 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/23 17:54:47 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh21.h"
+#include "termcaps.h"
 
-void	cb_copy_internal(t_main *sh, bool cut)
+void	cb_copy_internal(t_memory *sh, bool cut)
 {
 	int				start;
 	size_t			size;

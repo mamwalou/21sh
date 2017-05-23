@@ -6,13 +6,13 @@
 /*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 04:54:44 by mbourget          #+#    #+#             */
-/*   Updated: 2017/05/11 02:15:15 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/23 17:54:04 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh21.h"
+#include "termcaps.h"
 
-static void	print_read_buffer(t_main *sh, void (*f)(t_main *, char))
+static void	print_read_buffer(t_memory *sh, void (*f)(t_memory *, char))
 {
 	int	i;
 
@@ -22,10 +22,10 @@ static void	print_read_buffer(t_main *sh, void (*f)(t_main *, char))
 	ft_bzero(sh->inp.rbuf, sizeof(sh->inp.rbuf));
 }
 
-void		cb_paste_external(t_main *sh)
+void		cb_paste_external(t_memory *sh)
 {
 	int		ret;
-	void	(*f)(t_main *, char);
+	void	(*f)(t_memory *, char);
 
 	if (sh->curs.i < sh->inp.cbuflen)
 		f = &cbuf_insert;

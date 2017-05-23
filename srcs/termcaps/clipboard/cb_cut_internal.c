@@ -6,13 +6,13 @@
 /*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 04:00:16 by mbourget          #+#    #+#             */
-/*   Updated: 2017/01/12 00:46:40 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/23 17:53:59 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh21.h"
+#include "termcaps.h"
 
-void	cb_cut_internal(t_main *sh, int start, size_t size, size_t total)
+void	cb_cut_internal(t_memory *sh, int start, size_t size, size_t total)
 {
 	unsigned int	y;
 	size_t			rest;

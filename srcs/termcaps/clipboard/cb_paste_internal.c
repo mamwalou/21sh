@@ -6,13 +6,13 @@
 /*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 02:10:56 by mbourget          #+#    #+#             */
-/*   Updated: 2017/01/12 02:16:41 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/23 17:54:11 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh21.h"
+#include "termcaps.h"
 
-void	cb_paste_internal(t_main *sh)
+void	cb_paste_internal(t_memory *sh)
 {
 	cbuf_check_size(sh, sh->cb.len);
 	if (sh->curs.i < sh->inp.cbuflen)
