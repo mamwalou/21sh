@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/24 19:53:48 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/24 21:56:45 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,7 @@ int				find_token(char *line)
 	tmp = 0;
 	iter = 0;
 	if ((tmp = redirection_filters(line)) > 0)
-	{
 		return (tmp);
-	}
 	if ((tmp = ctrl_mode(line, &g_memory)) > 0)
 		return (tmp);
 	if ((tmp = operator_filters(line)) > 0)
