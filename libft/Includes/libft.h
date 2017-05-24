@@ -6,7 +6,7 @@
 /*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/24 02:21:59 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/25 01:31:53 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ int					ft_strsplit(char ***dst, char const *s, int *t);
 int					ft_strisdigit(char *str);
 int					get_next_line(int fd, char **line);
 int					*generate(int c, int c1, int size);
+void				chreplace(char *s, char to_find, char new);
 
 typedef struct		s_llist
 {

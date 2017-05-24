@@ -1,37 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   chreplace.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/19 11:21:00 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/25 01:28:47 by mbourget         ###   ########.fr       */
+/*   Created: 2017/05/04 03:25:40 by mbourget          #+#    #+#             */
+/*   Updated: 2017/05/25 01:31:30 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "termcaps.h"
+#include "Includes/libft.h"
 
-void	sig_set(int signo)
+void	chreplace(char *s, char to_find, char new)
 {
-	g_memory.signo = signo;
-	ioctl(STDIN_FILENO, TIOCSTI, "");
-}
-
-void	sig_init(void)
-{
-	signal(SIGWINCH, &sig_set);
-	signal(SIGINT, &sig_set);
-}
-
-void	sig_handler(t_memory *sh)
-{
-	if (sh->signo == SIGINT)
+	while (*s)
 	{
-		ft_putchar('\n');
-		cbuf_reset(sh);
+		if (*s == to_find)
+			*s = new;
+		++s;
 	}
-	else if (sh->signo == SIGWINCH)
-		tc_refresh(sh);
-	sh->signo = 0;
 }

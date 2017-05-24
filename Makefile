@@ -14,9 +14,7 @@ CC = clang
 NAME = 21sh
 
 CPPFLAGS = -Iincludes -Ilibft/Includes
-CFLAGS =  -g -Wall -Wextra
-# -Werror
-# -O1 -g -fsanitize=address -fno-omit-frame-pointer
+CFLAGS =  -Wall -Wextra -Werror
 LIBFT = libft.a
 LIBFTDIR = libft
 
@@ -43,16 +41,16 @@ SRCS =	srcs/ast/an_ll.c\
 		srcs/exec/pipe_function2.c\
 		srcs/exec/redirection.c\
 		srcs/exec_it/main.c\
+		srcs/exec_it/sh_abort.c\
 		srcs/exec_it/tools.c\
 		srcs/exec_it/tools_env.c\
-		srcs/exec_it/sh_abort.c\
+		srcs/history/get_histfile_path.c\
 		srcs/history/hst_browse_next.c\
 		srcs/history/hst_browse_prev.c\
 		srcs/history/hst_push.c\
 		srcs/history/hst_retrieve.c\
-		srcs/history/hst_update_cbuf.c\
 		srcs/history/hst_tmp_push.c\
-		srcs/history/get_histfile_path.c\
+		srcs/history/hst_update_cbuf.c\
 		srcs/lexer_parser/lexem.c\
 		srcs/lexer_parser/lexem_pt2.c\
 		srcs/lexer_parser/lexer.c\
@@ -62,10 +60,11 @@ SRCS =	srcs/ast/an_ll.c\
 		srcs/lexer_parser/stock_line.c\
 		srcs/lexer_parser/token.c\
 		srcs/lexer_parser/tool_lexem.c\
-		srcs/lexer_parser/tool_lexem2.c\
 		srcs/lexer_parser/tools_lexer.c\
+		srcs/lexer_parser/tool_lexem2.c\
 		srcs/lexer_parser/tools_lexer2.c\
-		srcs/termcaps/signal.c\
+		srcs/termcaps/autocompletion.c\
+		srcs/termcaps/autocompletion2.c\
 		srcs/termcaps/clipboard/cb_copy_internal.c\
 		srcs/termcaps/clipboard/cb_cut_internal.c\
 		srcs/termcaps/clipboard/cb_paste_external.c\
@@ -86,7 +85,6 @@ SRCS =	srcs/ast/an_ll.c\
 		srcs/termcaps/key_events/evt_ctrl_h.c\
 		srcs/termcaps/key_events/evt_ctrl_p.c\
 		srcs/termcaps/key_events/evt_del.c\
-		srcs/termcaps/key_events/evt_tab.c\
 		srcs/termcaps/key_events/evt_dpad_down.c\
 		srcs/termcaps/key_events/evt_dpad_left.c\
 		srcs/termcaps/key_events/evt_dpad_right.c\
@@ -96,15 +94,16 @@ SRCS =	srcs/ast/an_ll.c\
 		srcs/termcaps/key_events/evt_home.c\
 		srcs/termcaps/key_events/evt_newline.c\
 		srcs/termcaps/key_events/evt_printable.c\
+		srcs/termcaps/key_events/evt_tab.c\
+		srcs/termcaps/signal.c\
 		srcs/termcaps/tc_init.c\
+		srcs/termcaps/tc_refresh.c\
 		srcs/termcaps/tc_restore_default.c\
 		srcs/termcaps/tc_set_blocking_read.c\
 		srcs/termcaps/tc_set_timed_read.c\
 		srcs/termcaps/tc_unset_canonical.c\
 		srcs/termcaps/tc_write.c\
-		srcs/termcaps/termcaps.c\
-		srcs/termcaps/autocompletion.c\
-		srcs/termcaps/autocompletion2.c
+		srcs/termcaps/termcaps.c
 
 OBJS = $(SRCS:.c=.o)
 

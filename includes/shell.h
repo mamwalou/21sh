@@ -6,7 +6,7 @@
 /*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/24 17:24:57 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/25 01:30:13 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@
 # define BCKSLASH_CODE 262150
 # define MACREALLOC(ret, name, size) (ret = ft_realloc(name, size));
 
-extern int		dfd;
-
 typedef	enum e_mode				t_mode;
 typedef struct s_memory			t_memory;
 typedef struct s_cursor			t_cursor;
@@ -64,7 +62,8 @@ enum				e_sh_state
 {
 	IDLE,
 	HGL,
-	ENCL
+	ENCL,
+	HERED
 };
 
 struct				s_input
@@ -143,8 +142,6 @@ struct				s_memory
 	int				signo;
 };
 
-int					prompt();
-void				print_ascii(void);
 void				termcaps(t_memory *sh);
 void				sh_abort(char *msg);
 
