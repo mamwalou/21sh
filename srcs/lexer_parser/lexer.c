@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/24 05:30:45 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/24 13:43:16 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ int				find_str(char *line)
 			return (count);
 		else if (line[count] == '\\' && (!line[count + 1]))
 			return (BCKSLASH_CODE);
-		else if ((itr = ctrl_mode(line + count, &g_memory)) > SWITCH_MODE)
-			return (itr);
+		else if ((itr = ctrl_mode(line + count, &g_memory)) > 0)
+			return (itr + 1);
 		else
 			count++;
 	}
@@ -84,8 +84,9 @@ int				find_token(char *line)
 
 	tmp = 0;
 	iter = 0;
-
 	if ((tmp = redirection_filters(line)) > 0)
+		return (tmp);
+	if ((tmp = ctrl_mode(line, &g_memory)) > 0)
 		return (tmp);
 	if ((tmp = operator_filters(line)) > 0)
 	{
@@ -104,7 +105,7 @@ int				find_token(char *line)
 		return (tmp);
 
 	}
-	if ((tmp = find_str(line)) >= SWITCH_MODE)
+	if ((tmp = find_str(line)) > 0)
 		return (tmp);
 	return (tmp);
 }

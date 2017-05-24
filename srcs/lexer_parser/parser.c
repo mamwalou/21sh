@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/24 09:23:36 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/24 13:38:03 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ static t_mode		mode_gestion(t_st_lexem *lexem, int code)
 	stock_line(lexem->begin_lexem, code);
 	if (lexem->begin_lexem)
 		free_lexem(lexem->begin_lexem);
-	free(lexem); 
+	free(lexem);
 	if (code == HEREDOC_CODE)
 		return (HEREDOC);
 	else if (code == QUOTE_CODE)

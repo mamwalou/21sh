@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/24 12:54:23 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/24 14:16:44 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,8 @@ void				init(void)
 	if ((dfd = open("/dev/ttys002", O_WRONLY)) == -1)
 		ft_putendl("log init failed");
 	sig_init();
-	g_env = build_env();
 	ft_bzero(&g_memory, sizeof(t_memory));
+	g_env = build_env();
 	tc_init(&g_memory);
 	g_memory.mode = SHELL;
 	get_histfile_path();
@@ -132,6 +132,7 @@ int					main(void)
 	t_mode			mode;
 
 	init();
+	g_memory.mode = lexer_parser(&g_memory);
 	mode = SHELL;
 	while (42)
 	{

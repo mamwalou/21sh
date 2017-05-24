@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_gestion.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/13 10:31:53 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/24 11:17:37 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/24 14:07:24 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,13 @@ void				exec_fct2(t_lexem *lexem, pid_t child)
 {
 	char			**env;
 
-	env = NULL;
+	env = copy_env();
 	if (!(check_builltins(lexem->option, lexem->index)))
 	{
 		child = fork();
 		if (!child)
 		{
-			execve(lexem->option[0], lexem->option, NULL);
+			execve(lexem->option[0], lexem->option, env);
 			exit(1);
 		}
 		else if (child < 0)
