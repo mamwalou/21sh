@@ -62,7 +62,9 @@ SRCS =	srcs/ast/an_ll.c\
 		srcs/lexer_parser/stock_line.c\
 		srcs/lexer_parser/token.c\
 		srcs/lexer_parser/tool_lexem.c\
+		srcs/lexer_parser/tool_lexem2.c\
 		srcs/lexer_parser/tools_lexer.c\
+		srcs/lexer_parser/tools_lexer2.c\
 		srcs/termcaps/signal.c\
 		srcs/termcaps/clipboard/cb_copy_internal.c\
 		srcs/termcaps/clipboard/cb_cut_internal.c\

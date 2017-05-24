@@ -49,7 +49,7 @@ void			epur_variable(char **str, char **ptr)
 	free(putain);
 }
 
-void 			epur_backslash(char **str, char *ptr_after)
+void			epur_backslash(char **str, char *ptr_after)
 {
 	char		*tmp;
 
@@ -100,13 +100,7 @@ int				ctrl_tab(char *line, const char **tableau, int itr)
 						g_memory.heredoc_sw == 0)
 				g_memory.heredoc_sw = 1;
 			if (line[count] == '&')
-			{
-				count++;
-				if (line[count] == '-')
-					return (count + 1);
-				while (ft_isdigit(line[count]))
-					count++;
-			}
+				return (ctrl_tab2(count, line));
 			return (count);
 		}
 		i++;

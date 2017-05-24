@@ -12,20 +12,6 @@
 
 #include "exec.h"
 
-void			dbg_history(t_memory *sh)
-{
-	int		i;
-	t_hlst	*lst;
-
-	i = 0;
-	lst = sh->hst.head;
-	while (lst)
-	{
-		dprintf(dfd, "history[%u] = %s\n", i++, lst->cmd);
-		lst = lst->next;
-	}
-}
-
 static void		aff_history(t_hlst *lst)
 {
 	while (lst)

@@ -12,7 +12,7 @@
 
 #include "lexer_parser.h"
 
-int 				recall_q(char **str, char *line)
+int					recall_q(char **str, char *line)
 {
 	char			*tmp;
 	char			*tmp2;
@@ -40,7 +40,7 @@ int 				recall_q(char **str, char *line)
 	return (count);
 }
 
-int 				recall_ob(char **str, char *line)
+int					recall_ob(char **str, char *line)
 {
 	char			*tmp;
 	char			*tmp2;
@@ -84,7 +84,7 @@ char				*define_name_lexem(char *line)
 				mode = 1;
 			count++;
 		}
-		if  (mode == 1)
+		if (mode == 1)
 			count += recall_q(&str, line + count);
 		if (mode == 0)
 			count += recall_ob(&str, line + count);
@@ -92,21 +92,6 @@ char				*define_name_lexem(char *line)
 			return (str);
 	}
 	return (str);
-}
-
-t_lexem				*new_lexem(char *line)
-{
-	t_lexem			*new_lexem;
-
-	new_lexem = (t_lexem*)ft_memalloc(sizeof(t_lexem));
-	new_lexem->name_lexem = ft_strdup(line);
-	new_lexem->next = NULL;
-	new_lexem->prev = NULL;
-	new_lexem->index = 0;
-	new_lexem->option = NULL;
-	new_lexem->token_type = define_token(new_lexem->name_lexem);
-	new_lexem->priority = define_prio(new_lexem->token_type);
-	return (new_lexem);
 }
 
 void				free_lexem(t_lexem *lexem)
