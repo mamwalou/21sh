@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 10:27:23 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/24 11:15:20 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/24 18:17:20 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,7 @@ void			ft_cd(char **cmd, int index)
 		go_home(NULL);
 	if (index > 1)
 	{
-		if (*cmd[1] == '~')
-			go_home(cmd[1]);
-		else if (*cmd[1] == '-' && search_env(g_env, "OLDPWD="))
+		if (*cmd[1] == '-' && search_env(g_env, "OLDPWD="))
 			dash_one(search_env(g_env, "OLDPWD="));
 		else if (index == 2 && is_dir(cmd[1]) == REP)
 			dash_one(cmd[1]);

@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 21:05:10 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/24 17:16:09 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/24 18:26:16 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,31 @@ void			epur_home(char **str, char **ptr)
 {
 	char		*ptr_after;
 	char		*sigle;
+	char		*tmp;
 	int			count;
 
 	count = 0;
 	sigle = NULL;
-	ptr_after = *ptr;
+	ptr_after = *ptr + 1;
+	**ptr = 0;
+	dprintf(dfd,"ptr_after(%s), ptr(%s), *str(%s)\n", ptr_after, *ptr, *str);
 	while ((ptr_after[count + 1]) != '\0' || (ptr_after[count] == ' '))
 		count++;
 	if ((sigle = search_env(g_env, "HOME=")))
 	{
-		free(*str);
-		*str = ft_strdup(sigle);
+		if (!*str)
+		{
+			*str = ft_strjoin(sigle, ptr_after);
+			dprintf(dfd,"ptr_after(%s), ptr(%p)\n", ptr_after, ptr_after);
+		}
+		else
+		{
+			tmp = ft_strjoin(*str, sigle);
+			free(*str);
+			*str = ft_strjoin(tmp, ptr_after);
+			free(tmp);
+			dprintf(dfd,"tmp(%s), str(%p)\n", tmp, str);
+		}
 	}
 	else
 		*str = NULL;
@@ -73,6 +87,8 @@ void			epur_str(char **str, int mode)
 	char		*ptr_after;
 
 	ptr = NULL;
+	dprintf(dfd, "*str %s\n", *str);
+	dprintf(dfd, " oy oy%d\n", mode);
 	if (((ptr = ft_strchr(*str, '\\')) != NULL) && (mode == 0))
 	{
 		*ptr = 0;
@@ -81,7 +97,7 @@ void			epur_str(char **str, int mode)
 	}
 	else if (((ptr = ft_strchr(*str, '$')) != NULL) && (mode == 0 || mode == 1))
 		epur_variable(str, &ptr);
-	else if (((ptr = ft_strchr(*str, '~')) != NULL) && (mode == 0 || mode == 1))
+	else if (((ptr = ft_strchr(*str, '~')) != NULL) && (mode == 0))
 		epur_home(str, &ptr);
 }
 

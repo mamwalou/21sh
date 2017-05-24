@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/13 12:36:06 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/24 13:41:36 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/24 18:19:09 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ int 				recall_q(char **str, char *line)
 		free(tmp);
 		*str = tmp2;
 	}
-	epur_str(str, 0);
+	if (line[count] == '\'')
+		epur_str(str, 2);
+	else
+		epur_str(str, 1);
 	return (count);
 }
 
@@ -85,7 +88,7 @@ char				*define_name_lexem(char *line)
 			count += recall_q(&str, line + count);
 		if (mode == 0)
 			count += recall_ob(&str, line + count);
-		if (!line[count])
+		if (!line[count + 1] || !line[count])
 			return (str);
 	}
 	return (str);
