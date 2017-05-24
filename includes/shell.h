@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/24 12:54:06 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/24 15:11:32 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,7 @@ int					is_bulltin(char *cmd);
 int					operator_ctrl(int test);
 int					find_str(char *line);
 int					ctrl_mode(char *line, t_memory *memory);
-int					ctrl_quot(int first, int second, char *line);
+int					ctrl_quot(int first, int second);
 
 t_llist				*my_setenv();
 char				**my_env(t_llist *env);

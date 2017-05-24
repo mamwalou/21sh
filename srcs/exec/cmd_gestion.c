@@ -6,24 +6,24 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/13 10:31:53 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/24 14:07:24 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/24 15:20:32 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "termcaps.h"
 
-static int			check_builltins_tris(char **cmd, int index)
+static int			check_builltins_tris(char **cmd)
 {
 	if (!ft_strcmp(cmd[0], "export"))
 	{
-		ft_export(cmd[0], cmd[1]);
+		ft_export(cmd[1]);
 		return (1);
 	}
 	return (0);
 }
 
-static int			check_builltins_bis(char **cmd, int index)
+static int			check_builltins_bis(char **cmd)
 {
 	if (!ft_strcmp(cmd[0], "unsetenv"))
 	{
@@ -45,7 +45,7 @@ static int			check_builltins_bis(char **cmd, int index)
 		history(cmd);
 		return (1);
 	}
-	return (check_builltins_tris(cmd, index));
+	return (check_builltins_tris(cmd));
 }
 
 static int			check_builltins(char **cmd, int index)
@@ -74,7 +74,7 @@ static int			check_builltins(char **cmd, int index)
 		exit(0);
 	}
 	else
-		return (check_builltins_bis(cmd, index));
+		return (check_builltins_bis(cmd));
 }
 
 void				exec_fct2(t_lexem *lexem, pid_t child)

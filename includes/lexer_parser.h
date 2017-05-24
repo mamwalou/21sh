@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/24 05:10:13 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/24 15:11:11 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ void					generate_ast(t_st_lexem *lex);
 int						redirection_filters(char *line);
 int						find_token(char *line);
 int						ctrl_tab(char *line, const char **tableau, int itr);
-void					stock_line(t_lexem *begin, int code_mode);
 char					*define_name_lexem(char *line);
 void					epur_str(char **str, int mode);
+void					stock_line(int code_mode);
 
 #endif

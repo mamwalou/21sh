@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 16:45:53 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/23 16:14:38 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/24 15:20:43 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void					ft_get_pwd(void);
 void					ft_cd(char **cmd, int index);
 void					ft_setenv(char *name, char *value);
 void					history(char **cmd);
-void					ft_export(char *cmd, char *arg);
+void					ft_export(char *arg);
 void					ft_unsetenv(char *name);
 void					ft_echo(char **cmd);
 void					fnc_exit();
