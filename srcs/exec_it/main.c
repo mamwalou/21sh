@@ -76,34 +76,6 @@ void				end_memory(void)
 		free(g_memory.line_mode);
 }
 
-void	test(void)
-{
-	switch (g_memory.mode)
-	{
-		case SHELL :
-			dprintf(dfd, "SHELL\n");
-			break ;
-		case HEREDOC :
-			dprintf(dfd, "HEREDOC\n");
-			break ;
-		case QUOTE :
-			dprintf(dfd, "QUOTE\n");
-			break ;
-		case D_QUOTE :
-			dprintf(dfd, "DQUOTE\n");
-			break ;
-		case BACKQUOTE :
-			dprintf(dfd, "BQUOTE\n");
-			break ;
-		case BCKSLASH :
-			dprintf(dfd, "BSLASH\n");
-			break ;
-		case ERROR :
-			dprintf(dfd, "ERROR\n");
-			break ;
-	}
-}
-
 void				init(void)
 {
 	if ((dfd = open("/dev/ttys002", O_WRONLY)) == -1)
@@ -119,14 +91,6 @@ void				init(void)
 	ft_putstr_fd(PROMPT, STDERR_FILENO);
 }
 
-//handler(&g_memory);
-			// else if (g_memory.mode == HEREDOC)
-			// {
-			// 	printf("line %s\n", g_memory.line_mode);
-			// 	printf("key %s\n", g_memory.key_ctrl);
-			// 	printf("line after %s\n", g_memory.line_mode_after);
-			// }
-
 int					main(void)
 {
 	t_mode			mode;
@@ -139,7 +103,6 @@ int					main(void)
 		if (g_memory.inp.cmdlen > 0)
 		{
 			g_memory.mode = lexer_parser(&g_memory);
-			test();
 			if (g_memory.mode == SHELL)
 			{
 				hst_push(&g_memory, NULL);

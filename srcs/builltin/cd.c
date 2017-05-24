@@ -15,7 +15,6 @@
 static void		go_home(char *home_bis)
 {
 	char		*home;
-	char		*joint;
 	char		*pwd;
 
 	pwd = get_pwd();
@@ -28,20 +27,6 @@ static void		go_home(char *home_bis)
 			chdir(home);
 			replace_env(&g_env, "PWD=", home, &g_memory.env_lenght);
 			replace_env(&g_env, "OLDPWD=", pwd, &g_memory.env_lenght);
-		}
-		else
-		{
-			joint = ft_strtrijoin(home, "/", home_bis + 2);
-			if ((is_dir(joint)) != REP)
-			{
-				ft_putstr_fd("cd: no such file or directory:", 2);
-				ft_putendl_fd(joint, 2);
-			}
-			else
-			{
-				replace_env(&g_env, "PWD=", joint, &g_memory.env_lenght);
-				replace_env(&g_env, "OLDPWD=", pwd, &g_memory.env_lenght);
-			}
 		}
 	}
 	free(pwd);

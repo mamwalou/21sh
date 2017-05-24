@@ -77,6 +77,23 @@ int				find_str(char *line)
 	return (count);
 }
 
+static int		find_token2(char *line, int iter, int tmp)
+{
+	iter = tmp;
+	if (!line[iter])
+		return (BCKSLASH_CODE);
+	else
+	{
+		while (line[iter] && line[iter] == ' ')
+		{
+			if (!line[iter + 1])
+				return (BCKSLASH_CODE);
+			iter++;
+		}
+	}
+	return (tmp);
+}
+
 int				find_token(char *line)
 {
 	int			tmp;
@@ -89,22 +106,7 @@ int				find_token(char *line)
 	if ((tmp = ctrl_mode(line, &g_memory)) > 0)
 		return (tmp);
 	if ((tmp = operator_filters(line)) > 0)
-	{
-		iter = tmp;
-		if (!line[iter])
-			return (BCKSLASH_CODE);
-		else
-		{
-			while (line[iter] && line[iter] == ' ')
-			{
-				if (!line[iter + 1])
-					return (BCKSLASH_CODE);
-				iter++;
-			}
-		}
-		return (tmp);
-
-	}
+		return (find_token2(line, iter, tmp));
 	if ((tmp = find_str(line)) > 0)
 		return (tmp);
 	return (tmp);

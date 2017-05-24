@@ -13,13 +13,12 @@
 #include "exec.h"
 #include "termcaps.h"
 
-void 				close_fd_chain(int fd[4])
+void				close_fd_chain(int fd[4])
 {
 	if (fd[2])
 		close(fd[2]);
 	if (fd[3])
 		close(fd[3]);
-
 }
 
 void				treat_redirection(t_node *ast, int fd[4], int *status)

@@ -76,9 +76,9 @@ void			epur_str(char **str, int mode)
 		epur_variable(str, &ptr);
 	else if (((ptr = ft_strchr(*str, '~')) != NULL) && (mode == 0))
 	{
-		*ptr = 0;
 		ptr_after = ptr + 1;
 		epur_home(str, &ptr_after);
+		free(ptr);
 	}
 }
 

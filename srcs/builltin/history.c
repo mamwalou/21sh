@@ -12,9 +12,9 @@
 
 #include "exec.h"
 
-void	dbg_history(t_memory *sh)
+void			dbg_history(t_memory *sh)
 {
-	int	i;
+	int		i;
 	t_hlst	*lst;
 
 	i = 0;

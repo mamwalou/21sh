@@ -66,6 +66,17 @@ static void			ctrl_lexem(t_st_lexem *lex, char *tmp, t_lexem *new)
 	push_lexem(lex, new);
 }
 
+static void			save_lexem2(t_st_lexem *lex, t_lexem *new)
+{
+	lex->begin_lexem = new;
+	lex->end_lexem = new;
+	lex->nb_of_lexem = 1;
+	if ((find_varibale(new->name_lexem, '=')) > 0)
+		new->token_type = VARIABLE;
+	if (new->token_type == CMD)
+		option_lexem(lex, new);
+}
+
 void				save_lexem(t_st_lexem *lex, char *line, int end, int begin)
 {
 	t_lexem			*new;
@@ -82,13 +93,7 @@ void				save_lexem(t_st_lexem *lex, char *line, int end, int begin)
 	free(tmp);
 	if (lex->begin_lexem == NULL)
 	{
-		lex->begin_lexem = new;
-		lex->end_lexem = new;
-		lex->nb_of_lexem = 1;
-		if ((find_varibale(new->name_lexem, '=')) > 0)
-			new->token_type = VARIABLE;
-		if (new->token_type == CMD)
-			option_lexem(lex, new);
+		save_lexem2(lex, new);
 		free(tmp2);
 		return ;
 	}
