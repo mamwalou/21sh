@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 20:26:51 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/21 23:27:33 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/24 18:57:43 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void				arg_spe_sep(t_st_lexem *lex, char *line)
 	t_lexem			*arg_files;
 
 	arg_files = (t_lexem*)ft_memalloc(sizeof(t_lexem));
-	arg_files->name_lexem = define_name_lexem(line);
+	arg_files->name_lexem = ft_strdup(line);
 	arg_files->next = NULL;
 	arg_files->prev = NULL;
 	arg_files->index = 0;

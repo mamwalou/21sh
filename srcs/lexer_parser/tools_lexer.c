@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 21:05:10 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/24 18:26:16 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/24 18:57:56 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,8 @@ int				ctrl_tab(char *line, const char **tableau, int itr)
 			count += ft_strlen(tableau[i]);
 			if ((!(ft_strcmp(tableau[i], "<<"))) && g_memory.heredoc_sw == 1)
 				g_memory.heredoc_sw = 0;
-			else
-				return (0);
+			else if ((!(ft_strcmp(tableau[i], "<<"))) && g_memory.heredoc_sw == 0)
+				g_memory.heredoc_sw = 1;
 			return (count);
 		}
 		i++;

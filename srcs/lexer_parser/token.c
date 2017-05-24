@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/16 16:53:02 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/24 18:57:49 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,9 @@ t_token				define_token(char *lexem)
 
 	i = 0;
 	if (token_rr(lexem))
+	{
 		return (OP_REDIR_RIGHT);
+	}
 	if (token_left(lexem))
 		return (OP_REDIR_LEFT);
 	if (!ft_strncmp(lexem, "&&", 2))

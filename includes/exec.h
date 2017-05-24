@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 16:45:53 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/24 15:20:43 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/24 18:42:48 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void					ft_cd(char **cmd, int index);
 void					ft_setenv(char *name, char *value);
 void					history(char **cmd);
 void					ft_export(char *arg);
-void					ft_unsetenv(char *name);
+void					ft_unsetenv(char **name);
 void					ft_echo(char **cmd);
 void					fnc_exit();
 void					print_env(void);
