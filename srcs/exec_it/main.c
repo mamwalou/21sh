@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/24 05:36:17 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/24 12:54:23 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,44 +70,84 @@ void				end_memory(void)
 		free(g_memory.line);
 	if (g_memory.key_ctrl)
 		free(g_memory.key_ctrl);
-	if (g_memory.variable == NULL)
+	if (g_memory.variable != NULL)
 		ft_lstdel(&(g_memory.variable), ft_bzero);
-	if (g_memory.line_mode == NULL)
+	if (g_memory.line_mode != NULL)
 		free(g_memory.line_mode);
 }
+
+void	test(void)
+{
+	switch (g_memory.mode)
+	{
+		case SHELL :
+			dprintf(dfd, "SHELL\n");
+			break ;
+		case HEREDOC :
+			dprintf(dfd, "HEREDOC\n");
+			break ;
+		case QUOTE :
+			dprintf(dfd, "QUOTE\n");
+			break ;
+		case D_QUOTE :
+			dprintf(dfd, "DQUOTE\n");
+			break ;
+		case BACKQUOTE :
+			dprintf(dfd, "BQUOTE\n");
+			break ;
+		case BCKSLASH :
+			dprintf(dfd, "BSLASH\n");
+			break ;
+		case ERROR :
+			dprintf(dfd, "ERROR\n");
+			break ;
+	}
+}
+
+void				init(void)
+{
+	if ((dfd = open("/dev/ttys002", O_WRONLY)) == -1)
+		ft_putendl("log init failed");
+	sig_init();
+	g_env = build_env();
+	ft_bzero(&g_memory, sizeof(t_memory));
+	tc_init(&g_memory);
+	g_memory.mode = SHELL;
+	get_histfile_path();
+	if (is_dir(search_env(g_env, "HISTORY=")) == FILES)
+		hst_retrieve(&g_memory);
+	ft_putstr_fd(PROMPT, STDERR_FILENO);
+}
+
+//handler(&g_memory);
+			// else if (g_memory.mode == HEREDOC)
+			// {
+			// 	printf("line %s\n", g_memory.line_mode);
+			// 	printf("key %s\n", g_memory.key_ctrl);
+			// 	printf("line after %s\n", g_memory.line_mode_after);
+			// }
 
 int					main(void)
 {
 	t_mode			mode;
-	int				ctrl;
 
-	if ((dfd = open("/dev/ttys002", O_WRONLY)) == -1)
-		ft_putendl("log init failed");
-	ctrl = 0;
+	init();
 	mode = SHELL;
-	g_env = build_env();
-	init_memory();
-	ft_putstr_fd(PROMPT, STDERR_FILENO);
 	while (42)
 	{
-		if (g_memory.mode == HEREDOC)
-		{
-			printf("line %s\n", g_memory.line_mode);
-			printf("key %s\n", g_memory.key_ctrl);
-			printf("line after %s\n", g_memory.line_mode_after);
-		}
 		termcaps(&g_memory);
-
 		if (g_memory.inp.cmdlen > 0)
 		{
 			g_memory.mode = lexer_parser(&g_memory);
+			test();
 			if (g_memory.mode == SHELL)
 			{
 				hst_push(&g_memory, NULL);
 				g_memory.line = NULL;
 				g_memory.line_lenght = 0;
-				// dbg_history(&g_memory);
 			}
+			else
+				;
 		}
 		cbuf_reset(&g_memory);
 	}

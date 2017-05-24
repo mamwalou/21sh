@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 10:27:23 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/15 20:47:41 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/24 11:15:20 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void		go_home(char *home_bis)
 {
-	int			*tableau;
 	char		*home;
 	char		*joint;
 	char		*pwd;
@@ -73,7 +72,6 @@ void			dash_one(char *str)
 {
 	char		*tmp;
 	char		*save_pwd;
-	char		*pwd;
 
 	save_pwd = get_pwd();
 	chdir(str);

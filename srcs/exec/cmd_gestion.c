@@ -6,11 +6,12 @@
 /*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/13 10:31:53 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/23 17:41:59 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/24 11:17:37 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "termcaps.h"
 
 static int			check_builltins_tris(char **cmd, int index)
 {
@@ -98,7 +99,6 @@ void				exec_fct2(t_lexem *lexem, pid_t child)
 
 int					exec_fct(t_node *ast, int *status)
 {
-	t_code			code;
 	pid_t			child_pid;
 	int				pos;
 

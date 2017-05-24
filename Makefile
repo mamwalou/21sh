@@ -45,12 +45,14 @@ SRCS =	srcs/ast/an_ll.c\
 		srcs/exec_it/main.c\
 		srcs/exec_it/tools.c\
 		srcs/exec_it/tools_env.c\
+		srcs/exec_it/sh_abort.c\
 		srcs/history/hst_browse_next.c\
 		srcs/history/hst_browse_prev.c\
 		srcs/history/hst_push.c\
 		srcs/history/hst_retrieve.c\
 		srcs/history/hst_update_cbuf.c\
-		srcs/history/manage_history.c\
+		srcs/history/hst_tmp_push.c\
+		srcs/history/get_histfile_path.c\
 		srcs/lexer_parser/lexem.c\
 		srcs/lexer_parser/lexem_pt2.c\
 		srcs/lexer_parser/lexer.c\
@@ -61,6 +63,7 @@ SRCS =	srcs/ast/an_ll.c\
 		srcs/lexer_parser/token.c\
 		srcs/lexer_parser/tool_lexem.c\
 		srcs/lexer_parser/tools_lexer.c\
+		srcs/termcaps/signal.c\
 		srcs/termcaps/clipboard/cb_copy_internal.c\
 		srcs/termcaps/clipboard/cb_cut_internal.c\
 		srcs/termcaps/clipboard/cb_paste_external.c\
@@ -90,6 +93,7 @@ SRCS =	srcs/ast/an_ll.c\
 		srcs/termcaps/key_events/evt_home.c\
 		srcs/termcaps/key_events/evt_newline.c\
 		srcs/termcaps/key_events/evt_printable.c\
+		srcs/termcaps/tc_init.c\
 		srcs/termcaps/tc_restore_default.c\
 		srcs/termcaps/tc_set_blocking_read.c\
 		srcs/termcaps/tc_set_timed_read.c\
