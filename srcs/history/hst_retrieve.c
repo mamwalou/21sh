@@ -1,18 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdel.c                                        :+:      :+:    :+:   */
+/*   hst_retrieve.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/23 22:36:26 by mbourget         ###   ########.fr       */
+/*   Created: 2017/05/24 00:39:58 by mbourget          #+#    #+#             */
+/*   Updated: 2017/05/24 02:18:55 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Includes/libft.h"
+#include "termcaps.h"
 
-void	ft_strdel(char **as)
+void	hst_retrieve(t_memory *sh)
 {
-	ft_memdel((void **)as);
+	char		*line;
+	char		*cmd;
+	int			fd;
+
+	fd = open(search_env(g_env, "HISTORY="), O_RDONLY | O_CREAT, 0666);
+	line = NULL;
+	while (get_next_line(fd, &line) > 0)
+	{
+		if (line)
+		{
+			if ((cmd = ft_strchr(line, ';')) != NULL && *(cmd + 1) != 0)
+				hst_push(sh, line);
+			ft_strdel(&line);
+		}
+		sh->code_history++;
+	}
+	close(fd);
 }

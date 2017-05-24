@@ -6,7 +6,7 @@
 /*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/23 20:18:15 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/24 02:15:26 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 # include "libft.h"
 # include "shell.h"
 
-
+void	dbg_history(t_memory *sh);
+void	write_history(t_memory *memory);
 
 void	init_term(t_memory *sh);
 
@@ -64,7 +65,8 @@ void	cb_paste_external(t_memory *sh);
 void	highlight(t_memory *sh);
 void	highlight_cleanup(t_memory *sh, bool cut, int start);
 
-void	hst_push(t_memory *sh, char *cmd);
+void	hst_push(t_memory *sh, char *line);
+void	hst_retrieve(t_memory *sh);
 void	hst_update_cbuf(t_memory *sh);
 void	hst_browse_prev(t_memory *sh);
 void	hst_browse_next(t_memory *sh);

@@ -6,11 +6,14 @@
 /*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/23 17:43:59 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/24 02:24:37 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
+#include "termcaps.h"
+
+int	dfd = -1;
 
 int					find_varibale(char *str, char c)
 {
@@ -73,31 +76,33 @@ void				end_memory(void)
 		free(g_memory.line_mode);
 }
 
-int					main(int argc, char **argv, char **environ)
+int					main(void)
 {
 	t_mode			mode;
 	int				ctrl;
 
+	if ((dfd = open("/dev/ttys002", O_WRONLY)) == -1)
+		ft_putendl("log init failed");
 	ctrl = 0;
 	mode = SHELL;
-	g_env = build_env(environ);
+	g_env = build_env();
 	init_memory();
 	ft_putstr_fd(PROMPT, STDERR_FILENO);
 	while (42)
 	{
 		termcaps(&g_memory);
-		if (g_memory.line)
+		if (g_memory.inp.cmdlen > 0)
 		{
 			g_memory.mode = lexer_parser(&g_memory);
 			if (g_memory.mode == SHELL)
 			{
-				push_history();
-				cbuf_reset(&g_memory);
-				//free(g_memory.line);
+				hst_push(&g_memory, NULL);
 				g_memory.line = NULL;
 				g_memory.line_lenght = 0;
+				// dbg_history(&g_memory);
 			}
 		}
+		cbuf_reset(&g_memory);
 	}
 	end_memory();
 	return (0);

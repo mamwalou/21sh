@@ -6,7 +6,7 @@
 /*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/23 20:31:07 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/24 02:19:18 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ int					g_nb_hist(void)
 	int			count;
 
 	count = 0;
-	fd = open(search_env(g_env, "HISTORY="),
-			O_RDONLY | O_CREAT | O_APPEND, 0666);
-	while ((get_next_line(fd, &line)) > 0)
+	fd = open(search_env(g_env, "HISTORY="), O_RDONLY | O_CREAT, 0666);
+	line = NULL;
+	while (get_next_line(fd, &line) > 0)
 	{
 		if (line)
 		{
-			if ((cmd = ft_strchr(line, ';')) != NULL && (cmd + 1) != NULL)
-				hst_push(&g_memory, cmd + 1);
+			if ((cmd = ft_strchr(line, ';')) != NULL && *(cmd + 1) != 0)
+				hst_push(&g_memory, line);
 			ft_strdel(&line);
 		}
 		count++;
@@ -59,10 +59,10 @@ void				init_memory(void)
 	g_memory.mode = SHELL;
 	history_path();
 	if (is_dir(search_env(g_env, "HISTORY=")) == FILES)
-		g_memory.code_history = g_nb_hist();
+		hst_retrieve(&g_memory);
 }
 
-static void			write_history(t_memory *memory)
+void			write_history(t_memory *memory)
 {
 	char			*tmp;
 	int				fd;
@@ -72,7 +72,7 @@ static void			write_history(t_memory *memory)
 	tmp = ft_itoa(memory->code_history);
 	write(fd, tmp, ft_strlen(tmp));
 	write(fd, ";", 1);
-	write(fd, memory->line, ft_strlen(memory->line));
+	write(fd, memory->hst.current->cmd, memory->hst.current->cmdlen);
 	write(fd, "\n", 1);
 	free(tmp);
 	close(fd);

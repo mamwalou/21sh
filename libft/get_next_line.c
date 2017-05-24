@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdriay <mdriay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/23 21:50:21 by mdriay            #+#    #+#             */
-/*   Updated: 2017/05/07 13:24:05 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/24 02:23:13 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ int		get_next_line(int const fd, char **line)
 			return (ret);
 		while (gnl->i < gnl->count)
 		{
-			temp = ft_strmerge(temp, get_append(gnl));
+			temp = ft_strmerge(temp, get_append(gnl), 1, 1);
 			if (gnl->nl)
 			{
 				*line = temp;

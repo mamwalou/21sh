@@ -6,7 +6,7 @@
 /*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/21 14:39:18 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/23 20:41:50 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/23 20:57:06 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,11 @@ static t_llist	*constuct_env(char **environ)
 	return (ret);
 }
 
-t_llist			*build_env(char **environ)
+t_llist			*build_env(void)
 {
-	t_llist	*ret;
-	char	*tmp;
+	extern char	**environ;
+	t_llist		*ret;
+	char		*tmp;
 
 	ret = NULL;
 	if (!*environ)

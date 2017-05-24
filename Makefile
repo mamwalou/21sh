@@ -42,13 +42,13 @@ SRCS =	srcs/ast/an_ll.c\
 		srcs/exec/pipe_function.c\
 		srcs/exec/pipe_function2.c\
 		srcs/exec/redirection.c\
-		srcs/exec_it/history_tools.c\
 		srcs/exec_it/main.c\
 		srcs/exec_it/tools.c\
 		srcs/exec_it/tools_env.c\
 		srcs/history/hst_browse_next.c\
 		srcs/history/hst_browse_prev.c\
 		srcs/history/hst_push.c\
+		srcs/history/hst_retrieve.c\
 		srcs/history/hst_update_cbuf.c\
 		srcs/history/manage_history.c\
 		srcs/lexer_parser/lexem.c\

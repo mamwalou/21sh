@@ -6,7 +6,7 @@
 /*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/23 20:28:16 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/24 00:35:07 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define BCKSLASH_CODE 262150
 # define MACREALLOC(ret, name, size) (ret = ft_realloc(name, size));
 
-
+extern int	dfd;
 
 t_llist				*g_env;
 
@@ -99,6 +99,7 @@ struct	s_history_list
 	t_hlst	*prev;
 	t_hlst	*next;
 	char	*cmd;
+	char	*line;
 	size_t	cmdlen;
 };
 
@@ -141,8 +142,9 @@ t_memory			g_memory;
 
 int					prompt();
 void				print_ascii(void);
+void				termcaps(t_memory *sh);
 
-t_llist				*build_env(char **environ);
+t_llist				*build_env(void);
 int					count_env(t_llist *env);
 char				*search_env(t_llist *env, const char *value);
 char				**copy_env(void);
