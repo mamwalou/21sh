@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/24 14:16:44 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/24 15:48:28 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,6 @@ int					main(void)
 	t_mode			mode;
 
 	init();
-	g_memory.mode = lexer_parser(&g_memory);
 	mode = SHELL;
 	while (42)
 	{
