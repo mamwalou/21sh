@@ -6,11 +6,31 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 21:05:10 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/24 13:45:05 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/24 17:16:09 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer_parser.h"
+
+void			epur_home(char **str, char **ptr)
+{
+	char		*ptr_after;
+	char		*sigle;
+	int			count;
+
+	count = 0;
+	sigle = NULL;
+	ptr_after = *ptr;
+	while ((ptr_after[count + 1]) != '\0' || (ptr_after[count] == ' '))
+		count++;
+	if ((sigle = search_env(g_env, "HOME=")))
+	{
+		free(*str);
+		*str = ft_strdup(sigle);
+	}
+	else
+		*str = NULL;
+}
 
 void			epur_variable(char **str, char **ptr)
 {
@@ -61,6 +81,8 @@ void			epur_str(char **str, int mode)
 	}
 	else if (((ptr = ft_strchr(*str, '$')) != NULL) && (mode == 0 || mode == 1))
 		epur_variable(str, &ptr);
+	else if (((ptr = ft_strchr(*str, '~')) != NULL) && (mode == 0 || mode == 1))
+		epur_home(str, &ptr);
 }
 
 int				ctrl_tab(char *line, const char **tableau, int itr)

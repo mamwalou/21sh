@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/24 13:43:16 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/24 17:16:50 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int				find_str(char *line)
 		else if (line[count] == '\\' && (!line[count + 1]))
 			return (BCKSLASH_CODE);
 		else if ((itr = ctrl_mode(line + count, &g_memory)) > 0)
-			return (itr + 1);
+			return (itr + 2);
 		else
 			count++;
 	}

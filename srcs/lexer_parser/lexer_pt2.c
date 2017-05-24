@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/24 15:10:59 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/24 17:18:05 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,10 @@ int				ctrl_mode(char *line, t_memory *memory)
 		count++;
 		if (tmp == HEREDOC_CODE)
 			return (ctrl_heredoc(memory, line + 3));
-		if (tmp == D_QUOTE_CODE)
-			memory->key_ctrl = ft_strdup("\"");
-		if (tmp == QUOTE_CODE)
-			memory->key_ctrl = ft_strdup("\'");
-		if (tmp == BACKQUOTE)
-			memory->key_ctrl = ft_strdup("`");
 		while (line[count])
 		{
 			if (tmp == ctrl_quot(line[count], 0))
-			{
 				return (count + 1);
-			}
 			count++;
 		}
 		return (tmp);
