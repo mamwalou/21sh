@@ -107,11 +107,11 @@ SRCS =	srcs/ast/an_ll.c\
 OBJS = $(SRCS:.c=.o)
 
 DEPS = $(LIBFTDIR)/$(LIBFT)\
-		includes/ast/ast.h\
-		includes/exec/exec.h\
-		includes/lexer_parser/lexer_parser.h\
+		includes/ast.h\
+		includes/exec.h\
+		includes/lexer_parser.h\
 		includes/shell.h\
-		includes/termcaps/termcaps.h
+		includes/termcaps.h
 
 .PHONY: target makelib clean fclean re
 

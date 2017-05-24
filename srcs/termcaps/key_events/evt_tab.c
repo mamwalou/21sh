@@ -6,7 +6,7 @@
 /*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/24 16:17:40 by mbourget          #+#    #+#             */
-/*   Updated: 2017/05/24 16:20:21 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/24 17:14:40 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 void	evt_tab(t_memory *sh)
 {
-	autocompletion(sh);
+	if (sh->state == IDLE)
+		autocompletion(sh);
 }

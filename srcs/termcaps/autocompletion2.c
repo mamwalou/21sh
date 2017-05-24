@@ -6,7 +6,7 @@
 /*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 09:29:41 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/24 17:05:06 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/24 17:25:31 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void				auto_push(char *str, t_memory *sh, int pos)
 
 void				aff_auto(t_autocmp *autocmpl, t_memory *sh)
 {
-	int				count;
+	size_t			count;
 	t_llist			*ptr;
 
 	count = 0;

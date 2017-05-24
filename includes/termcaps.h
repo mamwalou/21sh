@@ -6,7 +6,7 @@
 /*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/24 16:25:05 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/24 17:23:42 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,11 @@ void	hst_retrieve(t_memory *sh);
 void	hst_update_cbuf(t_memory *sh);
 void	hst_browse_prev(t_memory *sh);
 void	hst_browse_next(t_memory *sh);
+
+int		autocompletion(t_memory *sh);
+void	rsearch(char *str, char *trep, t_autocmp *autc);
+void	remove_autc(t_autocmp *autocmp);
+void	auto_push(char *str, t_memory *sh, int pos);
+void	aff_auto(t_autocmp *autocmpl, t_memory *sh);
 
 #endif
