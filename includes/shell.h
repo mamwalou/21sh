@@ -6,7 +6,7 @@
 /*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/23 15:49:36 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/24 16:12:15 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,11 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <fcntl.h>
+# include <stdbool.h>
 # define NB_BUILT 8
-
+# define RBUF_SIZE	8
+# define PROMPT	"$ "
+# define PROMPT_SIZE 2
 # define SUCCESS 0
 # define SWITCH_MODE 262144
 # define SHELL_CODE 262145
@@ -33,9 +36,20 @@
 # define BCKSLASH_CODE 262150
 # define MACREALLOC(ret, name, size) (ret = ft_realloc(name, size));
 
-t_llist				*g_env;
+extern int		dfd;
 
-typedef	enum		e_mode
+typedef	enum e_mode				t_mode;
+typedef struct s_memory			t_memory;
+typedef struct s_cursor			t_cursor;
+typedef struct s_input			t_input;
+typedef struct s_clipboard		t_clipboard;
+typedef struct s_history		t_history;
+typedef struct s_history_list	t_hlst;
+
+t_memory		g_memory;
+t_llist			*g_env;
+
+enum				e_mode
 {
 	SHELL,
 	HEREDOC,
@@ -44,9 +58,67 @@ typedef	enum		e_mode
 	BACKQUOTE,
 	BCKSLASH,
 	ERROR,
-}					t_mode;
+};
 
-typedef struct		s_memory
+enum				e_sh_state
+{
+	IDLE,
+	HGL,
+	ENCL
+};
+
+struct				s_input
+{
+	char			rbuf[RBUF_SIZE + 1];
+	char			missing;
+	char			*cbuf;
+	char			*cmd;
+	size_t			cbuflen;
+	size_t			cmdlen;
+	size_t			maxlen;
+	bool			multi_line;
+	bool			ready;
+};
+
+struct				s_cursor
+{
+	unsigned int	x;
+	unsigned int	y;
+	unsigned int	x_max;
+	unsigned int	y_max;
+	unsigned int	win_x;
+	unsigned int	win_y;
+	unsigned int	i;
+	unsigned int	s_i;
+};
+
+struct				s_clipboard
+{
+	char			*buf;
+	size_t			len;
+};
+
+struct				s_history_list
+{
+	t_hlst			*prev;
+	t_hlst			*next;
+	char			*cmd;
+	char			*line;
+	size_t			cmdlen;
+};
+
+struct				s_history
+{
+	t_hlst			*head;
+	t_hlst			*tmphead;
+	t_hlst			*end;
+	t_hlst			*current;
+	char			*last_cmd;
+	size_t			last_cmdlen;
+	bool			browsing;
+};
+
+struct				s_memory
 {
 	int				fd_history;
 	int				code_history;
@@ -61,14 +133,25 @@ typedef struct		s_memory
 	t_mode			mode;
 	int				launch;
 	int				line_lenght;
-}					t_memory;
-
-t_memory			g_memory;
+	struct termios	term;
+	struct termios	term_d;
+	enum e_sh_state	state;
+	t_input			inp;
+	t_cursor		curs;
+	t_clipboard		cb;
+	t_history		hst;
+	int				signo;
+};
 
 int					prompt();
 void				print_ascii(void);
+void				termcaps(t_memory *sh);
+void				sh_abort(char *msg);
 
-t_llist				*build_env(char **environ);
+void				sig_handler(t_memory *sh);
+void				sig_init(void);
+
+t_llist				*build_env(void);
 int					count_env(t_llist *env);
 char				*search_env(t_llist *env, const char *value);
 char				**copy_env(void);
@@ -84,7 +167,7 @@ int					is_bulltin(char *cmd);
 int					operator_ctrl(int test);
 int					find_str(char *line);
 int					ctrl_mode(char *line, t_memory *memory);
-int					ctrl_quot(int first, int second, char *line);
+int					ctrl_quot(int first, int second);
 
 t_llist				*my_setenv();
 char				**my_env(t_llist *env);
@@ -94,9 +177,8 @@ void				replace_env(t_llist **list, char *sigle, char *new,
 								int *lenght);
 
 void				init_memory(void);
-void				push_history(void);
 void				end_memory(void);
-void				history_path(void);
+void				get_histfile_path(void);
 char				**convert_history();
 
 void				*ft_realloc(void *mem, size_t size);

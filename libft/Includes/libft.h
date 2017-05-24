@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/21 22:03:15 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/24 02:21:59 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void				ft_putendl(char const *s);
 void				ft_putendl_fd(char const *s, int fd);
 char				*ft_strcat(char *s1, const char *s2);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);
-int					ft_strchr(char *s, char c);
+char				*ft_strchr(const char *s, int c);
 void				ft_strmove(char **s, int pos);
 char				*ft_strrchr(const char *s, int c);
 char				*ft_strstr(const char *s1, const char *s2);
@@ -103,6 +103,7 @@ char				*ft_strncat(char *s1, const char *s2, size_t n);
 size_t				ft_strlen(const char *str);
 char				*ft_strcpy(char *s1, const char *s2);
 char				*ft_strncpy(char *s1, const char *s2, size_t n);
+char				*ft_strmerge(char *s1, char *s2, int free_s1, int free_s2);
 void				ft_putnbr(int n);
 void				ft_putnbr_fd(int n, int fd);
 int					ft_atoi(const char *str);
@@ -139,7 +140,6 @@ int					ft_strsplit(char ***dst, char const *s, int *t);
 int					ft_strisdigit(char *str);
 int					get_next_line(int fd, char **line);
 int					*generate(int c, int c1, int size);
-char				*ft_strmerge(char *a, char *b);
 
 typedef struct		s_llist
 {

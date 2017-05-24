@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/23 11:07:43 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/24 15:10:59 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int				ctrl_heredoc(t_memory *memory, char *line)
 	return (HEREDOC_CODE);
 }
 
-int				ctrl_quot(int first, int second, char *line)
+int				ctrl_quot(int first, int second)
 {
 	if (first == 34)
 		return (D_QUOTE_CODE);
@@ -43,7 +43,7 @@ int				ctrl_mode(char *line, t_memory *memory)
 
 	tmp = 0;
 	count = 0;
-	if ((tmp = ctrl_quot(line[count], line[count + 1], line)) > 0)
+	if ((tmp = ctrl_quot(line[count], line[count + 1])) > 0)
 	{
 		count++;
 		if (tmp == HEREDOC_CODE)
@@ -56,8 +56,10 @@ int				ctrl_mode(char *line, t_memory *memory)
 			memory->key_ctrl = ft_strdup("`");
 		while (line[count])
 		{
-			if (tmp == ctrl_quot(line[count], 0, line))
-				return (count);
+			if (tmp == ctrl_quot(line[count], 0))
+			{
+				return (count + 1);
+			}
 			count++;
 		}
 		return (tmp);

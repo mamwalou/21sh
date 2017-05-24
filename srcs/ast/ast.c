@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/23 15:50:11 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/24 15:18:35 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ void		create(t_node **parent, t_node **ast, t_lexem *pos, t_st_lexem *lex)
 	prev = NULL;
 	next = NULL;
 	if (pos->next)
-		next = find_next_max(pos->next, lex);
+		next = find_next_max(pos->next);
 	if (pos->prev)
-		prev = find_prev_max(pos->prev, lex);
+		prev = find_prev_max(pos->prev);
 	if (next && next->priority > 0)
 	{
 		pos->next->prev = NULL;
@@ -41,7 +41,7 @@ void		create(t_node **parent, t_node **ast, t_lexem *pos, t_st_lexem *lex)
 	}
 	if (*ast == NULL)
 	{
-		*ast = create_node(pos, lex, parent);
+		*ast = create_node(pos, parent);
 		if (next != NULL)
 			create(&(*ast), &(*ast)->right_op, next, lex);
 		if (prev != NULL)
@@ -54,7 +54,6 @@ void		generate_ast(t_st_lexem *lex)
 	t_node	*ast;
 	t_lexem	*begin;
 	int		status;
-	// int		max;
 
 	ast = NULL;
 	status = 0;

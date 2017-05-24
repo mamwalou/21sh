@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   autocompletion.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 09:28:41 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/17 08:16:51 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/24 16:36:09 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "shell.h"
 #include "lexer_parser.h"
 
-void				sawfolder(t_win *win, char *path, t_autocmp *autc)
+void				sawfolder(t_memory *sh, char *path, t_autocmp *autc)
 {
 	struct dirent	*files;
 	DIR				*rep;
@@ -28,12 +28,12 @@ void				sawfolder(t_win *win, char *path, t_autocmp *autc)
 		ft_lstadd(&(autc)->match, ft_lstnew(files->d_name,
 					ft_strlen(files->d_name)));
 	}
-	if (win->end->l_char != '/')
-		push_line(win, '/');
+	if (sh->inp.cmd[sh->inp.cmdlen - 1] != '/')
+		cbuf_append(sh, '/');
 	closedir(rep);
 }
 
-void				folder_search(char *str, t_win *win, t_autocmp *autocmpl)
+void				folder_search(char *str, t_memory *sh, t_autocmp *autocmpl)
 {
 	char			*path;
 	int				i;
@@ -41,20 +41,20 @@ void				folder_search(char *str, t_win *win, t_autocmp *autocmpl)
 	i = 0;
 	path = NULL;
 	if (is_dir(str) == REP)
-		sawfolder(win, str, autocmpl);
+		sawfolder(sh, str, autocmpl);
 	else
 	{
 		if (!(path = search_env(g_env, "PWD=")))
 			return ;
-		rsearch(str, path, win, autocmpl);
+		rsearch(str, path, autocmpl);
 	}
 	if (autocmpl->occurance == 1)
-		auto_push(autocmpl->match->content, win, ft_strlen(str));
+		auto_push(autocmpl->match->content, sh, ft_strlen(str));
 	else if (autocmpl->occurance > 1)
-		aff_auto(autocmpl, win);
+		aff_auto(autocmpl, sh);
 }
 
-void				binary_search(char *str, t_win *win, t_autocmp *autocmpl)
+void				binary_search(char *str, t_memory *sh, t_autocmp *autocmpl)
 {
 	int				lenght;
 	char			**path;
@@ -66,50 +66,46 @@ void				binary_search(char *str, t_win *win, t_autocmp *autocmpl)
 	lenght = ft_strsplit(&path, search_env(g_env, "PATH="), tableau);
 	while (i < lenght - 1)
 	{
-		rsearch(str, path[i], win, autocmpl);
+		rsearch(str, path[i], autocmpl);
 		i++;
 	}
 	if (autocmpl->occurance == 1)
-		auto_push(autocmpl->match->content, win, ft_strlen(str));
+		auto_push(autocmpl->match->content, sh, ft_strlen(str));
 	else if (autocmpl->occurance > 1)
-		aff_auto(autocmpl, win);
+		aff_auto(autocmpl, sh);
 	free(tableau);
 	free_d(path, lenght);
 	free(path);
 }
 
-static void			gestion_auto(t_autocmp *autocmpl, t_win *win, char **tmp2)
+static void			gestion_auto(t_autocmp *autocmpl, t_memory *sh, char **tmp2)
 {
 	if (autocmpl->lenght > 1 && ((!operator_filters(tmp2[autocmpl->lenght - 1])
 		&& !redirection_filters(tmp2[autocmpl->lenght - 1]))))
-		folder_search(tmp2[autocmpl->lenght - 1], win, autocmpl);
+		folder_search(tmp2[autocmpl->lenght - 1], sh, autocmpl);
 	else
-		binary_search(tmp2[autocmpl->lenght - 1], win, autocmpl);
+		binary_search(tmp2[autocmpl->lenght - 1], sh, autocmpl);
 }
 
-int					autocompletion(t_win *win)
+int					autocompletion(t_memory *sh)
 {
 	t_autocmp		autocmpl;
 	char			**tmp2;
-	char			*tmp;
 	int				*tableau;
 
-	tmp = NULL;
 	tmp2 = NULL;
 	autocmpl.match = NULL;
 	autocmpl.occurance = 0;
 	if (!search_env(g_env, "PATH="))
 		return (1);
-	tmp = lchar_list(win->begin, win->lenght_line);
 	tableau = generate(9, 32, 3);
-	if ((autocmpl.lenght = ft_strsplit(&tmp2, tmp, tableau)) > 0)
+	if ((autocmpl.lenght = ft_strsplit(&tmp2, sh->inp.cmd, tableau)) > 0)
 	{
-		gestion_auto(&autocmpl, win, tmp2);
+		gestion_auto(&autocmpl, sh, tmp2);
 		remove_autc(&autocmpl);
 		free_d(tmp2, autocmpl.lenght);
 		free(tmp2);
 	}
 	free(tableau);
-	free(tmp);
 	return (1);
 }

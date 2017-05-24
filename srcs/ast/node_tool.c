@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   node_tool.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/20 19:11:22 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/23 15:50:55 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/24 15:17:59 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast.h"
 
-t_lexem			*rechatch_lexm(t_lexem *ptr, t_st_lexem *lex)
+t_lexem			*rechatch_lexm(t_lexem *ptr)
 {
-	(void)lex;
 	if (ptr->next != NULL)
 	{
 		if (ptr->prev)
@@ -34,7 +33,7 @@ t_lexem			*rechatch_lexm(t_lexem *ptr, t_st_lexem *lex)
 	return (ptr);
 }
 
-t_node			*create_node(t_lexem *ptr, t_st_lexem *lex, t_node **parent)
+t_node			*create_node(t_lexem *ptr, t_node **parent)
 {
 	t_node		*new_node;
 
@@ -44,7 +43,7 @@ t_node			*create_node(t_lexem *ptr, t_st_lexem *lex, t_node **parent)
 	new_node->right_op = NULL;
 	if (parent != NULL)
 		new_node->parent = *parent;
-	new_node->body->lexem = rechatch_lexm(ptr, lex);
+	new_node->body->lexem = rechatch_lexm(ptr);
 	if (new_node->body->lexem->priority > 0)
 		new_node->body->type_node = OP;
 	else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   log_sep.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 11:14:20 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/18 20:51:01 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/24 11:08:41 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void			exec_fonc_or(t_node *ast, int *status)
 		if (ast->right_op == NULL)
 			ft_putendl_fd("bash: syntax error near unexpected token `&&'", 2);
 		else
-		exec_tree(ast->right_op, status);
+			exec_tree(ast->right_op, status);
 	}
 }
 

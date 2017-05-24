@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 13:16:24 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/21 22:11:23 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/24 12:29:54 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
-
-
 
 static void 		files_open(char *token, char *after, int ret_fd[3])
 {

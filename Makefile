@@ -23,7 +23,6 @@ LIBFTDIR = libft
 LDFLAGS = -L$(LIBFTDIR)
 LDLIBS = -lft -ltermcap
 
-SRCDIR = src
 SRCS =	srcs/ast/an_ll.c\
 		srcs/ast/ast.c\
 		srcs/ast/node_tool.c\
@@ -43,11 +42,17 @@ SRCS =	srcs/ast/an_ll.c\
 		srcs/exec/pipe_function.c\
 		srcs/exec/pipe_function2.c\
 		srcs/exec/redirection.c\
-		srcs/exec_it/history_tools.c\
 		srcs/exec_it/main.c\
 		srcs/exec_it/tools.c\
 		srcs/exec_it/tools_env.c\
-		srcs/history/manage_history.c\
+		srcs/exec_it/sh_abort.c\
+		srcs/history/hst_browse_next.c\
+		srcs/history/hst_browse_prev.c\
+		srcs/history/hst_push.c\
+		srcs/history/hst_retrieve.c\
+		srcs/history/hst_update_cbuf.c\
+		srcs/history/hst_tmp_push.c\
+		srcs/history/get_histfile_path.c\
 		srcs/lexer_parser/lexem.c\
 		srcs/lexer_parser/lexem_pt2.c\
 		srcs/lexer_parser/lexer.c\
@@ -58,21 +63,46 @@ SRCS =	srcs/ast/an_ll.c\
 		srcs/lexer_parser/token.c\
 		srcs/lexer_parser/tool_lexem.c\
 		srcs/lexer_parser/tools_lexer.c\
-		srcs/termcaps/autocompletion.c\
-		srcs/termcaps/autocompletion2.c\
-		srcs/termcaps/depush_line.c\
-		srcs/termcaps/end_home.c\
-		srcs/termcaps/history_termcaps.c\
-		srcs/termcaps/loop_read.c\
-		srcs/termcaps/mode_termcaps.c\
-		srcs/termcaps/move_cursr.c\
-		srcs/termcaps/push_line.c\
 		srcs/termcaps/signal.c\
+		srcs/termcaps/clipboard/cb_copy_internal.c\
+		srcs/termcaps/clipboard/cb_cut_internal.c\
+		srcs/termcaps/clipboard/cb_paste_external.c\
+		srcs/termcaps/clipboard/cb_paste_internal.c\
+		srcs/termcaps/command_buffer/cbuf_append.c\
+		srcs/termcaps/command_buffer/cbuf_check_size.c\
+		srcs/termcaps/command_buffer/cbuf_insert.c\
+		srcs/termcaps/command_buffer/cbuf_print.c\
+		srcs/termcaps/command_buffer/cbuf_reset.c\
+		srcs/termcaps/highlighting/highlight.c\
+		srcs/termcaps/highlighting/highlight_cleanup.c\
+		srcs/termcaps/key_events/evt_backspace.c\
+		srcs/termcaps/key_events/evt_ctrl_d.c\
+		srcs/termcaps/key_events/evt_ctrl_dpad_down.c\
+		srcs/termcaps/key_events/evt_ctrl_dpad_left.c\
+		srcs/termcaps/key_events/evt_ctrl_dpad_right.c\
+		srcs/termcaps/key_events/evt_ctrl_dpad_up.c\
+		srcs/termcaps/key_events/evt_ctrl_h.c\
+		srcs/termcaps/key_events/evt_ctrl_p.c\
+		srcs/termcaps/key_events/evt_del.c\
+		srcs/termcaps/key_events/evt_tab.c\
+		srcs/termcaps/key_events/evt_dpad_down.c\
+		srcs/termcaps/key_events/evt_dpad_left.c\
+		srcs/termcaps/key_events/evt_dpad_right.c\
+		srcs/termcaps/key_events/evt_dpad_up.c\
+		srcs/termcaps/key_events/evt_end.c\
+		srcs/termcaps/key_events/evt_handler.c\
+		srcs/termcaps/key_events/evt_home.c\
+		srcs/termcaps/key_events/evt_newline.c\
+		srcs/termcaps/key_events/evt_printable.c\
+		srcs/termcaps/tc_init.c\
+		srcs/termcaps/tc_restore_default.c\
+		srcs/termcaps/tc_set_blocking_read.c\
+		srcs/termcaps/tc_set_timed_read.c\
+		srcs/termcaps/tc_unset_canonical.c\
+		srcs/termcaps/tc_write.c\
 		srcs/termcaps/termcaps.c\
-		srcs/termcaps/termcaps_checker.c\
-		srcs/termcaps/tools_for_mode.c\
-		srcs/termcaps/tools_line_edition.c
-
+		srcs/termcaps/autocompletion.c\
+		srcs/termcaps/autocompletion2.c
 
 OBJS = $(SRCS:.c=.o)
 

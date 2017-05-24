@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/21 14:39:18 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/18 19:45:16 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/23 20:57:06 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,17 @@
 char			*search_env(t_llist *env, const char *value)
 {
 	t_llist		*ptr;
+	char		*val;
 
 	ptr = env;
 	while (ptr != NULL)
 	{
 		if ((ft_findstr(ptr->content, (char*)value)) == 1)
-			return (ptr->content + ft_strchr(ptr->content, '='));
+		{
+			val = ft_strchr(ptr->content, '=');
+			if (val != NULL && *(val + 1) != 0)
+				return (val + 1);
+		}
 		ptr = ptr->next;
 	}
 	return (NULL);
@@ -98,10 +103,11 @@ static t_llist	*constuct_env(char **environ)
 	return (ret);
 }
 
-t_llist			*build_env(char **environ)
+t_llist			*build_env(void)
 {
-	t_llist	*ret;
-	char	*tmp;
+	extern char	**environ;
+	t_llist		*ret;
+	char		*tmp;
 
 	ret = NULL;
 	if (!*environ)

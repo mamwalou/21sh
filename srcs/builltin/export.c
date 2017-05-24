@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/15 03:13:05 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/15 17:01:37 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/24 15:20:02 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int					set_varible(t_node *ast, int *status)
 		replace_env(&g_memory.variable, sigle, name, &(g_memory).var_lenght);
 	free(sigle);
 	free(name);
+	*status = 0;
 	return (1);
 }
 
@@ -92,7 +93,7 @@ static void			export_env(char *str)
 	free(name);
 }
 
-void				ft_export(char *cmd, char *arg)
+void				ft_export(char *arg)
 {
 	if (!arg)
 		saw_varible();
