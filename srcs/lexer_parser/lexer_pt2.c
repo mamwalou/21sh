@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/23 11:07:43 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/24 05:39:56 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ int				ctrl_mode(char *line, t_memory *memory)
 	{
 		count++;
 		if (tmp == HEREDOC_CODE)
+		{
 			return (ctrl_heredoc(memory, line + 3));
+		}
 		if (tmp == D_QUOTE_CODE)
 			memory->key_ctrl = ft_strdup("\"");
 		if (tmp == QUOTE_CODE)

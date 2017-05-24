@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/24 02:24:37 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/24 05:36:17 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,14 @@ int					main(void)
 	ft_putstr_fd(PROMPT, STDERR_FILENO);
 	while (42)
 	{
+		if (g_memory.mode == HEREDOC)
+		{
+			printf("line %s\n", g_memory.line_mode);
+			printf("key %s\n", g_memory.key_ctrl);
+			printf("line after %s\n", g_memory.line_mode_after);
+		}
 		termcaps(&g_memory);
+
 		if (g_memory.inp.cmdlen > 0)
 		{
 			g_memory.mode = lexer_parser(&g_memory);

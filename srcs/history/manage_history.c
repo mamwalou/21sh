@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_history.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/24 02:19:18 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/24 05:30:49 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void				init_memory(void)
 	ft_bzero(&g_memory, sizeof(t_memory));
 	init_term(&g_memory);
 	g_memory.mode = SHELL;
+	g_memory.heredoc_sw = 0;
 	history_path();
 	if (is_dir(search_env(g_env, "HISTORY=")) == FILES)
 		hst_retrieve(&g_memory);

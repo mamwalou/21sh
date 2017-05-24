@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/13 12:36:06 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/23 11:45:25 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/24 05:04:36 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,45 +15,50 @@
 int 				recall_q(char **str, char *line)
 {
 	char			*tmp;
+	char			*tmp2;
 	int				count;
 
 	count = 0;
 	tmp = NULL;
-	while (line[count] != '\"' && line[count] != '\'')
-	{
+	tmp2 = NULL;
+	while (line[count] && (line[count] != '\'' && line[count] != '\"'))
 		count++;
-	}
 	if (*str == NULL)
 		*str = ft_strndup(line, 0, count);
 	else
 	{
 		tmp = ft_strndup(line, 0, count);
-		*str = ft_strjoin(*str, tmp);
+		tmp2 = ft_strjoin(*str, tmp);
+		free(*str);
 		free(tmp);
+		*str = tmp2;
 	}
+	epur_str(str, 0);
 	return (count);
 }
 
 int 				recall_ob(char **str, char *line)
 {
 	char			*tmp;
+	char			*tmp2;
 	int				count;
 
 	count = 0;
 	tmp = NULL;
+	tmp2 = NULL;
 	while (line[count] && (line[count] != '\'' && line[count] != '\"'))
-	{
 		count++;
-	}
 	if (*str == NULL)
 		*str = ft_strndup(line, 0, count);
 	else
 	{
 		tmp = ft_strndup(line, 0, count);
-		*str = ft_strjoin(*str, tmp);
+		tmp2 = ft_strjoin(*str, tmp);
+		free(*str);
 		free(tmp);
+		*str = tmp2;
 	}
-	*str = epur_str(*str, '\\');
+	epur_str(str, 0);
 	return (count);
 }
 
@@ -72,14 +77,16 @@ char				*define_name_lexem(char *line)
 		{
 			if (mode == 1)
 				mode = 0;
-			if (mode == 0)
+			else if (mode == 0)
 				mode = 1;
+			count++;
 		}
-		else if  (mode == 1)
+		if  (mode == 1)
 			count += recall_q(&str, line + count);
-		else if (mode == 0)
+		if (mode == 0)
 			count += recall_ob(&str, line + count);
-		count++;
+		if (!line[count])
+			return (str);
 	}
 	return (str);
 }
