@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gestion_redirection.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/28 01:30:28 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/25 03:19:59 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/25 04:25:12 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,13 @@ int					redirection_fonction(t_node *ast, int *status)
 
 void				close_fd_chain(int fd[4])
 {
-	if (fd[2])
+	if (fd[0] != 0 && fd[0] != 1 && fd[0] != 2 && fd[0] != -1)
+		close(fd[0]);
+	if (fd[1] != 0 && fd[1] != 1 && fd[1] != 2 && fd[1] != -1)
+		close(fd[1]);
+	if (fd[2] != 0 && fd[2] != 1 && fd[2] != 2 && fd[2] != -1)
 		close(fd[2]);
-	if (fd[3])
+	if (fd[3] != 0 && fd[3] != 1 && fd[3] != 2 && fd[3] != -1)
 		close(fd[3]);
 }
 

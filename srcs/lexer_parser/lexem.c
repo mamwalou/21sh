@@ -6,7 +6,7 @@
 /*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/25 03:57:39 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/25 04:25:55 by sbeline          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ static void			ctrl_lexem(t_st_lexem *lex, char *tmp, t_lexem *new)
 	}
 	if (lex->end_lexem->token_type == CMD && new->token_type == CMD)
 	{
-		printf("%s\n", tmp);
 		lex->end_lexem->option = init_option(tmp,
 								lex->end_lexem->option, lex->end_lexem->index);
 		lex->end_lexem->index++;
