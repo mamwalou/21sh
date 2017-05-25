@@ -6,7 +6,7 @@
 /*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 01:34:48 by mbourget          #+#    #+#             */
-/*   Updated: 2017/05/25 01:35:53 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/25 01:54:55 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ t_mode				lexer_parser(t_memory *memory)
 	lexem = (t_st_lexem*)ft_memalloc(sizeof(t_st_lexem));
 	if ((code_mode = parser(&lexem, memory)) > SWITCH_MODE)
 		return (mode_gestion(lexem, code_mode));
-	sw_list(lexem);
 	if (lexem->begin_lexem)
 	{
 		generate_ast(lexem);

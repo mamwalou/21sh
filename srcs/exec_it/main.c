@@ -6,7 +6,7 @@
 /*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/25 01:18:53 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/25 02:05:32 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void				end_memory(void)
 void				init(void)
 {
 	sig_init();
-	g_env = build_env();
 	ft_bzero(&g_memory, sizeof(t_memory));
+	g_env = build_env();
 	tc_init(&g_memory);
 	g_memory.mode = SHELL;
 	get_histfile_path();

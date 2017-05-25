@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 16:45:53 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/24 18:42:48 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/25 02:00:49 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@ typedef struct			s_pipe
 	pid_t				*list;
 }						t_pipe;
 
+typedef	struct			s_list_fd
+{
+	int					fd[4];
+	int					pcr;
+}						t_list_fd;
+
 char					**get_in_env(t_llist *env, const char *str);
 int						find_command(char **cmd);
 
@@ -64,5 +70,6 @@ void					ft_echo(char **cmd);
 void					fnc_exit();
 void					print_env(void);
 void					treat_redirection(t_node *ast, int fd[3], int *status);
+void					reacast_fd(char *token, char *after, t_list_fd *list);
 
 #endif
