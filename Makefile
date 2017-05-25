@@ -103,7 +103,8 @@ SRCS =	srcs/ast/an_ll.c\
 		srcs/termcaps/tc_set_timed_read.c\
 		srcs/termcaps/tc_unset_canonical.c\
 		srcs/termcaps/tc_write.c\
-		srcs/termcaps/termcaps.c
+		srcs/termcaps/termcaps.c\
+		srcs/termcaps/from_deep_space.c
 
 OBJS = $(SRCS:.c=.o)
 

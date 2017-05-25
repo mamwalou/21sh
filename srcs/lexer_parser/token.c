@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/24 21:56:44 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/25 03:21:48 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,14 @@ int					define_prio(t_token token)
 	if (token == CMD || token == ARG_FILES || token == OP_FILES ||
 		token == VARIABLE)
 		return (0);
-	else if (token == OP_PIPE)
+	else if (token == OP_REDIR_LEFT)
 		return (1);
-	else if (token == OP_REDIR_LEFT || token == OP_REDIR_RIGHT)
+	else if (token == OP_PIPE)
 		return (2);
-	else if (token == OP_SP_LOG)
+	else if (token == OP_REDIR_RIGHT)
 		return (3);
+	else if (token == OP_SP_LOG)
+		return (4);
 	return (-1);
 }
 
@@ -70,9 +72,7 @@ t_token				define_token(char *lexem)
 
 	i = 0;
 	if (token_rr(lexem))
-	{
 		return (OP_REDIR_RIGHT);
-	}
 	if (token_left(lexem))
 		return (OP_REDIR_LEFT);
 	if (!ft_strncmp(lexem, "&&", 2))

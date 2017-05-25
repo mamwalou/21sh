@@ -6,7 +6,7 @@
 /*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 04:17:20 by mbourget          #+#    #+#             */
-/*   Updated: 2017/05/25 01:13:30 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/25 02:59:55 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,8 @@ void			evt_newline(t_memory *sh)
 	}
 	handle_incomplete_enclosing(sh);
 	ft_putchar('\n');
-	if (sh->state == IDLE && sh->inp.cmdlen > 0)
+	if (sh->state == IDLE && sh->inp.cmdlen > 0
+		&& !from_deep_space(sh->inp.cmd, sh->inp.cmdlen))
 		sh->inp.ready = true;
 	else
 		cbuf_reset(sh);

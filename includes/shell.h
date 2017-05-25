@@ -6,7 +6,7 @@
 /*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/25 01:30:13 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/25 02:58:11 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ int					operator_ctrl(int test);
 int					find_str(char *line);
 int					ctrl_mode(char *line, t_memory *memory);
 int					ctrl_quot(int first, int second);
+bool				from_deep_space(char *str, size_t len);
 
 t_llist				*my_setenv();
 char				**my_env(t_llist *env);

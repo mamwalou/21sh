@@ -3,71 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 10:40:37 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/17 03:26:12 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/25 03:17:46 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-static void	echo_n_mode(char **tab)
+static void	echo_n_mode(char *tab)
 {
 	int i;
-	int j;
 
-	i = 2;
+	i = 0;
 	while (tab[i])
 	{
-		j = 0;
-		while (tab[i][j])
-		{
-			if (tab[i][j] != '\\')
-				ft_putchar(tab[i][j]);
-			else
-			{
-				j++;
-				if (tab[i][j])
-					ft_putchar(tab[i][j]);
-			}
-			j++;
-		}
+		ft_putchar(tab[i]);
 		i++;
-		if (tab[i])
-			ft_putchar(' ');
-		else
-			return ;
 	}
+	ft_putchar('\n');
 }
 
-static void	echo_normal_mode(char **tab)
+static void	echo_normal_mode(char *tab)
 {
 	int i;
-	int j;
 
-	i = 1;
+	i = 0;
 	while (tab[i])
 	{
-		j = 0;
-		while (tab[i][j])
-		{
-			if (tab[i][j] != '\\')
-				ft_putchar(tab[i][j]);
-			else
-			{
-				j++;
-				if (tab[i][j])
-					ft_putchar(tab[i][j]);
-			}
-			j++;
-		}
+		ft_putchar(tab[i]);
 		i++;
-		if (tab[i])
-			ft_putchar(' ');
-		else
-			ft_putchar('\n');
 	}
+	ft_putchar('\n');
+
 }
 
 void		ft_echo(char **cmd)
@@ -78,7 +47,7 @@ void		ft_echo(char **cmd)
 		return ;
 	}
 	if (ft_strcmp(cmd[1], "-n") == 0)
-		echo_n_mode(cmd);
+		echo_n_mode(cmd[1]);
 	else if (cmd[1])
-		echo_normal_mode(cmd);
+		echo_normal_mode(cmd[1]);
 }

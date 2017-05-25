@@ -6,7 +6,7 @@
 /*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 01:34:48 by mbourget          #+#    #+#             */
-/*   Updated: 2017/05/25 01:54:55 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/25 03:09:03 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,6 @@ static t_mode		mode_gestion(t_st_lexem *lexem, int code)
 	if (lexem->begin_lexem)
 		free_lexem(lexem->begin_lexem);
 	free(lexem);
-	if (code == HEREDOC_CODE)
-		return (HEREDOC);
-	else if (code == QUOTE_CODE)
-		return (QUOTE);
-	else if (code == D_QUOTE_CODE)
-		return (D_QUOTE);
-	else if (code == BCKSLASH_CODE)
-		return (BCKSLASH);
 	return (SHELL);
 }
 

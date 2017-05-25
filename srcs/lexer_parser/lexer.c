@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeline <sbeline@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/24 21:56:45 by sbeline          ###   ########.fr       */
+/*   Updated: 2017/05/25 03:06:36 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,31 +67,12 @@ int				find_str(char *line)
 			return (count);
 		else if ((redirection_filters(line + count)) > 0)
 			return (count);
-		else if (line[count] == '\\' && (!line[count + 1]))
-			return (BCKSLASH_CODE);
 		else if ((itr = ctrl_mode(line + count, &g_memory)) > 0)
 			return (itr + 2);
 		else
 			count++;
 	}
 	return (count);
-}
-
-static int		find_token2(char *line, int iter, int tmp)
-{
-	iter = tmp;
-	if (!line[iter])
-		return (BCKSLASH_CODE);
-	else
-	{
-		while (line[iter] && line[iter] == ' ')
-		{
-			if (!line[iter + 1])
-				return (BCKSLASH_CODE);
-			iter++;
-		}
-	}
-	return (tmp);
 }
 
 int				find_token(char *line)
@@ -106,7 +87,7 @@ int				find_token(char *line)
 	if ((tmp = ctrl_mode(line, &g_memory)) > 0)
 		return (tmp);
 	if ((tmp = operator_filters(line)) > 0)
-		return (find_token2(line, iter, tmp));
+		return (tmp);
 	if ((tmp = find_str(line)) > 0)
 		return (tmp);
 	return (tmp);

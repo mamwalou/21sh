@@ -6,7 +6,7 @@
 /*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 13:16:24 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/25 02:03:21 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/25 03:21:43 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void			central2(char *after, t_list_fd *list, char *token, int count)
 		else
 		{
 			list->fd[0] = 0;
-			list->fd[2] = open(after, O_RDONLY | O_TRUNC, 0666);
+			list->fd[2] = open(after, O_RDONLY, 0666);
 		}
 		return ;
 	}

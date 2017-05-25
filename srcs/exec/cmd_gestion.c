@@ -6,7 +6,7 @@
 /*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/13 10:31:53 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/25 01:10:02 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/25 02:45:04 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,11 +107,7 @@ int					exec_fct(t_node *ast, int *status)
 	pos = 1;
 	child_pid = 0;
 	if (ast && (find_command(&ast->body->lexem->option[0])) > 0)
-	{
-		tc_restore_default(&g_memory);
 		exec_fct2(ast->body->lexem, child_pid);
-		tc_unset_canonical(&g_memory);
-	}
 	else
 	{
 		*status = 1;

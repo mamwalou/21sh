@@ -6,7 +6,7 @@
 /*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 17:04:58 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/25 02:05:32 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/25 02:44:23 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,9 @@ int					main(void)
 	while (42)
 	{
 		termcaps(&g_memory);
+		tc_restore_default(&g_memory);
 		g_memory.mode = lexer_parser(&g_memory);
+		tc_unset_canonical(&g_memory);
 		if (g_memory.mode == SHELL)
 		{
 			if (g_memory.inp.multi_line)

@@ -6,7 +6,7 @@
 /*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/28 01:30:28 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/25 02:01:01 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/25 03:19:59 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int					redirection_fonction(t_node *ast, int *status)
 		if (value == REP)
 			ft_putendl_fd("is a directory:", 2);
 		else
-			ft_putendl_fd("else", 2);
+			ft_putendl_fd("cannot redirect", 2);
 	}
 	else if (list_fd.fd[3] == -1)
 		ft_putendl_fd("parse error near `'", 2);
