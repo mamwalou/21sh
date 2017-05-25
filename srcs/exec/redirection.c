@@ -6,19 +6,19 @@
 /*   By: mbourget <mbourget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 13:16:24 by sbeline           #+#    #+#             */
-/*   Updated: 2017/05/25 03:21:43 by mbourget         ###   ########.fr       */
+/*   Updated: 2017/05/25 03:25:10 by mbourget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-static void			ft_machon(char *token, int ret_fd[4], int pcr)
+static void		ft_machon(char *token, int ret_fd[4], int pcr)
 {
 	char			*tmp;
 
 	tmp = NULL;
 	if (token[pcr] == '&' && token[pcr + 1] == '-')
-		ret_fd[3] = open("/dev/null", O_WRONLY , 0666);
+		ret_fd[3] = open("/dev/null", O_WRONLY, 0666);
 	else if (token[pcr] == '&')
 	{
 		pcr++;
@@ -61,7 +61,7 @@ void			central(char *after, t_list_fd *list, char *token, int count)
 	if (count == 0)
 	{
 		if (!after)
-			ft_machon(token , list->fd, list->pcr + 2);
+			ft_machon(token, list->fd, list->pcr + 2);
 		else
 		{
 			list->fd[0] = 0;
@@ -72,7 +72,7 @@ void			central(char *after, t_list_fd *list, char *token, int count)
 	if (count == 1)
 	{
 		if (!after)
-			ft_machon(token , list->fd, list->pcr + 2);
+			ft_machon(token, list->fd, list->pcr + 2);
 		else
 		{
 			list->fd[0] = 1;
@@ -83,7 +83,7 @@ void			central(char *after, t_list_fd *list, char *token, int count)
 	central2(after, list, token, count);
 }
 
-static int			rediction_fd(t_list_fd *list, char *token)
+static int		rediction_fd(t_list_fd *list, char *token)
 {
 	char			*tmp;
 	int				pcr;
@@ -106,7 +106,7 @@ static int			rediction_fd(t_list_fd *list, char *token)
 	return (pcr);
 }
 
-void				reacast_fd(char *token, char *after, t_list_fd *list)
+void			reacast_fd(char *token, char *after, t_list_fd *list)
 {
 	const char		*tableau[4];
 	int				count;
@@ -122,7 +122,7 @@ void				reacast_fd(char *token, char *after, t_list_fd *list)
 	list->fd[3] = 0;
 	list->pcr = 0;
 	list->pcr = rediction_fd(list, token);
-	while(count < 5)
+	while (count < 5)
 	{
 		if (!(ft_strncmp(tableau[count], token + list->pcr,
 			ft_strlen(tableau[count]))))
